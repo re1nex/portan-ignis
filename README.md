@@ -15,6 +15,7 @@
 ## Пример комментария:
 #1 added:
 - textures
+
 fixed:
 - problem with light 
 
