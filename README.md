@@ -15,11 +15,12 @@
 5. Если были выполнены разные действия (Например: добавление новых функций и исправление старых), то после одного списка ставится ключевое слово и пишется другой список
 
 ## Пример комментария:
+```
 #1 added:
 - textures
-
 fixed:
 - problem with light 
+```
 
 
 # Правила названия веток
@@ -28,12 +29,12 @@ fixed:
 
 
 # Стандарт кодирования
-https://docs.godotengine.org/ru/latest/getting_started/scripting/gdscript/gdscript_styleguide.html
+[Руководство по стилю GDScript] (https://docs.godotengine.org/ru/latest/getting_started/scripting/gdscript/gdscript_styleguide.html)
 
 
 # Команда разработки
-1. Александр Митенев (https://github.com/mitenevav)
-2. Никита Счастливцев (https://github.com/NikitaS4)
-3. Александр Карасев (https://github.com/MethaHardworker)
-4. Виктор Колесник - Техлид (https://github.com/VsevolodMelnikov)
-5. Елисей Василевский - Тимлид (https://github.com/re1nex)
+1. [Александр Митенев] (https://github.com/mitenevav)
+2. [Никита Счастливцев] (https://github.com/NikitaS4)
+3. [Александр Карасев] (https://github.com/MethaHardworker)
+4. [Виктор Колесник] (https://github.com/VsevolodMelnikov) - Техлид 
+5. [Елисей Василевский] (https://github.com/re1nex) - Тимлид 
