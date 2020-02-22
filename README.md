@@ -32,6 +32,10 @@ fixed:
 [Руководство по стилю GDScript](https://docs.godotengine.org/ru/latest/getting_started/scripting/gdscript/gdscript_styleguide.html)
 
 
+# Лицензия
+Этот проект лицецнзирован в соответствии с [MIT License](https://github.com/re1nex/portan-ignis/blob/master/LICENSE)
+
+
 # Команда разработки
 1. [Александр Митенев](https://github.com/mitenevav)
 2. [Никита Счастливцев](https://github.com/NikitaS4)
