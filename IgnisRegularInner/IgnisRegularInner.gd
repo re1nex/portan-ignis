@@ -1,4 +1,4 @@
-extends Area2D
+extends Light2D
 
 
 # Declare member variables here. Examples:
@@ -10,18 +10,6 @@ extends Area2D
 func _ready():
 	pass # Replace with function body.
 
-
-signal ignis_regular_taken
-
-
-func _process(delta): # For testing only
-	if Input.is_action_pressed("ui_left"):
-		activate()
-
-
-func activate():
-	emit_signal("ignis_regular_taken")
-	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
