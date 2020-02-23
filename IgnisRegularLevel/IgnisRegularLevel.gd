@@ -7,17 +7,20 @@ extends Area2D
 var activated = false
 
 func _process(delta): # For testing only
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_just_released("ui_right"):
 		activate()
 
 
 func _init():
-	activated = false	
+	activated = false
+# Called when the node enters the scene tree for the first time.
+
+
+func _ready():
+	activated = false
 	$SpriteTorchOn.hide()
 	$SpriteTorchOff.show()
 	$Light2D.hide()
-# Called when the node enters the scene tree for the first time.
-func _ready():
 	pass # Replace with function body.
 
 func activate():
