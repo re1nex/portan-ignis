@@ -1,4 +1,8 @@
 # portan-ignis
+Компьютерная игра в жанре платформера с элементами головоломки для платформы PC (возможно портирование на Android в будущем). Действие игры разворачивается в абсолютно темном мире, игрок управляет персонажем, обладающим источником света, и должен избегать опасностей и преодолевать различные препятствия, таящиеся в темноте, чтобы продвинуться дальше. Одной из ключевых механик в игре является управление светом на уровнях для решения некоторых головоломок — например, некоторые враги реагируют на свет и возможным решением будет отвлечь их других источником света. 
+
+
+Portan Ignis is a puzzle-platformer adventure game developed for PC (may be released for Android in the future). The game takes place in a completely dark world. The player controls a character with a light source (Ignis). He must overcome the different obstacles and keep out of dangers hidden in the dark for advancement by level. One of the key mechanics in the game is to control the light on the levels to solve some puzzles - for example, some enemies react to light and a possible solution would be to distract them with another light source.
 
 
 # Правила комментирования коммитов
