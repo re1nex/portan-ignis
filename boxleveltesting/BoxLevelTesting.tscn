@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://boxleveltesting/background.png" type="Texture" id=1]
 [ext_resource path="res://boxleveltesting/block.png" type="Texture" id=2]
 [ext_resource path="res://IgnisRegularOuter/IgnisRegularOuter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://IgnisRegularLevel/IgnisRegularLevel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -46,3 +47,6 @@ color = Color( 0.101961, 0.0588235, 0.0588235, 1 )
 
 [node name="IgnisRegularLevel" parent="." instance=ExtResource( 4 )]
 position = Vector2( 855, 411 )
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 134.867, 429.989 )
