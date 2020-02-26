@@ -99,8 +99,9 @@ func _physics_process(delta):
 		
 
 func _on_Area2D_area_entered(area):
-	on_player_area_node = area;
-	in_node_area=true
+	if area.has_method("activate"):
+		on_player_area_node = area;
+		in_node_area=true
 	pass # Replace with function body.
 
 
