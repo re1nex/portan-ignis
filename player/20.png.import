@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/obiwan2.png-2e74625625bd6f1f41350e622f5fe50d.stex"
+path="res://.import/20.png-c3659521307a185eb15d5093dca1685f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/hero/obiwan2.png"
-dest_files=[ "res://.import/obiwan2.png-2e74625625bd6f1f41350e622f5fe50d.stex" ]
+source_file="res://player/20.png"
+dest_files=[ "res://.import/20.png-c3659521307a185eb15d5093dca1685f.stex" ]
 
 [params]
 
