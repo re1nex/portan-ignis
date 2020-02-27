@@ -6,9 +6,6 @@ extends Area2D
 # var b = "text"
 var activated = false
 
-func _process(delta): # For testing only
-	if Input.is_action_just_released("ui_right"):
-		activate()
 
 
 func _init():

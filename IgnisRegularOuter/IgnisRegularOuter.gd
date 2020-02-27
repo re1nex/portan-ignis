@@ -14,10 +14,6 @@ func _ready():
 signal ignis_regular_taken
 
 
-func _process(delta): # For testing only
-	if Input.is_action_pressed("ui_left"):
-		activate()
-
 
 func activate():
 	emit_signal("ignis_regular_taken")
