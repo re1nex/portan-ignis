@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://IgnisRegularInner/spot.png" type="Texture" id=1]
+[ext_resource path="res://IgnisRegularInner/IgnisRegularInner.gd" type="Script" id=2]
+
+[node name="Light2D" type="Light2D"]
+texture = ExtResource( 1 )
+texture_scale = 3.0
+color = Color( 0.870588, 0.67451, 0.0901961, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
