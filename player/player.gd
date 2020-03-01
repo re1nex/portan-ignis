@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-class_name Player
+class_name player
 
 
 const WEAPONS_NUM = 1
