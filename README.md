@@ -1,8 +1,14 @@
 # portan-ignis
-Компьютерная игра в жанре платформера с элементами головоломки для платформы PC (возможно портирование на Android в будущем). Действие игры разворачивается в абсолютно темном мире, игрок управляет персонажем, обладающим источником света, и должен избегать опасностей и преодолевать различные препятствия, таящиеся в темноте, чтобы продвинуться дальше. Одной из ключевых механик в игре является управление светом на уровнях для решения некоторых головоломок — например, некоторые враги реагируют на свет и возможным решением будет отвлечь их других источником света. 
+Компьютерная игра в жанре платформер с элементами головоломки для платформы PC. Действие игры разворачивается в абсолютно темном,враждебном мире, хранящем в себе различные опасности. Главный герой, обладая источником света, должен преодолевать различные препятствия, чтобы продвинуться дальше. Одной из ключевых механик в игре является управление светом на уровнях для решения некоторых головоломок — например, некоторые враги реагируют на свет и возможным решением будет отвлечь их других источником света. 
 
 
-Portan Ignis is a puzzle-platformer adventure game developed for PC (may be released for Android in the future). The game takes place in a completely dark world. The player controls a character with a light source (Ignis). He must overcome the different obstacles and keep out of dangers hidden in the dark for advancement by level. One of the key mechanics in the game is to control the light on the levels to solve some puzzles - for example, some enemies react to light and a possible solution would be to distract them with another light source.
+Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers hidden in the dark. One of the key mechanics in the game is using the light on the levels to solve some puzzles. For example, the main character can distract some enemies using level's light source.
+
+
+# Отличительные особенности
+1.  Переносимость. Выбранный движок позволяет без особых сложностей портировать игру на другую платформу
+2.  Необычный геймплей
+3.  Лёгкая установка продукта  
 
 
 # Правила комментирования коммитов
@@ -27,9 +33,10 @@ fixed:
 ```
 
 
-# Правила названия веток
+# Правила создания и названия веток
 1. Всегда существует две ветки: "dev" (для разработки) и "master" (для промежуточных и финального релизов)
-2. Временные ветки именуются на английском,с маленькой буквы, одно существительное или общепринятое сокращение понятное каждому
+2. Для каждой задачи, кроме документации, создается временная ветка
+3. Временные ветки именуются на английском,с маленькой буквы, одно существительное или общепринятое сокращение понятное каждому
 
 
 # Стандарт кодирования
