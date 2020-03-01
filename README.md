@@ -5,7 +5,7 @@
 Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers hidden in the dark. One of the key mechanics in the game is using the light on the levels to solve some puzzles. For example, the main character can distract some enemies using level's light source.
 
 
-# Преимущества по сравнению с аналогами
+# Отличительные особенности
 1.  Переносимость. Выбранный движок позволяет без особых сложностей портировать игру на другую платформу
 2.  Необычный геймплей
 3.  Лёгкая установка продукта  
