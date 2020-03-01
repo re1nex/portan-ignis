@@ -34,5 +34,5 @@ position = Vector2( 415.026, 577.67 )
 [node name="IgnisRegularLevel3" parent="Torches" instance=ExtResource( 1 )]
 position = Vector2( 132.596, 216.854 )
 
-[node name="player" parent="." instance=ExtResource( 6 )]
+[node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 89.625, 552.939 )
