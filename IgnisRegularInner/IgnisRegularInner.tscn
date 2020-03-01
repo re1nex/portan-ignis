@@ -9,13 +9,16 @@ radius = 114.018
 [node name="Light2D" type="Light2D"]
 texture = ExtResource( 1 )
 texture_scale = 3.0
-color = Color( 0.870588, 0.67451, 0.0901961, 1 )
+color = Color( 0.92549, 0.6, 0.172549, 1 )
+energy = 1.2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )

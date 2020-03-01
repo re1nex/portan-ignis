@@ -48,9 +48,13 @@ func _ready():
 	$iconWithoutIgnis.show()
 	sprite = $iconWithoutIgnis
 	instruments.resize(WEAPONS_NUM)
-	pass # Replace with function body.
+	
 
-
+func prepare_camera(var LU, var RD):
+	$Camera.limit_left = LU.x
+	$Camera.limit_top = LU.y
+	$Camera.limit_right = RD.x
+	$Camera.limit_bottom = RD.y
 
 
 func _physics_process(delta):

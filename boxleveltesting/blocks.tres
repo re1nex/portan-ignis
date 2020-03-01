@@ -1,12 +1,18 @@
-[gd_resource type="TileSet" load_steps=4 format=2]
+[gd_resource type="TileSet" load_steps=5 format=2]
 
-[ext_resource path="res://boxleveltesting/blocks1.0.png" type="Texture" id=1]
+[ext_resource path="res://BoxLevelTesting/blocks.png" type="Texture" id=1]
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="ConcavePolygonShape2D" id=2]
-segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.59525, 8.19395, 2.59525, -7.76073, 2.59525, -7.76073, 2.59525, -7.78071, 8 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6.61026, 5.69464 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 8.02497, 2.75484 )
 
 [resource]
 0/name = "Sprite"
@@ -81,13 +87,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 4/tile_mode = 0
 4/occluder_offset = Vector2( 8, 8 )
 4/navigation_offset = Vector2( 8, 8 )
-4/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+4/shapes = [  ]
 4/z_index = 0
 5/name = "Sprite27"
 5/texture = ExtResource( 1 )
@@ -97,13 +97,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 5/tile_mode = 0
 5/occluder_offset = Vector2( 8, 8 )
 5/navigation_offset = Vector2( 8, 8 )
-5/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+5/shapes = [  ]
 5/z_index = 0
 6/name = "Sprite28"
 6/texture = ExtResource( 1 )
@@ -113,13 +107,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 6/tile_mode = 0
 6/occluder_offset = Vector2( 8, 8 )
 6/navigation_offset = Vector2( 8, 8 )
-6/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+6/shapes = [  ]
 6/z_index = 0
 7/name = "Sprite29"
 7/texture = ExtResource( 1 )
@@ -129,13 +117,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 7/tile_mode = 0
 7/occluder_offset = Vector2( 8, 8 )
 7/navigation_offset = Vector2( 8, 8 )
-7/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+7/shapes = [  ]
 7/z_index = 0
 8/name = "Sprite32"
 8/texture = ExtResource( 1 )
@@ -145,13 +127,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 8/tile_mode = 0
 8/occluder_offset = Vector2( 8, 8 )
 8/navigation_offset = Vector2( 8, 8 )
-8/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+8/shapes = [  ]
 8/z_index = 0
 9/name = "Sprite30"
 9/texture = ExtResource( 1 )
@@ -161,13 +137,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 9/tile_mode = 0
 9/occluder_offset = Vector2( 8, 8 )
 9/navigation_offset = Vector2( 8, 8 )
-9/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+9/shapes = [  ]
 9/z_index = 0
 10/name = "Sprite33"
 10/texture = ExtResource( 1 )
@@ -177,13 +147,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 10/tile_mode = 0
 10/occluder_offset = Vector2( 8, 8 )
 10/navigation_offset = Vector2( 8, 8 )
-10/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+10/shapes = [  ]
 10/z_index = 0
 11/name = "Sprite31"
 11/texture = ExtResource( 1 )
@@ -193,13 +157,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 11/tile_mode = 0
 11/occluder_offset = Vector2( 8, 8 )
 11/navigation_offset = Vector2( 8, 8 )
-11/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+11/shapes = [  ]
 11/z_index = 0
 12/name = "Sprite34"
 12/texture = ExtResource( 1 )
@@ -209,13 +167,7 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 12/tile_mode = 0
 12/occluder_offset = Vector2( 8, 8 )
 12/navigation_offset = Vector2( 8, 8 )
-12/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
-} ]
+12/shapes = [  ]
 12/z_index = 0
 13/name = "Sprite18"
 13/texture = ExtResource( 1 )
@@ -277,8 +229,8 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 8, 8 )
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 8.20833, 10.2916 )
 } ]
 16/z_index = 0
 17/name = "Sprite22"
@@ -547,9 +499,9 @@ segments = PoolVector2Array( -7.78071, 8, 8.21929, 8, 8.21929, 8, 8.19395, 2.595
 33/navigation_offset = Vector2( 8, 8 )
 33/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 7.78071, 8 )
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 8.08526, 13.4565 )
 } ]
 33/z_index = 0

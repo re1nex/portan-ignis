@@ -49,30 +49,16 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 
-func _on_Visibility_body_entered(body):
-	#if body.name == 'Player':
-		#target = body
-		#chasing_light = false
-		pass
-
-func _on_Visibility_body_exited(body):
-	#mode = ROAMING
-	#target = null
-	pass
-
-
-func _draw():
-	#draw_circle(Vector2(), $Visibility/VisibilyShape.shape.radius, color)
-	pass
-
 func _on_Visibility_area_entered(area):
-	if target == null:
 		target = area
 
 
 func _on_Visibility_area_exited(area):
-	mode = ROAMING
-	target = null
+	if target == area:
+		mode = ROAMING
+		target = null
+		direction = 1.0
+	
 
 
 func _on_CatchArea_body_entered(body):
@@ -80,7 +66,7 @@ func _on_CatchArea_body_entered(body):
 
 func check_chase():
 	var space_state = get_world_2d().direct_space_state
-	var res = space_state.intersect_ray(position, target.global_position, [self, get_parent().get_node("Player")], collision_mask)
+	var res = space_state.intersect_ray(position, target.global_position, [self, get_parent().get_parent().get_node("Player")], collision_mask)
 	#var name = res.collider.name
 	if not res:
 		mode = CHASING

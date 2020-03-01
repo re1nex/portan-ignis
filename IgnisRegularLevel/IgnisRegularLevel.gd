@@ -19,12 +19,12 @@ func _ready():
 		activated = true
 		$SpriteTorchOn.show()
 		$SpriteTorchOff.hide()
-		$Light2D.enabled = true
+		$Light2D.enable()
 	else:
 		activated = false
 		$SpriteTorchOn.hide()
 		$SpriteTorchOff.show()
-		$Light2D.enabled = false
+		$Light2D.disable()
 	pass # Replace with function body.
 
 
@@ -32,12 +32,12 @@ func activate():
 	if activated:
 		$SpriteTorchOff.show()
 		$SpriteTorchOn.hide()
-		$Light2D.enabled = false
+		$Light2D.disable()
 		activated = false
 	else:
 		if body_informator != null and body_informator.is_ignis:
 			activated = true
-			$Light2D.enabled = true
+			$Light2D.enable()
 			$SpriteTorchOn.show()
 			$SpriteTorchOff.hide()
 
