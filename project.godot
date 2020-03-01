@@ -15,13 +15,13 @@ _global_script_classes=[ {
 "path": "res://Enemy/Enemy.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Player",
+"class": "player",
 "language": "GDScript",
-"path": "res://Player/Player.gd"
+"path": "res://player/player.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
-"Player": ""
+"player": ""
 }
 
 [application]
