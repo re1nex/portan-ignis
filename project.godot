@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Player/Player.gd"
+"path": "res://player/player.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
