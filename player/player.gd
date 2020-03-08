@@ -6,10 +6,8 @@ class_name Player
 const WEAPONS_NUM = 1
 const GRAVITY_VEC = Vector2(0,1100)
 const FLOOR_NORMAL = Vector2(0, -1)
-const SLOPE_SLIDE_STOP = 25.0
 const WALK_SPEED = 225 # pixels/sec
 const JUMP_SPEED = 280
-const SIDING_CHANGE_SPEED = 10
 const INERTIA = 0.8
 const JUMP_HEIGHT_LIMIT = 65
 
@@ -17,9 +15,8 @@ const SCALE_X = 1.3
 const SCALE_Y = 1.3
 
 var linear_vel = Vector2()
-var shoot_time = 99999 # time since last shot
 
-var instruments=[]  
+var weapons=[]  
 var on_player_area_node
 var in_node_area = false
 
@@ -47,7 +44,7 @@ func _ready():
 	$iconWithIgnis.hide()
 	$iconWithoutIgnis.show()
 	sprite = $iconWithoutIgnis
-	instruments.resize(WEAPONS_NUM)
+	weapons.resize(WEAPONS_NUM)
 	
 
 func prepare_camera(var LU, var RD):
@@ -57,16 +54,21 @@ func prepare_camera(var LU, var RD):
 	$Camera.limit_bottom = RD.y
 
 
+func _process(delta):
+	if Input.is_action_just_pressed("ui_interact") and in_node_area:
+		on_player_area_node.activate()
+	
+	control_weapons()
+
+
+
+
 func _physics_process(delta):
-	# Increment counters
-	shoot_time += delta
-
 	### MOVEMENT ###
-
 	# Apply gravity
 	linear_vel += delta * GRAVITY_VEC
 	# Move and slide
-	linear_vel = move_and_slide(linear_vel, FLOOR_NORMAL, SLOPE_SLIDE_STOP)
+	linear_vel = move_and_slide(linear_vel, FLOOR_NORMAL)
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
 	
@@ -78,8 +80,14 @@ func _physics_process(delta):
 	var target_speed = 0
 	if Input.is_action_pressed("ui_left"):
 		target_speed -= 1
+		if not Input.is_action_pressed("ui_right"):
+			sprite.scale.x = -SCALE_X
+	
 	if Input.is_action_pressed("ui_right"):
 		target_speed += 1
+		if not Input.is_action_pressed("ui_left"):
+			sprite.scale.x = SCALE_X
+		
 
 	target_speed *= WALK_SPEED
 	linear_vel.x = lerp(linear_vel.x, target_speed, INERTIA)
@@ -96,38 +104,7 @@ func _physics_process(delta):
 			height -= linear_vel.y * delta
 		else:
 			jumping=false
-	
-	if on_floor:
-		if linear_vel.x < -SIDING_CHANGE_SPEED:
-			sprite.scale.x = -SCALE_X
 
-
-		if linear_vel.x > SIDING_CHANGE_SPEED:
-			sprite.scale.x = SCALE_X
-
-	else:
-		# We want the character to immediately change facing side when the player
-		# tries to change direction, during air control.
-		# This allows for example the player to shoot quickly left then right.
-		if Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
-			sprite.scale.x = -SCALE_X
-		if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):
-			sprite.scale.x = SCALE_X
-	
-	
-	
-	if Input.is_action_just_pressed("ui_interact") and in_node_area:
-		on_player_area_node.activate()
-	
-	if Input.is_action_just_pressed("ui_1"):
-		if $Informator.is_ignis:
-			remove_child(instruments.back())
-			$Informator.is_ignis=false
-			switch_sprites($iconWithoutIgnis, $iconWithIgnis)
-		elif $Informator.has_weapons[0]:
-			add_child(instruments.back())
-			$Informator.is_ignis=true
-			switch_sprites($iconWithIgnis, $iconWithoutIgnis)
 
 
 func _on_Area2D_area_entered(area):
@@ -147,13 +124,12 @@ func _on_Area2D_area_exited(area):
 
 func _on_IgnisRegularOuter_ignis_regular_taken():
 	if $Informator.is_ignis:
-		remove_child(instruments[0])
+		turn_off_ignis()
 	
-	$Informator.is_ignis=true
 	var node = preload("res://IgnisRegularInner/IgnisRegularInner.tscn").instance()
-	instruments[0] = node
+	weapons[0] = node
 	$Informator.has_weapons[0] = true
-	add_child(node)
+	turn_on_ignis(0)
 	
 	switch_sprites($iconWithIgnis, $iconWithoutIgnis)
 	pass # Replace with function body.
@@ -171,4 +147,26 @@ func switch_sprites(new_sprite, old_sprite):
 	new_sprite.show()
 	synchronize_sprites(new_sprite, old_sprite)
 	sprite = new_sprite
-	
+
+
+func control_weapons():
+	if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[0]:
+		if $Informator.num_of_active_weapon == 0:
+			turn_off_ignis()
+			switch_sprites($iconWithoutIgnis, $iconWithIgnis)
+		else:
+			if $Informator.is_ignis:
+				turn_off_ignis()
+			turn_on_ignis(0)
+			switch_sprites($iconWithIgnis, $iconWithoutIgnis)
+
+
+func turn_off_ignis():
+	remove_child(weapons[$Informator.num_of_active_weapon])
+	$Informator.is_ignis = false
+	$Informator.num_of_active_weapon = -1
+
+func turn_on_ignis(num):
+	add_child(weapons[num])
+	$Informator.is_ignis=true
+	$Informator.num_of_active_weapon = num

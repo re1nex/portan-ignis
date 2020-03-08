@@ -6,7 +6,7 @@ extends Node
 # var b = "text"
 var is_ignis = false
 var has_weapons = []
-
+var num_of_active_weapon = - 1 # -1 - nothing is active
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
