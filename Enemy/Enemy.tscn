@@ -32,13 +32,13 @@ scale = Vector2( 7.15237, 5.44014 )
 position = Vector2( 8.1125, 21.0328 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 20 )
+cast_to = Vector2( 0, 15 )
 
 [node name="RayLeft" type="RayCast2D" parent="."]
 position = Vector2( -8.37194, 20.7254 )
 rotation = 1.5708
 enabled = true
-cast_to = Vector2( 0, 20 )
+cast_to = Vector2( 0, 15 )
 
 [node name="RayDownRight" type="RayCast2D" parent="."]
 position = Vector2( 20.8041, -0.349648 )
