@@ -1,15 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://IgnisRegularInner/spot.png" type="Texture" id=1]
 [ext_resource path="res://IgnisRegularInner/IgnisRegularInner.gd" type="Script" id=2]
+[ext_resource path="res://IgnisRegularInner/fire_particle.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 114.018
 
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+gravity = Vector3( 0, -26, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 50.0
+linear_accel_random = 1.0
+damping = 2.0
+scale = 0.12
+scale_random = 0.3
+scale_curve = SubResource( 3 )
+color = Color( 0.803922, 0.14902, 0.14902, 1 )
+
 [node name="Light2D" type="Light2D"]
 texture = ExtResource( 1 )
 texture_scale = 3.0
-color = Color( 0.92549, 0.6, 0.172549, 1 )
+color = Color( 0.909804, 0.596078, 0.101961, 1 )
 energy = 1.2
 script = ExtResource( 2 )
 __meta__ = {
@@ -22,3 +44,8 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 32
+process_material = SubResource( 4 )
+texture = ExtResource( 3 )
