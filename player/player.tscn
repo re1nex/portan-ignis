@@ -14,7 +14,6 @@ extents = Vector2( 12.0862, 22.5747 )
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
-INERTIA = 0.8
 
 [node name="iconWithIgnis" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -40,5 +39,10 @@ current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="IgnisPosition" type="Position2D" parent="."]
+position = Vector2( 15.0887, -4.10628 )
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]
