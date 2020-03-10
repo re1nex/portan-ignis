@@ -6,13 +6,13 @@ class_name Player
 const WEAPONS_NUM = 1
 const GRAVITY_VEC = Vector2(0,1100)
 const FLOOR_NORMAL = Vector2(0, -1)
-const WALK_SPEED = 225 # pixels/sec
-const JUMP_SPEED = 280
-const INERTIA = 0.8
-const JUMP_HEIGHT_LIMIT = 65
+export (int) var WALK_SPEED = 225 # pixels/sec
+export (int) var JUMP_SPEED = 280
+export (float) var INERTIA = 0.8
+export (int) var JUMP_HEIGHT_LIMIT = 65
 
-const SCALE_X = 1.3
-const SCALE_Y = 1.3
+export (float) var SCALE_X = 1.3
+export (float) var SCALE_Y = 1.3
 
 var linear_vel = Vector2()
 
