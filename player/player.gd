@@ -83,6 +83,8 @@ func _process(delta):
 	control_weapons()
 	
 	update_ignis_ignis_timer_start(delta)
+	
+	check_rotate_ignis(delta)
 
 
 
@@ -109,6 +111,7 @@ func _physics_process(delta):
 			ignis_pos.x = - $IgnisPosition.position.x
 			if $Informator.num_of_active_weapon != -1:
 				weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
+				weapons[$Informator.num_of_active_weapon].mirror()
 	
 	if Input.is_action_pressed("ui_right"):
 		target_speed += 1
@@ -117,6 +120,7 @@ func _physics_process(delta):
 			ignis_pos.x = $IgnisPosition.position.x
 			if $Informator.num_of_active_weapon != -1:
 				weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
+				weapons[$Informator.num_of_active_weapon].mirror()
 	
 	target_speed *= walk_speed
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
@@ -205,7 +209,7 @@ func turn_off_ignis():
 	weapons[$Informator.num_of_active_weapon].disable()
 	$Informator.ignis_status = $Informator.Is_ignis.HIDE_IGNIS
 	$Informator.num_of_active_weapon = -1
-	turn_on_ignis_timer(life_time_of_ignis)
+	turn_on_ignis_timer()
 
 func turn_on_ignis(num):
 	if $Informator.ignis_status == $Informator.Is_ignis.HIDE_IGNIS:
@@ -215,7 +219,7 @@ func turn_on_ignis(num):
 	weapons[num].set_position(ignis_pos)
 	weapons[num].enable()
 
-func turn_on_ignis_timer(time):
+func turn_on_ignis_timer():
 	$TimerIgnis.set_wait_time($Informator.ignis_timer_start)
 	$TimerIgnis.start()
 
@@ -253,3 +257,14 @@ func recharge():
 			if $Informator.has_weapons[Ignis_type.REGULAR]:
 				turn_on_ignis(Ignis_type.REGULAR)
 				switch_sprites($iconWithIgnis, $iconWithoutIgnis)
+
+
+func check_rotate_ignis(delta):
+	if $Informator.num_of_active_weapon != -1:
+		if Input.is_action_pressed("ui_page_up"):
+			weapons[$Informator.num_of_active_weapon].rotate_ignis(PI / 2 * delta)
+		if Input.is_action_pressed("ui_page_down"):
+			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
+
+func hit():
+	pass
