@@ -51,7 +51,8 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func _draw():
-	draw_circle(Vector2(), $Visibility/VisibilyShape.shape.radius, color)
+	pass
+	#draw_circle(Vector2(), $Visibility/VisibilyShape.shape.radius, color)
 
 func _on_Visibility_area_entered(area):
 	if area.get_parent().priority == 1:
