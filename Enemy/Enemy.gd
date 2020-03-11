@@ -24,7 +24,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	#if targets:
+
 	check_chase()
 	
 	##  Moving logic  ##
@@ -46,7 +46,6 @@ func _physics_process(delta):
 				direction = -1
 			else:
 				direction = 0
-			#direction = 0
 		velocity.x = direction * run_speed
 	velocity = move_and_slide(velocity)
 
@@ -55,16 +54,10 @@ func _draw():
 	#draw_circle(Vector2(), $Visibility/VisibilyShape.shape.radius, color)
 
 func _on_Visibility_area_entered(area):
-	if area.get_parent().priority == 1:
-		targets.push_back(area)
-	else:
-		targets.push_front(area)
+	targets.push_back(area)
 
 
 func _on_Visibility_area_exited(area):
-	if targets.bsearch(recent_tar) == targets.bsearch(area):
-		targets.erase(area)
-		check_chase()
 	targets.erase(area)
 	if recent_tar == area:
 		recent_tar = null
@@ -76,7 +69,7 @@ func _on_CatchArea_body_entered(body):
 
 func check_chase():
 	var space_state = get_world_2d().direct_space_state
-	#recent_tar = targets.front()
+	var found = false
 	var current
 	var i = 0
 	while (i < targets.size()):
@@ -85,12 +78,12 @@ func check_chase():
 		var res = space_state.intersect_ray(position, current.global_position, 
 				[self, get_parent().get_parent().get_node("Player"), current], collision_mask)
 		#var name = res.collider.name
-		if not res:
+		if not res and (not recent_tar or current.get_parent().priority > recent_tar.get_parent().priority) :
 			mode = CHASING
 			recent_tar = current
-			return
-		else:
-			i += 1
-	mode = ROAMING
-	if direction == 0:
-		direction = 1
+			found = true
+		i += 1 
+	if not recent_tar:
+		mode = ROAMING
+		if direction == 0:
+			direction = 1
