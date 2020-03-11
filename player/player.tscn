@@ -40,9 +40,11 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TimerIgnis" type="Timer" parent="."]
 
 [node name="IgnisPosition" type="Position2D" parent="."]
 position = Vector2( 15.0887, -4.10628 )
+
+[node name="TimerHit" type="Timer" parent="."]
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]

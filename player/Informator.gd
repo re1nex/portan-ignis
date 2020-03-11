@@ -13,15 +13,23 @@ enum Is_ignis {
 var ignis_status
 var has_weapons = []
 var num_of_active_weapon = - 1 # -1 - nothing is active
-var timer_start
+var ignis_timer_start
+var lives
+var health 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(get_parent().WEAPONS_NUM):
 		has_weapons.append(false)
+		
 	ignis_status = Is_ignis.NO_IGNIS
-	timer_start = get_parent().LIFE_TIME_OF_IGNIS
+	ignis_timer_start = get_parent().life_time_of_ignis
+	lives = get_parent().lives
+	health = get_parent().health
 	pass # Replace with function body.
+
+func death():
+	lives -= 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

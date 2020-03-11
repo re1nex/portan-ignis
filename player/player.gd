@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal die
+
 class_name Player
 
 enum Ignis_type {
@@ -7,19 +9,22 @@ enum Ignis_type {
 		SECTOR,
 }
 
-const WEAPONS_NUM = 1
+const WEAPONS_NUM = 2
 const GRAVITY_VEC = Vector2(0,1100)
 const FLOOR_NORMAL = Vector2(0, -1)
-export (int) var WALK_SPEED = 225 # pixels/sec
-export (int) var JUMP_SPEED = 280
-export (float) var INERTIA = 0.8
-export (int) var JUMP_HEIGHT_LIMIT = 65
+export (int) var walk_speed = 225 # pixels/sec
+export (int) var jump_speed = 280
+export (float) var inertia = 0.8
+export (int) var jump_height_limit = 65
 
-export (float) var SCALE_X = 1.3
-export (float) var SCALE_Y = 1.3
+export (float) var scale_x = 1.3
+export (float) var scale_y = 1.3
 
 export (float) var recharge_coef = 1.5
-export (float) var LIFE_TIME_OF_IGNIS = 3
+export (float) var life_time_of_ignis = 3
+
+export (int) var lives = 5
+export (int) var health = 5
 
 var linear_vel = Vector2()
 
@@ -35,17 +40,17 @@ onready var sprite = $iconWithoutIgnis
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$iconWithIgnis.scale.x=SCALE_X
-	$iconWithIgnis.scale.y=SCALE_Y
+	$iconWithIgnis.scale.x=scale_x
+	$iconWithIgnis.scale.y=scale_y
 	
-	$iconWithoutIgnis.scale.x=SCALE_X
-	$iconWithoutIgnis.scale.y=SCALE_Y
+	$iconWithoutIgnis.scale.x=scale_x
+	$iconWithoutIgnis.scale.y=scale_y
 	
-	$Area/CollisionShape.scale.x=SCALE_X
-	$Area/CollisionShape.scale.y=SCALE_Y
+	$Area/CollisionShape.scale.x=scale_x
+	$Area/CollisionShape.scale.y=scale_y
 	
-	$CollisionShape.scale.x=SCALE_X
-	$CollisionShape.scale.y=SCALE_Y
+	$CollisionShape.scale.x=scale_x
+	$CollisionShape.scale.y=scale_y
 	
 	$iconWithIgnis.hide()
 	$iconWithoutIgnis.show()
@@ -55,8 +60,8 @@ func _ready():
 	ignis_pos = $IgnisPosition.get_position()
 	fill_weapons()
 	
-	$Timer.connect("timeout",self, "_on_Timer_timeout")
-	
+	$TimerIgnis.connect("timeout",self, "_on_Timer_timeout")
+
 
 func prepare_camera(var LU, var RD):
 	$Camera.limit_left = LU.x
@@ -66,6 +71,9 @@ func prepare_camera(var LU, var RD):
 
 
 func _process(delta):
+	if $Informator.lives == 0:
+		emit_signal("die")
+	
 	if Input.is_action_just_pressed("ui_interact") and in_node_area:
 		on_player_area_node.activate()
 	
@@ -74,7 +82,7 @@ func _process(delta):
 	
 	control_weapons()
 	
-	update_timer_start(delta)
+	update_ignis_ignis_timer_start(delta)
 
 
 
@@ -97,29 +105,31 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_left"):
 		target_speed -= 1
 		if not Input.is_action_pressed("ui_right"):
-			sprite.scale.x = -SCALE_X
+			sprite.scale.x = -scale_x
 			ignis_pos.x = - $IgnisPosition.position.x
-			weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
+			if $Informator.num_of_active_weapon != -1:
+				weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
 	
 	if Input.is_action_pressed("ui_right"):
 		target_speed += 1
 		if not Input.is_action_pressed("ui_left"):
-			sprite.scale.x = SCALE_X
+			sprite.scale.x = scale_x
 			ignis_pos.x = $IgnisPosition.position.x
-			weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
-			
-	target_speed *= WALK_SPEED
-	linear_vel.x = lerp(linear_vel.x, target_speed, INERTIA)
+			if $Informator.num_of_active_weapon != -1:
+				weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
+	
+	target_speed *= walk_speed
+	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
 	# Jumping
 	if on_floor and Input.is_action_pressed("ui_up"):
-		linear_vel.y = -JUMP_SPEED
+		linear_vel.y = -jump_speed
 		height -= linear_vel.y * delta
 		jumping=true
 	
 	elif jumping==true:
-		if Input.is_action_pressed("ui_up") and height < JUMP_HEIGHT_LIMIT:
-			linear_vel.y = -JUMP_SPEED
+		if Input.is_action_pressed("ui_up") and height < jump_height_limit:
+			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 		else:
 			jumping=false
@@ -169,8 +179,8 @@ func switch_sprites(new_sprite, old_sprite):
 
 func control_weapons():
 	if not $Informator.ignis_status == $Informator.Is_ignis.NO_IGNIS:
-		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[0]:
-			if $Informator.num_of_active_weapon == 0:
+		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
+			if $Informator.num_of_active_weapon == Ignis_type.REGULAR:
 				turn_off_ignis()
 				switch_sprites($iconWithoutIgnis, $iconWithIgnis)
 			else:
@@ -178,32 +188,42 @@ func control_weapons():
 					turn_off_ignis()
 				turn_on_ignis(Ignis_type.REGULAR)
 				switch_sprites($iconWithIgnis, $iconWithoutIgnis)
+				
+		
+		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[Ignis_type.SECTOR]:
+			if $Informator.num_of_active_weapon == Ignis_type.SECTOR:
+				turn_off_ignis()
+				switch_sprites($iconWithoutIgnis, $iconWithIgnis)
+			else:
+				if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+					turn_off_ignis()
+				turn_on_ignis(Ignis_type.SECTOR)
+				switch_sprites($iconWithIgnis, $iconWithoutIgnis)
 
 
 func turn_off_ignis():
 	weapons[$Informator.num_of_active_weapon].disable()
 	$Informator.ignis_status = $Informator.Is_ignis.HIDE_IGNIS
 	$Informator.num_of_active_weapon = -1
-	turn_on_timer(LIFE_TIME_OF_IGNIS)
+	turn_on_ignis_timer(life_time_of_ignis)
 
 func turn_on_ignis(num):
 	if $Informator.ignis_status == $Informator.Is_ignis.HIDE_IGNIS:
-		turn_off_timer()
+		turn_off_ignis_time()
 	$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
 	$Informator.num_of_active_weapon = num
 	weapons[num].set_position(ignis_pos)
 	weapons[num].enable()
 
-func turn_on_timer(time):
-	$Timer.set_wait_time($Informator.timer_start)
-	$Timer.start()
+func turn_on_ignis_timer(time):
+	$TimerIgnis.set_wait_time($Informator.ignis_timer_start)
+	$TimerIgnis.start()
 
-func turn_off_timer():
-	$Timer.stop()
+func turn_off_ignis_time():
+	$TimerIgnis.stop()
 
 func _on_Timer_timeout():
-	for i in range(WEAPONS_NUM):
-		$Informator.ignis_status = $Informator.Is_ignis.NO_IGNIS
+	$Informator.ignis_status = $Informator.Is_ignis.NO_IGNIS
 
 
 func fill_weapons():
@@ -214,21 +234,21 @@ func fill_weapons():
 
 
 
-func update_timer_start(delta):
-	if $Timer.is_stopped():
-		if $Informator.timer_start < LIFE_TIME_OF_IGNIS:
-			$Informator.timer_start += delta * recharge_coef
-		elif $Informator.timer_start > LIFE_TIME_OF_IGNIS:
-			$Informator.timer_start = LIFE_TIME_OF_IGNIS
+func update_ignis_ignis_timer_start(delta):
+	if $TimerIgnis.is_stopped():
+		if $Informator.ignis_timer_start < life_time_of_ignis:
+			$Informator.ignis_timer_start += delta * recharge_coef
+		elif $Informator.ignis_timer_start > life_time_of_ignis:
+			$Informator.ignis_timer_start = life_time_of_ignis
 	else:
-		$Informator.timer_start = $Timer.time_left
+		$Informator.ignis_timer_start = $TimerIgnis.time_left
 
 
 func recharge():
 	if on_player_area_node.activated and $Informator.ignis_status != $Informator.Is_ignis.HAS_IGNIS:
-			if not $Timer.is_stopped():
-				turn_off_timer()
-			$Informator.timer_start = LIFE_TIME_OF_IGNIS
+			if not $TimerIgnis.is_stopped():
+				turn_off_ignis_time()
+			$Informator.ignis_timer_start = life_time_of_ignis
 			$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
 			if $Informator.has_weapons[Ignis_type.REGULAR]:
 				turn_on_ignis(Ignis_type.REGULAR)
