@@ -1,9 +1,6 @@
 extends Light2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var reflected = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,12 +9,27 @@ func _ready():
 
 
 func mirror():
-	texture_scale *= -1
-	$Area2D.scale *= -1
+	reflected = not reflected
+	rotation = -rotation
+	clamp_rotation()
 	pass
 
 
-func rotate_ignis(degree):
-	rotate(deg2rad(degree))
+func clamp_rotation():
+	# rotation must be in [-PI; PI]
+	if rotation <= -PI:
+		rotation = -PI
+	if rotation > PI:
+		rotation = PI
+
+
+func rotate_ignis(val):
+	if reflected:
+		val *= -1
+	if rotation * (rotation + val) < 0:
+		# val changes rotation sign
+		rotation = 0 # border value
+		pass
+	rotation += val
+	clamp_rotation()
 	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
