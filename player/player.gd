@@ -23,7 +23,6 @@ export (float) var scale_y = 1.3
 export (float) var recharge_coef = 1.5
 export (float) var life_time_of_ignis = 3
 
-export (int) var lives = 5
 export (int) var health = 5
 
 var linear_vel = Vector2()
@@ -71,7 +70,7 @@ func prepare_camera(var LU, var RD):
 
 
 func _process(delta):
-	if $Informator.lives == 0:
+	if $Informator.health == 0:
 		emit_signal("die")
 	
 	if Input.is_action_just_pressed("ui_interact") and in_node_area:
