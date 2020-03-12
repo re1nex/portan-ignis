@@ -51,11 +51,20 @@ func _physics_process(delta):
 
 func _draw():
 	pass
-	#draw_circle(Vector2(), $Visibility/VisibilyShape.shape.radius, color)
+	#draw_circle(Vector2(0, -$BodyShape.shape.height), $Visibility/VisibilyShape.shape.radius, color)
 
 func _on_Visibility_area_entered(area):
-	targets.push_back(area)
-
+	var pr = area.get_parent().priority
+	if pr == 1:
+		targets.push_back(area)
+	else:
+		var i = 0
+		while (i < targets.size() and targets[i].get_parent().priority > pr):
+			i += 1
+		if i == targets.size():
+			targets.push_back(area)
+		else:
+			targets.insert(i, area)
 
 func _on_Visibility_area_exited(area):
 	targets.erase(area)
@@ -69,21 +78,18 @@ func _on_CatchArea_body_entered(body):
 
 func check_chase():
 	var space_state = get_world_2d().direct_space_state
-	var found = false
 	var current
 	var i = 0
 	while (i < targets.size()):
 		current = targets[i]
-		var gp = current.global_position
-		var res = space_state.intersect_ray(position, current.global_position, 
-				[self, get_parent().get_parent().get_node("Player"), current], collision_mask)
-		#var name = res.collider.name
-		if not res and (not recent_tar or current.get_parent().priority > recent_tar.get_parent().priority) :
+		var res = space_state.intersect_ray(position + Vector2(0, -$BodyShape.shape.height), current.global_position, 
+				[self, get_parent().get_parent().get_node("Player")], collision_mask)
+		if not res:
 			mode = CHASING
 			recent_tar = current
-			found = true
+			return
 		i += 1 
-	if not recent_tar:
+	if i == targets.size():
 		mode = ROAMING
 		if direction == 0:
 			direction = 1
