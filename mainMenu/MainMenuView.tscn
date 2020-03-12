@@ -23,21 +23,21 @@
 [ext_resource path="res://mainMenu/fullscreen.png" type="Texture" id=21]
 [ext_resource path="res://mainMenu/arial.ttf" type="DynamicFontData" id=22]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=1]
 size = 20
 font_data = ExtResource( 22 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=2]
 size = 26
 font_data = ExtResource( 22 )
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=2]
-curve = SubResource( 1 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
 emission_sphere_radius = 1.0
 flag_disable_z = true
@@ -49,16 +49,16 @@ linear_accel_random = 1.0
 damping = 2.0
 scale = 0.12
 scale_random = 0.3
-scale_curve = SubResource( 2 )
+scale_curve = SubResource( 4 )
 color = Color( 0.803922, 0.14902, 0.14902, 1 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=6]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 1
 emission_sphere_radius = 1.0
 flag_disable_z = true
@@ -68,7 +68,7 @@ orbit_velocity_random = 0.0
 damping = 2.0
 scale = 0.12
 scale_random = 0.3
-scale_curve = SubResource( 5 )
+scale_curve = SubResource( 7 )
 color = Color( 0.803922, 0.690196, 0.14902, 1 )
 
 [node name="MainMenuView" type="MarginContainer"]
@@ -236,7 +236,7 @@ alignment = 2
 margin_top = 4.0
 margin_right = 784.0
 margin_bottom = 383.0
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 1 )
 custom_constants/line_separation = 5
 text = "Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. 
 The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers 
@@ -275,13 +275,14 @@ alignment = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Help/Sprite"]
 margin_right = 805.0
 margin_bottom = 372.0
-custom_fonts/normal_font = SubResource( 8 )
+custom_fonts/normal_font = SubResource( 2 )
 custom_constants/line_separation = 10
 text = "A/arrow left  - move left
 D/arrow right - move right
-W/space - jump
-arrow up, arrow down - rotate ignis
-E -interaction
+W/space/arrow up - jump
+V - rotate ignis upwards
+B - rotate ignis downwards
+E - interaction
 R - recharge
 1,2 - type of ignis"
 __meta__ = {
@@ -311,7 +312,7 @@ __meta__ = {
 [node name="Particles2D" type="Particles2D" parent="HBoxContainer/Logo/Logo"]
 position = Vector2( 50.6628, 205.605 )
 amount = 32
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
 texture = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
@@ -320,7 +321,7 @@ __meta__ = {
 [node name="Particles2D2" type="Particles2D" parent="HBoxContainer/Logo/Logo/Particles2D"]
 position = Vector2( -0.297729, 0.292633 )
 amount = 32
-process_material = SubResource( 6 )
+process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
