@@ -11,7 +11,7 @@ var switchedOff
 
 signal enabled
 signal disabled
-
+var priority = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,7 +45,7 @@ func disable():
 
 
 func finish_disabling():
-	$Area2D.monitorable = false
+	$Area2D/CollisionShape2D.disabled = true
 	$Particles2D.emitting = false
 	enabled = false
 	energy = 0
@@ -60,7 +60,7 @@ func enable():
 func finish_enabling():
 	switchedOff = false
 	$Particles2D.emitting = true
-	$Area2D.monitorable = true
+	$Area2D/CollisionShape2D.disabled = false
 	enabled = true
 	energy = energyMax
 	emit_signal("enabled")

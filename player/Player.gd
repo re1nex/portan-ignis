@@ -34,6 +34,7 @@ var ignis_pos = Vector2(0, 0)
 
 var height = 0
 var jumping = false
+
 onready var sprite = $iconWithoutIgnis
 
 
@@ -94,13 +95,14 @@ func _physics_process(delta):
 	linear_vel += delta * GRAVITY_VEC
 	# Move and slide
 	linear_vel = move_and_slide(linear_vel, FLOOR_NORMAL)
+
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
 	
 	if on_floor:
 		height=0
 	### CONTROL ###
-	
+
 	# Horizontal movement
 	var target_speed = 0
 	if Input.is_action_pressed("ui_left"):
@@ -138,7 +140,6 @@ func _physics_process(delta):
 			jumping=false
 
 
-
 func _on_Area2D_area_entered(area):
 	if area.has_method("activate"):
 		on_player_area_node = area;
@@ -150,8 +151,6 @@ func _on_Area2D_area_exited(area):
 	if on_player_area_node == area:
 		in_node_area = false
 	pass # Replace with function body.
-
-
 
 
 func _on_IgnisRegularOuter_ignis_regular_taken(type):
@@ -178,7 +177,6 @@ func switch_sprites(new_sprite, old_sprite):
 	new_sprite.show()
 	synchronize_sprites(new_sprite, old_sprite)
 	sprite = new_sprite
-
 
 func control_weapons():
 	if not $Informator.ignis_status == $Informator.Is_ignis.NO_IGNIS:
