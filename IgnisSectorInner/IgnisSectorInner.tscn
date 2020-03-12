@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://IgnisSectorInner/sector.png" type="Texture" id=1]
+[ext_resource path="res://IgnisSectorInner/IgnisSectorInner.gd" type="Script" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 10, 220, 15, 120, -200 )
@@ -11,6 +12,7 @@ texture = ExtResource( 1 )
 texture_scale = 5.0
 color = Color( 0.909804, 0.596078, 0.101961, 1 )
 energy = 1.2
+script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
