@@ -180,7 +180,7 @@ func switch_sprites(new_sprite, old_sprite):
 func control_weapons():
 	if not $Informator.ignis_status == $Informator.Is_ignis.NO_IGNIS:
 		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
-			if $Informator.num_of_active_weapon == Ignis_type.REGULAR:
+			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.REGULAR:
 				turn_off_ignis()
 				switch_sprites($iconWithoutIgnis, $iconWithIgnis)
 			else:
@@ -191,7 +191,7 @@ func control_weapons():
 				
 		
 		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[Ignis_type.SECTOR]:
-			if $Informator.num_of_active_weapon == Ignis_type.SECTOR:
+			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.SECTOR:
 				turn_off_ignis()
 				switch_sprites($iconWithoutIgnis, $iconWithIgnis)
 			else:
@@ -204,7 +204,7 @@ func control_weapons():
 func turn_off_ignis():
 	weapons[$Informator.num_of_active_weapon].disable()
 	$Informator.ignis_status = $Informator.Is_ignis.HIDE_IGNIS
-	$Informator.num_of_active_weapon = -1
+	#$Informator.num_of_active_weapon = -1
 	turn_on_ignis_timer()
 
 func turn_on_ignis(num):
