@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/zombieYell7.wav-bfe39f42c3f44b4b29690837d7e6c10f.sample"
+
+[deps]
+
+source_file="res://sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell7.wav"
+dest_files=[ "res://.import/zombieYell7.wav-bfe39f42c3f44b4b29690837d7e6c10f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

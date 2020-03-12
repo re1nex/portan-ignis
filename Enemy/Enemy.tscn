@@ -30,13 +30,13 @@ scale = Vector2( 7.15237, 5.44014 )
 position = Vector2( 8.1125, 21.0328 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 15 )
+cast_to = Vector2( 0, 20 )
 
 [node name="RayLeft" type="RayCast2D" parent="."]
 position = Vector2( -8.37194, 20.7254 )
 rotation = 1.5708
 enabled = true
-cast_to = Vector2( 0, 15 )
+cast_to = Vector2( 0, 20 )
 
 [node name="RayDownRight" type="RayCast2D" parent="."]
 position = Vector2( 20.8041, -0.349648 )
@@ -55,6 +55,8 @@ shape = SubResource( 2 )
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+[connection signal="area_entered" from="CatchArea" to="." method="_on_CatchArea_area_entered"]
+[connection signal="area_exited" from="CatchArea" to="." method="_on_CatchArea_area_exited"]
 [connection signal="body_entered" from="CatchArea" to="." method="_on_CatchArea_body_entered"]
 [connection signal="area_entered" from="Visibility" to="." method="_on_Visibility_area_entered"]
 [connection signal="area_exited" from="Visibility" to="." method="_on_Visibility_area_exited"]
