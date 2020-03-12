@@ -20,7 +20,7 @@ func _ready():
 	switchingOff = not enabled
 	switchedOff = enabled
 	if switchedOff:
-		finishDisabling()
+		finish_disabling()
 	pass # Replace with function body.
 
 
@@ -32,21 +32,20 @@ func _process(delta):
 		checkEnergy()
 	if not switchingOff and switchedOff:
 		# light needs to be switched on
-		finishEnabling()
+		finish_enabling()
 
 func checkEnergy():
 	if energy <= energyMin:
-		finishDisabling()
+		finish_disabling()
 		switchedOff = true
 
 
 func disable():
-	$Area2D/CollisionShape2D.disabled = true
 	switchingOff = true
 
 
-func finishDisabling():
-	$Area2D.monitorable = false
+func finish_disabling():
+	$Area2D/CollisionShape2D.disabled = true
 	$Particles2D.emitting = false
 	enabled = false
 	energy = 0
@@ -55,14 +54,19 @@ func finishDisabling():
 
 
 func enable():
-	$Area2D/CollisionShape2D.disabled = false
 	switchingOff = false
 
 
-func finishEnabling():
+func finish_enabling():
 	switchedOff = false
 	$Particles2D.emitting = true
-	$Area2D.monitorable = true
+	$Area2D/CollisionShape2D.disabled = false
 	enabled = true
 	energy = energyMax
 	emit_signal("enabled")
+
+func mirror():
+	pass
+
+func rotate_ignis(degree):
+	pass
