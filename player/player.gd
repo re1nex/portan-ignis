@@ -74,10 +74,10 @@ func _process(delta):
 	if $Informator.lives == 0:
 		emit_signal("die")
 	
-	if Input.is_action_just_pressed("ui_interact") and in_node_area:
+	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
 		on_player_area_node.activate()
 	
-	if Input.is_action_just_pressed("ui_R") and in_node_area and "activated" in on_player_area_node:
+	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "activated" in on_player_area_node:
 		recharge()
 	
 	control_weapons()
@@ -261,9 +261,9 @@ func recharge():
 
 func check_rotate_ignis(delta):
 	if $Informator.num_of_active_weapon != -1:
-		if Input.is_action_pressed("ui_page_up"):
+		if Input.is_action_pressed("ui_rotate_right"):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(PI / 2 * delta)
-		if Input.is_action_pressed("ui_page_down"):
+		if Input.is_action_pressed("ui_rotate_left"):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
 
 func hit():
