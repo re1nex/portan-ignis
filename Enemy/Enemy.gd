@@ -5,7 +5,7 @@ class_name Enemy
 signal catch
 
 var color = Color(.867, .91, .247, 0.1)
-var lazerColor = Color(0.411765, 0.015686, 0.015686, 0.101961)
+var lazerColor = Color(1, 0.007843, 0.007843, 0.1)
 const GRAVITY_VEC = Vector2(0, 1500)
 export (int) var walk_speed = 100
 export (int) var run_speed = 250
@@ -18,13 +18,15 @@ const SMALL_RADIUS = 5
 var mode = ROAMING
 var targets = []
 var recent_tar = null
+var torch_area = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 func _physics_process(delta):
-
+	if torch_area and "activated" in torch_area and torch_area.activated:
+		torch_area.activate()
 	check_chase()
 	
 	##  Moving logic  ##
@@ -50,8 +52,10 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func _draw():
-	pass
+	#pass
 	#draw_circle(Vector2(0, -$BodyShape.shape.height), $Visibility/VisibilyShape.shape.radius, color)
+	if recent_tar != null:
+		draw_line(Vector2(0, -$BodyShape.shape.height), recent_tar.global_position - position, lazerColor)
 
 func _on_Visibility_area_entered(area):
 	var pr = area.get_parent().priority
@@ -75,6 +79,13 @@ func _on_Visibility_area_exited(area):
 func _on_CatchArea_body_entered(body):
 	emit_signal("catch") 
 
+func _on_CatchArea_area_entered(area):
+	if area.has_method("activate"):
+		torch_area = area
+
+func _on_CatchArea_area_exited(area):
+	if area == torch_area:
+		torch_area = null
 
 func check_chase():
 	var space_state = get_world_2d().direct_space_state
@@ -83,7 +94,7 @@ func check_chase():
 	while (i < targets.size()):
 		current = targets[i]
 		var res = space_state.intersect_ray(position + Vector2(0, -$BodyShape.shape.height), current.global_position, 
-				[self, get_parent().get_parent().get_node("Player")], collision_mask)
+				[self], collision_mask)
 		if not res:
 			mode = CHASING
 			recent_tar = current
