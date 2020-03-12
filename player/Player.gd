@@ -34,7 +34,8 @@ var ignis_pos = Vector2(0, 0)
 
 var height = 0
 var jumping = false
-
+var direction = 1 # -1 - left; 1 - right
+var ignis_direction = 1 # -1 - left; 1 - right
 onready var sprite = $iconWithoutIgnis
 
 
@@ -107,21 +108,19 @@ func _physics_process(delta):
 	var target_speed = 0
 	if Input.is_action_pressed("ui_left"):
 		target_speed -= 1
-		if not Input.is_action_pressed("ui_right"):
+		if not Input.is_action_pressed("ui_right") and direction == 1:
+			direction = -1
 			sprite.scale.x = -scale_x
-			ignis_pos.x = - $IgnisPosition.position.x
 			if $Informator.num_of_active_weapon != -1:
-				weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
-				weapons[$Informator.num_of_active_weapon].mirror()
+				update_ignis()
 	
 	if Input.is_action_pressed("ui_right"):
 		target_speed += 1
-		if not Input.is_action_pressed("ui_left"):
+		if not Input.is_action_pressed("ui_left") and direction == -1:
+			direction = 1
 			sprite.scale.x = scale_x
-			ignis_pos.x = $IgnisPosition.position.x
 			if $Informator.num_of_active_weapon != -1:
-				weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
-				weapons[$Informator.num_of_active_weapon].mirror()
+				update_ignis()
 	
 	target_speed *= walk_speed
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
@@ -213,7 +212,7 @@ func turn_on_ignis(num):
 		turn_off_ignis_time()
 	$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
 	$Informator.num_of_active_weapon = num
-	weapons[num].set_position(ignis_pos)
+	update_ignis()
 	weapons[num].enable()
 
 func turn_on_ignis_timer():
@@ -264,4 +263,12 @@ func check_rotate_ignis(delta):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
 
 func hit():
+	pass
+
+
+func update_ignis():
+	ignis_pos.x = direction * $IgnisPosition.position.x
+	weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
+	weapons[$Informator.num_of_active_weapon].mirror()
+	ignis_direction = direction
 	pass
