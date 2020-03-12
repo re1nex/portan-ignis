@@ -55,6 +55,7 @@ func finishDisabling():
 
 func enable():
 	switchingOff = false
+	energy = energyMax
 
 
 func finishEnabling():
