@@ -151,6 +151,7 @@ func _on_IgnisRegularOuter_ignis_regular_taken():
 	
 	$Informator.is_ignis=true
 	var node = preload("res://IgnisRegularInner/IgnisRegularInner.tscn").instance()
+	node.priority = 2
 	instruments[0] = node
 	$Informator.has_weapons[0] = true
 	add_child(node)

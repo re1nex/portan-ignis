@@ -4,7 +4,7 @@
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 19.2129, 27.9659 )
+extents = Vector2( 20, 30 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 120.0
@@ -13,8 +13,6 @@ radius = 120.0
 radius = 17.9001
 
 [node name="Enemy" type="KinematicBody2D"]
-collision_layer = 15
-collision_mask = 15
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -32,13 +30,13 @@ scale = Vector2( 7.15237, 5.44014 )
 position = Vector2( 8.1125, 21.0328 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 20 )
+cast_to = Vector2( 0, 15 )
 
 [node name="RayLeft" type="RayCast2D" parent="."]
 position = Vector2( -8.37194, 20.7254 )
 rotation = 1.5708
 enabled = true
-cast_to = Vector2( 0, 20 )
+cast_to = Vector2( 0, 15 )
 
 [node name="RayDownRight" type="RayCast2D" parent="."]
 position = Vector2( 20.8041, -0.349648 )
@@ -49,7 +47,7 @@ position = Vector2( -21.1538, 0 )
 enabled = true
 
 [node name="Visibility" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 8
 
 [node name="VisibilyShape" type="CollisionShape2D" parent="Visibility"]
