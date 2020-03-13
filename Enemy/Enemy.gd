@@ -32,6 +32,10 @@ func _ready():
 	vision_center = Vector2(0, -$BodyShape.shape.height)
 	pass
 
+func _process(delta):
+	if player_target:
+		player_target.hit()
+
 func _physics_process(delta):
 	if torch_area and "activated" in torch_area and torch_area.activated:
 		torch_area.activate()
@@ -98,7 +102,12 @@ func _on_Visibility_area_exited(area):
 
 
 func _on_CatchArea_body_entered(body):
-	emit_signal("catch") 
+	if body.get_name() == 'Player':
+		player_target = body
+
+func _on_CatchArea_body_exited(body):
+	if body == player_target:
+		player_target = null
 
 func _on_CatchArea_area_entered(area):
 	if area.has_method("activate"):
