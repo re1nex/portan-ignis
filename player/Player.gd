@@ -22,6 +22,8 @@ export (float) var scale_y = 1.3
 
 export (float) var recharge_coef = 1.5
 export (float) var life_time_of_ignis = 3
+export (float) var hit_time = 1
+
 
 export (int) var health = 5
 
@@ -72,9 +74,6 @@ func prepare_camera(var LU, var RD):
 
 
 func _process(delta):
-	if $Informator.health == 0:
-		emit_signal("die")
-	
 	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
 		on_player_area_node.activate()
 	
@@ -83,9 +82,11 @@ func _process(delta):
 	
 	control_weapons()
 	
-	update_ignis_ignis_timer_start(delta)
+	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
+	
+
 
 
 
@@ -244,7 +245,7 @@ func fill_weapons():
 
 
 
-func update_ignis_ignis_timer_start(delta):
+func update_ignis_timer_start(delta):
 	if $TimerIgnis.is_stopped():
 		if $Informator.ignis_timer_start < life_time_of_ignis:
 			$Informator.ignis_timer_start += delta * recharge_coef
@@ -272,10 +273,6 @@ func check_rotate_ignis(delta):
 		if Input.is_action_pressed("ui_rotate_up"):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
 
-func hit():
-	pass
-
-
 func update_ignis():
 	ignis_pos.x = direction * $IgnisPosition.position.x
 
@@ -285,4 +282,19 @@ func update_ignis():
 			weapons[i].mirror()
 	
 	ignis_direction = direction
+	pass
+
+func turn_on_hit_timer():
+	$TimerHit.set_wait_time(hit_time)
+	$TimerHit.start()
+	
+func hit():
+	if $TimerHit.is_stopped():
+		$Informator.health -= 1
+		if $Informator.health == 0:
+			emit_signal("die")
+			
+		if $Informator.ignis_status==$Informator.Is_ignis.HAS_IGNIS:
+			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+		turn_on_hit_timer()
 	pass

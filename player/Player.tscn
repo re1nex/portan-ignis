@@ -41,10 +41,12 @@ drag_margin_v_enabled = true
 smoothing_enabled = true
 
 [node name="TimerIgnis" type="Timer" parent="."]
+one_shot = true
 
 [node name="IgnisPosition" type="Position2D" parent="."]
 position = Vector2( 15.0887, -4.10628 )
 
 [node name="TimerHit" type="Timer" parent="."]
+one_shot = true
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]

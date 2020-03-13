@@ -11,3 +11,8 @@ func _ready():
 	$Player.prepare_camera(posLU, posRD)
 	$Player/Camera.zoom = Vector2(0.5, 0.5)
 	$IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
+
+
+func _on_Player_die():
+	$Player.queue_free()
+	pass # Replace with function body.

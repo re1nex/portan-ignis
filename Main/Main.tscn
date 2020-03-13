@@ -41,3 +41,4 @@ position = Vector2( 89.625, 552.939 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 7 )]
+[connection signal="die" from="Player" to="." method="_on_Player_die"]
