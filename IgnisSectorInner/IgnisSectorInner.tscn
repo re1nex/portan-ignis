@@ -4,12 +4,11 @@
 [ext_resource path="res://IgnisSectorInner/IgnisSectorInner.gd" type="Script" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 0, 10, 220, 15, 120, -200 )
+points = PoolVector2Array( 0, 0, 103, -225, -112, -225 )
 
 [node name="Light2D" type="Light2D"]
-rotation = 0.436332
 texture = ExtResource( 1 )
-texture_scale = 5.0
+texture_scale = 0.15
 color = Color( 0.909804, 0.596078, 0.101961, 1 )
 energy = 1.2
 script = ExtResource( 2 )

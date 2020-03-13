@@ -1,10 +1,12 @@
 extends Light2D
 
-const deltaScale = 0.0025
+#const deltaScale = 0.0001
 const energyDec = 0.025
 const energyMin = 0.1
 
-var reflected = false
+var reflected = 1
+
+var deltaScale
 
 var minScale
 var energyMax
@@ -17,12 +19,15 @@ var priority = 1
 
 
 func _ready():
-	minScale = texture_scale - 0.01
+	minScale = texture_scale * 0.99
+	deltaScale = texture_scale - minScale
+	rotate(PI / 2)
 	energyMax = 1.2
 	switchingOff = not enabled
 	switchedOff = enabled
 	if switchedOff:
 		finishDisabling()
+	
 	pass # Replace with function body.
 
 
@@ -38,7 +43,7 @@ func _process(delta):
 
 
 func mirror():
-	reflected = not reflected
+	reflected = - reflected
 	rotation = -rotation
 	clamp_rotation()
 	pass
@@ -53,12 +58,11 @@ func clamp_rotation():
 
 
 func rotate_ignis(val):
-	if reflected:
-		val *= -1
-	if rotation * (rotation + val) < 0:
+	val *= reflected
+	if reflected * (rotation + val) < 0:
 		# val changes rotation sign
 		rotation = 0 # border value
-		pass
+		return
 	rotation += val
 	clamp_rotation()
 	pass
