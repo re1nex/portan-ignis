@@ -13,6 +13,8 @@ signal enabled
 signal disabled
 var priority = 1
 
+var reflected = 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	minScale = texture_scale - 0.01
@@ -67,6 +69,7 @@ func finish_enabling():
 	emit_signal("enabled")
 
 func mirror():
+	reflected *= -1
 	pass
 
 func rotate_ignis(degree):

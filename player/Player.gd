@@ -156,11 +156,15 @@ func _on_IgnisRegularOuter_ignis_regular_taken(type):
 	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
 		turn_off_ignis()
 	
-	if(type == Ignis_type.REGULAR):
+	if type == Ignis_type.REGULAR :
 		$Informator.has_weapons[Ignis_type.REGULAR] = true
-		turn_on_ignis(Ignis_type.REGULAR)
-		switch_sprites($iconWithIgnis, $iconWithoutIgnis)
+		#turn_on_ignis(Ignis_type.REGULAR)
+		switch_sprites($iconWithIgnis)
 	
+	if type == Ignis_type.REGULAR:
+		$Informator.has_weapons[Ignis_type.SECTOR] = true
+		turn_on_ignis(Ignis_type.SECTOR)
+		switch_sprites($iconWithIgnis)
 	pass # Replace with function body.
 
 func get_informator():
@@ -171,10 +175,10 @@ func synchronize_sprites(opp1, opp2):
 	if opp1.scale.x * opp2.scale.x < 0:
 		opp1.scale.x *= -1
 
-func switch_sprites(new_sprite, old_sprite):
-	old_sprite.hide()
+func switch_sprites(new_sprite):
+	sprite.hide()
 	new_sprite.show()
-	synchronize_sprites(new_sprite, old_sprite)
+	synchronize_sprites(new_sprite, sprite)
 	sprite = new_sprite
 
 func control_weapons():
@@ -182,23 +186,23 @@ func control_weapons():
 		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
 			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.REGULAR:
 				turn_off_ignis()
-				switch_sprites($iconWithoutIgnis, $iconWithIgnis)
+				switch_sprites($iconWithoutIgnis)
 			else:
 				if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
 					turn_off_ignis()
 				turn_on_ignis(Ignis_type.REGULAR)
-				switch_sprites($iconWithIgnis, $iconWithoutIgnis)
+				switch_sprites($iconWithIgnis)
 				
 		
 		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[Ignis_type.SECTOR]:
 			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.SECTOR:
 				turn_off_ignis()
-				switch_sprites($iconWithoutIgnis, $iconWithIgnis)
+				switch_sprites($iconWithoutIgnis)
 			else:
 				if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
 					turn_off_ignis()
 				turn_on_ignis(Ignis_type.SECTOR)
-				switch_sprites($iconWithIgnis, $iconWithoutIgnis)
+				switch_sprites($iconWithIgnis)
 
 
 func turn_off_ignis():
@@ -231,6 +235,11 @@ func fill_weapons():
 	weapons[Ignis_type.REGULAR] = node
 	add_child(weapons[Ignis_type.REGULAR])
 	weapons[Ignis_type.REGULAR].disable()
+	
+	node = preload("res://IgnisSectorInner/IgnisSectorInner.tscn").instance()
+	weapons[Ignis_type.SECTOR] = node
+	add_child(weapons[Ignis_type.SECTOR])
+	weapons[Ignis_type.SECTOR].disable()
 
 
 
@@ -252,14 +261,14 @@ func recharge():
 			$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
 			if $Informator.has_weapons[Ignis_type.REGULAR]:
 				turn_on_ignis(Ignis_type.REGULAR)
-				switch_sprites($iconWithIgnis, $iconWithoutIgnis)
+				switch_sprites($iconWithIgnis)
 
 
 func check_rotate_ignis(delta):
 	if $Informator.num_of_active_weapon != -1:
-		if Input.is_action_pressed("ui_rotate_right"):
+		if Input.is_action_pressed("ui_rotate_down"):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(PI / 2 * delta)
-		if Input.is_action_pressed("ui_rotate_left"):
+		if Input.is_action_pressed("ui_rotate_up"):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
 
 func hit():
@@ -268,7 +277,11 @@ func hit():
 
 func update_ignis():
 	ignis_pos.x = direction * $IgnisPosition.position.x
-	weapons[$Informator.num_of_active_weapon].set_position(ignis_pos)
-	weapons[$Informator.num_of_active_weapon].mirror()
+
+	for i in range(WEAPONS_NUM):
+		weapons[i].set_position(ignis_pos)
+		if weapons[i].reflected != direction:
+			weapons[i].mirror()
+	
 	ignis_direction = direction
 	pass
