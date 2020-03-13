@@ -4,6 +4,8 @@ const deltaScale = 0.0025
 const energyDec = 0.025
 const energyMin = 0.1
 
+var reflected = false
+
 var minScale
 var energyMax
 var switchingOff
@@ -13,14 +15,14 @@ signal enabled
 signal disabled
 var priority = 1
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	minScale = texture_scale - 0.01
 	energyMax = 1.2
 	switchingOff = not enabled
 	switchedOff = enabled
 	if switchedOff:
-		finish_disabling()
+		finishDisabling()
 	pass # Replace with function body.
 
 
@@ -32,11 +34,39 @@ func _process(delta):
 		checkEnergy()
 	if not switchingOff and switchedOff:
 		# light needs to be switched on
-		finish_enabling()
+		finishEnabling()
+
+
+func mirror():
+	reflected = not reflected
+	rotation = -rotation
+	clamp_rotation()
+	pass
+
+
+func clamp_rotation():
+	# rotation must be in [-PI; PI]
+	if rotation <= -PI:
+		rotation = -PI
+	if rotation > PI:
+		rotation = PI
+
+
+func rotate_ignis(val):
+	if reflected:
+		val *= -1
+	if rotation * (rotation + val) < 0:
+		# val changes rotation sign
+		rotation = 0 # border value
+		pass
+	rotation += val
+	clamp_rotation()
+	pass
+
 
 func checkEnergy():
 	if energy <= energyMin:
-		finish_disabling()
+		finishDisabling()
 		switchedOff = true
 
 
@@ -44,9 +74,8 @@ func disable():
 	switchingOff = true
 
 
-func finish_disabling():
+func finishDisabling():
 	$Area2D/CollisionShape2D.disabled = true
-	$Particles2D.emitting = false
 	enabled = false
 	energy = 0
 	switchedOff = true
@@ -58,16 +87,9 @@ func enable():
 	energy = energyMax
 
 
-func finish_enabling():
+func finishEnabling():
 	switchedOff = false
-	$Particles2D.emitting = true
 	$Area2D/CollisionShape2D.disabled = false
 	enabled = true
 	energy = energyMax
 	emit_signal("enabled")
-
-func mirror():
-	pass
-
-func rotate_ignis(degree):
-	pass
