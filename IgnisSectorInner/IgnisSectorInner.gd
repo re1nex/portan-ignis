@@ -1,12 +1,10 @@
 extends Light2D
 
-#const deltaScale = 0.0001
+const deltaScale = 0.001
 const energyDec = 0.025
 const energyMin = 0.1
 
 var reflected = 1
-
-var deltaScale
 
 var minScale
 var energyMax
@@ -19,8 +17,7 @@ var priority = 1
 
 
 func _ready():
-	minScale = texture_scale * 0.99
-	deltaScale = texture_scale - minScale
+	minScale = texture_scale
 	rotate(PI / 2)
 	energyMax = 1.2
 	switchingOff = not enabled
@@ -32,7 +29,7 @@ func _ready():
 
 
 func _process(delta):
-	texture_scale = minScale + float(randf() / (minScale + deltaScale))
+	texture_scale = minScale + float(randf() * deltaScale/ (minScale))
 	if switchingOff and not switchedOff:
 		# switching off is in process
 		energy -= energyDec
