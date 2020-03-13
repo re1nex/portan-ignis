@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://levelTileSet/cavern_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levelTileSet/background.tres" type="TileSet" id=3]
+[ext_resource path="res://pauseMenu/pauseMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levelTileSet/TileMap.gd" type="Script" id=5]
 [ext_resource path="res://levelTileSet/platforms.tres" type="TileSet" id=11]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://IgnisRegularOuter/IgnisRegularOuter.tscn" type="PackedScene" id=13]
 
 [node name="NewDesignTestLevel" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -30,6 +33,11 @@ cell_size = Vector2( 16, 8 )
 format = 1
 tile_data = PoolIntArray( 589840, 1, 131072, 589841, 1, 0, 589842, 1, 0, 589843, 1, 0, 589844, 1, 0, 589845, 1, 0, 589846, 1, 0, 589847, 1, 0, 589848, 1, 0, 589849, 1, 0, 589850, 1, 0, 589851, 1, 0, 589852, 1, 131073, 720926, 4, 0, 852001, 4, 0, 1114145, 4, 0, 1507361, 4, 0, 1835041, 4, 0, 1900575, 4, 0, 2097185, 4, 0, 2490397, 4, 0, 2555937, 4, 0, 2621456, 4, 0, 2818081, 4, 0, 2949133, 4, 0, 3145761, 4, 0, 3276825, 4, 0, 3342356, 4, 0, 3342358, 4, 0, 3342369, 4, 0, 3538955, 4, 0, 3538969, 1, 131072, 3538970, 1, 0, 3538971, 1, 0, 3538972, 1, 0, 3538973, 1, 131073, 3604498, 4, 0, 3604513, 4, 0, 3801121, 4, 0, 3866650, 4, 0 )
 
+[node name="PositionLU" type="Position2D" parent="Level"]
+
+[node name="PositionRD" type="Position2D" parent="Level"]
+position = Vector2( 704.488, 565 )
+
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 267.389, 61.3367 )
 scale = Vector2( 0.338609, 0.338609 )
@@ -44,4 +52,8 @@ scale = Vector2( 0.46923, 0.46923 )
 [node name="IgnisRegularOuter" parent="." instance=ExtResource( 13 )]
 position = Vector2( 106.262, 469.196 )
 scale = Vector2( 0.295914, 0.295914 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
 [connection signal="ignis_regular_taken" from="IgnisRegularOuter" to="Player" method="_on_IgnisRegularOuter_ignis_regular_taken"]

@@ -27,8 +27,12 @@ _global_script_class_icons={
 [application]
 
 config/name="portan-ignis"
-run/main_scene="res://Main/Main.tscn"
+run/main_scene="res://mainMenu/MainMenuView.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+SceneSwitcher="*res://sceneSwitcher/SceneSwitcher.gd"
 
 [display]
 
