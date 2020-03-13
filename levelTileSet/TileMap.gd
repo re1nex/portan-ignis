@@ -1,16 +1,13 @@
-extends TileMap
+extends Node2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var posRD = Vector2()
+var posLU = Vector2()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	posRD = $Level/PositionRD.position
+	posLU = $Level/PositionLU.position
+	$Player.prepare_camera(posLU, posRD)
+	$Player/Camera.zoom = Vector2(0.5, 0.5)
+	$IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
