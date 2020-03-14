@@ -1,20 +1,34 @@
 extends MarginContainer
-signal Continue
-signal ExitMenu
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var game_paused = false
+export (bool) var hide_at_start = true
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if hide_at_start:
+		hide()
+	if OS.window_fullscreen:
+		$CenterContainer/background/CenterContainer/Settings/Sprite/TextureRect/CheckBox.pressed = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		game_paused = !game_paused
+		process_pause()
+
+
+func process_pause():
+	if game_paused:
+		get_tree().paused = true
+		show()
+	else:
+		get_tree().paused = false
+		reset_menu();
+		hide()
+
+func reset_menu():
+	$CenterContainer/background/CenterContainer/Settings.hide()
+	$CenterContainer/background/CenterContainer/Pause.show()
 
 
 func _on_backSettings_pressed():
@@ -27,7 +41,8 @@ func _on_CheckBox_pressed():
 
 
 func _on_Continue_pressed():
-	emit_signal("Continue")
+	game_paused = false
+	process_pause()
 
 
 func _on_Settings_pressed():
@@ -36,4 +51,6 @@ func _on_Settings_pressed():
 
 
 func _on_MainMenu_pressed():
-	emit_signal("ExitMenu")
+	game_paused = false
+	process_pause()
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)

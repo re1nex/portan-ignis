@@ -1,22 +1,8 @@
 extends MarginContainer
-signal level0
-signal level1
 
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if OS.window_fullscreen:
+		$HBoxContainer/VBoxContainer/Settings/HBoxContainer/TextureRect/CheckBox.pressed = true
 
 
 func _on_Start_pressed():
@@ -72,8 +58,8 @@ func _on_backHelp_pressed():
 
 
 func _on_level0_pressed():
-	emit_signal("level0")
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_TEST)
 
 
 func _on_level1_pressed():
-	emit_signal("level1")
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_TEST_DESIGN)
