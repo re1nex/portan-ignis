@@ -4,7 +4,7 @@
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20, 30 )
+extents = Vector2( 25, 30 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 120.0
@@ -58,5 +58,6 @@ shape = SubResource( 3 )
 [connection signal="area_entered" from="CatchArea" to="." method="_on_CatchArea_area_entered"]
 [connection signal="area_exited" from="CatchArea" to="." method="_on_CatchArea_area_exited"]
 [connection signal="body_entered" from="CatchArea" to="." method="_on_CatchArea_body_entered"]
+[connection signal="body_exited" from="CatchArea" to="." method="_on_CatchArea_body_exited"]
 [connection signal="area_entered" from="Visibility" to="." method="_on_Visibility_area_entered"]
 [connection signal="area_exited" from="Visibility" to="." method="_on_Visibility_area_exited"]
