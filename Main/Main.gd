@@ -13,5 +13,6 @@ func _ready():
 
 
 func _on_Player_die():
-	$Player.queue_free()
+	#$Player.queue_free()
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
 	pass # Replace with function body.
