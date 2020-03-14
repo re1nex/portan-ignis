@@ -1,5 +1,9 @@
 extends MarginContainer
 
+func _ready():
+	if OS.window_fullscreen:
+		$HBoxContainer/VBoxContainer/Settings/HBoxContainer/TextureRect/CheckBox.pressed = true
+
 
 func _on_Start_pressed():
 	$HBoxContainer/VBoxContainer/mainView.hide()

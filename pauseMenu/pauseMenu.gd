@@ -7,6 +7,8 @@ export (bool) var hide_at_start = true
 func _ready():
 	if hide_at_start:
 		hide()
+	if OS.window_fullscreen:
+		$CenterContainer/background/CenterContainer/Settings/Sprite/TextureRect/CheckBox.pressed = true
 
 
 func _process(delta):
@@ -21,7 +23,12 @@ func process_pause():
 		show()
 	else:
 		get_tree().paused = false
+		reset_menu();
 		hide()
+
+func reset_menu():
+	$CenterContainer/background/CenterContainer/Settings.hide()
+	$CenterContainer/background/CenterContainer/Pause.show()
 
 
 func _on_backSettings_pressed():
