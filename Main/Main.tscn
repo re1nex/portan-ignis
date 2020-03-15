@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://IgnisRegularLevel/IgnisRegularLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BoxLevelTesting/BoxLevelTesting.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Main/Main.gd" type="Script" id=5]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://pauseMenu/pauseMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=8]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
@@ -41,4 +42,10 @@ position = Vector2( 89.625, 552.939 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 7 )]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+margin_top = -20.0
+margin_right = 1024.0
+margin_bottom = 84.0
 [connection signal="die" from="Player" to="." method="_on_Player_die"]
