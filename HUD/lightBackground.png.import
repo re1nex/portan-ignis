@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/back.png-b7b03b09d0eed0658727ee4941b4188a.stex"
+path="res://.import/lightBackground.png-4d030751d49edeeec61eb8a5726f54e4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pauseMenu/back.png"
-dest_files=[ "res://.import/back.png-b7b03b09d0eed0658727ee4941b4188a.stex" ]
+source_file="res://HUD/lightBackground.png"
+dest_files=[ "res://.import/lightBackground.png-4d030751d49edeeec61eb8a5726f54e4.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
