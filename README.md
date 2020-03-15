@@ -22,11 +22,11 @@ Portan Ignis is a puzzle-platformer adventure game developed for PC. The game ta
 
 # Запуск игры
 1. Запустите Godot Engine
-2. Нажмите импорт и выберете расположение файлов игры
+2. Нажмите импорт и выберите расположение файлов игры
 
 ![alt text](https://github.com/re1nex/portan-ignis/blob/dev/instruction/godotImport.png)
 
-3. Выберете файл project.godot и нажмите импорт
+3. Выберите файл project.godot и нажмите импорт
 4. В открывшемся окне нажмите кнопку "Запустить проект"
 
 ![alt text](https://github.com/re1nex/portan-ignis/blob/dev/instruction/run.png)
