@@ -10,12 +10,12 @@ const GRAVITY_VEC = Vector2(0, 1500)
 export (int) var walk_speed = 100
 export (int) var run_speed = 250
 export (int) var jump_speed = 150
+export (int) var JUMP_HEIGHT_LIMIT = 60
 var direction = 1
 var velocity = Vector2()
 const ROAMING = 0
 const CHASING = 1 
 const SMALL_RADIUS = 5
-const JUMP_HEIGHT_LIMIT = 60
 const JUMP_RADIUS = 120
 const FLOOR_NORMAL = Vector2(0, -1)
 var vision_center
