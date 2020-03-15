@@ -62,6 +62,11 @@ func _ready():
 	ignis_pos = $IgnisPosition.get_position()
 	fill_weapons()
 	
+	sprite = $AnimatedSprite1
+	sprite.scale.x = scale_x
+	sprite.scale.y = scale_y
+	sprite.animation = "walk"
+	
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
 
 
