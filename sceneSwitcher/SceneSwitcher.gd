@@ -1,7 +1,7 @@
 extends Node
 
 enum Scenes{
-	SCENE_STAGE_TEST_DESIGN,
+	SCENE_STAGE_1,
 	SCENE_STAGE_TEST,
 	SCENE_MAIN_MENU,
 }
@@ -20,8 +20,8 @@ func goto_scene(scene):
 func _deferred_goto_scene(scene):
 	var new_scene
 	
-	if (scene == Scenes.SCENE_STAGE_TEST_DESIGN):
-		new_scene = ResourceLoader.load("res://levelTileSet/TileMap.tscn")
+	if (scene == Scenes.SCENE_STAGE_1):
+		new_scene = ResourceLoader.load("res://level1/Level1.tscn")
 	elif (scene == Scenes.SCENE_STAGE_TEST):
 		new_scene = ResourceLoader.load("res://Main/Main.tscn")
 	elif (scene == Scenes.SCENE_MAIN_MENU):

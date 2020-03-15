@@ -1,16 +1,9 @@
-[gd_resource type="TileSet" load_steps=6 format=2]
+[gd_resource type="TileSet" load_steps=4 format=2]
 
 [ext_resource path="res://levelTileSet/cavern_textures.png" type="Texture" id=1]
 
-
-[sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( 4.14853, 16, 4.09445, 14.9461, 4.04037, 11.214, 6.0957, 9.10458, 9.88184, 8.94232, 11.829, 11.9712, 12.9108, 14.1348, 13.7762, 16 )
-
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 4.63531, 15.6695, 3.3913, 14.3714, 3.22903, 11.0179, 5.7171, 8.47581, 9.6655, 8.31355, 11.829, 10.1525, 14.1007, 15.6154 )
-
-[sub_resource type="OccluderPolygon2D" id=3]
-polygon = PoolVector2Array( 1.93094, 16, 2.03912, 14.0366, 2.90451, 12.9548, 2.79633, 11.1699, 7.23154, 8.1951, 10.8554, 7.97875, 11.7749, 10.1964, 12.9648, 12.3058, 13.1271, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 1.01144, 15.8621, 1.01144, 13.4281, 1.93094, 13.3199, 1.7146, 11.1564, 7.44791, 6.93755, 10.8554, 6.82938, 14.0466, 11.9677, 14.1548, 15.8621 )
@@ -23,7 +16,6 @@ points = PoolVector2Array( 1.01144, 15.8621, 1.01144, 13.4281, 1.93094, 13.3199,
 0/region = Rect2( 256, 80, 16, 16 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
-0/occluder = SubResource( 1 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
@@ -40,7 +32,6 @@ points = PoolVector2Array( 1.01144, 15.8621, 1.01144, 13.4281, 1.93094, 13.3199,
 1/region = Rect2( 256, 96, 16, 16 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
-1/occluder = SubResource( 3 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
