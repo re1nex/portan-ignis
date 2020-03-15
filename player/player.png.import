@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/characters.png-7bd449ff05756324e359c822eb56468a.stex"
+path="res://.import/player.png-1ad27fc2a62fa126eae918723933dd6f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levelTileSet/characters.png"
-dest_files=[ "res://.import/characters.png-7bd449ff05756324e359c822eb56468a.stex" ]
+source_file="res://player/player.png"
+dest_files=[ "res://.import/player.png-1ad27fc2a62fa126eae918723933dd6f.stex" ]
 
 [params]
 
