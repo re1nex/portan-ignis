@@ -61,7 +61,7 @@ func _ready():
 	ignis_pos = $IgnisPosition.get_position()
 	fill_weapons()
 	
-	$TimerIgnis.connect("timeout",self, "_on_Timer_timeout")
+	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
 
 
 func prepare_camera(var LU, var RD):

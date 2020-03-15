@@ -8,5 +8,5 @@ func _ready():
 	posRD = $PositionRD.position
 	posLU = $PositionLU.position
 	
-	$CanvasModulate.visible = true
+	$CanvasModulate.visible = false
 	pass # Replace with function body.
