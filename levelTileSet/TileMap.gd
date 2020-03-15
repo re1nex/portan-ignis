@@ -11,6 +11,7 @@ func _ready():
 	$Player.prepare_camera(posLU, posRD)
 	$Player/Camera.zoom = Vector2(0.5, 0.5)
 	$IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
+	$CanvasLayer/HUD.init_player($Player)
 
 
 func _on_Player_die():
