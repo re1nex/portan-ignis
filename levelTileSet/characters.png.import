@@ -14,7 +14,7 @@ dest_files=[ "res://.import/characters.png-7bd449ff05756324e359c822eb56468a.stex
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
