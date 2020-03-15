@@ -8,6 +8,7 @@ func _ready():
 	$Win/WinMenu/TextureButton.connect("pressed", self, "_on_Player_die")
 	$Level1Landscape.connect("level_complete", self, "complete")
 	$Win/WinMenu.hide()
+	$Menu/HUD.init_player($Player)
 	
 func _on_Player_die():
 	#$Player.queue_free()
