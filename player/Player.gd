@@ -49,8 +49,8 @@ func _ready():
 	$Area/CollisionShape.scale.x = scale_x
 	$Area/CollisionShape.scale.y = scale_y
 	
-	$CollisionShape.scale.x = scale_x
-	$CollisionShape.scale.y = scale_y
+	$CharacterShape.scale.x = scale_x
+	$CharacterShape.scale.y = scale_y
 	
 	$IgnisPosition.position.x *= scale_x
 	$IgnisPosition.position.y *= scale_y
