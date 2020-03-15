@@ -35,7 +35,7 @@ func activate():
 		$Light2D.disable()
 		activated = false
 	else:
-		if body_informator != null and body_informator.is_ignis:
+		if body_informator != null and body_informator.ignis_status == body_informator.Is_ignis.HAS_IGNIS:
 			activated = true
 			$Light2D.enable()
 			$SpriteTorchOn.show()

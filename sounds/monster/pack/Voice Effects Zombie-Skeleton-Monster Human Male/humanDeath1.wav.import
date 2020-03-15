@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/humanDeath1.wav-f25a2b15dbdc2f2d4e4a904669550bbc.sample"
+
+[deps]
+
+source_file="res://sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanDeath1.wav"
+dest_files=[ "res://.import/humanDeath1.wav-f25a2b15dbdc2f2d4e4a904669550bbc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

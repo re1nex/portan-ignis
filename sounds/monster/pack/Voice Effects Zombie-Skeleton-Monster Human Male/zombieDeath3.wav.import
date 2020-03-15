@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/zombieDeath3.wav-755a55e460e9786764115d1fa47d46ff.sample"
+
+[deps]
+
+source_file="res://sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieDeath3.wav"
+dest_files=[ "res://.import/zombieDeath3.wav-755a55e460e9786764115d1fa47d46ff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

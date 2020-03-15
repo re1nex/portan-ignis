@@ -10,3 +10,10 @@ func _ready():
 	posLU = $BoxLevelTesting.posLU
 	$Player.prepare_camera(posLU, posRD)
 	$IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
+	$CanvasLayer/HUD.init_player($Player)
+
+
+func _on_Player_die():
+	#$Player.queue_free()
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
+	pass # Replace with function body.
