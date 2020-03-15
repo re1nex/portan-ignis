@@ -8,8 +8,7 @@
 radius = 14.8201
 
 [sub_resource type="RectangleShape2D" id=2]
-
-extents = Vector2( 8.01269, 12.074 )
+extents = Vector2( 10.0685, 12.074 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
@@ -61,7 +60,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
@@ -72,9 +70,7 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
-
 z_as_relative = false
-
 shape = SubResource( 2 )
 one_way_collision_margin = 0.0
 
