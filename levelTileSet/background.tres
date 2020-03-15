@@ -2,7 +2,6 @@
 
 [ext_resource path="res://levelTileSet/cavern_textures.png" type="Texture" id=1]
 
-
 [resource]
 0/name = "Background"
 0/texture = ExtResource( 1 )
