@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/levels/level1/Level1.gd" type="Script" id=2]
+[ext_resource path="res://src/ui/pauseMenu/pauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/levels/level1/Level1Landscape.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resource/sprites/tiles/level_0/background.jpg" type="Texture" id=5]
+[ext_resource path="res://src/ui/HUD/HUD.tscn" type="PackedScene" id=6]
+
+
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Level1Landscape" parent="." instance=ExtResource( 4 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1030.58, 1418.05 )
+scale_x = 2.5
+scale_y = 2.5
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="Menu" instance=ExtResource( 3 )]
+
+[node name="HUD" parent="Menu" instance=ExtResource( 6 )]
+
+[node name="Win" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="WinMenu" type="Node2D" parent="Win"]
+
+[node name="Sprite" type="Sprite" parent="Win/WinMenu"]
+position = Vector2( 506.156, 296.804 )
+scale = Vector2( 0.244201, 0.244201 )
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Win/WinMenu"]
+margin_left = 283.607
+margin_top = 196.438
+margin_right = 430.607
+margin_bottom = 244.438
+rect_scale = Vector2( 3.10226, 3.10226 )
+text = "You've reached 
+the end of the 1st part 
+of Level 1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="Win/WinMenu"]
+margin_left = 406.381
+margin_top = 385.51
+margin_right = 446.381
+margin_bottom = 425.51
+rect_scale = Vector2( 5.06391, 1.88637 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Win/WinMenu/TextureButton"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 0.977541, 2.80722 )
+text = "OK"
+align = 1
+valign = 1
