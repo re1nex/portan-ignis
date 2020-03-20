@@ -7,8 +7,6 @@
 [ext_resource path="res://resource/sprites/tiles/level_0/background.jpg" type="Texture" id=5]
 [ext_resource path="res://src/ui/HUD/HUD.tscn" type="PackedScene" id=6]
 
-
-
 [node name="Level1" type="Node2D"]
 script = ExtResource( 2 )
 
