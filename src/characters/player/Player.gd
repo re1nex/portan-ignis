@@ -117,7 +117,10 @@ func _physics_process(delta):
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
 	if on_floor:
-		sprite.animation = "walk"
+		if linear_vel.length() > 0:
+			sprite.animation = "walk"
+		else:
+			sprite.animation = "stay"
 	
 	
 	if linear_vel.length() > 0 and on_floor:
@@ -184,27 +187,36 @@ func switch_sprites(new_sprite):
 	sprite = new_sprite
 
 func control_weapons():
+	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+		if Input.is_action_just_pressed("turn_off_ignis"):
+			turn_off_ignis()
+		
+		if Input.is_action_just_released("ui_weapon_up"):
+			var type = $Informator.num_of_active_weapon + 1
+			if type >= WEAPONS_NUM:
+				type = 0
+			while not $Informator.has_weapons[type]:
+				type+=1
+				if type >= WEAPONS_NUM:
+					type = 0
+			switch_weapons(type)
+		
+		elif Input.is_action_just_released("ui_weapon_down"):
+			var type = $Informator.num_of_active_weapon - 1
+			if type < 0:
+				type = WEAPONS_NUM -1
+			while not $Informator.has_weapons[type]:
+				type-=1
+				if type < 0:
+					type = WEAPONS_NUM -1
+			switch_weapons(type)
+	
 	if not $Informator.ignis_status == $Informator.Is_ignis.NO_IGNIS:
 		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
-			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.REGULAR:
-				turn_off_ignis()
-				#switch_sprites($iconWithoutIgnis)
-			else:
-				if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
-					turn_off_ignis()
-				turn_on_ignis(Ignis_type.REGULAR)
-				#switch_sprites($iconWithIgnis)
-				
+			switch_weapons(Ignis_type.REGULAR)
 		
 		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[Ignis_type.SECTOR]:
-			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.SECTOR:
-				turn_off_ignis()
-				#switch_sprites($iconWithoutIgnis)
-			else:
-				if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
-					turn_off_ignis()
-				turn_on_ignis(Ignis_type.SECTOR)
-				#switch_sprites($iconWithIgnis)
+			switch_weapons(Ignis_type.SECTOR)
 
 
 func turn_off_ignis():
@@ -303,3 +315,11 @@ func hit():
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
 		turn_on_hit_timer()
 	pass
+
+func switch_weapons(type):
+	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == type:
+		pass
+	else:
+		if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+			turn_off_ignis()
+		turn_on_ignis(type)
