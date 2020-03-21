@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resource/tileres/blocks.tres" type="TileSet" id=1]
+[ext_resource path="res://src/levels/level0/Level0Landscape.gd" type="Script" id=2]
+[ext_resource path="res://resource/sprites/tiles/level_0/background.jpg" type="Texture" id=3]
+
+[node name="Level0Landscape" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( -64.7542, -36.6943 )
+scale = Vector2( 0.479268, 0.468726 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 4, 3, 0, 5, 3, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0, 11, 3, 0, 12, 3, 0, 13, 3, 0, 14, 3, 0, 15, 3, 0, 65536, 3, 0, 65551, 3, 0, 131072, 3, 0, 131073, 4, 0, 131074, 6, 0, 131087, 3, 0, 196608, 3, 0, 196609, 7, 0, 196610, 12, 0, 196615, 33, 0, 196621, 4, 0, 196622, 6, 0, 196623, 3, 0, 262144, 3, 0, 262145, 18, 0, 262146, 18, 0, 262147, 33, 0, 262148, 33, 0, 262149, 33, 0, 262153, 33, 0, 262154, 33, 0, 262157, 7, 0, 262158, 12, 0, 262159, 3, 0, 327680, 3, 0, 327693, 18, 0, 327694, 18, 0, 327695, 3, 0, 393216, 3, 0, 393228, 25, 0, 393230, 25, 0, 393231, 3, 0, 458752, 3, 0, 458753, 4, 0, 458754, 6, 0, 458758, 33, 0, 458762, 16, 0, 458763, 21, 0, 458764, 26, 0, 458766, 26, 0, 458767, 3, 0, 524288, 3, 0, 524289, 8, 0, 524290, 11, 0, 524292, 25, 0, 524296, 21, 0, 524297, 21, 0, 524298, 2, 0, 524299, 21, 0, 524300, 2, 0, 524302, 2, 0, 524303, 3, 0, 589824, 3, 0, 589825, 3, 0, 589826, 3, 0, 589827, 3, 0, 589828, 3, 0, 589829, 3, 0, 589830, 3, 0, 589831, 3, 0, 589832, 3, 0, 589833, 3, 0, 589834, 3, 0, 589835, 3, 0, 589836, 3, 0, 589837, 3, 0, 589838, 3, 0, 589839, 3, 0 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color( 0, 0, 0, 1 )
+
+[node name="PositionRD" type="Position2D" parent="."]
+position = Vector2( 1084.93, 690.208 )
+
+[node name="PositionLU" type="Position2D" parent="."]
+position = Vector2( -63.9468, -36.0755 )
