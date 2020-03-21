@@ -46,16 +46,8 @@ var sprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	$Area/CollisionShape.scale.x = scale_x
-	$Area/CollisionShape.scale.y = scale_y
-	
-	$CharacterShape.scale.x = scale_x
-	$CharacterShape.scale.y = scale_y
-	
-
-	$IgnisPosition.position.x *= scale_x
-	$IgnisPosition.position.y *= scale_y
-
+	scale.x=scale_x
+	scale.y=scale_y
 	
 	weapons.resize(WEAPONS_NUM)
 	
@@ -63,8 +55,6 @@ func _ready():
 	fill_weapons()
 	
 	sprite = $AnimatedSprite1
-	sprite.scale.x = scale_x
-	sprite.scale.y = scale_y
 	sprite.animation = "walk"
 	
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
@@ -89,7 +79,6 @@ func _process(delta):
 	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
-	
 
 
 func _physics_process(delta):
@@ -254,6 +243,10 @@ func fill_weapons():
 	weapons[Ignis_type.SECTOR] = node
 	add_child(weapons[Ignis_type.SECTOR])
 	weapons[Ignis_type.SECTOR].disable()
+	
+	for i in range(WEAPONS_NUM):
+		weapons[i].scale.x/=scale_x
+		weapons[i].scale.y/=scale_y
 
 
 

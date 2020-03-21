@@ -93,7 +93,7 @@ animations = [ {
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=13]
-points = PoolVector2Array( 0, 0, 9, -5, 18, 0, 18, 18, 0, 18 )
+points = PoolVector2Array( 0, 1, 9, -6, 18, 1, 18, 18, 0, 18 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -117,18 +117,17 @@ smoothing_enabled = true
 one_shot = true
 
 [node name="IgnisPosition" type="Position2D" parent="."]
-position = Vector2( 9.26011, 2.70617 )
+position = Vector2( 9.77179, -0.510129 )
 
 [node name="TimerHit" type="Timer" parent="."]
 one_shot = true
 
 [node name="AnimatedSprite1" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 0.0994377 )
 frames = SubResource( 12 )
-animation = "landing"
+animation = "walk"
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
-position = Vector2( -9.9426, -7.06691 )
+position = Vector2( -9.1092, -5.92449 )
 shape = SubResource( 13 )
 one_way_collision_margin = 0.0
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
