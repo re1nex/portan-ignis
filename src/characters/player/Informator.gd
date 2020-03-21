@@ -20,7 +20,7 @@ var health
 func _ready():
 	for i in range(get_parent().WEAPONS_NUM):
 		has_weapons.append(false)
-		
+	
 	ignis_status = Is_ignis.NO_IGNIS
 	ignis_timer_start = get_parent().life_time_of_ignis
 	health = get_parent().health

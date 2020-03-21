@@ -46,16 +46,8 @@ var sprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	$Area/CollisionShape.scale.x = scale_x
-	$Area/CollisionShape.scale.y = scale_y
-	
-	$CharacterShape.scale.x = scale_x
-	$CharacterShape.scale.y = scale_y
-	
-
-	$IgnisPosition.position.x *= scale_x
-	$IgnisPosition.position.y *= scale_y
-
+	scale.x=scale_x
+	scale.y=scale_y
 	
 	weapons.resize(WEAPONS_NUM)
 	
@@ -63,8 +55,6 @@ func _ready():
 	fill_weapons()
 	
 	sprite = $AnimatedSprite1
-	sprite.scale.x = scale_x
-	sprite.scale.y = scale_y
 	sprite.animation = "walk"
 	
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
@@ -89,7 +79,6 @@ func _process(delta):
 	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
-	
 
 
 func _physics_process(delta):
@@ -128,15 +117,22 @@ func _physics_process(delta):
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
 	if on_floor:
-		sprite.animation = "walk"
+		if linear_vel.length() > 0:
+			sprite.animation = "walk"
+		else:
+			sprite.animation = "stay"
 	
 	
-	if linear_vel.length() > 0 and on_floor:
+	if target_speed != 0 and on_floor:
 		sprite.play()
 	else:
 		sprite.stop()
 	
 	# Jumping
+	#if is_on_ceiling():
+		#linear_vel.y = 0
+		#jumping = false
+	
 	if on_floor and Input.is_action_pressed("ui_up"):
 		linear_vel.y = -jump_speed
 		height -= linear_vel.y * delta
@@ -195,27 +191,40 @@ func switch_sprites(new_sprite):
 	sprite = new_sprite
 
 func control_weapons():
+	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+		
+		if Input.is_action_just_released("ui_weapon_up"):
+			var type = $Informator.num_of_active_weapon + 1
+			if type >= WEAPONS_NUM:
+				type = 0
+			while not $Informator.has_weapons[type]:
+				type+=1
+				if type >= WEAPONS_NUM:
+					type = 0
+			switch_weapons(type)
+		
+		elif Input.is_action_just_released("ui_weapon_down"):
+			var type = $Informator.num_of_active_weapon - 1
+			if type < 0:
+				type = WEAPONS_NUM -1
+			while not $Informator.has_weapons[type]:
+				type-=1
+				if type < 0:
+					type = WEAPONS_NUM -1
+			switch_weapons(type)
+	
 	if not $Informator.ignis_status == $Informator.Is_ignis.NO_IGNIS:
-		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
-			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.REGULAR:
+		if Input.is_action_just_pressed("switch_ignis"):
+			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
 				turn_off_ignis()
-				#switch_sprites($iconWithoutIgnis)
 			else:
-				if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
-					turn_off_ignis()
-				turn_on_ignis(Ignis_type.REGULAR)
-				#switch_sprites($iconWithIgnis)
-				
+				turn_on_ignis($Informator.num_of_active_weapon)
+		
+		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
+			switch_weapons(Ignis_type.REGULAR)
 		
 		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[Ignis_type.SECTOR]:
-			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == Ignis_type.SECTOR:
-				turn_off_ignis()
-				#switch_sprites($iconWithoutIgnis)
-			else:
-				if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
-					turn_off_ignis()
-				turn_on_ignis(Ignis_type.SECTOR)
-				#switch_sprites($iconWithIgnis)
+			switch_weapons(Ignis_type.SECTOR)
 
 
 func turn_off_ignis():
@@ -254,6 +263,10 @@ func fill_weapons():
 	weapons[Ignis_type.SECTOR] = node
 	add_child(weapons[Ignis_type.SECTOR])
 	weapons[Ignis_type.SECTOR].disable()
+	
+	for i in range(WEAPONS_NUM):
+		weapons[i].scale.x/=scale_x
+		weapons[i].scale.y/=scale_y
 
 
 
@@ -310,3 +323,11 @@ func hit():
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
 		turn_on_hit_timer()
 	pass
+
+func switch_weapons(type):
+	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == type:
+		pass
+	else:
+		if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+			turn_off_ignis()
+		turn_on_ignis(type)
