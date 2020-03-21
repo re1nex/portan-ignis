@@ -192,8 +192,6 @@ func switch_sprites(new_sprite):
 
 func control_weapons():
 	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
-		if Input.is_action_just_pressed("turn_off_ignis"):
-			turn_off_ignis()
 		
 		if Input.is_action_just_released("ui_weapon_up"):
 			var type = $Informator.num_of_active_weapon + 1
@@ -216,6 +214,12 @@ func control_weapons():
 			switch_weapons(type)
 	
 	if not $Informator.ignis_status == $Informator.Is_ignis.NO_IGNIS:
+		if Input.is_action_just_pressed("switch_ignis"):
+			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+				turn_off_ignis()
+			else:
+				turn_on_ignis($Informator.num_of_active_weapon)
+		
 		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
 			switch_weapons(Ignis_type.REGULAR)
 		
