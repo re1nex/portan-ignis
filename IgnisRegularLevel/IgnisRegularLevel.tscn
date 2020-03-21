@@ -10,6 +10,8 @@
 [node name="IgnisRegularLevel" type="Area2D"]
 light_mask = 3
 position = Vector2( 0, 2 )
+collision_layer = 2
+collision_mask = 0
 script = ExtResource( 4 )
 
 [node name="SpriteTorchOn" type="Sprite" parent="."]
