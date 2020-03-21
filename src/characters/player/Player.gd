@@ -123,12 +123,16 @@ func _physics_process(delta):
 			sprite.animation = "stay"
 	
 	
-	if linear_vel.length() > 0 and on_floor:
+	if target_speed != 0 and on_floor:
 		sprite.play()
 	else:
 		sprite.stop()
 	
 	# Jumping
+	#if is_on_ceiling():
+		#linear_vel.y = 0
+		#jumping = false
+	
 	if on_floor and Input.is_action_pressed("ui_up"):
 		linear_vel.y = -jump_speed
 		height -= linear_vel.y * delta
