@@ -25,7 +25,14 @@ func init_player(plr):
 func _process(delta):
 	set_health_bar(informator.health)
 	set_ignis_bar(informator.ignis_timer_start)
-	
+	upd_ignis_bar()
+
+
+func upd_ignis_bar():
+	if informator.ignis_status == informator.Is_ignis.NO_IGNIS:
+		$MainContainer/Bars/Bar/torchStatus.hide()
+	else:
+		$MainContainer/Bars/Bar/torchStatus.show()
 
 
 func set_ignis_bar(value):
