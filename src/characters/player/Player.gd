@@ -104,6 +104,7 @@ func _physics_process(delta):
 		if not Input.is_action_pressed("ui_right") and direction == 1:
 			direction = -1
 			sprite.flip_h = true
+			$CharacterShape.scale.x *= -1
 			if $Informator.num_of_active_weapon != -1:
 				update_ignis()
 	
@@ -112,6 +113,7 @@ func _physics_process(delta):
 		if not Input.is_action_pressed("ui_left") and direction == -1:
 			direction = 1
 			sprite.flip_h = false
+			$CharacterShape.scale.x *= -1
 			if $Informator.num_of_active_weapon != -1:
 				update_ignis()
 	

@@ -52,19 +52,19 @@ region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 64 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
+region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
@@ -77,19 +77,19 @@ animations = [ {
 "name": "jump",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 9 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
 "name": "stay",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "walk",
 "speed": 5.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
-points = PoolVector2Array( -1, 1, 9, -6, 19.1, 1, 19.1, 18, -1, 18 )
+points = PoolVector2Array( -10, 1, 0, -6, 10.1, 1, 10.1, 7, 10.1, 18, 0, 18, -4, 18, -10, 8, -10, 8 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -125,9 +125,10 @@ one_shot = true
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
 animation = "walk"
+frame = 3
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
-position = Vector2( -9.05547, -5.92449 )
+position = Vector2( -0.0418178, -5.98959 )
 shape = SubResource( 11 )
 one_way_collision_margin = 0.0
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
