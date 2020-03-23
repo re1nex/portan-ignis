@@ -87,3 +87,14 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ChosenIgnis" type="HBoxContainer" parent="MainContainer"]
+margin_left = 596.0
+margin_right = 648.0
+margin_bottom = 64.0
+
+[node name="Status" type="Label" parent="MainContainer/ChosenIgnis"]
+margin_top = 25.0
+margin_right = 52.0
+margin_bottom = 39.0
+text = "No ignis"

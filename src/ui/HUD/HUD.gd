@@ -26,6 +26,21 @@ func _process(delta):
 	set_health_bar(informator.health)
 	set_ignis_bar(informator.ignis_timer_start)
 	upd_ignis_bar()
+	upd_chosen_ignis(informator.num_of_active_weapon)
+
+
+func upd_chosen_ignis(active_weapon):
+	if informator.ignis_status == informator.Is_ignis.NO_IGNIS:
+		$MainContainer/ChosenIgnis/Status.text = "no ignis"
+		return
+	match active_weapon:
+		-1:
+			$MainContainer/ChosenIgnis/Status.text = "no ignis"
+		0:
+			$MainContainer/ChosenIgnis/Status.text = "torch"
+		1: 
+			$MainContainer/ChosenIgnis/Status.text = "lens"
+	pass
 
 
 func upd_ignis_bar():
