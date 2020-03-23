@@ -24,6 +24,8 @@ export (float) var recharge_coef = 1.5
 export (float) var life_time_of_ignis = 3
 export (float) var hit_time = 1
 
+export (float) var dead_zone = 0.2
+
 
 export (int) var health = 5
 
@@ -133,7 +135,7 @@ func _physics_process(delta):
 		#linear_vel.y = 0
 		#jumping = false
 	
-	if on_floor and Input.is_action_pressed("ui_up"):
+	if on_floor and Input.is_action_pressed("jump"):
 		linear_vel.y = -jump_speed
 		height -= linear_vel.y * delta
 		jumping=true
@@ -141,7 +143,7 @@ func _physics_process(delta):
 		sprite.play()
 	
 	elif jumping==true:
-		if Input.is_action_pressed("ui_up") and height < jump_height_limit:
+		if Input.is_action_pressed("jump") and height < jump_height_limit:
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 		else:
@@ -293,6 +295,28 @@ func recharge():
 
 func check_rotate_ignis(delta):
 	if $Informator.num_of_active_weapon != -1:
+		if Input.get_connected_joypads().size() > 0:
+			var x_ax = -Input.get_joy_axis(0, JOY_ANALOG_RY)
+			var y_ax = Input.get_joy_axis(0, JOY_ANALOG_RX)
+			if abs(x_ax) > dead_zone or abs(y_ax) > dead_zone:
+				var angle = atan2(y_ax, x_ax)
+				if angle > 0:
+					if not Input.is_action_pressed("ui_left"):
+						if direction == -1:
+							direction = 1
+							sprite.flip_h = false
+							update_ignis()
+						var angle_delta = angle - weapons[$Informator.num_of_active_weapon].rotation
+						weapons[$Informator.num_of_active_weapon].rotate_ignis(angle_delta)
+				else:
+					if not Input.is_action_pressed("ui_right"):
+						if direction == 1:
+							direction = -1
+							sprite.flip_h = true
+							update_ignis()
+						var angle_delta = weapons[$Informator.num_of_active_weapon].rotation - angle
+						weapons[$Informator.num_of_active_weapon].rotate_ignis(angle_delta)
+
 		if Input.is_action_pressed("ui_rotate_down"):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(PI / 2 * delta)
 		if Input.is_action_pressed("ui_rotate_up"):
