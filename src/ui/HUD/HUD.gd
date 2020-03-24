@@ -33,6 +33,8 @@ func init_ignis_bar_anim():
 	fading_in = false 
 	max_alpha = $MainContainer/Bars.modulate.a
 	min_alpha = 0
+	if old_status == informator.Is_ignis.NO_IGNIS:
+		$MainContainer/Bars.modulate.a = 0 # hide
 
 
 func _process(delta):
@@ -77,10 +79,12 @@ func ignis_bar_anim():
 	if fading_in:
 		$MainContainer/Bars.modulate.a += fading_delta
 		if $MainContainer/Bars.modulate.a >= max_alpha:
+			$MainContainer/Bars.modulate.a = max_alpha
 			progress_bar_fading = false # stop animation
 	else:
 		$MainContainer/Bars.modulate.a -= fading_delta
 		if $MainContainer/Bars.modulate.a <= min_alpha:
+			$MainContainer/Bars.modulate.a = min_alpha
 			progress_bar_fading = false # stop animation
 
 
