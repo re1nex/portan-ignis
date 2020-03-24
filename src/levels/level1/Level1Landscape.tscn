@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/levels/level1/Level1Landscape.gd" type="Script" id=1]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/objects/IgnisRegularOuter/IgnisRegularOuter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resource/tileres/flowers_grass.tres" type="TileSet" id=8]
+[ext_resource path="res://src/objects/MovingBlock/MovingPlatform.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/levels/level1/MovingPlatforms.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 101.342, 123.447 )
@@ -33,6 +35,7 @@ tile_data = PoolIntArray( 1245193, 0, 0, 1376290, 0, 0, 2162697, 1, 0, 2162701, 
 [node name="Platforms" type="TileMap" parent="Landscape"]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 16 )
+occluder_light_mask = 0
 format = 1
 tile_data = PoolIntArray( 786433, 1, 131073, 786434, 1, 1, 786435, 1, 1, 786436, 1, 131074, 917510, 4, 0, 917513, 4, 0, 983051, 4, 0, 1048589, 4, 0, 1179660, 4, 0, 1310729, 4, 0, 1376264, 5, 0, 1376265, 5, 2, 1441818, 5, 0, 1441819, 5, 1, 1441820, 5, 2, 1441823, 5, 0, 1441824, 5, 1, 1441825, 5, 1, 1441826, 5, 1, 1441827, 5, 1, 1441828, 5, 1, 1441829, 5, 1, 1441830, 5, 1, 1441831, 5, 2, 1507335, 4, 0, 1638405, 4, 0, 1703940, 4, 0, 1835034, 5, 0, 1835035, 5, 1, 1835036, 5, 1, 1835037, 5, 2, 1900575, 4, 0, 2031629, 4, 0, 2031631, 4, 0, 2031648, 4, 0, 2097164, 4, 0, 2097172, 4, 0, 2097183, 4, 0, 2162709, 4, 0, 2162717, 4, 0, 2228246, 4, 0, 2228251, 4, 0, 2293780, 5, 0, 2293781, 5, 1, 2293782, 5, 1, 2293783, 5, 2, 2359320, 4, 0, 2424856, 5, 0, 2424857, 5, 2, 2490396, 4, 0, 2621470, 4, 0, 2687006, 5, 0, 2687007, 5, 2, 2687011, 4, 0, 2883615, 5, 0, 2883616, 5, 1, 2883617, 5, 1, 2883618, 5, 1, 2883619, 5, 1, 2883620, 5, 1, 2883621, 5, 1, 2883622, 5, 2 )
 
@@ -50,7 +53,6 @@ format = 1
 tile_data = PoolIntArray( 720898, 0, 65536, 720900, 0, 458755 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="LevelEnd" type="Area2D" parent="."]
@@ -61,7 +63,7 @@ scale = Vector2( 0.873188, 1.17247 )
 shape = SubResource( 1 )
 
 [node name="IgnisRegularOuter" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1102.78, 1445.26 )
+position = Vector2( 1215.97, 1441.82 )
 
 [node name="Ignises" type="Node2D" parent="."]
 
@@ -91,4 +93,20 @@ position = Vector2( -421.921, -234.916 )
 
 [node name="PositionRD" type="Position2D" parent="."]
 position = Vector2( 3834.68, 1719.49 )
+
+[node name="MovingPlatform" parent="." instance=ExtResource( 9 )]
+position = Vector2( 2199.92, 1282.79 )
+move_to = Vector2( 2, -8 )
+speed = 5.0
+
+[node name="MovingPlatforms" type="Node2D" parent="."]
+pause_mode = 2
+position = Vector2( 100, 0 )
+scale = Vector2( 2, 2 )
+
+[node name="MovingPlatforms" type="TileMap" parent="MovingPlatforms"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 16 )
+format = 1
+script = ExtResource( 10 )
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
