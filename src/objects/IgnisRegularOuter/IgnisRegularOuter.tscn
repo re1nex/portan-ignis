@@ -4,12 +4,6 @@
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_outer/torch.png" type="Texture" id=3]
 
-
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.81818, 54.6559 )
 
