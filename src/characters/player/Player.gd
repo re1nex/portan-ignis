@@ -13,6 +13,7 @@ enum Instruments_type {
 		LEVER,
 }
 
+const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 2
 const GRAVITY_VEC = Vector2(0,1100)
 const FLOOR_NORMAL = Vector2(0, -1)
@@ -48,7 +49,6 @@ var jumping = false
 var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -93,7 +93,10 @@ func _physics_process(delta):
 	# Apply gravity
 	linear_vel += delta * GRAVITY_VEC
 	# Move and slide
-	linear_vel = move_and_slide(linear_vel, FLOOR_NORMAL)
+	
+	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
+	
+	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
 
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
@@ -131,7 +134,7 @@ func _physics_process(delta):
 			$TimerLanding.set_wait_time(landing_time)
 			$TimerLanding.start()
 		if $TimerLanding.is_stopped():
-			if linear_vel.length() > 0:
+			if abs(linear_vel.x) > SMALL_TWITCHING:
 				sprite.animation = "walk"
 			else:
 				sprite.animation = "stay"

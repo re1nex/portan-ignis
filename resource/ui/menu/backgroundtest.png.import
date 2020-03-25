@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/level1Press.png-4562f90255fa95c95ad976a74a6ab866.stex"
+path="res://.import/backgroundtest.png-fa5d9af58add0e98b89a2c8ee994397e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/ui/menu/level1Press.png"
-dest_files=[ "res://.import/level1Press.png-4562f90255fa95c95ad976a74a6ab866.stex" ]
+source_file="res://resource/ui/menu/backgroundtest.png"
+dest_files=[ "res://.import/backgroundtest.png-fa5d9af58add0e98b89a2c8ee994397e.stex" ]
 
 [params]
 

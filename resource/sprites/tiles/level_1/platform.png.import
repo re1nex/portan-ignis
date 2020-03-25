@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/helpPress.png-691f14ac6a6118fb9ba17c85d4a3190f.stex"
+path="res://.import/platform.png-ad79b8570f3cdb5a9341f4862550819e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/ui/menu/helpPress.png"
-dest_files=[ "res://.import/helpPress.png-691f14ac6a6118fb9ba17c85d4a3190f.stex" ]
+source_file="res://resource/sprites/tiles/level_1/platform.png"
+dest_files=[ "res://.import/platform.png-ad79b8570f3cdb5a9341f4862550819e.stex" ]
 
 [params]
 

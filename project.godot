@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/enemy1/Enemy1.gd"
 }, {
+"base": "Node2D",
+"class": "MovingPlatform",
+"language": "GDScript",
+"path": "res://src/objects/MovingBlock/MovingPlatform.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Enemy1": "",
+"MovingPlatform": "",
 "Player": ""
 }
 
@@ -36,6 +42,8 @@ SceneSwitcher="*res://src/sceneSwitcher/SceneSwitcher.gd"
 
 [display]
 
+window/size/width=1280
+window/size/height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
