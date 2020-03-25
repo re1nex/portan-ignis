@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=1]
-[ext_resource path="res://resource/ui/menu/backgroundtest2.png" type="Texture" id=2]
+[ext_resource path="res://resource/ui/menu/backgroundtest3.png" type="Texture" id=2]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui/mainMenu/MainMenuView.gd" type="Script" id=14]
 [ext_resource path="res://resource/ui/arial.ttf" type="DynamicFontData" id=22]
@@ -14,7 +14,7 @@ font_data = ExtResource( 1 )
 size = 90
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 font_data = ExtResource( 22 )
 
@@ -323,7 +323,7 @@ margin_left = -90465.5
 margin_top = -8771.86
 margin_right = -90319.5
 margin_bottom = -8730.86
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "1280x720"
 __meta__ = {
 "_edit_use_anchors_": false,
