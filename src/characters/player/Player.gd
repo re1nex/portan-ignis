@@ -9,6 +9,10 @@ enum Ignis_type {
 		SECTOR,
 }
 
+enum Instruments_type {
+		LEVER,
+}
+
 const WEAPONS_NUM = 2
 const GRAVITY_VEC = Vector2(0,1100)
 const FLOOR_NORMAL = Vector2(0, -1)
@@ -26,15 +30,15 @@ export (float) var hit_time = 1
 
 export (float) var dead_zone = 0.2
 
-export (float) var landing_time = 0.2
+export (float) var landing_time = 0.15
 
 export (int) var health = 5
 
 var linear_vel = Vector2()
 var velocity = Vector2()
 
-
-var weapons=[]  
+var instruments = []
+var weapons = []  
 var on_player_area_node
 var in_node_area = false
 var ignis_pos = Vector2(0, 0)
@@ -139,7 +143,6 @@ func _physics_process(delta):
 			sprite.animation = "fall"
 			
 	
-	print(height)
 	# Jumping
 	#if is_on_ceiling():
 		#linear_vel.y = 0
@@ -280,6 +283,9 @@ func fill_weapons():
 		weapons[i].scale.y/=scale_y
 
 
+func fill_instruments():
+	var node = preload("res://src/objects/lever/Lever.tscn").instance()
+	instruments[Instruments_type.LEVER] = node
 
 func update_ignis_timer_start(delta):
 	if $TimerIgnis.is_stopped():
@@ -364,3 +370,8 @@ func switch_weapons(type):
 		if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
 			turn_off_ignis()
 		turn_on_ignis(type)
+
+
+func _on_Lever_lever_taken():
+	$Informator.has_instruments[Instruments_type.LEVER] = true
+	pass # Replace with function body.
