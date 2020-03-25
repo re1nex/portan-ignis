@@ -89,7 +89,7 @@ func _physics_process(delta):
 	linear_vel += delta * GRAVITY_VEC
 	# Move and slide
 	
-	var snap =  Vector2.DOWN * 50 if !jumping else Vector2.ZERO
+	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
 	
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
 

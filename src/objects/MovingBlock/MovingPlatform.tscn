@@ -1,23 +1,30 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/objects/MovingBlock/MovingPlatform.gd" type="Script" id=1]
-[ext_resource path="res://resource/sprites/tiles/level_1/platform.png" type="Texture" id=2]
+[ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64, 16 )
+extents = Vector2( 80, 8 )
 
 [node name="MovingPlatform" type="Node2D"]
+scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 
 [node name="Platform" type="KinematicBody2D" parent="."]
 motion/sync_to_physics = true
 
-[node name="Sprite" type="Sprite" parent="Platform"]
-texture = ExtResource( 2 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 16, -8 )
 shape = SubResource( 1 )
 one_way_collision = true
+
+[node name="TileMap" type="TileMap" parent="Platform"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 16 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -2, 5, 0, -1, 5, 1, -65536, 5, 1, -65535, 5, 1, -65534, 5, 2 )
 
 [node name="MoveTween" type="Tween" parent="."]
 repeat = true
