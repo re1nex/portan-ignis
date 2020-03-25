@@ -26,6 +26,7 @@ export (float) var hit_time = 1
 
 export (float) var dead_zone = 0.2
 
+export (float) var landing_time = 0.2
 
 export (int) var health = 5
 
@@ -121,17 +122,24 @@ func _physics_process(delta):
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
 	if on_floor:
-		if linear_vel.length() > 0:
-			sprite.animation = "walk"
-		else:
-			sprite.animation = "stay"
-	
-	
-	if target_speed != 0 and on_floor:
-		sprite.play()
+		if sprite.animation == "fall":
+			sprite.animation = "landing"
+			$TimerLanding.set_wait_time(landing_time)
+			$TimerLanding.start()
+		if $TimerLanding.is_stopped():
+			if linear_vel.length() > 0:
+				sprite.animation = "walk"
+			else:
+				sprite.animation = "stay"
 	else:
-		sprite.stop()
+		if linear_vel.y < 0:
+			sprite.animation = "jump"
+			pass
+		elif linear_vel.y > 0:
+			sprite.animation = "fall"
+			
 	
+	print(height)
 	# Jumping
 	#if is_on_ceiling():
 		#linear_vel.y = 0
@@ -140,9 +148,8 @@ func _physics_process(delta):
 	if on_floor and Input.is_action_pressed("jump"):
 		linear_vel.y = -jump_speed
 		height -= linear_vel.y * delta
-		jumping=true
+		jumping = true
 		sprite.animation = "jump"
-		sprite.play()
 	
 	elif jumping==true:
 		if Input.is_action_pressed("jump") and height < jump_height_limit:
