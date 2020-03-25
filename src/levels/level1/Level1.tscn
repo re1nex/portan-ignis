@@ -13,9 +13,7 @@ script = ExtResource( 2 )
 [node name="Level1Landscape" parent="." instance=ExtResource( 4 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1146.46, 1447.59 )
-scale_x = 2.5
-scale_y = 2.5
+position = Vector2( 536, 704 )
 
 [node name="Menu" type="CanvasLayer" parent="."]
 

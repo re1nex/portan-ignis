@@ -14,37 +14,37 @@
 script = ExtResource( 5 )
 
 [node name="Level0Landscape" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 0.5, 0.5 )
 
 [node name="IgnisRegularOuter" parent="." instance=ExtResource( 4 )]
-position = Vector2( 210.858, 539.709 )
+position = Vector2( 104, 288 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 93.9786, 207.742 )
+position = Vector2( 56, 112 )
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 644.469, 255.971 )
+position = Vector2( 320, 144 )
 
 [node name="Torches" type="Node2D" parent="."]
 
 [node name="IgnisRegularLevel" parent="Torches" instance=ExtResource( 1 )]
-position = Vector2( 898.706, 284.38 )
+position = Vector2( 448, 152 )
 
 [node name="IgnisRegularLevel2" parent="Torches" instance=ExtResource( 1 )]
-position = Vector2( 414.026, 562.67 )
+position = Vector2( 208, 248 )
 
 [node name="IgnisRegularLevel3" parent="Torches" instance=ExtResource( 1 )]
-position = Vector2( 132.596, 216.854 )
+position = Vector2( 56, 128 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 89.625, 552.939 )
-scale_x = 2.5
-scale_y = 2.5
+position = Vector2( 48, 272 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 8 )]
 anchor_right = 0.0
@@ -52,10 +52,6 @@ margin_top = -20.0
 margin_right = 1024.0
 margin_bottom = 84.0
 
-[node name="Lever" parent="." instance=ExtResource( 9 )]
-position = Vector2( 109.7, 559.223 )
-
 [node name="Lever2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 344.493, 561.792 )
-[connection signal="lever_taken" from="Lever" to="Player" method="_on_Lever_lever_taken"]
+position = Vector2( 184, 272 )
 [connection signal="lever_taken" from="Lever2" to="Player" method="_on_Lever_lever_taken"]

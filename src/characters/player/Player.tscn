@@ -139,7 +139,7 @@ smoothing_enabled = true
 one_shot = true
 
 [node name="IgnisPosition" type="Position2D" parent="."]
-position = Vector2( 9.67478, -2.19816 )
+position = Vector2( 9.67478, -4.19816 )
 
 [node name="TimerHit" type="Timer" parent="."]
 one_shot = true

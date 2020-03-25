@@ -15,12 +15,12 @@ enum Instruments_type {
 
 const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 2
-const GRAVITY_VEC = Vector2(0,1100)
+const GRAVITY_VEC = Vector2(0,550)
 const FLOOR_NORMAL = Vector2(0, -1)
-export (int) var walk_speed = 225 # pixels/sec
-export (int) var jump_speed = 280
+export (int) var walk_speed = 115 # pixels/sec
+export (int) var jump_speed = 130
 export (float) var inertia = 1
-export (int) var jump_height_limit = 65
+export (int) var jump_height_limit = 32
 
 export (float) var scale_x = 1
 export (float) var scale_y = 1

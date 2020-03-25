@@ -7,7 +7,7 @@ var pos = -1
 
 func _ready():
 	if OS.window_fullscreen:
-		$HBoxContainer/VBoxContainer/Settings/HBoxContainer/TextureRect/CheckBox.pressed = true
+		$HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox.pressed = true
 
 
 func _input(event):

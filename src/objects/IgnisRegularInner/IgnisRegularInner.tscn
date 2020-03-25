@@ -29,6 +29,7 @@ scale_curve = SubResource( 3 )
 color = Color( 0.803922, 0.14902, 0.14902, 1 )
 
 [node name="Light2D" type="Light2D"]
+scale = Vector2( 0.42, 0.42 )
 texture = ExtResource( 1 )
 texture_scale = 3.0
 color = Color( 0.909804, 0.596078, 0.101961, 1 )
