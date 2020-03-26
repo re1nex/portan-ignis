@@ -18,29 +18,30 @@ func _ready():
 #func _process(delta):
 #	pass
 func _input(event):
-	if event is InputEventMouseMotion:
-		if(keyboard) :
+	if($MarginContainer.is_visible_in_tree()):
+		if event is InputEventMouseMotion:
+			if(keyboard) :
+				_closeBeforeChange()
+				keyboard=false
+				pos=-1
+		if event.is_action_pressed("ui_down"): 
 			_closeBeforeChange()
-			keyboard=false
-			pos=-1
-	if event.is_action_pressed("ui_down"): 
-		_closeBeforeChange()
-		pos+=1
-		keyboard=true
-		_ChangePos()
-	if event.is_action_pressed("ui_up"):
-		_closeBeforeChange()
-		pos-=1
-		keyboard=true
-		_ChangePos()
-	if event.is_action_pressed("ui_cancel"):
-		_closeBeforeChange()
-		pos-=1
-	if event.is_action_pressed("ui_accept"):
-		if(pos==0 && !$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.switchingOff):
-			_on_Restart_pressed()
-		if(pos==1 && !$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.switchingOff):
-			_on_MainMenu_pressed()
+			pos+=1
+			keyboard=true
+			_ChangePos()
+		if event.is_action_pressed("ui_up"):
+			_closeBeforeChange()
+			pos-=1
+			keyboard=true
+			_ChangePos()
+		if event.is_action_pressed("ui_cancel"):
+			_closeBeforeChange()
+			pos-=1
+		if event.is_action_pressed("ui_accept"):
+			if(pos==0 && !$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.switchingOff):
+				_on_Restart_pressed()
+			if(pos==1 && !$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.switchingOff):
+				_on_MainMenu_pressed()
 
 func _closeBeforeChange():
 	if(pos==0):
