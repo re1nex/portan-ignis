@@ -31,9 +31,9 @@ func _input(event):
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if($PauseMenu/CenterContainer/CenterContainer/Pause.is_visible_in_tree()||!game_paused):
+			_close_esc()
 			game_paused = !game_paused
 			process_pause()
-			_closeBeforeChange()
 		if($PauseMenu/CenterContainer/CenterContainer/Settings.is_visible_in_tree()):
 			_closeBeforeChange()
 			_on_backSettings_pressed()
@@ -49,23 +49,38 @@ func _process(delta):
 		keyboard=true
 		_changePos()
 	if Input.is_action_just_pressed("ui_accept"):
-		_closeBeforeChange()
 		_pressButt()
+		_closeBeforeChange()
 		pos=-1
 
 func _pressButt():
 	if($PauseMenu/CenterContainer/CenterContainer/Pause.is_visible_in_tree()):
-		if(pos==0):
+		if(pos==0 && !$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.switchingOff):
 			_on_Continue_pressed()
 			return
-		if(pos==1):
+		if(pos==1 && !$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Settings/SetLight.switchingOff):
 			_on_Settings_pressed()
 			return
-		if (pos==2):
+		if (pos==2 &&!$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.switchingOff):
 			_on_MainMenu_pressed()
 			return
-	if($PauseMenu/CenterContainer/CenterContainer/Settings.is_visible_in_tree() && $PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.is_visible_in_tree()):
+	if($PauseMenu/CenterContainer/CenterContainer/Settings.is_visible_in_tree() && !$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.switchingOff):
 		_on_backSettings_pressed()
+		return
+
+
+func _close_esc():
+	if(pos==0):
+		_on_Continue_mouse_exited()
+		$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.hide()
+		return
+	if(pos==1):
+		_on_Settings_mouse_exited()
+		$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Settings/SetLight.hide()
+		return
+	if (pos==2):
+		_on_MainMenu_mouse_exited()
+		$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.hide()
 		return
 
 func _changePos():
@@ -136,6 +151,8 @@ func _on_CheckBox_pressed():
 
 
 func _on_Continue_pressed():
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.hide()
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.disable()
 	pos=-1
 	game_paused = false
 	process_pause()

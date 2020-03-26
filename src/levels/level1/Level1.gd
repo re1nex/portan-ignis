@@ -9,11 +9,11 @@ func _ready():
 	$Level1Landscape.connect("level_complete", self, "complete")
 	$Win/WinMenu.hide()
 	$Menu/HUD.init_player($Player)
+	$WindowGameOver/MarginContainer.hide()
 	
 func _on_Player_die():
-	#$Player.queue_free()
-	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
-	get_tree().paused = false
+	get_tree().paused = true
+	$WindowGameOver/MarginContainer.show()
 	pass # Replace with function body.
 	
 func complete():

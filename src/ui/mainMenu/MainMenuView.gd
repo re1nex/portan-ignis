@@ -32,46 +32,46 @@ func _input(event):
 		_backToMain()
 		pos=-1
 	if(event.is_action_pressed("ui_accept")):
-		_closeBeforeChange()
 		_pressButt()
+		_closeBeforeChange()
 		pos=-1
 
 
 
 func _pressButt():
 	if($HBoxContainer/VBoxContainer/mainView.is_visible_in_tree()):
-		if(pos==4):
+		if(pos==4 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.switchingOff):
 			_on_Exit_pressed()
 			return
-		if(pos==0):
+		if(pos==0 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.switchingOff):
 			_on_Start_pressed()
 			return
-		if(pos==1):
+		if(pos==1 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.switchingOff):
 			_on_Settings_pressed()
 			return
-		if(pos==2):
+		if(pos==2 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.switchingOff):
 			_on_Help_pressed()
 			return
-		if(pos==3):
+		if(pos==3 && !$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.switchingOff):
 			_on_About_pressed()
 		return
 	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos==2):
+		if(pos==2 && !$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.switchingOff):
 			_on_BackStart_pressed()
 			return
-		if(pos==0):
+		if(pos==0 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.switchingOff):
 			_on_level0_pressed()
 			return
-		if(pos==1):
+		if(pos==1 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.switchingOff):
 			_on_level1_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree() && $HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.switchingOff):
 		_on_backSettings_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree() && $HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.switchingOff):
 		_on_BackAbout_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree() && $HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.switchingOff):
 		_on_backHelp_pressed()
 		return
 

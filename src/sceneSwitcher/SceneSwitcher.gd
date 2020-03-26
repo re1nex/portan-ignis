@@ -4,6 +4,7 @@ enum Scenes{
 	SCENE_STAGE_0,
 	SCENE_STAGE_1,
 	SCENE_MAIN_MENU,
+	SCENE_RESTART
 }
 
 var current_scene = null
@@ -26,6 +27,9 @@ func _deferred_goto_scene(scene):
 		new_scene = ResourceLoader.load("res://src/levels/level1/Level1.tscn")
 	elif (scene == Scenes.SCENE_MAIN_MENU):
 		new_scene = ResourceLoader.load("res://src/ui/mainMenu/MainMenuView.tscn")
+	elif (scene == Scenes.SCENE_RESTART):
+		get_tree().reload_current_scene()
+		return
 	else:
 		return
 	
