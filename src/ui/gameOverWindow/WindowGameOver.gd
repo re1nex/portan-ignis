@@ -12,6 +12,8 @@ func _ready():
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.range_layer_min=1
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.range_layer_max=1
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.range_layer_min=1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.disable()
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.disable()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
