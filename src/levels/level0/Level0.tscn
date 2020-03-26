@@ -42,11 +42,12 @@ scale_x = 2.5
 scale_y = 2.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 7 )]
+follow_viewport_enable = true
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 8 )]
 anchor_right = 0.0
 margin_top = -20.0
 margin_right = 1024.0
 margin_bottom = 84.0
+
+[node name="PauseMenu" parent="." instance=ExtResource( 7 )]

@@ -7,7 +7,8 @@ var pos = -1
 
 func _ready():
 	if OS.window_fullscreen:
-		$HBoxContainer/VBoxContainer/Settings/HBoxContainer/TextureRect/CheckBox.pressed = true
+		fullScreen=true
+		_full_Screen()
 
 
 func _input(event):
@@ -15,7 +16,7 @@ func _input(event):
 		if(keyboard) :
 			_closeBeforeChange()
 			keyboard=false
-			pos=0
+			pos=-1
 	if event.is_action_pressed("ui_down"): 
 		_closeBeforeChange()
 		pos+=1
@@ -27,9 +28,11 @@ func _input(event):
 		keyboard=true
 		_ChangePos()
 	if(event.is_action_pressed("ui_cancel")):
+		_closeBeforeChange()
 		_backToMain()
 		pos=-1
 	if(event.is_action_pressed("ui_accept")):
+		_closeBeforeChange()
 		_pressButt()
 		pos=-1
 
@@ -62,13 +65,13 @@ func _pressButt():
 		if(pos==1):
 			_on_level1_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree() && $HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.is_visible_in_tree()):
 		_on_backSettings_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree() && $HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.is_visible_in_tree()):
 		_on_BackAbout_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree() && $HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.is_visible_in_tree()):
 		_on_backHelp_pressed()
 		return
 

@@ -19,9 +19,9 @@ scale_y = 2.5
 
 [node name="Menu" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="Menu" instance=ExtResource( 3 )]
-
 [node name="HUD" parent="Menu" instance=ExtResource( 6 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 
 [node name="Win" type="CanvasLayer" parent="."]
 pause_mode = 2
