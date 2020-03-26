@@ -18,5 +18,6 @@ func _ready():
 func _on_Player_die():
 	#$Player.queue_free()
 	get_tree().paused = true
+	$WindowGameOver._closeBefore()
 	$WindowGameOver/MarginContainer.show()
 	pass # Replace with function body.

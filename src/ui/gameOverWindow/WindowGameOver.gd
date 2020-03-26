@@ -48,6 +48,13 @@ func _closeBeforeChange():
 	if(pos==1):
 		_on_MainMenu_mouse_exited()
 
+func _closeBefore():
+	if(pos==0):
+		$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.hide()
+		_on_Restart_mouse_exited()
+	if(pos==1):
+		$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.hide()
+		_on_MainMenu_mouse_exited()
 
 func _ChangePos():
 	if(pos<=0):
