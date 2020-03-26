@@ -1,0 +1,502 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://resource/ui/menu/backgroundtest3.png" type="Texture" id=2]
+[ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ui/mainMenu/MainMenuView.gd" type="Script" id=14]
+[ext_resource path="res://resource/ui/arial.ttf" type="DynamicFontData" id=22]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 90
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 22 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 46
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 180
+extra_spacing_top = 10
+extra_spacing_bottom = 10
+font_data = ExtResource( 1 )
+
+[node name="MainMenuView" type="MarginContainer"]
+anchor_right = 1.045
+anchor_bottom = 1.0
+margin_right = 0.399902
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 120
+custom_constants/margin_top = 80
+custom_constants/margin_left = 120
+custom_constants/margin_bottom = 80
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 572.457, 463.678 )
+scale = Vector2( 0.751744, 0.818948 )
+texture = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 1217.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+custom_constants/separation = 180
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 917.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="mainView" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_right = 917.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+custom_constants/separation = 30
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/mainView"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Start" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
+margin_top = 1.36037
+margin_right = 192.0
+margin_bottom = 84.3604
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "start"
+flat = true
+align = 0
+expand_icon = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightStart" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Start" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="Settings" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
+margin_top = 113.0
+margin_right = 274.0
+margin_bottom = 196.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "settings"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightSettings" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Settings" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="Help" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
+margin_top = 226.0
+margin_right = 137.0
+margin_bottom = 309.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "help"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightHelp" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Help" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="About" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
+margin_top = 339.0
+margin_right = 182.0
+margin_bottom = 422.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "about"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightAbout" parent="HBoxContainer/VBoxContainer/mainView/Sprite/About" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
+margin_top = 452.0
+margin_right = 138.0
+margin_bottom = 535.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "exit"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightExit" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Exit" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="StartView" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+visible = false
+margin_right = 917.0
+custom_constants/separation = 200
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/StartView"]
+position = Vector2( 0, 30 )
+
+[node name="level0" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
+margin_right = 242.0
+margin_bottom = 83.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "level 0"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightLevel0" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level0" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="level1" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
+margin_top = 100.0
+margin_right = 217.0
+margin_bottom = 183.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "level 1"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightLevel1" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level1" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="BackStart" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
+margin_top = 400.0
+margin_right = 140.0
+margin_bottom = 483.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "back"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightBackStart" parent="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="Settings" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+visible = false
+margin_right = 1097.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 300
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/Settings"]
+position = Vector2( 0, 30 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="backSettings" type="Button" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
+margin_top = 400.0
+margin_right = 140.0
+margin_bottom = 483.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "back"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightBackStg" parent="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 2 )
+text = "fullscreen mode"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/Settings/Sprite/Label"]
+anchor_right = 1.659
+anchor_bottom = 0.5
+margin_left = 560.0
+margin_top = 15.0
+margin_right = -230.569
+margin_bottom = 0.5
+rect_scale = Vector2( 2, 2 )
+focus_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBoxLight" parent="HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 12.3872, 12.5733 )
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
+margin_top = 100.0
+margin_right = 491.0
+margin_bottom = 177.0
+custom_fonts/font = SubResource( 2 )
+text = "resolution"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton" type="MenuButton" parent="HBoxContainer/VBoxContainer/Settings/Sprite/Label2"]
+anchor_left = 185.388
+anchor_top = 114.18
+anchor_right = 185.388
+anchor_bottom = 114.18
+margin_left = -90465.5
+margin_top = -8771.86
+margin_right = -90319.5
+margin_bottom = -8730.86
+custom_fonts/font = SubResource( 3 )
+text = "1280x720"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="About" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+visible = false
+margin_right = 1097.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/About"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/About/Sprite"]
+margin_top = 4.0
+margin_right = 1040.0
+margin_bottom = 350.0
+custom_fonts/normal_font = SubResource( 4 )
+custom_constants/line_separation = 5
+text = "Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. 
+The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers 
+hidden in the dark. One of the key mechanics in the game is using the light on the levels to solve some puzzles.
+
+A long time ago The Darkness covered the world. Remainig people live under ground in closed caves, while Portans of Ignis Order travel in dangerous caverns, help people and fight monsters.
+You and your small team of fellow Portans were walking through a tunnel, when you had got into ambush. Presumably, your comrades were defeated, as before the end of the battle you had fallen into a hole and had lost all of your Ignis weapon.
+Regain your sacred weapons, find the way out and save your friends.
+
+Developers:
+Alexander Karasev
+Aleksandr Mitenev
+Nikita Schastlivtsev
+Victor Kolesnik 
+Elisey Vasilevskiy 
+
+Textures and art by:
+Buch: https://opengameart.org/users/buch
+
+github: https://github.com/re1nex/portan-ignis
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackAbout" type="Button" parent="HBoxContainer/VBoxContainer/About/Sprite"]
+margin_top = 400.0
+margin_right = 140.0
+margin_bottom = 483.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "back"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightBackAbout" parent="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="Help" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
+visible = false
+margin_right = 917.0
+margin_bottom = 560.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/Help"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="backHelp" type="Button" parent="HBoxContainer/VBoxContainer/Help/Sprite"]
+margin_top = 400.0
+margin_right = 140.0
+margin_bottom = 483.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "back"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightbackHelp" parent="HBoxContainer/VBoxContainer/Help/Sprite/backHelp" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Help/Sprite"]
+margin_right = 805.0
+margin_bottom = 414.0
+custom_fonts/normal_font = SubResource( 5 )
+custom_constants/line_separation = 10
+text = "A/arrow left  - move left
+D/arrow right - move right
+W/space/arrow up - jump
+V - rotate ignis upwards
+B - rotate ignis downwards
+E - interaction
+R - recharge
+1,2 - type of ignis"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 1097.0
+margin_right = 1097.0
+margin_bottom = 560.0
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/Logo"]
+position = Vector2( 40, 10 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="HBoxContainer/Logo/Sprite"]
+margin_left = -502.303
+margin_top = 79.6799
+margin_right = -75.3029
+margin_bottom = 428.68
+custom_fonts/font = SubResource( 6 )
+text = "Portan
+Ignis"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" parent="HBoxContainer/Logo/Sprite/Label" instance=ExtResource( 4 )]
+position = Vector2( 14.1612, 178.56 )
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/Settings" to="." method="_on_Settings_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/Settings" to="." method="_on_Settings_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/Help" to="." method="_on_Help_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/Help" to="." method="_on_Help_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/Help" to="." method="_on_Help_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/About" to="." method="_on_About_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/About" to="." method="_on_About_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/About" to="." method="_on_About_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/Exit" to="." method="_on_Exit_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/Exit" to="." method="_on_Exit_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/StartView/Sprite/level0" to="." method="_on_level0_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/StartView/Sprite/level0" to="." method="_on_level0_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/StartView/Sprite/level0" to="." method="_on_level0_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/StartView/Sprite/level1" to="." method="_on_level1_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/StartView/Sprite/level1" to="." method="_on_level1_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/StartView/Sprite/level1" to="." method="_on_level1_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" to="." method="_on_BackStart_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" to="." method="_on_BackStart_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" to="." method="_on_BackStart_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" to="." method="_on_backSettings_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" to="." method="_on_backSettings_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" to="." method="_on_backSettings_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox" to="." method="_on_CheckBox_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/Help/Sprite/backHelp" to="." method="_on_backHelp_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/Help/Sprite/backHelp" to="." method="_on_backHelp_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Help/Sprite/backHelp" to="." method="_on_backHelp_pressed"]
