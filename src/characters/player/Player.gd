@@ -9,6 +9,11 @@ enum Ignis_type {
 		SECTOR,
 }
 
+enum Instruments_type {
+		LEVER,
+}
+
+const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 2
 const GRAVITY_VEC = Vector2(0,1100)
 const FLOOR_NORMAL = Vector2(0, -1)
@@ -26,14 +31,15 @@ export (float) var hit_time = 1
 
 export (float) var dead_zone = 0.2
 
+export (float) var landing_time = 0.15
 
 export (int) var health = 5
 
 var linear_vel = Vector2()
 var velocity = Vector2()
 
-
-var weapons=[]  
+var instruments = []
+var weapons = []  
 var on_player_area_node
 var in_node_area = false
 var ignis_pos = Vector2(0, 0)
@@ -43,7 +49,6 @@ var jumping = false
 var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -88,7 +93,10 @@ func _physics_process(delta):
 	# Apply gravity
 	linear_vel += delta * GRAVITY_VEC
 	# Move and slide
-	linear_vel = move_and_slide(linear_vel, FLOOR_NORMAL)
+	
+	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
+	
+	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
 
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
@@ -104,6 +112,7 @@ func _physics_process(delta):
 		if not Input.is_action_pressed("ui_right") and direction == 1:
 			direction = -1
 			sprite.flip_h = true
+			$CharacterShape.scale.x *= -1
 			if $Informator.num_of_active_weapon != -1:
 				update_ignis()
 	
@@ -112,6 +121,7 @@ func _physics_process(delta):
 		if not Input.is_action_pressed("ui_left") and direction == -1:
 			direction = 1
 			sprite.flip_h = false
+			$CharacterShape.scale.x *= -1
 			if $Informator.num_of_active_weapon != -1:
 				update_ignis()
 	
@@ -119,16 +129,22 @@ func _physics_process(delta):
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
 	if on_floor:
-		if linear_vel.length() > 0:
-			sprite.animation = "walk"
-		else:
-			sprite.animation = "stay"
-	
-	
-	if target_speed != 0 and on_floor:
-		sprite.play()
+		if sprite.animation == "fall":
+			sprite.animation = "landing"
+			$TimerLanding.set_wait_time(landing_time)
+			$TimerLanding.start()
+		if $TimerLanding.is_stopped():
+			if abs(linear_vel.x) > SMALL_TWITCHING:
+				sprite.animation = "walk"
+			else:
+				sprite.animation = "stay"
 	else:
-		sprite.stop()
+		if linear_vel.y < 0:
+			sprite.animation = "jump"
+			pass
+		elif linear_vel.y > 0:
+			sprite.animation = "fall"
+			
 	
 	# Jumping
 	#if is_on_ceiling():
@@ -138,9 +154,8 @@ func _physics_process(delta):
 	if on_floor and Input.is_action_pressed("jump"):
 		linear_vel.y = -jump_speed
 		height -= linear_vel.y * delta
-		jumping=true
+		jumping = true
 		sprite.animation = "jump"
-		sprite.play()
 	
 	elif jumping==true:
 		if Input.is_action_pressed("jump") and height < jump_height_limit:
@@ -271,6 +286,9 @@ func fill_weapons():
 		weapons[i].scale.y/=scale_y
 
 
+func fill_instruments():
+	var node = preload("res://src/objects/lever/Lever.tscn").instance()
+	instruments[Instruments_type.LEVER] = node
 
 func update_ignis_timer_start(delta):
 	if $TimerIgnis.is_stopped():
@@ -355,3 +373,8 @@ func switch_weapons(type):
 		if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
 			turn_off_ignis()
 		turn_on_ignis(type)
+
+
+func _on_Lever_lever_taken():
+	$Informator.has_instruments[Instruments_type.LEVER] = true
+	pass # Replace with function body.

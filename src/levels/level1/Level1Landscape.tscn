@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/levels/level1/Level1Landscape.gd" type="Script" id=1]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/objects/IgnisRegularOuter/IgnisRegularOuter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resource/tileres/flowers_grass.tres" type="TileSet" id=8]
+[ext_resource path="res://src/objects/MovingBlock/MovingPlatform.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 101.342, 123.447 )
@@ -61,7 +62,7 @@ scale = Vector2( 0.873188, 1.17247 )
 shape = SubResource( 1 )
 
 [node name="IgnisRegularOuter" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1102.78, 1445.26 )
+position = Vector2( 1215.97, 1441.82 )
 
 [node name="Ignises" type="Node2D" parent="."]
 
@@ -91,4 +92,9 @@ position = Vector2( -421.921, -234.916 )
 
 [node name="PositionRD" type="Position2D" parent="."]
 position = Vector2( 3834.68, 1719.49 )
+
+[node name="MovingPlatform" parent="." instance=ExtResource( 9 )]
+position = Vector2( 2177.71, 1287.55 )
+move_to = Vector2( 2, -5 )
+speed = 50.0
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
