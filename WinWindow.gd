@@ -1,6 +1,6 @@
 extends CanvasLayer
 var keyboard=false
-
+var pos = -1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -8,9 +8,12 @@ var keyboard=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.range_layer_max=1
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.range_layer_min=1
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.disable()
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.range_layer_max=1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.range_layer_min=1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.range_layer_max=1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.range_layer_min=1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.disable()
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.disable()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,31 +23,80 @@ func _input(event):
 	if($MarginContainer.is_visible_in_tree()):
 		if event is InputEventMouseMotion:
 			if(keyboard) :
-				_on_Ok_mouse_exited()
+				_closeBeforeChange()
 				keyboard=false
+				pos=-1
 		if event.is_action_pressed("ui_down"): 
-			_on_Ok_mouse_entered()
+			_closeBeforeChange()
+			pos+=1
 			keyboard=true
+			_ChangePos()
 		if event.is_action_pressed("ui_up"):
-			_on_Ok_mouse_entered()
+			_closeBeforeChange()
+			pos-=1
 			keyboard=true
+			_ChangePos()
 		if event.is_action_pressed("ui_cancel"):
-			_on_Ok_pressed()
-		if (event.is_action_pressed("ui_accept")&&!$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.switchingOff):
-			_on_Ok_pressed()
+			_closeBeforeChange()
+			pos-=1
+		if event.is_action_pressed("ui_accept"):
+			if(pos==0 && !$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.switchingOff):
+				_on_NextLvl_pressed()
+			if(pos==1 && !$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.switchingOff):
+				_on_MainMenu_pressed()
 
-func _on_Ok_pressed():
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.disable()
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.hide()
+func _closeBeforeChange():
+	if(pos==0):
+		_on_NextLvl_mouse_exited()
+	if(pos==1):
+		_on_MainMenu_mouse_exited()
+
+func _closeBefore():
+	if(pos==0):
+		$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.hide()
+		_on_NextLvl_mouse_exited()
+	if(pos==1):
+		$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.hide()
+		_on_MainMenu_mouse_exited()
+
+func _ChangePos():
+	if(pos<=0):
+		pos=0 
+		_on_NextLvl_mouse_entered()
+	if(pos>=1):
+		pos=1 
+		_on_MainMenu_mouse_entered()
+
+func _on_NextLvl_pressed():
+	pos=-1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.disable()
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.hide()
 	get_tree().paused=false
-	$MarginContainer.hide()
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
+
+func _on_NextLvl_mouse_entered():
+	pos=0
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.enable()
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.show()
+
+
+func _on_NextLvl_mouse_exited():
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.disable()
+
+
+func _on_MainMenu_mouse_entered():
+	pos=1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.show()
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.enable()
+
+
+func _on_MainMenu_mouse_exited():
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.disable()
+
+
+func _on_MainMenu_pressed():
+	pos=-1
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.disable()
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.hide()
+	get_tree().paused=false
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
-
-
-func _on_Ok_mouse_entered():
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.enable()
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.show()
-
-
-func _on_Ok_mouse_exited():
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Ok/OkLight.disable()

@@ -6,7 +6,7 @@
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 110
+size = 100
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -28,7 +28,7 @@ margin_right = 1280.0
 margin_bottom = 720.0
 
 [node name="Sprite" type="Sprite" parent="MarginContainer/CenterContainer"]
-position = Vector2( 640, 360 )
+position = Vector2( 640, 358.892 )
 scale = Vector2( 1, 0.8 )
 texture = ExtResource( 1 )
 
@@ -41,35 +41,58 @@ margin_bottom = 360.0
 [node name="Sprite" type="Sprite" parent="MarginContainer/CenterContainer/CenterContainer"]
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/CenterContainer/Sprite"]
-margin_left = -166.0
-margin_top = -140.0
-margin_right = 166.0
-margin_bottom = 51.0
+margin_left = -257.0
+margin_top = -110.0
+margin_right = 258.0
+margin_bottom = -25.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.886275, 0.964706, 0.560784, 1 )
-text = "level
-complete"
+custom_colors/font_color = Color( 0.854902, 0.690196, 0.45098, 1 )
+text = "level complete"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Ok" type="Button" parent="MarginContainer/CenterContainer/CenterContainer/Sprite"]
-margin_left = -31.5
-margin_top = 60.0
-margin_right = 31.5
-margin_bottom = 126.0
+[node name="NextLvl" type="Button" parent="MarginContainer/CenterContainer/CenterContainer/Sprite"]
+margin_left = -137.0
+margin_top = -20.0
+margin_right = 141.0
+margin_bottom = 46.0
+focus_mode = 0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.898039, 1, 0.639216, 1 )
-text = "ok"
+enabled_focus_mode = 0
+text = "next level"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OkLight" parent="MarginContainer/CenterContainer/CenterContainer/Sprite/Ok" instance=ExtResource( 4 )]
+[node name="ResLight" parent="MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 30 )
-[connection signal="mouse_entered" from="MarginContainer/CenterContainer/CenterContainer/Sprite/Ok" to="." method="_on_Ok_mouse_entered"]
-[connection signal="mouse_exited" from="MarginContainer/CenterContainer/CenterContainer/Sprite/Ok" to="." method="_on_Ok_mouse_exited"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/CenterContainer/Sprite/Ok" to="." method="_on_Ok_pressed"]
+
+[node name="MainMenu" type="Button" parent="MarginContainer/CenterContainer/CenterContainer/Sprite"]
+margin_left = -160.0
+margin_top = 60.0
+margin_right = 160.0
+margin_bottom = 126.0
+focus_mode = 0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.898039, 1, 0.639216, 1 )
+enabled_focus_mode = 0
+text = "exit to menu"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuLight" parent="MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 30 )
+[connection signal="mouse_entered" from="MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl" to="." method="_on_NextLvl_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl" to="." method="_on_NextLvl_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl" to="." method="_on_NextLvl_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu" to="." method="_on_MainMenu_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu" to="." method="_on_MainMenu_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu" to="." method="_on_MainMenu_pressed"]
