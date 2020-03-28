@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/ui/menu/backgroundtest3.png" type="Texture" id=2]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui/mainMenu/MainMenuView.gd" type="Script" id=14]
-[ext_resource path="res://resource/ui/arial.ttf" type="DynamicFontData" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -13,10 +12,6 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=2]
 size = 90
 font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 30
-font_data = ExtResource( 22 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 40
@@ -187,7 +182,9 @@ scale = Vector2( 1, 1 )
 
 [node name="StartView" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
+margin_top = 4.0
 margin_right = 917.0
+margin_bottom = 4.0
 custom_constants/separation = 200
 
 [node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/StartView"]
@@ -314,31 +311,35 @@ visible = false
 position = Vector2( 12.3872, 12.5733 )
 scale = Vector2( 1, 1 )
 
-[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
-margin_top = 100.0
-margin_right = 491.0
-margin_bottom = 177.0
+[node name="stretchSettings" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
+margin_top = 107.0
+margin_right = 486.0
+margin_bottom = 185.0
 custom_fonts/font = SubResource( 2 )
-text = "resolution"
+text = "stretching mode"
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings"]
+anchor_right = 1.659
+anchor_bottom = 0.5
+margin_left = 562.0
+margin_top = 15.0
+margin_right = -220.274
+margin_bottom = 0.5
+rect_scale = Vector2( 2, 2 )
+focus_mode = 0
+enabled_focus_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MenuButton" type="MenuButton" parent="HBoxContainer/VBoxContainer/Settings/Sprite/Label2"]
-anchor_left = 185.388
-anchor_top = 114.18
-anchor_right = 185.388
-anchor_bottom = 114.18
-margin_left = -90465.5
-margin_top = -8771.86
-margin_right = -90319.5
-margin_bottom = -8730.86
-custom_fonts/font = SubResource( 3 )
-text = "1280x720"
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
+[node name="CheckBoxLight" parent="HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 12.3872, 12.5733 )
+scale = Vector2( 1, 1 )
 
 [node name="About" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
@@ -507,6 +508,7 @@ scale = Vector2( 1, 1 )
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" to="." method="_on_backSettings_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" to="." method="_on_backSettings_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox" to="." method="_on_CheckBox_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox" to="." method="_on_CheckBox_stretch_pressed"]
 [connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_pressed"]

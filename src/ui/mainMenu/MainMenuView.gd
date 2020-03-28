@@ -9,6 +9,8 @@ func _ready():
 	if OS.window_fullscreen:
 		fullScreen=true
 		_full_Screen()
+	if SceneSwitcher.strech:
+		_stretch()
 
 
 func _input(event):
@@ -403,3 +405,21 @@ func _ChangePos():
 		pos=0
 		_on_backHelp_mouse_entered()
 		return
+
+
+func _stretch():
+	$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox.pressed = true
+	$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.enable()
+	$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.show()
+
+
+func _on_CheckBox_stretch_pressed():
+	SceneSwitcher.strech = !SceneSwitcher.strech
+	if SceneSwitcher.strech:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1280, 720))
+		$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.enable()
+		$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.show()
+	else:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(1280, 720))
+		$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.disable()
+	pass
