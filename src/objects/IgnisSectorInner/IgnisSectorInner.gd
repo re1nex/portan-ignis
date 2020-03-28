@@ -77,6 +77,7 @@ func disable():
 
 func finishDisabling():
 	$Area2D/CollisionShape2D.disabled = true
+	$Lens.hide()
 	enabled = false
 	energy = 0
 	switchedOff = true
@@ -91,6 +92,7 @@ func enable():
 func finishEnabling():
 	switchedOff = false
 	$Area2D/CollisionShape2D.disabled = false
+	$Lens.show()
 	enabled = true
 	energy = energyMax
 	emit_signal("enabled")

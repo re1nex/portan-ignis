@@ -12,9 +12,13 @@ func _ready():
 	$IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
 	$CanvasLayer/HUD.init_player($Player)
 	$Player.connect("die", self, "_on_Player_die")
+	$WindowGameOver/MarginContainer.hide()
+	$WinWindow/MarginContainer.hide()
 
 
 func _on_Player_die():
 	#$Player.queue_free()
-	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
+	get_tree().paused = true
+	$WindowGameOver._closeBefore()
+	$WindowGameOver/MarginContainer.show()
 	pass # Replace with function body.
