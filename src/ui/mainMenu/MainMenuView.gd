@@ -7,7 +7,8 @@ var pos = -1
 
 func _ready():
 	if OS.window_fullscreen:
-		$HBoxContainer/VBoxContainer/Settings/HBoxContainer/TextureRect/CheckBox.pressed = true
+		fullScreen=true
+		_full_Screen()
 
 
 func _input(event):
@@ -15,7 +16,7 @@ func _input(event):
 		if(keyboard) :
 			_closeBeforeChange()
 			keyboard=false
-			pos=0
+			pos=-1
 	if event.is_action_pressed("ui_down"): 
 		_closeBeforeChange()
 		pos+=1
@@ -27,48 +28,50 @@ func _input(event):
 		keyboard=true
 		_ChangePos()
 	if(event.is_action_pressed("ui_cancel")):
+		_closeBeforeChange()
 		_backToMain()
 		pos=-1
 	if(event.is_action_pressed("ui_accept")):
 		_pressButt()
+		_closeBeforeChange()
 		pos=-1
 
 
 
 func _pressButt():
 	if($HBoxContainer/VBoxContainer/mainView.is_visible_in_tree()):
-		if(pos==4):
+		if(pos==4 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.switchingOff):
 			_on_Exit_pressed()
 			return
-		if(pos==0):
+		if(pos==0 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.switchingOff):
 			_on_Start_pressed()
 			return
-		if(pos==1):
+		if(pos==1 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.switchingOff):
 			_on_Settings_pressed()
 			return
-		if(pos==2):
+		if(pos==2 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.switchingOff):
 			_on_Help_pressed()
 			return
-		if(pos==3):
+		if(pos==3 && !$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.switchingOff):
 			_on_About_pressed()
 		return
 	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos==2):
+		if(pos==2 && !$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.switchingOff):
 			_on_BackStart_pressed()
 			return
-		if(pos==0):
+		if(pos==0 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.switchingOff):
 			_on_level0_pressed()
 			return
-		if(pos==1):
+		if(pos==1 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.switchingOff):
 			_on_level1_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.switchingOff):
 		_on_backSettings_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.switchingOff):
 		_on_BackAbout_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree()):
+	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.switchingOff):
 		_on_backHelp_pressed()
 		return
 
@@ -127,27 +130,45 @@ func _closeBeforeChange():
 		_on_backHelp_mouse_exited()
 		return
 
+
+func _disableMain():
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.disable()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.hide()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.disable()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.hide()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.disable()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.hide()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.disable()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.hide()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.disable()
+	$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.hide()
+
+func _disableStart():
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.disable()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.hide()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.disable()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.hide()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.disable()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.hide()
+
 func _on_Start_pressed():
 	pos=-1
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/VBoxContainer/StartView.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.hide()
+	_disableMain()
 
 func _on_Settings_pressed():
 	pos=-1
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/Logo.hide()
 	$HBoxContainer/VBoxContainer/Settings.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.hide()
+	_disableMain()
 
 func _on_Help_pressed():
 	pos=-1
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/VBoxContainer/Help.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.hide()
+	_disableMain()
 
 
 func _on_About_pressed():
@@ -155,8 +176,7 @@ func _on_About_pressed():
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/Logo.hide()
 	$HBoxContainer/VBoxContainer/About.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.hide()
+	_disableMain()
 
 
 func _on_Exit_pressed():
@@ -211,15 +231,14 @@ func _on_backHelp_pressed():
 func _on_level0_pressed():
 	pos=0
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_0)
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.disable()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.hide()
+	_disableStart()
+
 
 
 func _on_level1_pressed():
 	pos=0
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.disable()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.hide()
+	_disableStart()
 
 
 
@@ -300,8 +319,8 @@ func _on_BackStart_pressed():
 	pos=0
 	$HBoxContainer/VBoxContainer/mainView.show()
 	$HBoxContainer/VBoxContainer/StartView.hide()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.disable()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.hide()
+	_disableStart()
+	
 
 
 func _on_BackStart_mouse_entered():
