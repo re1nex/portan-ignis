@@ -5,7 +5,7 @@ class_name Enemy1
 var color = Color(.867, .91, .247, 0.1)
 var lazerColor = Color(1, 0.007843, 0.007843, 0.9)
 var greenColor = Color(0.015686, 0.996078, 0.215686)
-const GRAVITY_VEC = Vector2(0, 1000)
+const GRAVITY_VEC = Vector2(0, 550)
 export (int) var walk_speed = 100
 export (int) var run_speed = 230
 export (int) var jump_speed = 100

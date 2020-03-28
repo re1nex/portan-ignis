@@ -5,21 +5,25 @@ export (bool) var hide_at_start = true
 var pos = -1
 
 func _ready():
-	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.range_layer_min=1
-	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.range_layer_max=1
-	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Settings/SetLight.range_layer_min=1
-	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Settings/SetLight.range_layer_max=1
-	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.range_layer_min=1
-	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.range_layer_max=1
-	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.range_layer_min=1
-	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.range_layer_max=1
-	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/Label/CheckBox/CheckLight.range_layer_min=1
-	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/Label/CheckBox/CheckLight.range_layer_max=1
+	var en = $PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.Ignis_layer.MENU
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.set_light_layer(en)
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Settings/SetLight.set_light_layer(en)
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.set_light_layer(en)
+	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.set_light_layer(en)
+	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/Label/CheckBox/CheckLight.set_light_layer(en)
+	
 	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.disable()
 	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Settings/SetLight.disable()
 	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.disable()
 	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.disable()
 	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/Label/CheckBox/CheckLight.disable()
+	
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue/ContLight.set_enemy_visible(false)
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Settings/SetLight.set_enemy_visible(false)
+	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.set_enemy_visible(false)
+	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.set_enemy_visible(false)
+	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/Label/CheckBox/CheckLight.set_enemy_visible(false)
+	
 	if hide_at_start:
 		$PauseMenu.hide()
 	if OS.window_fullscreen:
