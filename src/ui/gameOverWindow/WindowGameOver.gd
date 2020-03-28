@@ -8,13 +8,16 @@ var pos = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.range_layer_max=1
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.range_layer_min=1
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.range_layer_max=1
-	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.range_layer_min=1
+	var en = $MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.Ignis_layer.MENU
+	
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.set_light_layer(en)
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.set_light_layer(en)
+	
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.disable()
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.disable()
 
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.set_enemy_visible(false)
+	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.set_enemy_visible(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/torchOff.png-ac5dd518869913975ce6c3cfdb7f7cd9.stex"
+path="res://.import/TorchWithLens.png-161d8ac0b4b9bf20e90e59122045c1e3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/ignis/ignis_regular_level/torchOff.png"
-dest_files=[ "res://.import/torchOff.png-ac5dd518869913975ce6c3cfdb7f7cd9.stex" ]
+source_file="res://resource/ui/hud/TorchWithLens.png"
+dest_files=[ "res://.import/TorchWithLens.png-161d8ac0b4b9bf20e90e59122045c1e3.stex" ]
 
 [params]
 

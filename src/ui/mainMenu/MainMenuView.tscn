@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/ui/menu/backgroundtest3.png" type="Texture" id=2]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui/mainMenu/MainMenuView.gd" type="Script" id=14]
-[ext_resource path="res://resource/ui/arial.ttf" type="DynamicFontData" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -15,18 +14,14 @@ size = 90
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 30
-font_data = ExtResource( 22 )
-
-[sub_resource type="DynamicFont" id=4]
 size = 40
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 46
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 180
 extra_spacing_top = 10
 extra_spacing_bottom = 10
@@ -104,6 +99,7 @@ __meta__ = {
 [node name="LightStart" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Start" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Settings" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 113.0
@@ -123,6 +119,7 @@ __meta__ = {
 [node name="LightSettings" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Settings" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Help" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 226.0
@@ -141,6 +138,7 @@ __meta__ = {
 [node name="LightHelp" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Help" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="About" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 339.0
@@ -160,6 +158,7 @@ __meta__ = {
 [node name="LightAbout" parent="HBoxContainer/VBoxContainer/mainView/Sprite/About" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 452.0
@@ -179,10 +178,13 @@ __meta__ = {
 [node name="LightExit" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Exit" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="StartView" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
+margin_top = 4.0
 margin_right = 917.0
+margin_bottom = 4.0
 custom_constants/separation = 200
 
 [node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/StartView"]
@@ -205,6 +207,7 @@ __meta__ = {
 [node name="LightLevel0" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level0" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="level1" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
 margin_top = 100.0
@@ -224,6 +227,7 @@ __meta__ = {
 [node name="LightLevel1" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level1" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="BackStart" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
 margin_top = 400.0
@@ -243,6 +247,7 @@ __meta__ = {
 [node name="LightBackStart" parent="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Settings" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
@@ -276,6 +281,7 @@ __meta__ = {
 [node name="LightBackStg" parent="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
 margin_right = 40.0
@@ -303,32 +309,37 @@ __meta__ = {
 [node name="CheckBoxLight" parent="HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 12.3872, 12.5733 )
+scale = Vector2( 1, 1 )
 
-[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
-margin_top = 100.0
-margin_right = 491.0
-margin_bottom = 177.0
+[node name="stretchSettings" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
+margin_top = 107.0
+margin_right = 486.0
+margin_bottom = 185.0
 custom_fonts/font = SubResource( 2 )
-text = "resolution"
+text = "stretching mode"
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings"]
+anchor_right = 1.659
+anchor_bottom = 0.5
+margin_left = 562.0
+margin_top = 15.0
+margin_right = -220.274
+margin_bottom = 0.5
+rect_scale = Vector2( 2, 2 )
+focus_mode = 0
+enabled_focus_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MenuButton" type="MenuButton" parent="HBoxContainer/VBoxContainer/Settings/Sprite/Label2"]
-anchor_left = 185.388
-anchor_top = 114.18
-anchor_right = 185.388
-anchor_bottom = 114.18
-margin_left = -90465.5
-margin_top = -8771.86
-margin_right = -90319.5
-margin_bottom = -8730.86
-custom_fonts/font = SubResource( 3 )
-text = "1280x720"
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
+[node name="CheckBoxLight" parent="HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 12.3872, 12.5733 )
+scale = Vector2( 1, 1 )
 
 [node name="About" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
@@ -347,7 +358,7 @@ __meta__ = {
 margin_top = 4.0
 margin_right = 1040.0
 margin_bottom = 350.0
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 3 )
 custom_constants/line_separation = 5
 text = "Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. 
 The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers 
@@ -391,6 +402,7 @@ __meta__ = {
 [node name="LightBackAbout" parent="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Help" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
@@ -423,11 +435,12 @@ __meta__ = {
 [node name="LightbackHelp" parent="HBoxContainer/VBoxContainer/Help/Sprite/backHelp" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Help/Sprite"]
 margin_right = 805.0
 margin_bottom = 414.0
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_constants/line_separation = 10
 text = "A/arrow left  - move left
 D/arrow right - move right
@@ -457,7 +470,7 @@ margin_left = -502.303
 margin_top = 79.6799
 margin_right = -75.3029
 margin_bottom = 428.68
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Portan
 Ignis"
 __meta__ = {
@@ -466,6 +479,7 @@ __meta__ = {
 
 [node name="Light2D" parent="HBoxContainer/Logo/Sprite/Label" instance=ExtResource( 4 )]
 position = Vector2( 14.1612, 178.56 )
+scale = Vector2( 1, 1 )
 [connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_pressed"]
@@ -494,6 +508,7 @@ position = Vector2( 14.1612, 178.56 )
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" to="." method="_on_backSettings_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" to="." method="_on_backSettings_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox" to="." method="_on_CheckBox_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox" to="." method="_on_CheckBox_stretch_pressed"]
 [connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" to="." method="_on_BackAbout_pressed"]
