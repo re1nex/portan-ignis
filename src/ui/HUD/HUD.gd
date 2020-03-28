@@ -67,7 +67,7 @@ func upd_chosen_ignis(active_weapon):
 		status_set_none()
 		return
 	match active_weapon:
-		-1:			
+		-1:
 			status_set_none()
 		0:
 			status_set_torch()
