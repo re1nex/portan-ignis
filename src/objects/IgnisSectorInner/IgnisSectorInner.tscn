@@ -8,6 +8,7 @@
 points = PoolVector2Array( 0, 0, 103, -225, -112, -225 )
 
 [node name="Light2D" type="Light2D"]
+scale = Vector2( 0.43, 0.43 )
 texture = ExtResource( 1 )
 texture_scale = 0.15
 color = Color( 0.909804, 0.596078, 0.101961, 1 )

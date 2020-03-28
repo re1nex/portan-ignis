@@ -7,6 +7,7 @@ enum Scenes{
 	SCENE_RESTART
 }
 
+var strech = false
 
 func goto_scene(scene):
 	call_deferred("_deferred_goto_scene", scene)
