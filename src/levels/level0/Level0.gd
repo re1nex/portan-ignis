@@ -13,6 +13,7 @@ func _ready():
 	$CanvasLayer/HUD.init_player($Player)
 	$Player.connect("die", self, "_on_Player_die")
 	$WindowGameOver/MarginContainer.hide()
+	$WinWindow/MarginContainer.hide()
 
 
 func _on_Player_die():
