@@ -18,20 +18,18 @@ __meta__ = {
 }
 
 [node name="SpriteTorchOn" type="Sprite" parent="."]
-position = Vector2( 1, -16 )
-scale = Vector2( 0.45, 0.45 )
+position = Vector2( 0, -29 )
 texture = ExtResource( 1 )
 
 [node name="SpriteTorchOff" type="Sprite" parent="."]
-position = Vector2( 1, -16 )
-scale = Vector2( 0.45, 0.45 )
+position = Vector2( 0, -29 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -17 )
+position = Vector2( 0, -24 )
 shape = SubResource( 1 )
 
 [node name="Light2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( -2.38419e-07, -32 )
+position = Vector2( -2.38419e-07, -34 )
 [connection signal="body_entered" from="." to="." method="_on_IgnisRegularLevel_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_IgnisRegularLevel_body_exited"]
