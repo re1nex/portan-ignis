@@ -17,6 +17,7 @@ font_data = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+light_mask = 2
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
@@ -24,23 +25,28 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+light_mask = 2
 margin_right = 1280.0
 margin_bottom = 720.0
 
 [node name="Sprite" type="Sprite" parent="MarginContainer/CenterContainer"]
+light_mask = 2
 position = Vector2( 640, 360 )
 scale = Vector2( 1, 0.8 )
 texture = ExtResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/CenterContainer"]
+light_mask = 2
 margin_left = 640.0
 margin_top = 360.0
 margin_right = 640.0
 margin_bottom = 360.0
 
 [node name="Sprite" type="Sprite" parent="MarginContainer/CenterContainer/CenterContainer"]
+light_mask = 2
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/CenterContainer/Sprite"]
+light_mask = 2
 margin_left = -150.0
 margin_top = -130.0
 margin_right = 150.0
@@ -53,6 +59,7 @@ __meta__ = {
 }
 
 [node name="Restart" type="Button" parent="MarginContainer/CenterContainer/CenterContainer/Sprite"]
+light_mask = 2
 margin_left = -118.0
 margin_top = -30.0
 margin_right = 118.0
@@ -69,8 +76,10 @@ __meta__ = {
 [node name="ResLight" parent="MarginContainer/CenterContainer/CenterContainer/Sprite/Restart" instance=ExtResource( 1 )]
 visible = false
 position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
 
 [node name="MainMenu" type="Button" parent="MarginContainer/CenterContainer/CenterContainer/Sprite"]
+light_mask = 2
 margin_left = -183.0
 margin_top = 50.0
 margin_right = 183.0
@@ -87,6 +96,7 @@ __meta__ = {
 [node name="MenuLight" parent="MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu" instance=ExtResource( 1 )]
 visible = false
 position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
 [connection signal="mouse_entered" from="MarginContainer/CenterContainer/CenterContainer/Sprite/Restart" to="." method="_on_Restart_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/CenterContainer/CenterContainer/Sprite/Restart" to="." method="_on_Restart_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/CenterContainer/CenterContainer/Sprite/Restart" to="." method="_on_Restart_pressed"]

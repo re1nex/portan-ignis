@@ -104,6 +104,7 @@ __meta__ = {
 [node name="LightStart" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Start" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Settings" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 113.0
@@ -123,6 +124,7 @@ __meta__ = {
 [node name="LightSettings" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Settings" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Help" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 226.0
@@ -141,6 +143,7 @@ __meta__ = {
 [node name="LightHelp" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Help" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="About" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 339.0
@@ -160,6 +163,7 @@ __meta__ = {
 [node name="LightAbout" parent="HBoxContainer/VBoxContainer/mainView/Sprite/About" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer/mainView/Sprite"]
 margin_top = 452.0
@@ -179,6 +183,7 @@ __meta__ = {
 [node name="LightExit" parent="HBoxContainer/VBoxContainer/mainView/Sprite/Exit" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="StartView" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
@@ -205,6 +210,7 @@ __meta__ = {
 [node name="LightLevel0" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level0" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="level1" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
 margin_top = 100.0
@@ -224,6 +230,7 @@ __meta__ = {
 [node name="LightLevel1" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level1" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="BackStart" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
 margin_top = 400.0
@@ -243,6 +250,7 @@ __meta__ = {
 [node name="LightBackStart" parent="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Settings" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
@@ -276,6 +284,7 @@ __meta__ = {
 [node name="LightBackStg" parent="HBoxContainer/VBoxContainer/Settings/Sprite/backSettings" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
 margin_right = 40.0
@@ -303,6 +312,7 @@ __meta__ = {
 [node name="CheckBoxLight" parent="HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 12.3872, 12.5733 )
+scale = Vector2( 1, 1 )
 
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Settings/Sprite"]
 margin_top = 100.0
@@ -391,6 +401,7 @@ __meta__ = {
 [node name="LightBackAbout" parent="HBoxContainer/VBoxContainer/About/Sprite/BackAbout" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="Help" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
@@ -423,6 +434,7 @@ __meta__ = {
 [node name="LightbackHelp" parent="HBoxContainer/VBoxContainer/Help/Sprite/backHelp" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Help/Sprite"]
 margin_right = 805.0
@@ -466,6 +478,7 @@ __meta__ = {
 
 [node name="Light2D" parent="HBoxContainer/Logo/Sprite/Label" instance=ExtResource( 4 )]
 position = Vector2( 14.1612, 178.56 )
+scale = Vector2( 1, 1 )
 [connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_pressed"]
