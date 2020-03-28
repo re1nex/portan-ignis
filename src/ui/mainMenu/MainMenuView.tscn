@@ -13,15 +13,15 @@ font_data = ExtResource( 1 )
 size = 90
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 40
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 46
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 180
 extra_spacing_top = 10
 extra_spacing_bottom = 10
@@ -358,7 +358,7 @@ __meta__ = {
 margin_top = 4.0
 margin_right = 1040.0
 margin_bottom = 350.0
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 3 )
 custom_constants/line_separation = 5
 text = "Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. 
 The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers 
@@ -440,7 +440,7 @@ scale = Vector2( 1, 1 )
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Help/Sprite"]
 margin_right = 805.0
 margin_bottom = 414.0
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_constants/line_separation = 10
 text = "A/arrow left  - move left
 D/arrow right - move right
@@ -470,7 +470,7 @@ margin_left = -502.303
 margin_top = 79.6799
 margin_right = -75.3029
 margin_bottom = 428.68
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Portan
 Ignis"
 __meta__ = {

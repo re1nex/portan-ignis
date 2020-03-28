@@ -96,11 +96,11 @@ margin_right = 596.0
 margin_bottom = 64.0
 
 [node name="Torch" type="Sprite" parent="MainContainer/ChosenIgnis"]
-position = Vector2( 22, 31 )
+position = Vector2( 22, 27 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 7 )
 
 [node name="Sector" type="Sprite" parent="MainContainer/ChosenIgnis"]
-position = Vector2( 22, 34 )
+position = Vector2( 22, 30 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 8 )
