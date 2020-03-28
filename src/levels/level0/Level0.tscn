@@ -77,8 +77,7 @@ pause_mode = 2
 pause_mode = 2
 
 [node name="Door" parent="." instance=ExtResource( 13 )]
-position = Vector2( 436.559, 545.569 )
-collision_layer = 1
+position = Vector2( 262.246, 221.247 )
 [connection signal="active" from="Torches/IgnisRegularLevel2" to="Door" method="_on_IgnisRegularLevel_active"]
 [connection signal="not_active" from="Torches/IgnisRegularLevel2" to="Door" method="_on_IgnisRegularLevel_not_active"]
 [connection signal="lever_taken" from="Lever" to="Player" method="_on_Lever_lever_taken"]

@@ -12,9 +12,11 @@ func _ready():
 
 func _on_IgnisRegularLevel_active():
 	set_collision_layer_bit(0, false)
+	$Sprite.hide()
 	pass # Replace with function body.
 
 
 func _on_IgnisRegularLevel_not_active():
+	$Sprite.show()
 	set_collision_layer_bit(0, true)
 	pass # Replace with function body.
