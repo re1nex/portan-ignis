@@ -76,6 +76,9 @@ func _pressButt():
 		return
 
 func _backToMain():
+	if($HBoxContainer/VBoxContainer/mainView.is_visible_in_tree()):
+		_closeBeforeChange()
+		return
 	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
 		_on_BackStart_pressed()
 		return
