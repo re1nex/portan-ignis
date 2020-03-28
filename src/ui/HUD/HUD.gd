@@ -16,6 +16,8 @@ var max_alpha
 var min_alpha
 
 func _ready():
+	$MainContainer/ChosenIgnis/Sector.hide()
+	$MainContainer/ChosenIgnis/Torch.hide()
 	pass
 
 
@@ -45,17 +47,32 @@ func _process(delta):
 	ignis_bar_anim()
 
 
+func status_set_sector():
+	$MainContainer/ChosenIgnis/Sector.show()
+	$MainContainer/ChosenIgnis/Torch.hide()
+
+
+func status_set_torch():
+	$MainContainer/ChosenIgnis/Sector.hide()
+	$MainContainer/ChosenIgnis/Torch.show()
+
+
+func status_set_none():
+	$MainContainer/ChosenIgnis/Sector.hide()
+	$MainContainer/ChosenIgnis/Torch.hide()
+
+
 func upd_chosen_ignis(active_weapon):
 	if informator.ignis_status == informator.Is_ignis.NO_IGNIS:
-		$MainContainer/ChosenIgnis/Status.text = "no ignis"
+		status_set_none()
 		return
 	match active_weapon:
 		-1:
-			$MainContainer/ChosenIgnis/Status.text = "no ignis"
+			status_set_none()
 		0:
-			$MainContainer/ChosenIgnis/Status.text = "torch"
+			status_set_torch()
 		1: 
-			$MainContainer/ChosenIgnis/Status.text = "lens"
+			status_set_sector()
 	pass
 
 
