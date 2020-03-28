@@ -95,13 +95,6 @@ margin_left = 596.0
 margin_right = 596.0
 margin_bottom = 64.0
 
-[node name="Status" type="Label" parent="MainContainer/ChosenIgnis"]
-visible = false
-margin_top = 25.0
-margin_right = 52.0
-margin_bottom = 39.0
-text = "No ignis"
-
 [node name="Torch" type="Sprite" parent="MainContainer/ChosenIgnis"]
 position = Vector2( 22, 31 )
 scale = Vector2( 3, 3 )
