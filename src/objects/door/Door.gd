@@ -15,6 +15,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	print(height)
 	if step != 0:
 		var del = position.y
 		
