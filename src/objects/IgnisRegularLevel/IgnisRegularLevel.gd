@@ -1,5 +1,7 @@
 extends Area2D
 
+signal active
+signal not_active
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -21,11 +23,13 @@ func _ready():
 		$SpriteTorchOn.show()
 		$SpriteTorchOff.hide()
 		$Light2D.enable()
+		emit_signal("active")
 	else:
 		activated = false
 		$SpriteTorchOn.hide()
 		$SpriteTorchOff.show()
 		$Light2D.disable()
+		emit_signal("not_active")
 	pass # Replace with function body.
 
 
@@ -37,6 +41,7 @@ func activate():
 		$SpriteTorchOn.hide()
 		$Light2D.disable()
 		activated = false
+		emit_signal("not_active")
 	else:
 		if body_informator != null and body_informator.ignis_status == body_informator.Is_ignis.HAS_IGNIS:
 			$AudioOff.stop()
@@ -45,6 +50,7 @@ func activate():
 			$Light2D.enable()
 			$SpriteTorchOn.show()
 			$SpriteTorchOff.hide()
+			emit_signal("active")
 
 
 func _on_IgnisRegularLevel_body_entered(body):

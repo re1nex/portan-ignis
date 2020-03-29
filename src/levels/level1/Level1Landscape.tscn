@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/levels/level1/Level1Landscape.gd" type="Script" id=1]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/objects/IgnisRegularOuter/IgnisRegularOuter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resource/tileres/flowers_grass.tres" type="TileSet" id=8]
 [ext_resource path="res://src/objects/MovingBlock/MovingPlatform.tscn" type="PackedScene" id=9]
+[ext_resource path="res://resource/tileres/wood_floor.tres" type="TileSet" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 41.4907, 65.2372 )
@@ -48,6 +49,11 @@ tile_set = ExtResource( 8 )
 cell_size = Vector2( 32, 16 )
 format = 1
 tile_data = PoolIntArray( 720898, 0, 65536, 720900, 0, 458755 )
+
+[node name="TileMap" type="TileMap" parent="Landscape"]
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 32, 32 )
+format = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
