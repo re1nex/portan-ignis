@@ -4,7 +4,7 @@
 [ext_resource path="res://src/objects/door/Door.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.10987, 21.1798 )
+extents = Vector2( 4.10987, 20.8319 )
 
 [node name="Door" type="StaticBody2D"]
 collision_mask = 0
@@ -15,4 +15,5 @@ rotation = -0.785398
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.579912 )
 shape = SubResource( 1 )
