@@ -2,11 +2,13 @@
 
 importer="wav"
 type="AudioStreamSample"
-valid=false
+path="res://.import/win1.wav-1bbe848405273766aed74932390d8311.sample"
 
 [deps]
 
-source_file="res://resource/sounds/ignis/2.wav"
+source_file="res://resource/sounds/situation/win1.wav"
+dest_files=[ "res://.import/win1.wav-1bbe848405273766aed74932390d8311.sample" ]
+
 [params]
 
 force/8_bit=false
