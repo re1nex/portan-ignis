@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://resource/ui/pause_menu/background3.png" type="Texture" id=1]
+[ext_resource path="res://resource/sounds/clicks/2.wav" type="AudioStream" id=2]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=5]
 [ext_resource path="res://src/ui/pauseMenu/pauseMenu.gd" type="Script" id=11]
@@ -192,6 +193,9 @@ __meta__ = {
 visible = false
 position = Vector2( 12.1226, 11.0909 )
 scale = Vector2( 1, 1 )
+
+[node name="AudioClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 [connection signal="mouse_entered" from="PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue" to="." method="_on_Continue_mouse_entered"]
 [connection signal="mouse_exited" from="PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue" to="." method="_on_Continue_mouse_exited"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/Continue" to="." method="_on_Continue_pressed"]

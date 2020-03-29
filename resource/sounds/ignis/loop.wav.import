@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/2.wav-da222f4b04431f411cb4cd0bb25c5dfe.sample"
+path="res://.import/loop.wav-8730cccb87da1aec39f00d60ff16b30e.sample"
 
 [deps]
 
-source_file="res://resource/sounds/monster/2.wav"
-dest_files=[ "res://.import/2.wav-da222f4b04431f411cb4cd0bb25c5dfe.sample" ]
+source_file="res://resource/sounds/ignis/loop.wav"
+dest_files=[ "res://.import/loop.wav-8730cccb87da1aec39f00d60ff16b30e.sample" ]
 
 [params]
 
