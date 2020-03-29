@@ -17,6 +17,7 @@ func _init():
 func _ready():
 	if activated_at_start:
 		activated = true
+		$AudioLoop.play()
 		$SpriteTorchOn.show()
 		$SpriteTorchOff.hide()
 		$Light2D.enable()
@@ -30,12 +31,16 @@ func _ready():
 
 func activate():
 	if activated:
+		$AudioLoop.stop()
+		$AudioOff.play()
 		$SpriteTorchOff.show()
 		$SpriteTorchOn.hide()
 		$Light2D.disable()
 		activated = false
 	else:
 		if body_informator != null and body_informator.ignis_status == body_informator.Is_ignis.HAS_IGNIS:
+			$AudioOff.stop()
+			$AudioLoop.play()
 			activated = true
 			$Light2D.enable()
 			$SpriteTorchOn.show()

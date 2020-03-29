@@ -109,15 +109,18 @@ func _physics_process(delta):
 	var target_speed = 0
 	if Input.is_action_pressed("ui_left"):
 		target_speed -= 1
+		if(!$AudioStep.playing &&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_right") and direction == 1:
 			direction = -1
 			sprite.flip_h = true
 			$CharacterShape.scale.x *= -1
 			if $Informator.num_of_active_weapon != -1:
 				update_ignis()
+
 	
 	if Input.is_action_pressed("ui_right"):
 		target_speed += 1
+		if(!$AudioStep.playing&&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_left") and direction == -1:
 			direction = 1
 			sprite.flip_h = false
@@ -248,6 +251,8 @@ func turn_off_ignis():
 	weapons[$Informator.num_of_active_weapon].disable()
 	$Informator.ignis_status = $Informator.Is_ignis.HIDE_IGNIS
 	#$Informator.num_of_active_weapon = -1
+	$AudioIngisLoop.stop()
+	$AudioIngisOff.play()
 	turn_on_ignis_timer()
 
 func turn_on_ignis(num):
@@ -255,6 +260,8 @@ func turn_on_ignis(num):
 		turn_off_ignis_time()
 	$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
 	$Informator.num_of_active_weapon = num
+	$AudioIngisOff.stop()
+	$AudioIngisLoop.play()
 	update_ignis()
 	weapons[num].enable()
 

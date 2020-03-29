@@ -2,11 +2,13 @@
 
 importer="wav"
 type="AudioStreamSample"
-valid=false
+path="res://.import/5.wav-6dd63cf45b0a193a3918c6ce7d46de94.sample"
 
 [deps]
 
-source_file="res://resource/sounds/clicks/1.wav"
+source_file="res://resource/sounds/steps/5.wav"
+dest_files=[ "res://.import/5.wav-6dd63cf45b0a193a3918c6ce7d46de94.sample" ]
+
 [params]
 
 force/8_bit=false

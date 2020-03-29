@@ -4,6 +4,7 @@ signal ChangePos
 var keyboard = false
 var fullScreen = false
 var pos = -1
+var soundLen=0.22
 
 func _ready():
 	if OS.window_fullscreen:
@@ -155,12 +156,14 @@ func _disableStart():
 
 func _on_Start_pressed():
 	pos=-1
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/VBoxContainer/StartView.show()
 	_disableMain()
 
 func _on_Settings_pressed():
 	pos=-1
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/Logo.hide()
 	$HBoxContainer/VBoxContainer/Settings.show()
@@ -168,6 +171,7 @@ func _on_Settings_pressed():
 
 func _on_Help_pressed():
 	pos=-1
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/VBoxContainer/Help.show()
 	_disableMain()
@@ -175,6 +179,7 @@ func _on_Help_pressed():
 
 func _on_About_pressed():
 	pos=-1
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/mainView.hide()
 	$HBoxContainer/Logo.hide()
 	$HBoxContainer/VBoxContainer/About.show()
@@ -182,14 +187,16 @@ func _on_About_pressed():
 
 
 func _on_Exit_pressed():
+	$ClickSound.play()
+	while($ClickSound.get_playback_position()<soundLen):pos=-1
 	get_tree().quit()
-
 
 
 
 
 func _on_backSettings_pressed():
 	pos=-1
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/Settings.hide()
 	$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.disable()
 	$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.hide()
@@ -205,6 +212,7 @@ func _full_Screen():
 		$HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox/CheckBoxLight.disable()
 
 func _on_CheckBox_pressed():
+	$ClickSound.play()
 	OS.window_fullscreen = !OS.window_fullscreen
 	fullScreen=!fullScreen
 	_full_Screen()
@@ -213,6 +221,7 @@ func _on_CheckBox_pressed():
 
 func _on_BackAbout_pressed():
 	pos=-1
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/About.hide()
 	$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.disable()
 	$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.hide()
@@ -223,6 +232,7 @@ func _on_BackAbout_pressed():
 
 func _on_backHelp_pressed():
 	pos=-1
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.disable()
 	$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.hide()
 	$HBoxContainer/VBoxContainer/Help.hide()
@@ -232,6 +242,7 @@ func _on_backHelp_pressed():
 
 func _on_level0_pressed():
 	pos=0
+	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_0)
 	_disableStart()
 
@@ -239,6 +250,7 @@ func _on_level0_pressed():
 
 func _on_level1_pressed():
 	pos=0
+	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
 	_disableStart()
 
@@ -319,6 +331,7 @@ func _on_level1_mouse_exited():
 
 func _on_BackStart_pressed():
 	pos=0
+	$ClickSound.play()
 	$HBoxContainer/VBoxContainer/mainView.show()
 	$HBoxContainer/VBoxContainer/StartView.hide()
 	_disableStart()
@@ -414,6 +427,7 @@ func _stretch():
 
 
 func _on_CheckBox_stretch_pressed():
+	$ClickSound.play()
 	SceneSwitcher.strech = !SceneSwitcher.strech
 	if SceneSwitcher.strech:
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1280, 720))

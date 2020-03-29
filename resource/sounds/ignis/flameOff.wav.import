@@ -2,11 +2,13 @@
 
 importer="wav"
 type="AudioStreamSample"
-valid=false
+path="res://.import/flameOff.wav-4ab4b93e94aa9e38b9eb3201e7c6d25e.sample"
 
 [deps]
 
-source_file="res://resource/sounds/ignis/2.wav"
+source_file="res://resource/sounds/ignis/flameOff.wav"
+dest_files=[ "res://.import/flameOff.wav-4ab4b93e94aa9e38b9eb3201e7c6d25e.sample" ]
+
 [params]
 
 force/8_bit=false
