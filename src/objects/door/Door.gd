@@ -1,22 +1,46 @@
-extends StaticBody2D
+extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var height
+var step
+var max_height
+const SPEED = 10
+var linear_vel = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	height = 0
+	step = 0
+	max_height = $CollisionShape2D.shape.extents.y * 2
 	pass # Replace with function body.
 
+func _process(delta):
+	print(height)
+	if step != 0:
+		var del = position.y
+		
+		move_and_collide(linear_vel * delta)
+		del -= position.y
+		
+		height += del
+		if height > max_height:
+			position.y += height - max_height
+			height -= height - max_height
+			step = 0
+		elif height < 0:
+			position.y += height
+			height = 0
+			step = 0
+	pass
+
+
 func _on_IgnisRegularLevel_active():
-	set_collision_layer_bit(0, false)
-	$Sprite.hide()
+	linear_vel.y = -SPEED
+	step = -SPEED
 	pass # Replace with function body.
 
 
 func _on_IgnisRegularLevel_not_active():
-	$Sprite.show()
-	set_collision_layer_bit(0, true)
+	linear_vel.y = SPEED
+	step = SPEED
 	pass # Replace with function body.
