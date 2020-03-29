@@ -50,6 +50,7 @@ var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 
+var changeIgnis = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -93,7 +94,7 @@ func _physics_process(delta):
 	# Apply gravity
 	linear_vel += delta * GRAVITY_VEC
 	# Move and slide
-	
+	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
 	
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
@@ -251,8 +252,9 @@ func turn_off_ignis():
 	weapons[$Informator.num_of_active_weapon].disable()
 	$Informator.ignis_status = $Informator.Is_ignis.HIDE_IGNIS
 	#$Informator.num_of_active_weapon = -1
-	$AudioIngisLoop.stop()
-	$AudioIngisOff.play()
+	if(!changeIgnis):
+		$AudioIngisLoop.stop()
+		$AudioIngisOff.play()
 	turn_on_ignis_timer()
 
 func turn_on_ignis(num):
@@ -260,8 +262,9 @@ func turn_on_ignis(num):
 		turn_off_ignis_time()
 	$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
 	$Informator.num_of_active_weapon = num
-	$AudioIngisOff.stop()
-	$AudioIngisLoop.play()
+	if(!changeIgnis):
+		$AudioIngisOff.stop()
+		$AudioIngisLoop.play()
 	update_ignis()
 	weapons[num].enable()
 
@@ -378,6 +381,7 @@ func switch_weapons(type):
 		pass
 	else:
 		if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+			changeIgnis=true
 			turn_off_ignis()
 		turn_on_ignis(type)
 

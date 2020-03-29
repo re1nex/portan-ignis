@@ -36,8 +36,32 @@ func _ready():
 	x_scale = $Visibility.scale.x
 	pass
 
+func HitPlay(num):
+	if(!$AudioHit.playing && !$AudioHit2.playing && !$AudioHit3.playing && !$AudioHit4.playing && !$AudioHit5.playing && !$AudioHit6.playing && !$AudioHit7.playing && !$AudioHit8.playing && !$AudioHit9.playing):
+		hitPlay(num)
+func hitPlay(num):
+	if(num == 1):
+		$AudioHit.play()
+	elif(num ==2):
+		$AudioHit2.play()
+	elif(num ==3):
+		$AudioHit3.play()
+	elif(num ==4):
+		$AudioHit4.play()
+	elif(num ==5):
+		$AudioHit5.play()
+	elif(num ==6):
+		$AudioHit6.play()
+	elif(num ==7):
+		$AudioHit7.play()
+	elif(num ==8):
+		$AudioHit8.play()
+	elif(num ==9):
+		$AudioHit9.play()
+
 func _process(_delta):
 	if player_target:
+		HitPlay(randi()%9+1)
 		$AnimatedSprite.animation = "slash"
 		$AnimatedSprite.speed_scale = 0.25
 		player_target.hit()

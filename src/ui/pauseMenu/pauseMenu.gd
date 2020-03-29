@@ -142,6 +142,7 @@ func reset_menu():
 
 
 func _on_backSettings_pressed():
+	$AudioClick.play()
 	pos=-1
 	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.disable()
 	$PauseMenu/CenterContainer/CenterContainer/Settings/Sprite/backSettings/backLight.hide()
@@ -157,6 +158,7 @@ func _full_screen():
 
 
 func _on_CheckBox_pressed():
+	$AudioClick.play()
 	OS.window_fullscreen = !OS.window_fullscreen
 	_full_screen()
 
@@ -169,6 +171,7 @@ func _disablePause():
 	$PauseMenu/CenterContainer/CenterContainer/Pause/Sprite/MainMenu/MenuLight.disable()
 
 func _on_Continue_pressed():
+	$AudioClick.play()
 	_disablePause()
 	pos=-1
 	game_paused = false
@@ -176,6 +179,7 @@ func _on_Continue_pressed():
 
 
 func _on_Settings_pressed():
+	$AudioClick.play()
 	pos=-1
 	$PauseMenu/CenterContainer/CenterContainer/Pause.hide()
 	$PauseMenu/CenterContainer/CenterContainer/Settings.show()
@@ -184,6 +188,7 @@ func _on_Settings_pressed():
 
 
 func _on_MainMenu_pressed():
+	$AudioClick.play()
 	pos=-1
 	_disablePause()
 	game_paused = false

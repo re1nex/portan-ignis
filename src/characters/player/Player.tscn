@@ -168,11 +168,11 @@ one_shot = true
 
 [node name="AudioIngisLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -3.0
+volume_db = -7.0
 
 [node name="AudioIngisOff" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -3.0
+volume_db = -7.0
 
 [node name="AudioStep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
