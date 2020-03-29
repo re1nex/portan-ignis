@@ -29,5 +29,5 @@ position = Vector2( -2.38419e-07, -14 )
 
 [node name="AudioLoop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
-max_distance = 200.0
+max_distance = 400.0
 attenuation = 4.0

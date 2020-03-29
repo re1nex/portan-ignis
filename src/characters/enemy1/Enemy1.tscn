@@ -1,18 +1,14 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://resource/sounds/monster/2.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/characters/enemy1/Enemy1.gd" type="Script" id=2]
 [ext_resource path="res://resource/sprites/characters/characters.png" type="Texture" id=3]
 [ext_resource path="res://resource/sounds/steps/5.wav" type="AudioStream" id=4]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell1.wav" type="AudioStream" id=5]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell9.wav" type="AudioStream" id=6]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell8.wav" type="AudioStream" id=7]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell7.wav" type="AudioStream" id=8]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell6.wav" type="AudioStream" id=9]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell3.wav" type="AudioStream" id=10]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell5.wav" type="AudioStream" id=11]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell4.wav" type="AudioStream" id=12]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell2.wav" type="AudioStream" id=13]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell4.wav" type="AudioStream" id=5]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav" type="AudioStream" id=6]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav" type="AudioStream" id=7]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell2.wav" type="AudioStream" id=8]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell1.wav" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -115,7 +111,6 @@ position = Vector2( 0, -8 )
 scale = Vector2( 0.65, 0.65 )
 frames = SubResource( 14 )
 animation = "slash"
-frame = 1
 playing = true
 
 [node name="CatchArea" type="Area2D" parent="."]
@@ -177,39 +172,23 @@ stream = ExtResource( 4 )
 max_distance = 100.0
 
 [node name="AudioHit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-volume_db = -15.0
-
-[node name="AudioHit2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
-volume_db = -15.0
-
-[node name="AudioHit3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-volume_db = -15.0
-
-[node name="AudioHit4" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
-volume_db = -15.0
-
-[node name="AudioHit5" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 11 )
-volume_db = -15.0
-
-[node name="AudioHit6" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -15.0
 
-[node name="AudioHit7" type="AudioStreamPlayer" parent="."]
+[node name="AudioHit2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -15.0
 
-[node name="AudioHit8" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+[node name="AudioHit3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 volume_db = -15.0
 
-[node name="AudioHit9" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+[node name="AudioHit4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -15.0
+
+[node name="AudioHit5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 volume_db = -15.0
 [connection signal="area_entered" from="CatchArea" to="." method="_on_CatchArea_area_entered"]
 [connection signal="area_exited" from="CatchArea" to="." method="_on_CatchArea_area_exited"]
