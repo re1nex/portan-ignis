@@ -4,7 +4,7 @@ extends KinematicBody2D
 var height
 var step
 var max_height
-const SPEED = 10
+export var SPEED = 10
 var linear_vel = Vector2()
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +15,6 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	print(height)
 	if step != 0:
 		var del = position.y
 		

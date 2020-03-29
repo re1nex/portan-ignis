@@ -9,6 +9,8 @@ func _ready():
 	$WinWindow/MarginContainer.hide()
 	$Menu/HUD.init_player($Player)
 	$WindowGameOver/MarginContainer.hide()
+	$Player.hit()
+	
 	
 func _on_Player_die():
 	get_tree().paused = true

@@ -3,8 +3,8 @@ extends Node2D
 class_name MovingPlatform
 
 const IDLE_DURATION = 1.0
-const TILE_SIZE = 64
-export var move_to = Vector2.RIGHT * 3
+const TILE_SIZE = 32
+export var move_to = Vector2.RIGHT * 1
 export var speed = 3.0
 
 onready var platform = $Platform
