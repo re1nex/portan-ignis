@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fire_particle.png-f1ffdaf06737ef493857699029bfbd42.stex"
+path="res://.import/spot.png-c39943a724bbb28e45607a4aa2096316.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/ignis/ignis_regular_inner/fire_particle.png"
-dest_files=[ "res://.import/fire_particle.png-f1ffdaf06737ef493857699029bfbd42.stex" ]
+source_file="res://resource/sprites/ignis/ignis_sector_inner/spot.png"
+dest_files=[ "res://.import/spot.png-c39943a724bbb28e45607a4aa2096316.stex" ]
 
 [params]
 
