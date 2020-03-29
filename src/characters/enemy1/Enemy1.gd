@@ -55,7 +55,7 @@ func hitPlay(num):
 func _process(_delta):
 	if player_target:
 		HitPlay(randi()%5+1)
-		$AnimatedSprite.animation = "slash"
+		$AnimatedSprite.animation = "punch"
 		$AnimatedSprite.speed_scale = 0.25
 		player_target.hit()
 
