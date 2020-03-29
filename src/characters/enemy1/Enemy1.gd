@@ -38,7 +38,7 @@ func _ready():
 
 func _process(_delta):
 	if player_target:
-		$AnimatedSprite.animation = "slash"
+		$AnimatedSprite.animation = "punch"
 		$AnimatedSprite.speed_scale = 0.25
 		player_target.hit()
 
