@@ -135,5 +135,4 @@ position = Vector2( 64, 176 )
 
 [node name="Door" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1536, 336 )
-SPEED = 60
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]

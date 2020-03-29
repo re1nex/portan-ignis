@@ -182,9 +182,7 @@ scale = Vector2( 1, 1 )
 
 [node name="StartView" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 visible = false
-margin_top = 4.0
-margin_right = 917.0
-margin_bottom = 4.0
+margin_right = 1097.0
 custom_constants/separation = 200
 
 [node name="Sprite" type="Sprite" parent="HBoxContainer/VBoxContainer/StartView"]
@@ -225,6 +223,26 @@ __meta__ = {
 }
 
 [node name="LightLevel1" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level1" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
+
+[node name="level2" type="Button" parent="HBoxContainer/VBoxContainer/StartView/Sprite"]
+margin_top = 194.0
+margin_right = 243.0
+margin_bottom = 277.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "level 2"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightLevel2" parent="HBoxContainer/VBoxContainer/StartView/Sprite/level2" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -30, 40 )
 scale = Vector2( 1, 1 )
@@ -501,6 +519,9 @@ scale = Vector2( 1, 1 )
 [connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/StartView/Sprite/level1" to="." method="_on_level1_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/StartView/Sprite/level1" to="." method="_on_level1_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/StartView/Sprite/level1" to="." method="_on_level1_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/StartView/Sprite/level2" to="." method="_on_level2_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/StartView/Sprite/level2" to="." method="_on_level2_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/StartView/Sprite/level2" to="." method="_on_level2_pressed"]
 [connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" to="." method="_on_BackStart_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" to="." method="_on_BackStart_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/StartView/Sprite/BackStart" to="." method="_on_BackStart_pressed"]

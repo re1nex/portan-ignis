@@ -4,7 +4,7 @@ extends KinematicBody2D
 var height
 var step
 var max_height
-export var SPEED = 10
+export var SPEED = 60
 var linear_vel = Vector2()
 
 # Called when the node enters the scene tree for the first time.
