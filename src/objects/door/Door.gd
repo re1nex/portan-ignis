@@ -1,10 +1,11 @@
-extends StaticBody2D
+extends KinematicBody2D
 
 
 var height
 var step
 var max_height
 const SPEED = 10
+var linear_vel = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,10 +15,14 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	print(height)
 	if step != 0:
-		var del = step * delta
-		position.y += del
-		height -= del
+		var del = position.y
+		
+		move_and_collide(linear_vel * delta)
+		del -= position.y
+		
+		height += del
 		if height > max_height:
 			position.y += height - max_height
 			height -= height - max_height
@@ -30,10 +35,12 @@ func _process(delta):
 
 
 func _on_IgnisRegularLevel_active():
+	linear_vel.y = -SPEED
 	step = -SPEED
 	pass # Replace with function body.
 
 
 func _on_IgnisRegularLevel_not_active():
+	linear_vel.y = SPEED
 	step = SPEED
 	pass # Replace with function body.
