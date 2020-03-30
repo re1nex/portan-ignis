@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/levels/level2/Level2.gd" type="Script" id=2]
+[ext_resource path="res://src/levels/level2/Level2Landscape.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/objects/IgnisRegularOuter/IgnisRegularOuter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/characters/enemy1/Enemy1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/ui/pauseMenu/pauseMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/ui/winWindow/WinWindow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/ui/HUD/HUD.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 64 )
+
+[node name="Level2" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Level2Landscape" parent="." instance=ExtResource( 3 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 288, 148 )
+
+[node name="IgnisRegularOuter" parent="." instance=ExtResource( 4 )]
+position = Vector2( 320, 160 )
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 672, 208 )
+
+[node name="Ignises" type="Node2D" parent="."]
+
+[node name="IgnisDoor" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 544, 232 )
+
+[node name="IgnisActivated" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 128, 168 )
+
+[node name="IgnisRegularLevel" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 1152, 96 )
+
+[node name="IgnisRegularLevel2" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 792, 256 )
+
+[node name="Death" type="Area2D" parent="."]
+position = Vector2( 736, 432 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
+shape = SubResource( 1 )
+
+[node name="Win" type="Area2D" parent="."]
+position = Vector2( 1416, 32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Win"]
+shape = SubResource( 2 )
+
+[node name="Hearts" type="Node2D" parent="."]
+
+[node name="Heart" parent="Hearts" instance=ExtResource( 11 )]
+position = Vector2( 1176, 80 )
+
+[node name="Heart2" parent="Hearts" instance=ExtResource( 11 )]
+position = Vector2( 472, 208 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 7 )]
+
+[node name="WinWindow" parent="." instance=ExtResource( 8 )]
+
+[node name="WindowGameOver" parent="." instance=ExtResource( 10 )]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HUD" instance=ExtResource( 9 )]
+margin_bottom = 104.0
+[connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
+[connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]

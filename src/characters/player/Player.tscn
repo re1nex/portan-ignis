@@ -1,0 +1,181 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://resource/sprites/characters/player/player.png" type="Texture" id=1]
+[ext_resource path="res://src/characters/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://resource/sounds/ignis/flameOff.wav" type="AudioStream" id=3]
+[ext_resource path="res://resource/sounds/ignis/loop.wav" type="AudioStream" id=4]
+[ext_resource path="res://resource/sounds/steps/5.wav" type="AudioStream" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 14.8201
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+enum Is_ignis {
+		HAS_IGNIS,
+		HIDE_IGNIS,
+		NO_IGNIS,
+}
+
+
+var ignis_status
+var has_instruments = []
+var has_weapons = []
+var num_of_active_weapon = - 1 # -1 - nothing is active
+var ignis_timer_start
+var health 
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	for i in range(get_parent().WEAPONS_NUM):
+		has_weapons.append(false)
+	
+	for i in range(get_parent().Instruments_type.size()):
+		has_instruments.append(false)
+		
+	ignis_status = Is_ignis.NO_IGNIS
+	ignis_timer_start = get_parent().life_time_of_ignis
+	health = get_parent().health
+	pass # Replace with function body.
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "stay",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "landing",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": false,
+"name": "jump",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "landing",
+"speed": 5.0
+} ]
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+points = PoolVector2Array( -10, 1, 0, -6, 10.1, 1, 10.1, 7, 10.1, 18, 0, 18, -4, 18, -10, 8, -10, 8 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+shape = SubResource( 1 )
+
+[node name="Informator" type="Node" parent="."]
+script = SubResource( 2 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.4, 0.4 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.15
+drag_margin_right = 0.15
+editor_draw_drag_margin = true
+
+[node name="TimerIgnis" type="Timer" parent="."]
+one_shot = true
+
+[node name="IgnisPosition" type="Position2D" parent="."]
+position = Vector2( 9.67478, -4.19816 )
+
+[node name="TimerHit" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimatedSprite1" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 12 )
+animation = "walk"
+frame = 2
+playing = true
+
+[node name="CharacterShape" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0418178, -5.98959 )
+shape = SubResource( 13 )
+one_way_collision_margin = 0.0
+
+[node name="TimerLanding" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioIngisLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -7.0
+
+[node name="AudioIngisOff" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -7.0
+
+[node name="AudioStep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+[connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]
