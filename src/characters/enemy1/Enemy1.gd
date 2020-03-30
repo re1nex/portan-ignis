@@ -36,26 +36,9 @@ func _ready():
 	x_scale = $Visibility.scale.x
 	pass
 
-func HitPlay(num):
-	if(!$AudioHit.playing && !$AudioHit2.playing && !$AudioHit3.playing && !$AudioHit4.playing && !$AudioHit5.playing ):
-		hitPlay(num)
-func hitPlay(num):
-	if(num == 1):
-		$AudioHit.play()
-	elif(num ==2):
-		$AudioHit2.play()
-	elif(num ==3):
-		$AudioHit3.play()
-	elif(num ==4):
-		$AudioHit4.play()
-	elif(num ==5):
-		$AudioHit5.play()
-
-
 func _process(_delta):
 	if player_target:
-		HitPlay(randi()%5+1)
-		$AnimatedSprite.animation = "punch"
+		$AnimatedSprite.animation = "slash"
 		$AnimatedSprite.speed_scale = 0.25
 		player_target.hit()
 
@@ -70,8 +53,6 @@ func _physics_process(delta):
 	var on_floor = is_on_floor()
 	if on_floor:
 		height=0
-		if(!$AudioStep.playing):$AudioStep.play()
-	if(!$AudioVoice.playing):$AudioVoice.play()
 	$AnimatedSprite.play()
 	if mode == ROAMING:
 		$AnimatedSprite.speed_scale = 2

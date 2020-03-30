@@ -2,7 +2,7 @@ extends CanvasLayer
 var keyboard=false
 var pos = -1
 var coef = 1.5
-var first =true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,13 +20,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-func _process(delta):
-	if($MarginContainer.is_visible_in_tree()):
-		if first:
-			first=false
-			$music.play()
-
 func _input(event):
 	if($MarginContainer.is_visible_in_tree()):
 		if event is InputEventMouseMotion:
@@ -76,8 +69,6 @@ func _ChangePos():
 		_on_MainMenu_mouse_entered()
 
 func _on_NextLvl_pressed():
-	first=true
-	$AudioClick.play()
 	pos=-1
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.disable()
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.hide()
@@ -105,8 +96,6 @@ func _on_MainMenu_mouse_exited():
 
 
 func _on_MainMenu_pressed():
-	first=true
-	$AudioClick.play()
 	pos=-1
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.disable()
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.hide()

@@ -36,11 +36,11 @@ func _ready():
 func set_light_layer(layer):
 	if layer == Ignis_layer.STAGE:
 		shadow_item_cull_mask = 1 << 0
-		$Flame.light_mask = 1 << 0
+		$Particles2D.light_mask = 1 << 0
 		range_item_cull_mask = 1 << 1
 	elif layer == Ignis_layer.MENU:
 		shadow_item_cull_mask = 1 << 1
-		$Flame.light_mask = 1 << 1
+		$Particles2D.light_mask = 1 << 1
 		range_item_cull_mask = 1 << 1
 		
 func set_enemy_visible(vis):
@@ -72,8 +72,7 @@ func disable():
 func finish_disabling():
 	if enemy_visible == true:
 		$Area2D/CollisionShape2D.disabled = true
-	$Flame.emitting = false
-	$Smoke.emitting = false
+	$Particles2D.emitting = false
 	enabled = false
 	energy = 0
 	switchedOff = true
@@ -87,8 +86,7 @@ func enable():
 
 func finish_enabling():
 	switchedOff = false
-	$Flame.emitting = true
-	$Smoke.emitting = true
+	$Particles2D.emitting = true
 	if enemy_visible == true:
 		$Area2D/CollisionShape2D.disabled = false
 	enabled = true

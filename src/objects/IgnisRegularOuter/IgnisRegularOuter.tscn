@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/objects/IgnisRegularOuter/IgnisRegularOuter.gd" type="Script" id=1]
+[ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resource/sprites/ignis/ignis_regular_outer/torch.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10.9183, 12.9112 )
+
+[node name="IgnisRegularOuter" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="SpriteTorch" type="Sprite" parent="."]
+position = Vector2( 0, -9 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -11 )
+shape = SubResource( 1 )
+
+[node name="Light2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( -2.38419e-07, -14 )

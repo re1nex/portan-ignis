@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/ui/menu/backgroundtest3.png" type="Texture" id=2]
-[ext_resource path="res://resource/sounds/clicks/2.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui/mainMenu/MainMenuView.gd" type="Script" id=14]
 
@@ -468,9 +467,7 @@ V - rotate ignis upwards
 B - rotate ignis downwards
 E - interaction
 R - recharge
-1,2 - type of ignis
-F - hide ignis
-mouse wheel - scrolling ignis"
+1,2 - type of ignis"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -501,10 +498,6 @@ __meta__ = {
 [node name="Light2D" parent="HBoxContainer/Logo/Sprite/Label" instance=ExtResource( 4 )]
 position = Vector2( 14.1612, 178.56 )
 scale = Vector2( 1, 1 )
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="."]
-process_priority = 10
-stream = ExtResource( 3 )
 [connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/mainView/Sprite/Start" to="." method="_on_Start_pressed"]
