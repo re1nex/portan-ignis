@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/1.wav-b4e6012f69d645e4c1f16c13c883d1e7.sample"
+path="res://.import/flameOff.wav-4ab4b93e94aa9e38b9eb3201e7c6d25e.sample"
 
 [deps]
 
-source_file="res://resource/sounds/ignis/1.wav"
-dest_files=[ "res://.import/1.wav-b4e6012f69d645e4c1f16c13c883d1e7.sample" ]
+source_file="res://resource/sounds/ignis/flameOff.wav"
+dest_files=[ "res://.import/flameOff.wav-4ab4b93e94aa9e38b9eb3201e7c6d25e.sample" ]
 
 [params]
 
