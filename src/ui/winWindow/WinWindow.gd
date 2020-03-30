@@ -82,7 +82,7 @@ func _on_NextLvl_pressed():
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.disable()
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/NextLvl/ResLight.hide()
 	get_tree().paused=false
-	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_NEXT_SCENE)
 
 func _on_NextLvl_mouse_entered():
 	pos=0

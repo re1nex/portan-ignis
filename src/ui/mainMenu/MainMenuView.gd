@@ -59,7 +59,7 @@ func _pressButt():
 			_on_About_pressed()
 		return
 	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos==2 && !$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.switchingOff):
+		if(pos==3 && !$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.switchingOff):
 			_on_BackStart_pressed()
 			return
 		if(pos==0 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.switchingOff):
@@ -67,6 +67,8 @@ func _pressButt():
 			return
 		if(pos==1 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.switchingOff):
 			_on_level1_pressed()
+		if(pos==2 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.switchingOff):
+			_on_level2_pressed()
 		return
 	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.switchingOff):
 		_on_backSettings_pressed()
@@ -113,7 +115,7 @@ func _closeBeforeChange():
 			_on_About_mouse_exited()
 		return
 	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos==2):
+		if(pos==3):
 			_on_BackStart_mouse_exited()
 			return
 		if(pos==0):
@@ -121,6 +123,8 @@ func _closeBeforeChange():
 			return
 		if(pos==1):
 			_on_level1_mouse_exited()
+		if(pos==2):
+			_on_level2_mouse_exited()
 			return
 		return
 	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree()):
@@ -151,6 +155,8 @@ func _disableStart():
 	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.hide()
 	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.disable()
 	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.hide()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.disable()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.hide()
 	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.disable()
 	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.hide()
 
@@ -246,15 +252,16 @@ func _on_level0_pressed():
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_0)
 	_disableStart()
 
-
-
 func _on_level1_pressed():
 	pos=0
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
 	_disableStart()
 
-
+func _on_level2_pressed():
+	pos=0
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_2)
+	_disableStart()
 
 
 
@@ -328,6 +335,14 @@ func _on_level1_mouse_entered():
 func _on_level1_mouse_exited():
 	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.disable()
 
+func _on_level2_mouse_entered():
+	pos=2
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.show()
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.enable()
+
+
+func _on_level2_mouse_exited():
+	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.disable()
 
 func _on_BackStart_pressed():
 	pos=0
@@ -339,7 +354,7 @@ func _on_BackStart_pressed():
 
 
 func _on_BackStart_mouse_entered():
-	pos=2
+	pos=3
 	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.show()
 	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.enable()
 
@@ -397,7 +412,7 @@ func _ChangePos():
 			_on_About_mouse_entered()
 		return
 	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos>=2):
+		if(pos>=3):
 			_on_BackStart_mouse_entered()
 			return
 		if(pos==0):
@@ -405,6 +420,8 @@ func _ChangePos():
 			return
 		if(pos==1):
 			_on_level1_mouse_entered()
+		if(pos==2):
+			_on_level2_mouse_entered()
 		return
 	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree()):
 		pos=0 

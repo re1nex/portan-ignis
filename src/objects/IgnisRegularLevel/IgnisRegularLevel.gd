@@ -31,6 +31,13 @@ func _ready():
 		$Light2D.disable()
 		emit_signal("not_active")
 	pass # Replace with function body.
+	
+func activate_at_start():
+	activated = true
+	$Light2D.enable()
+	$SpriteTorchOn.show()
+	$SpriteTorchOff.hide()
+	emit_signal("active")
 
 
 func activate():
