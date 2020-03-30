@@ -4,7 +4,7 @@ var pos = -1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var first=true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +22,19 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+func _musicPlay(num):
+	if(num==1):$music.play()
+	elif(num==2):$music2.play()
+	elif(num==3):$music3.play()
+
+
+func _process(delta):
+	if($MarginContainer.is_visible_in_tree()):
+		if first:
+			first=false
+			_musicPlay(randi()%3+1)
+
+
 func _input(event):
 	if($MarginContainer.is_visible_in_tree()):
 		if event is InputEventMouseMotion:
@@ -71,6 +84,8 @@ func _ChangePos():
 		_on_MainMenu_mouse_entered()
 
 func _on_Restart_pressed():
+	$AudioClick.play()
+	first=true
 	pos=-1
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.disable()
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/Restart/ResLight.hide()
@@ -98,6 +113,8 @@ func _on_MainMenu_mouse_exited():
 
 
 func _on_MainMenu_pressed():
+	$AudioClick.play()
+	first=true
 	pos=-1
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.disable()
 	$MarginContainer/CenterContainer/CenterContainer/Sprite/MainMenu/MenuLight.hide()
