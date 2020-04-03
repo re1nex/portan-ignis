@@ -16,8 +16,8 @@ var max_alpha
 var min_alpha
 
 func _ready():
-	$MainContainer/ChosenIgnis/Sector.hide()
-	$MainContainer/ChosenIgnis/Torch.hide()
+	$MainContainer/Sector.hide()
+	$MainContainer/Torch.hide()
 	pass
 
 
@@ -48,18 +48,18 @@ func _process(delta):
 
 
 func status_set_sector():
-	$MainContainer/ChosenIgnis/Sector.show()
-	$MainContainer/ChosenIgnis/Torch.hide()
+	$MainContainer/Sector.show()
+	$MainContainer/Torch.hide()
 
 
 func status_set_torch():
-	$MainContainer/ChosenIgnis/Sector.hide()
-	$MainContainer/ChosenIgnis/Torch.show()
+	$MainContainer/Sector.hide()
+	$MainContainer/Torch.show()
 
 
 func status_set_none():
-	$MainContainer/ChosenIgnis/Sector.hide()
-	$MainContainer/ChosenIgnis/Torch.hide()
+	$MainContainer/Sector.hide()
+	$MainContainer/Torch.hide()
 
 
 func upd_chosen_ignis(active_weapon):
