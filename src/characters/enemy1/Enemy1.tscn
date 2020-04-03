@@ -12,47 +12,47 @@
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 256, 0, 64, 64 )
+region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 64, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 0, 64, 64 )
+region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 704, 0, 64, 64 )
+region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 832, 0, 64, 64 )
+region = Rect2( 704, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 0, 64, 64 )
+region = Rect2( 768, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
@@ -60,34 +60,34 @@ region = Rect2( 704, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 0, 64, 64 )
+region = Rect2( 832, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": false,
 "name": "landing",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
 "name": "jump",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "punch",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "punch",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "slash",
 "speed": 2.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "punch",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=15]
@@ -110,7 +110,8 @@ JUMP_HEIGHT_LIMIT = 30
 position = Vector2( 0, -8 )
 scale = Vector2( 0.65, 0.65 )
 frames = SubResource( 14 )
-animation = "slash"
+animation = "walk"
+frame = 1
 playing = true
 
 [node name="CatchArea" type="Area2D" parent="."]
