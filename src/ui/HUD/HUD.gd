@@ -33,10 +33,10 @@ func init_ignis_bar_anim():
 	old_status = informator.ignis_status
 	progress_bar_fading = false
 	fading_in = false 
-	max_alpha = $MainContainer/Bars.modulate.a
+	max_alpha = $MainContainer/torchStatus.modulate.a
 	min_alpha = 0
 	if old_status == informator.Is_ignis.NO_IGNIS:
-		$MainContainer/Bars.modulate.a = 0 # hide
+		$MainContainer/torchStatus.modulate.a = 0 # hide
 
 
 func _process(delta):
@@ -94,42 +94,42 @@ func ignis_bar_anim():
 	if not progress_bar_fading:
 		return
 	if fading_in:
-		$MainContainer/Bars.modulate.a += fading_delta
-		if $MainContainer/Bars.modulate.a >= max_alpha:
-			$MainContainer/Bars.modulate.a = max_alpha
+		$MainContainer/torchStatus.modulate.a += fading_delta
+		if $MainContainer/torchStatus.modulate.a >= max_alpha:
+			$MainContainer/torchStatus.modulate.a = max_alpha
 			progress_bar_fading = false # stop animation
 	else:
-		$MainContainer/Bars.modulate.a -= fading_delta
-		if $MainContainer/Bars.modulate.a <= min_alpha:
-			$MainContainer/Bars.modulate.a = min_alpha
+		$MainContainer/torchStatus.modulate.a -= fading_delta
+		if $MainContainer/torchStatus.modulate.a <= min_alpha:
+			$MainContainer/torchStatus.modulate.a = min_alpha
 			progress_bar_fading = false # stop animation
 
 
 func set_ignis_bar(value):
 	if informator.ignis_status == informator.Is_ignis.NO_IGNIS:
-		$MainContainer/Bars/Bar/torchStatus.value = 0
+		$MainContainer/torchStatus.value = 0
 	else:
-		$MainContainer/Bars/Bar/torchStatus.value = value
+		$MainContainer/torchStatus.value = value
 
 
 func set_health_bar(lives):
 	if lives >= 1:
-		$MainContainer/Heart1.value = 1
+		$MainContainer/Hearts/Heart1.value = 1
 	else:
-		$MainContainer/Heart1.value = 0
+		$MainContainer/Hearts/Heart1.value = 0
 	if lives >= 2:
-		$MainContainer/Heart2.value = 1
+		$MainContainer/Hearts/Heart2.value = 1
 	else:
-		$MainContainer/Heart2.value = 0
+		$MainContainer/Hearts/Heart2.value = 0
 	if lives >= 3:
-		$MainContainer/Heart3.value = 1
+		$MainContainer/Hearts/Heart3.value = 1
 	else:
-		$MainContainer/Heart3.value = 0
+		$MainContainer/Hearts/Heart3.value = 0
 	if lives >= 4:
-		$MainContainer/Heart4.value = 1
+		$MainContainer/Hearts/Heart4.value = 1
 	else:
-		$MainContainer/Heart4.value = 0
+		$MainContainer/Hearts/Heart4.value = 0
 	if lives >= 5:
-		$MainContainer/Heart5.value = 1
+		$MainContainer/Hearts/Heart5.value = 1
 	else:
-		$MainContainer/Heart5.value = 0
+		$MainContainer/Hearts/Heart5.value = 0
