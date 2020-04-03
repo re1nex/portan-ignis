@@ -95,8 +95,3 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ChosenIgnis" type="HBoxContainer" parent="MainContainer"]
-margin_left = 592.0
-margin_right = 592.0
-margin_bottom = 64.0
