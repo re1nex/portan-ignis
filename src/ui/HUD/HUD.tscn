@@ -24,69 +24,58 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1260.0
-margin_bottom = 84.0
+margin_bottom = 86.0
 
-[node name="Torch" type="Sprite" parent="MainContainer"]
-position = Vector2( 614, 27 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+[node name="Hearts" type="HBoxContainer" parent="MainContainer"]
+margin_right = 336.0
+margin_bottom = 66.0
 
-[node name="Sector" type="Sprite" parent="MainContainer"]
-position = Vector2( 614, 30 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 8 )
-
-[node name="Heart1" type="TextureProgress" parent="MainContainer"]
+[node name="Heart1" type="TextureProgress" parent="MainContainer/Hearts"]
 margin_right = 64.0
-margin_bottom = 64.0
+margin_bottom = 66.0
 max_value = 1.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
-[node name="Heart2" type="TextureProgress" parent="MainContainer"]
+[node name="Heart2" type="TextureProgress" parent="MainContainer/Hearts"]
 margin_left = 68.0
 margin_right = 132.0
-margin_bottom = 64.0
+margin_bottom = 66.0
 max_value = 1.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
-[node name="Heart3" type="TextureProgress" parent="MainContainer"]
+[node name="Heart3" type="TextureProgress" parent="MainContainer/Hearts"]
 margin_left = 136.0
 margin_right = 200.0
-margin_bottom = 64.0
+margin_bottom = 66.0
 max_value = 1.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
-[node name="Heart4" type="TextureProgress" parent="MainContainer"]
+[node name="Heart4" type="TextureProgress" parent="MainContainer/Hearts"]
 margin_left = 204.0
 margin_right = 268.0
-margin_bottom = 64.0
+margin_bottom = 66.0
 max_value = 1.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
-[node name="Heart5" type="TextureProgress" parent="MainContainer"]
+[node name="Heart5" type="TextureProgress" parent="MainContainer/Hearts"]
 margin_left = 272.0
 margin_right = 336.0
-margin_bottom = 64.0
+margin_bottom = 66.0
 max_value = 1.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Bars" type="VBoxContainer" parent="MainContainer"]
+[node name="torchStatus" type="TextureProgress" parent="MainContainer"]
 margin_left = 340.0
 margin_right = 588.0
-margin_bottom = 64.0
-
-[node name="Bar" type="HBoxContainer" parent="MainContainer/Bars"]
-margin_right = 248.0
-margin_bottom = 40.0
-
-[node name="torchStatus" type="TextureProgress" parent="MainContainer/Bars/Bar"]
-margin_right = 248.0
-margin_bottom = 40.0
+margin_bottom = 66.0
 max_value = 3.0
 step = 0.01
 texture_under = ExtResource( 1 )
@@ -95,3 +84,28 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ChosenIgnis" type="CenterContainer" parent="MainContainer"]
+margin_left = 592.0
+margin_right = 622.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 30, 66 )
+size_flags_vertical = 3
+
+[node name="Torch" type="TextureRect" parent="MainContainer/ChosenIgnis"]
+margin_right = 30.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 30, 66 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Sector" type="TextureRect" parent="MainContainer/ChosenIgnis"]
+margin_right = 30.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 30, 66 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
