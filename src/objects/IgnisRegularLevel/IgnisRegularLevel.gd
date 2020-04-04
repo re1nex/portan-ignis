@@ -20,14 +20,10 @@ func _ready():
 	if activated_at_start:
 		activated = true
 		$AudioLoop.play()
-		$SpriteTorchOn.show()
-		$SpriteTorchOff.hide()
 		$Light2D.enable()
 		emit_signal("active")
 	else:
 		activated = false
-		$SpriteTorchOn.hide()
-		$SpriteTorchOff.show()
 		$Light2D.disable()
 		emit_signal("not_active")
 	pass # Replace with function body.
@@ -35,8 +31,6 @@ func _ready():
 func activate_at_start():
 	activated = true
 	$Light2D.enable()
-	$SpriteTorchOn.show()
-	$SpriteTorchOff.hide()
 	emit_signal("active")
 
 
@@ -44,8 +38,6 @@ func activate():
 	if activated:
 		$AudioLoop.stop()
 		$AudioOff.play()
-		$SpriteTorchOff.show()
-		$SpriteTorchOn.hide()
 		$Light2D.disable()
 		activated = false
 		emit_signal("not_active")
@@ -55,8 +47,6 @@ func activate():
 			$AudioLoop.play()
 			activated = true
 			$Light2D.enable()
-			$SpriteTorchOn.show()
-			$SpriteTorchOff.hide()
 			emit_signal("active")
 
 
