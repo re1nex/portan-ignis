@@ -1,12 +1,25 @@
 extends Area2D
-var lenSound=2.8
+
 signal ignis_regular_taken
-enum Ignis{ FIRST, SECOND, THIRD, FOURTH }
+
+const radius_multiplier = 1.5
+
+var lenSound=2.8
+var type = Ignis.FIRST
+
+enum Ignis{ 
+	FIRST, 
+	SECOND, 
+	THIRD, 
+	FOURTH,
+}
+
 
 func _ready():
+	$Light2D.init_radius(radius_multiplier)
 	$AudioLoop.play()
 
-var type = Ignis.FIRST
+
 func activate():
 	$AudioLoop.stop()
 	emit_signal("ignis_regular_taken", type)

@@ -32,6 +32,12 @@ func _ready():
 		finish_disabling()
 	pass # Replace with function body
 
+# Called in ignisRegularLevel and ...Outer to increase radiuses
+func init_radius(mul):
+	texture_scale *= mul
+	$Area2D/CollisionShape2D.shape.radius *= mul
+	minScale = texture_scale - 0.01
+
 
 func set_light_layer(layer):
 	if layer == Ignis_layer.STAGE:
@@ -42,7 +48,8 @@ func set_light_layer(layer):
 		shadow_item_cull_mask = 1 << 1
 		$Flame.light_mask = 1 << 1
 		range_item_cull_mask = 1 << 1
-		
+
+
 func set_enemy_visible(vis):
 	enemy_visible = vis
 	if enemy_visible == false:
@@ -58,6 +65,7 @@ func _process(delta):
 	if not switchingOff and switchedOff:
 		# light needs to be switched on
 		finish_enabling()
+
 
 func checkEnergy():
 	if energy <= energyMin:
@@ -95,9 +103,11 @@ func finish_enabling():
 	energy = energyMax
 	emit_signal("enabled")
 
+
 func mirror():
 	reflected *= -1
 	pass
+
 
 func rotate_ignis(degree):
 	pass
