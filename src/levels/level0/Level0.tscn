@@ -71,10 +71,8 @@ margin_bottom = 84.0
 [node name="PauseMenu" parent="." instance=ExtResource( 7 )]
 
 [node name="WinWindow" parent="." instance=ExtResource( 11 )]
-pause_mode = 2
 
 [node name="WindowGameOver" parent="." instance=ExtResource( 12 )]
-pause_mode = 2
 
 [node name="Door" parent="." instance=ExtResource( 13 )]
 position = Vector2( 281.314, 228.932 )
