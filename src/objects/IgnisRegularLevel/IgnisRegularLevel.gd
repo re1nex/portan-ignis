@@ -6,7 +6,7 @@ signal not_active
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const activated_at_start = false
+export (bool) var activated_at_start = false
 var body_informator = null
 var activated = false
 
