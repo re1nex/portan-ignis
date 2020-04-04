@@ -6,6 +6,8 @@ signal not_active
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+const radius_multiplier = 1.5
+
 export (bool) var activated_at_start = false
 var body_informator = null
 var activated = false
@@ -17,6 +19,7 @@ func _init():
 
 
 func _ready():
+	$Light2D.init_radius(radius_multiplier)
 	if activated_at_start:
 		activated = true
 		$AudioLoop.play()
@@ -27,7 +30,8 @@ func _ready():
 		$Light2D.disable()
 		emit_signal("not_active")
 	pass # Replace with function body.
-	
+
+
 func activate_at_start():
 	activated = true
 	$Light2D.enable()
