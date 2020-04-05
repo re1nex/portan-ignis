@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://resource/ui/pause_menu/background3.png" type="Texture" id=1]
 [ext_resource path="res://resource/sounds/clicks/2.wav" type="AudioStream" id=2]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resource/sounds/ignis/loop.wav" type="AudioStream" id=4]
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=5]
+[ext_resource path="res://resource/sounds/situation/win1.wav" type="AudioStream" id=6]
 [ext_resource path="res://src/ui/pauseMenu/pauseMenu.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
+size = 70
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 70
 font_data = ExtResource( 5 )
 
@@ -36,12 +42,12 @@ texture = ExtResource( 1 )
 visible = false
 light_mask = 2
 margin_left = 480.0
-margin_top = 231.0
+margin_top = 220.0
 margin_right = 800.0
-margin_bottom = 489.0
+margin_bottom = 499.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 30
+custom_constants/separation = 5
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,15 +74,40 @@ __meta__ = {
 
 [node name="ContLight" parent="CenterContainer/Pause/Continue" instance=ExtResource( 3 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
+
+[node name="Restart" type="Button" parent="CenterContainer/Pause"]
+light_mask = 2
+margin_left = 58.0
+margin_top = 71.0
+margin_right = 261.0
+margin_bottom = 137.0
+focus_mode = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+toggle_mode = true
+enabled_focus_mode = 0
+text = "restart"
+flat = true
+expand_icon = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ResLight" parent="CenterContainer/Pause/Restart" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="Settings" type="Button" parent="CenterContainer/Pause"]
 light_mask = 2
 margin_left = 52.0
-margin_top = 96.0
+margin_top = 142.0
 margin_right = 268.0
-margin_bottom = 162.0
+margin_bottom = 208.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -93,14 +124,14 @@ __meta__ = {
 
 [node name="SetLight" parent="CenterContainer/Pause/Settings" instance=ExtResource( 3 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="MainMenu" type="Button" parent="CenterContainer/Pause"]
 light_mask = 2
-margin_top = 192.0
+margin_top = 213.0
 margin_right = 320.0
-margin_bottom = 258.0
+margin_bottom = 279.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -116,23 +147,46 @@ __meta__ = {
 
 [node name="MenuLight" parent="CenterContainer/Pause/MainMenu" instance=ExtResource( 3 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="Settings" type="VBoxContainer" parent="CenterContainer"]
 light_mask = 2
 margin_left = 450.0
-margin_top = 277.0
+margin_top = 237.0
 margin_right = 830.0
-margin_bottom = 443.0
+margin_bottom = 483.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_constants/separation = 40
+custom_constants/separation = 30
+
+[node name="Label2" type="Label" parent="CenterContainer/Settings"]
+margin_right = 156.0
+margin_bottom = 60.0
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 3 )
+text = "volume"
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/Settings/Label2"]
+margin_left = 180.0
+margin_top = 24.0
+margin_right = 430.0
+margin_bottom = 40.0
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VolLight" parent="CenterContainer/Settings/Label2" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
 
 [node name="Label" type="Label" parent="CenterContainer/Settings"]
 light_mask = 2
+margin_top = 90.0
 margin_right = 380.0
-margin_bottom = 60.0
+margin_bottom = 150.0
 size_flags_horizontal = 0
 custom_fonts/font = SubResource( 2 )
 text = "fullscreen mode"
@@ -159,12 +213,17 @@ visible = false
 position = Vector2( 12.1226, 11.0909 )
 scale = Vector2( 1, 1 )
 
+[node name="LightFsc" parent="CenterContainer/Settings/Label" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
+
 [node name="backSettings" type="Button" parent="CenterContainer/Settings"]
 light_mask = 2
 margin_left = 134.0
-margin_top = 100.0
+margin_top = 180.0
 margin_right = 246.0
-margin_bottom = 166.0
+margin_bottom = 246.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -180,20 +239,38 @@ __meta__ = {
 
 [node name="backLight" parent="CenterContainer/Settings/backSettings" instance=ExtResource( 3 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="AudioClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+
+[node name="TestSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="IgnisSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="mouse_entered" from="CenterContainer/Pause/Continue" to="." method="_on_Continue_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Pause/Continue" to="." method="_on_Continue_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/Pause/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/Pause/Restart" to="." method="_on_Restart_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/Pause/Restart" to="." method="_on_Restart_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/Pause/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/Pause/Settings" to="." method="_on_Settings_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Pause/Settings" to="." method="_on_Settings_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/Pause/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/Pause/MainMenu" to="." method="_on_MainMenu_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Pause/MainMenu" to="." method="_on_MainMenu_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/Pause/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/Settings/Label2" to="." method="_on_Label2_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/Settings/Label2" to="." method="_on_Label2_mouse_exited"]
+[connection signal="mouse_entered" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_mouse_exited"]
+[connection signal="value_changed" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="mouse_entered" from="CenterContainer/Settings/Label" to="." method="_on_Label_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/Settings/Label" to="." method="_on_Label_mouse_exited"]
+[connection signal="mouse_entered" from="CenterContainer/Settings/Label/CheckBox" to="." method="_on_CheckBox_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/Settings/Label/CheckBox" to="." method="_on_CheckBox_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/Settings/Label/CheckBox" to="." method="_on_CheckBox_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/Settings/backSettings" to="." method="_on_backSettings_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Settings/backSettings" to="." method="_on_backSettings_mouse_exited"]

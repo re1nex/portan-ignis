@@ -20,7 +20,8 @@ func _ready():
 	
 	
 func _on_Player_die():
-	get_tree().paused = true
+	#get_tree().paused = true
+	$Player.after_die()
 	$WindowGameOver._closeBefore()
 	$WindowGameOver/CenterContainer.show()
 

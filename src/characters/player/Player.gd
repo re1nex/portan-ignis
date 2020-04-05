@@ -50,7 +50,9 @@ var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 
+var endLevel=false
 var changeIgnis = false
+var blockPlayer=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -67,6 +69,22 @@ func _ready():
 	
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
 
+func HitPlay(num):
+	if(!$AudioHit.playing && !$AudioHit2.playing && !$AudioHit3.playing && !$AudioHit4.playing && !$AudioHit5.playing ):
+		hitPlay(num)
+func hitPlay(num):
+	if(num == 1):
+		$AudioHit.play()
+	elif(num ==2):
+		$AudioHit2.play()
+	elif(num ==3):
+		$AudioHit3.play()
+	elif(num ==4):
+		$AudioHit4.play()
+	elif(num ==5):
+		$AudioHit5.play()
+
+
 
 func prepare_camera(var LU, var RD):
 	$Camera.limit_left = LU.x
@@ -76,6 +94,8 @@ func prepare_camera(var LU, var RD):
 
 
 func _process(delta):
+	if(endLevel):
+		return
 	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
 		on_player_area_node.activate()
 	
@@ -88,8 +108,15 @@ func _process(delta):
 	
 	check_rotate_ignis(delta)
 
+func goAway():
+	var i=0
+	blockPlayer=true
 
 func _physics_process(delta):
+	if(endLevel):
+		return
+	if(blockPlayer):
+		highway_to_hell(delta)
 	### MOVEMENT ###
 	# Apply gravity
 	linear_vel += delta * GRAVITY_VEC
@@ -366,7 +393,10 @@ func turn_on_hit_timer():
 	$TimerHit.start()
 	
 func hit():
+	if(endLevel):
+		return
 	if $TimerHit.is_stopped():
+		HitPlay(randi()%5+1)
 		$Informator.health -= 1
 		if $Informator.health == 0:
 			emit_signal("die")
@@ -389,3 +419,13 @@ func switch_weapons(type):
 func _on_Lever_lever_taken():
 	$Informator.has_instruments[Instruments_type.LEVER] = true
 	pass # Replace with function body.
+
+func after_die():
+	endLevel=true
+	visible=false
+	turn_off_ignis()
+	$Informator.health=0;
+
+func highway_to_hell(delta):
+	linear_vel.x = lerp(linear_vel.x, walk_speed, 1)
+	move_and_slide(linear_vel)
