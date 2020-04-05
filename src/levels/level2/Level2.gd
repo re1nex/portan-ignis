@@ -14,15 +14,15 @@ func _ready():
 	$Ignises/IgnisDoor.activate_at_start()
 	$Ignises/IgnisActivated.activate_at_start()
 	
-	$WinWindow/MarginContainer.hide()
+	$WinWindow/CenterContainer.hide()
 	$HUD/HUD.init_player($Player)
-	$WindowGameOver/MarginContainer.hide()
+	$WindowGameOver/CenterContainer.hide()
 	
 	
 func _on_Player_die():
 	get_tree().paused = true
 	$WindowGameOver._closeBefore()
-	$WindowGameOver/MarginContainer.show()
+	$WindowGameOver/CenterContainer.show()
 
 
 func _on_Death_body_entered(body):
@@ -34,5 +34,5 @@ func _on_Death_body_entered(body):
 
 func _on_Win_body_entered(body):
 	if body.has_method("get_informator"):
-		$WinWindow/MarginContainer.show()
+		$WinWindow/CenterContainer.show()
 		get_tree().paused = true
