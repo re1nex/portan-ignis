@@ -15,7 +15,7 @@ enum Instruments_type {
 
 const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 2
-const GRAVITY_VEC = Vector2(0,550)
+const GRAVITY = 550
 const FLOOR_NORMAL = Vector2(0, -1)
 export (int) var walk_speed = 115 # pixels/sec
 export (int) var jump_speed = 130
@@ -37,6 +37,8 @@ export (int) var health = 5
 
 var linear_vel = Vector2()
 var velocity = Vector2()
+var gravity_vec = Vector2()
+
 
 var instruments = []
 var weapons = []  
@@ -49,6 +51,8 @@ var jumping = false
 var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
+
+var on_stairs = 0
 
 var changeIgnis = false
 # Called when the node enters the scene tree for the first time.
@@ -65,7 +69,10 @@ func _ready():
 	sprite = $AnimatedSprite1
 	sprite.animation = "walk"
 	
+	gravity_vec.y = GRAVITY
+	
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
+	
 
 
 func prepare_camera(var LU, var RD):
@@ -92,7 +99,7 @@ func _process(delta):
 func _physics_process(delta):
 	### MOVEMENT ###
 	# Apply gravity
-	linear_vel += delta * GRAVITY_VEC
+	linear_vel += delta * gravity_vec
 	# Move and slide
 	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
@@ -154,31 +161,51 @@ func _physics_process(delta):
 	#if is_on_ceiling():
 		#linear_vel.y = 0
 		#jumping = false
-	
-	if on_floor and Input.is_action_pressed("jump"):
-		linear_vel.y = -jump_speed
-		height -= linear_vel.y * delta
-		jumping = true
-		sprite.animation = "jump"
-	
-	elif jumping==true:
-		if Input.is_action_pressed("jump") and height < jump_height_limit:
+	if on_stairs > 0:
+		linear_vel.y = 0
+		if Input.is_action_pressed("ui_up"):
+			position.y -= walk_speed * delta
+		elif Input.is_action_pressed("ui_down"):
+			position.y += walk_speed * delta
+		
+		
+	else:
+		if on_floor and Input.is_action_pressed("jump"):
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
-		else:
-			jumping=false
+			jumping = true
+			sprite.animation = "jump"
+		
+		elif jumping==true:
+			if Input.is_action_pressed("jump") and height < jump_height_limit:
+				linear_vel.y = -jump_speed
+				height -= linear_vel.y * delta
+			else:
+				jumping=false
 
 
 func _on_Area2D_area_entered(area):
 	if area.has_method("activate"):
 		on_player_area_node = area;
-		in_node_area=true
+		in_node_area = true
+	elif area.get_class() == "Stairs":
+		jumping = true
+		if on_stairs == 0:
+			linear_vel.y = 0
+			gravity_vec.y = 0
+		on_stairs += 1
+		print("+")
 	pass # Replace with function body.
 
 
 func _on_Area2D_area_exited(area):
 	if on_player_area_node == area:
 		in_node_area = false
+	elif area.get_class() == "Stairs":
+		on_stairs -= 1
+		if on_stairs == 0:
+			gravity_vec.y = GRAVITY
+		print("-")
 	pass # Replace with function body.
 
 
