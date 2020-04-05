@@ -58,6 +58,7 @@ var sprite
 
 var on_stairs = 0
 
+
 var changeIgnis = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -98,6 +99,7 @@ func _process(delta):
 	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
+	
 
 
 func _physics_process(delta):
@@ -433,3 +435,8 @@ func take_heart():
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart
 	return false # heart not taken --> can't free heart
+
+
+func highway_to_hell(delta):
+	linear_vel.x = lerp(linear_vel.x, walk_speed, 1)
+	move_and_slide(linear_vel)
