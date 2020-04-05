@@ -19,6 +19,7 @@ func _ready():
 	$MainContainer/ChosenIgnis/Sector.hide()
 	$MainContainer/ChosenIgnis/Torch.hide()
 	ignis_bar_changing = false
+	set_process(false)
 	pass
 
 
@@ -41,7 +42,9 @@ func _on_health_changed():
 
 
 func _on_torch_changed():
-	set_process(true)
+	upd_chosen_ignis(informator.num_of_active_weapon)
+	if old_status == informator.Is_ignis.NO_IGNIS:
+		set_process(true)
 	pass
 
 
@@ -70,7 +73,6 @@ func init_ignis_bar_anim():
 func _process(delta):
 	set_ignis_bar(informator.ignis_timer_start)
 	upd_ignis_bar(informator.ignis_status)
-	upd_chosen_ignis(informator.num_of_active_weapon)
 	ignis_bar_anim()
 	process_switcher(informator.ignis_status) # switch off process
 
