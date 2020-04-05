@@ -106,7 +106,7 @@ position = Vector2( 0, -8 )
 scale = Vector2( 0.65, 0.65 )
 frames = SubResource( 14 )
 animation = "walk"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CatchArea" type="Area2D" parent="."]

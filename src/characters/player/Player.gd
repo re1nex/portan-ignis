@@ -70,9 +70,6 @@ func _ready():
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
 
 func HitPlay(num):
-	if(!$AudioHit.playing && !$AudioHit2.playing && !$AudioHit3.playing && !$AudioHit4.playing && !$AudioHit5.playing ):
-		hitPlay(num)
-func hitPlay(num):
 	if(num == 1):
 		$AudioHit.play()
 	elif(num ==2):
@@ -86,6 +83,8 @@ func hitPlay(num):
 
 
 
+
+
 func prepare_camera(var LU, var RD):
 	$Camera.limit_left = LU.x
 	$Camera.limit_top = LU.y
@@ -94,7 +93,7 @@ func prepare_camera(var LU, var RD):
 
 
 func _process(delta):
-	if(endLevel):
+	if(endLevel||blockPlayer):
 		return
 	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
 		on_player_area_node.activate()
@@ -117,6 +116,7 @@ func _physics_process(delta):
 		return
 	if(blockPlayer):
 		highway_to_hell(delta)
+		return
 	### MOVEMENT ###
 	# Apply gravity
 	linear_vel += delta * GRAVITY_VEC
