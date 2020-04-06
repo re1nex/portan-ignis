@@ -1,6 +1,10 @@
 extends KinematicBody2D
 
 signal die
+signal health_changed
+signal torch_changed
+signal torch_reloaded
+signal torch_hidden
 
 class_name Player
 
@@ -283,6 +287,7 @@ func turn_off_ignis():
 		$AudioIngisLoop.stop()
 		$AudioIngisOff.play()
 	turn_on_ignis_timer()
+	emit_signal("torch_hidden")
 
 func turn_on_ignis(num):
 	if $Informator.ignis_status == $Informator.Is_ignis.HIDE_IGNIS:
@@ -294,6 +299,7 @@ func turn_on_ignis(num):
 		$AudioIngisLoop.play()
 	update_ignis()
 	weapons[num].enable()
+	emit_signal("torch_changed")
 
 func turn_on_ignis_timer():
 	$TimerIgnis.set_wait_time($Informator.ignis_timer_start)
@@ -346,6 +352,7 @@ func recharge():
 			if $Informator.has_weapons[Ignis_type.REGULAR]:
 				turn_on_ignis(Ignis_type.REGULAR)
 				#switch_sprites($iconWithIgnis)
+	emit_signal("torch_reloaded")
 
 
 func check_rotate_ignis(delta):
@@ -398,6 +405,7 @@ func hit():
 	if $TimerHit.is_stopped():
 		HitPlay(randi()%5+1)
 		$Informator.health -= 1
+		emit_signal("health_changed")
 		if $Informator.health == 0:
 			emit_signal("die")
 			
@@ -414,6 +422,7 @@ func switch_weapons(type):
 			changeIgnis=true
 			turn_off_ignis()
 		turn_on_ignis(type)
+		emit_signal("torch_changed")
 
 
 func _on_Lever_lever_taken():
