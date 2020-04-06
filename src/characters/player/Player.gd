@@ -145,6 +145,8 @@ func _physics_process(delta):
 	target_speed *= walk_speed
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
+	
+	
 	if on_floor:
 		if sprite.animation == "fall":
 			sprite.animation = "landing"
@@ -171,9 +173,13 @@ func _physics_process(delta):
 		linear_vel.y = 0
 		if Input.is_action_pressed("ui_up"):
 			position.y -= walk_speed * delta
+			sprite.animation = "jump"
+			sprite.set_frame(1)
 		elif Input.is_action_pressed("ui_down"):
 			position.y += walk_speed * delta
-		
+			sprite.animation = "fall"
+		else:
+			sprite.animation = "stay"
 		
 	else:
 		if on_floor and Input.is_action_pressed("jump"):
