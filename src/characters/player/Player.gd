@@ -126,9 +126,6 @@ func goAway():
 func _physics_process(delta):
 	if(endLevel):
 		return
-	if(blockPlayer):
-		highway_to_hell(delta)
-		return
 	### MOVEMENT ###
 	# Apply gravity
 	linear_vel += delta * GRAVITY_VEC
@@ -147,7 +144,7 @@ func _physics_process(delta):
 
 	# Horizontal movement
 	var target_speed = 0
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left")&&!blockPlayer:
 		target_speed -= 1
 		if(!$AudioStep.playing &&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_right") and direction == 1:
@@ -158,10 +155,10 @@ func _physics_process(delta):
 				update_ignis()
 
 	
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right")||blockPlayer:
 		target_speed += 1
 		if(!$AudioStep.playing&&on_floor):$AudioStep.play()
-		if not Input.is_action_pressed("ui_left") and direction == -1:
+		if not Input.is_action_pressed("ui_left") and direction == -1 &&!blockPlayer:
 			direction = 1
 			sprite.flip_h = false
 			$CharacterShape.scale.x *= -1
@@ -194,13 +191,13 @@ func _physics_process(delta):
 		#linear_vel.y = 0
 		#jumping = false
 	
-	if on_floor and Input.is_action_pressed("jump"):
+	if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 		linear_vel.y = -jump_speed
 		height -= linear_vel.y * delta
 		jumping = true
 		sprite.animation = "jump"
 	
-	elif jumping==true:
+	elif jumping==true &&!blockPlayer:
 		if Input.is_action_pressed("jump") and height < jump_height_limit:
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
@@ -444,9 +441,6 @@ func after_die():
 	turn_off_ignis()
 	$Informator.health=0;
 
-func highway_to_hell(delta):
-	linear_vel.x = lerp(linear_vel.x, walk_speed, 1)
-	move_and_slide(linear_vel)
 
 
 func take_heart():
