@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/levels/level1/Level1Landscape.gd" type="Script" id=1]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/objects/MovingBlock/MovingPlatform.gd" type="Script" id=9]
 [ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/door/Door.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/objects/stairs/Stairs.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 41.4907, 65.2372 )
@@ -135,4 +136,47 @@ position = Vector2( 64, 176 )
 
 [node name="Door" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1536, 336 )
+
+[node name="Stairs" type="Node2D" parent="."]
+
+[node name="Stairs7" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1273.33, 485.172 )
+type = "med"
+
+[node name="Stairs3" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1297.29, 592.003 )
+
+[node name="Stairs2" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1297.28, 624.003 )
+type = "med"
+
+[node name="Stairs" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1297.26, 655.97 )
+type = "med"
+
+[node name="Stairs4" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1297.28, 687.93 )
+type = "down"
+
+[node name="Stairs5" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1273.3, 549.177 )
+type = "med"
+
+[node name="Stairs6" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1273.32, 517.219 )
+type = "med"
+
+[node name="Stairs8" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1273.34, 453.179 )
+
+[node name="Stairs9" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1332.21, 367.912 )
+
+[node name="Stairs10" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1332.23, 399.934 )
+type = "down"
+
+[node name="Stairs11" parent="Stairs" instance=ExtResource( 12 )]
+position = Vector2( 1273.29, 581.166 )
+type = "down"
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
