@@ -47,6 +47,7 @@ config/icon="res://icon.png"
 GlobalVars="*res://src/globals/global_vars/GlobalVars.gd"
 SceneSwitcher="*res://src/globals/sceneSwitcher/SceneSwitcher.gd"
 Transfer="*res://src/globals/transfer/Transfer.gd"
+AudioController="*res://src/globals/audio/AudioController.gd"
 
 [display]
 

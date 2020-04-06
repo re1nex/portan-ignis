@@ -65,7 +65,6 @@ func new_lvl():
 	blockPlayer=false
 
 func _ready():
-	new_lvl()
 	scale.x=scale_x
 	scale.y=scale_y
 	

@@ -18,5 +18,6 @@ func _ready():
 	
 	ignis_status = Transfer.cur_ignis_status
 	ignis_timer_start = get_parent().life_time_of_ignis
-	health = get_parent().health
+	health = Transfer.health
+	
 	pass
