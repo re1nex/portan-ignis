@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resource/sprites/objects/stairs/stairs_up.png" type="Texture" id=1]
 [ext_resource path="res://resource/sprites/objects/stairs/stairs_med.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( 0, -16 )
 b = Vector2( 0, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 12, 16 )
 
 [node name="Stairs" type="Area2D"]
 collision_layer = 2
@@ -29,3 +32,6 @@ texture = ExtResource( 2 )
 [node name="down" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 3 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
