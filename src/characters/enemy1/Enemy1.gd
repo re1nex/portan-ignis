@@ -60,10 +60,13 @@ func _process(_delta):
 		player_target.hit()
 
 func _physics_process(delta):
+	
 	if torch_area and "activated" in torch_area and torch_area.activated:
 		$AnimatedSprite.animation = "punch"
 		torch_area.activate()
 	check_chase()
+	
+	
 	##  Moving logic  ##
 	velocity += GRAVITY_VEC * delta
 	velocity = move_and_slide(velocity, FLOOR_NORMAL, false, 4, 0.523598776)
@@ -104,6 +107,9 @@ func _physics_process(delta):
 				ex_direction = direction
 				direction = 0
 				$AnimatedSprite.stop()
+		
+		
+		# jumping #
 		var tar_tg = target_dir.y / target_dir.x
 		if on_floor and target_dir.y < -SMALL_RADIUS and tar_tg < -0.92 and can_jump:
 			can_jump = false
@@ -111,15 +117,15 @@ func _physics_process(delta):
 			$AnimatedSprite.animation = "jump"
 			velocity.y = -jump_speed
 			height -= velocity.y * delta
-			jumping=true
-		elif jumping==true:
+			jumping = true
+		elif jumping == true:
 			if $AnimatedSprite.animation != "slash":
 				$AnimatedSprite.animation = "walk"
 			if height < JUMP_HEIGHT_LIMIT and target_dir.y < -SMALL_RADIUS:
 				velocity.y = -jump_speed
 				height -= velocity.y * delta
 			else:
-				jumping=false
+				jumping = false
 				#$AnimatedSprite.animation = "landing"
 		velocity.x = direction * run_speed
 	update()
@@ -149,6 +155,7 @@ func _on_Visibility_area_entered(area):
 			targets.push_back(area)
 		else:
 			targets.insert(i, area)
+
 
 func _on_Visibility_area_exited(area):
 	targets.erase(area)
