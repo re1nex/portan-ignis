@@ -7,6 +7,7 @@ export (String, "up", "down", "med") var type
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$med.hide()
 	if type == "up":
 		$up.show()
 	elif type == "down":

@@ -206,7 +206,6 @@ func _on_Area2D_area_entered(area):
 			linear_vel.y = 0
 			gravity_vec.y = 0
 		on_stairs += 1
-		print("+")
 	pass # Replace with function body.
 
 
@@ -217,7 +216,6 @@ func _on_Area2D_area_exited(area):
 		on_stairs -= 1
 		if on_stairs == 0:
 			gravity_vec.y = GRAVITY
-		print("-")
 	pass # Replace with function body.
 
 
