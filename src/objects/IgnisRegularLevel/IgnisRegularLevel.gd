@@ -46,7 +46,7 @@ func activate():
 		activated = false
 		emit_signal("not_active")
 	else:
-		if body_informator != null and body_informator.ignis_status == body_informator.Is_ignis.HAS_IGNIS:
+		if body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
 			$AudioOff.stop()
 			$AudioLoop.play()
 			activated = true

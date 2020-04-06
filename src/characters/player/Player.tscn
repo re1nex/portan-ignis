@@ -5,75 +5,39 @@
 [ext_resource path="res://resource/sounds/ignis/flameOff.wav" type="AudioStream" id=3]
 [ext_resource path="res://resource/sounds/ignis/loop.wav" type="AudioStream" id=4]
 [ext_resource path="res://resource/sounds/steps/5.wav" type="AudioStream" id=5]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell2.wav" type="AudioStream" id=6]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell4.wav" type="AudioStream" id=7]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell1.wav" type="AudioStream" id=8]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav" type="AudioStream" id=9]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav" type="AudioStream" id=10]
+[ext_resource path="res://src/characters/player/Informator.gd" type="Script" id=6]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell2.wav" type="AudioStream" id=7]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell4.wav" type="AudioStream" id=8]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell1.wav" type="AudioStream" id=9]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav" type="AudioStream" id=10]
+[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav" type="AudioStream" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.8201
 
-[sub_resource type="GDScript" id=2]
-script/source = "extends Node
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-enum Is_ignis {
-		HAS_IGNIS,
-		HIDE_IGNIS,
-		NO_IGNIS,
-}
-
-
-var ignis_status
-var has_instruments = []
-var has_weapons = []
-var num_of_active_weapon = - 1 # -1 - nothing is active
-var ignis_timer_start
-var health 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	for i in range(get_parent().WEAPONS_NUM):
-		has_weapons.append(false)
-	
-	for i in range(get_parent().Instruments_type.size()):
-		has_instruments.append(false)
-		
-	ignis_status = Is_ignis.NO_IGNIS
-	ignis_timer_start = get_parent().life_time_of_ignis
-	health = get_parent().health
-	pass # Replace with function body.
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
@@ -81,45 +45,41 @@ region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 320, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ) ],
-"loop": false,
-"name": "jump",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": true,
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 10 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "landing",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 11 ) ],
+"frames": [ SubResource( 8 ) ],
 "loop": true,
 "name": "stay",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": false,
+"name": "jump",
+"speed": 15.0
 } ]
 
-[sub_resource type="ConvexPolygonShape2D" id=13]
+[sub_resource type="ConvexPolygonShape2D" id=12]
 points = PoolVector2Array( -10, 1, 0, -6, 10.1, 1, 10.1, 7, 10.1, 18, 0, 18, -4, 18, -10, 8, -10, 8 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -135,7 +95,7 @@ collision_mask = 2
 shape = SubResource( 1 )
 
 [node name="Informator" type="Node" parent="."]
-script = SubResource( 2 )
+script = ExtResource( 6 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
@@ -158,13 +118,13 @@ one_shot = true
 
 [node name="AnimatedSprite1" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 12 )
+frames = SubResource( 11 )
 animation = "fall"
 playing = true
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0418178, -5.98959 )
-shape = SubResource( 13 )
+shape = SubResource( 12 )
 one_way_collision_margin = 0.0
 
 [node name="TimerLanding" type="Timer" parent="."]
@@ -183,23 +143,23 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="AudioHit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 volume_db = -15.0
 
 [node name="AudioHit2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -15.0
-
-[node name="AudioHit3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-volume_db = -15.0
-
-[node name="AudioHit4" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -15.0
 
+[node name="AudioHit3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -15.0
+
+[node name="AudioHit4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -15.0
+
 [node name="AudioHit5" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource( 10 )
 volume_db = -15.0
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]

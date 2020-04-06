@@ -4,7 +4,6 @@ signal falls
 signal win
 
 func _ready():
-	$IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
 	$Player.prepare_camera($Level2Landscape.posLU, $Level2Landscape.posRD)
 	connect("falls", self, "_on_Player_die")
 	$Player.connect("die", self, "_on_Player_die")

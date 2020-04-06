@@ -39,6 +39,7 @@ format = 1
 tile_data = PoolIntArray( 589854, 4, 0, 720910, 1, 131073, 720911, 1, 1, 720912, 1, 1, 720913, 1, 1, 720914, 1, 2, 720915, 5, 1, 720916, 5, 2, 720922, 4, 0, 917526, 4, 0 )
 
 [node name="Flowers" type="TileMap" parent="Landscape"]
+z_index = 3
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 16 )
 format = 1
@@ -48,7 +49,7 @@ tile_data = PoolIntArray( 327716, 0, 458755, 327720, 0, 65536, 327721, 0, 65536,
 position = Vector2( -32, -192 )
 
 [node name="PositionRD" type="Position2D" parent="."]
-position = Vector2( 1521.3, 728.649 )
+position = Vector2( 1520, 456 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
