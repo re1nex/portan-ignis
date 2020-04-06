@@ -429,3 +429,10 @@ func after_die():
 func highway_to_hell(delta):
 	linear_vel.x = lerp(linear_vel.x, walk_speed, 1)
 	move_and_slide(linear_vel)
+
+func take_heart():
+	if $Informator.health < 5:
+		$Informator.health += 1
+		emit_signal("health_changed")
+		return true # heart taken --> can free heart
+	return false # heart not taken --> can't free heart
