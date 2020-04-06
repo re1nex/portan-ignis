@@ -8,17 +8,12 @@ signal torch_hidden
 
 class_name Player
 
-enum Ignis_type {
-		REGULAR,
-		SECTOR,
-}
 
-enum Instruments_type {
-		LEVER,
-}
 
 const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 2
+const INSTRUMENTS_NUM = 1
+const MAX_HEALTH = 5
 const GRAVITY_VEC = Vector2(0,550)
 const FLOOR_NORMAL = Vector2(0, -1)
 export (int) var walk_speed = 115 # pixels/sec
@@ -37,7 +32,7 @@ export (float) var dead_zone = 0.2
 
 export (float) var landing_time = 0.15
 
-export (int) var health = 5
+var health = Transfer.health
 
 var linear_vel = Vector2()
 var velocity = Vector2()
@@ -62,6 +57,7 @@ func _ready():
 	scale.y=scale_y
 	
 	weapons.resize(WEAPONS_NUM)
+	instruments.resize(INSTRUMENTS_NUM)
 	
 	ignis_pos = $IgnisPosition.get_position()
 	fill_weapons()
@@ -187,17 +183,17 @@ func _on_Area2D_area_exited(area):
 
 
 func _on_IgnisRegularOuter_ignis_regular_taken(type):
-	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+	if $Informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
 		turn_off_ignis()
 	
-	if type == Ignis_type.REGULAR :
-		$Informator.has_weapons[Ignis_type.REGULAR] = true
+	if type == GlobalVars.Ignis_type.REGULAR :
+		$Informator.has_weapons[GlobalVars.Ignis_type.REGULAR] = true
 		#turn_on_ignis(Ignis_type.REGULAR)
 		#switch_sprites($iconWithIgnis)
 	
-	if type == Ignis_type.REGULAR:
-		$Informator.has_weapons[Ignis_type.SECTOR] = true
-		turn_on_ignis(Ignis_type.SECTOR)
+	if type == GlobalVars.Ignis_type.REGULAR:
+		$Informator.has_weapons[GlobalVars.Ignis_type.SECTOR] = true
+		turn_on_ignis(GlobalVars.Ignis_type.SECTOR)
 		#switch_sprites($iconWithIgnis)
 	pass # Replace with function body.
 
@@ -216,7 +212,7 @@ func switch_sprites(new_sprite):
 	sprite = new_sprite
 
 func control_weapons():
-	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+	if $Informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
 		
 		if Input.is_action_just_released("ui_weapon_up"):
 			var type = $Informator.num_of_active_weapon + 1
@@ -238,23 +234,23 @@ func control_weapons():
 					type = WEAPONS_NUM -1
 			switch_weapons(type)
 	
-	if not $Informator.ignis_status == $Informator.Is_ignis.NO_IGNIS:
+	if not $Informator.ignis_status == GlobalVars.Is_ignis.NO_IGNIS:
 		if Input.is_action_just_pressed("switch_ignis"):
-			if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+			if $Informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
 				turn_off_ignis()
 			else:
 				turn_on_ignis($Informator.num_of_active_weapon)
 		
-		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[Ignis_type.REGULAR]:
-			switch_weapons(Ignis_type.REGULAR)
+		if Input.is_action_just_pressed("ui_1") and $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
+			switch_weapons(GlobalVars.Ignis_type.REGULAR)
 		
-		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[Ignis_type.SECTOR]:
-			switch_weapons(Ignis_type.SECTOR)
+		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[GlobalVars.Ignis_type.SECTOR]:
+			switch_weapons(GlobalVars.Ignis_type.SECTOR)
 
 
 func turn_off_ignis():
 	weapons[$Informator.num_of_active_weapon].disable()
-	$Informator.ignis_status = $Informator.Is_ignis.HIDE_IGNIS
+	$Informator.ignis_status = GlobalVars.Is_ignis.HIDE_IGNIS
 	#$Informator.num_of_active_weapon = -1
 	if(!changeIgnis):
 		$AudioIngisLoop.stop()
@@ -263,9 +259,9 @@ func turn_off_ignis():
 	emit_signal("torch_hidden")
 
 func turn_on_ignis(num):
-	if $Informator.ignis_status == $Informator.Is_ignis.HIDE_IGNIS:
+	if $Informator.ignis_status == GlobalVars.Is_ignis.HIDE_IGNIS:
 		turn_off_ignis_time()
-	$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
+	$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
 	$Informator.num_of_active_weapon = num
 	if(!changeIgnis):
 		$AudioIngisOff.stop()
@@ -282,20 +278,23 @@ func turn_off_ignis_time():
 	$TimerIgnis.stop()
 
 func _on_Timer_timeout():
-	$Informator.ignis_status = $Informator.Is_ignis.NO_IGNIS
+	$Informator.ignis_status = GlobalVars.Is_ignis.NO_IGNIS
 
 
 func fill_weapons():
 	var node = preload("res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn").instance()
 	node.priority = 2
-	weapons[Ignis_type.REGULAR] = node
-	add_child(weapons[Ignis_type.REGULAR])
-	weapons[Ignis_type.REGULAR].disable()
+	weapons[GlobalVars.Ignis_type.REGULAR] = node
+	add_child(weapons[GlobalVars.Ignis_type.REGULAR])
+	weapons[GlobalVars.Ignis_type.REGULAR].disable()
 	
 	node = preload("res://src/objects/IgnisSectorInner/IgnisSectorInner.tscn").instance()
-	weapons[Ignis_type.SECTOR] = node
-	add_child(weapons[Ignis_type.SECTOR])
-	weapons[Ignis_type.SECTOR].disable()
+	weapons[GlobalVars.Ignis_type.SECTOR] = node
+	add_child(weapons[GlobalVars.Ignis_type.SECTOR])
+	weapons[GlobalVars.Ignis_type.SECTOR].disable()
+	
+	if Transfer.cur_ignis_num != -1 and Transfer.cur_ignis_status != GlobalVars.Is_ignis.NO_IGNIS:
+		turn_on_ignis(Transfer.cur_ignis_num)
 	
 	for i in range(WEAPONS_NUM):
 		weapons[i].scale.x/=scale_x
@@ -303,8 +302,8 @@ func fill_weapons():
 
 
 func fill_instruments():
-	var node = preload("res://src/objects/lever/Lever.tscn").instance()
-	instruments[Instruments_type.LEVER] = node
+	for i in range(INSTRUMENTS_NUM):
+		instruments[i] = Transfer.instruments[i]
 
 func update_ignis_timer_start(delta):
 	if $TimerIgnis.is_stopped():
@@ -317,15 +316,16 @@ func update_ignis_timer_start(delta):
 
 
 func recharge():
-	if on_player_area_node.activated and $Informator.ignis_status != $Informator.Is_ignis.HAS_IGNIS:
-			if not $TimerIgnis.is_stopped():
-				turn_off_ignis_time()
-			$Informator.ignis_timer_start = life_time_of_ignis
-			$Informator.ignis_status = $Informator.Is_ignis.HAS_IGNIS
-			if $Informator.has_weapons[Ignis_type.REGULAR]:
-				turn_on_ignis(Ignis_type.REGULAR)
-				#switch_sprites($iconWithIgnis)
-	emit_signal("torch_reloaded")
+	if on_player_area_node.activated and $Informator.ignis_status != GlobalVars.Is_ignis.HAS_IGNIS:
+		if not $TimerIgnis.is_stopped():
+			turn_off_ignis_time()
+		$Informator.ignis_timer_start = life_time_of_ignis
+		$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
+		#if $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
+			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
+			#switch_sprites($iconWithIgnis)
+		turn_on_ignis($Informator.num_of_active_weapon)
+		emit_signal("torch_reloaded")
 
 
 func check_rotate_ignis(delta):
@@ -379,16 +379,16 @@ func hit():
 		if $Informator.health == 0:
 			emit_signal("die")
 			
-		if $Informator.ignis_status==$Informator.Is_ignis.HAS_IGNIS:
+		if $Informator.ignis_status==GlobalVars.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
 		turn_on_hit_timer()
 	pass
 
 func switch_weapons(type):
-	if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == type:
+	if $Informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS and $Informator.num_of_active_weapon == type:
 		pass
 	else:
-		if $Informator.ignis_status == $Informator.Is_ignis.HAS_IGNIS:
+		if $Informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
 			changeIgnis=true
 			turn_off_ignis()
 		turn_on_ignis(type)
@@ -396,12 +396,12 @@ func switch_weapons(type):
 
 
 func _on_Lever_lever_taken():
-	$Informator.has_instruments[Instruments_type.LEVER] = true
+	$Informator.has_instruments[GlobalVars.Instruments_type.LEVER] += 1
 	pass # Replace with function body.
 
 
 func take_heart():
-	if $Informator.health < 5:
+	if $Informator.health < MAX_HEALTH:
 		$Informator.health += 1
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart

@@ -29,6 +29,7 @@ func init_player(plr):
 	set_health_bar(informator.health)
 	set_ignis_bar(informator.ignis_timer_start)
 	init_ignis_bar_anim()
+	upd_chosen_ignis(informator.num_of_active_weapon)
 	# connect signals
 	player.connect("health_changed", self, "_on_health_changed")
 	player.connect("torch_changed", self, "_on_torch_changed")
@@ -43,7 +44,7 @@ func _on_health_changed():
 
 func _on_torch_changed():
 	upd_chosen_ignis(informator.num_of_active_weapon)
-	if old_status == informator.Is_ignis.NO_IGNIS:
+	if old_status == GlobalVars.Is_ignis.NO_IGNIS:
 		set_process(true)
 	pass
 
@@ -66,7 +67,7 @@ func init_ignis_bar_anim():
 	fading_in = false 
 	max_alpha = $MainContainer/torchStatus.modulate.a
 	min_alpha = 0
-	if old_status == informator.Is_ignis.NO_IGNIS:
+	if old_status == GlobalVars.Is_ignis.NO_IGNIS:
 		$MainContainer/torchStatus.modulate.a = 0 # hide
 
 
@@ -98,7 +99,7 @@ func status_set_none():
 
 
 func upd_chosen_ignis(active_weapon):
-	if informator.ignis_status == informator.Is_ignis.NO_IGNIS:
+	if informator.ignis_status == GlobalVars.Is_ignis.NO_IGNIS:
 		status_set_none()
 		return
 	match active_weapon:
@@ -117,7 +118,7 @@ func upd_ignis_bar(ignis_status):
 	# status changed
 	old_status = ignis_status # update status
 	match ignis_status:
-		informator.Is_ignis.NO_IGNIS:
+		GlobalVars.Is_ignis.NO_IGNIS:
 			progress_bar_fading = true # to start animation
 			fading_in = false # fading out
 		_:
@@ -145,7 +146,7 @@ func set_ignis_bar(value):
 		ignis_bar_changing = true
 	else:
 		ignis_bar_changing = false
-	if informator.ignis_status == informator.Is_ignis.NO_IGNIS:
+	if informator.ignis_status == GlobalVars.Is_ignis.NO_IGNIS:
 		$MainContainer/torchStatus.value = 0
 	else:
 		$MainContainer/torchStatus.value = value

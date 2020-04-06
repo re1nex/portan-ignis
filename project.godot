@@ -38,7 +38,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-SceneSwitcher="*res://src/sceneSwitcher/SceneSwitcher.gd"
+GlobalVars="*res://src/globals/global_vars/GlobalVars.gd"
+SceneSwitcher="*res://src/globals/sceneSwitcher/SceneSwitcher.gd"
+Transfer="*res://src/globals/transfer/Transfer.gd"
 
 [display]
 
