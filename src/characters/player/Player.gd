@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 signal die
+
+signal torch_hit
 signal health_changed
 signal torch_changed
 signal torch_reloaded
@@ -56,13 +58,19 @@ var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 
+var endLevel=false
 var on_stairs = 0
 
-
 var changeIgnis = false
+var blockPlayer=false
 # Called when the node enters the scene tree for the first time.
+
+func new_lvl():
+	endLevel=false
+	blockPlayer=false
+
 func _ready():
-	
+	new_lvl()
 	scale.x=scale_x
 	scale.y=scale_y
 	
@@ -79,6 +87,21 @@ func _ready():
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
 	
 
+func HitPlay(num):
+	if(num == 1):
+		$AudioHit.play()
+	elif(num ==2):
+		$AudioHit2.play()
+	elif(num ==3):
+		$AudioHit3.play()
+	elif(num ==4):
+		$AudioHit4.play()
+	elif(num ==5):
+		$AudioHit5.play()
+
+
+
+
 
 func prepare_camera(var LU, var RD):
 	$Camera.limit_left = LU.x
@@ -88,6 +111,9 @@ func prepare_camera(var LU, var RD):
 
 
 func _process(delta):
+	if(endLevel||blockPlayer):
+		update_ignis_timer_start(delta)
+		return
 	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
 		on_player_area_node.activate()
 	
@@ -101,8 +127,13 @@ func _process(delta):
 	check_rotate_ignis(delta)
 	
 
+func goAway():
+	var i=0
+	blockPlayer=true
 
 func _physics_process(delta):
+	if(endLevel):
+		return
 	### MOVEMENT ###
 	# Apply gravity
 	linear_vel += delta * gravity_vec
@@ -121,7 +152,7 @@ func _physics_process(delta):
 
 	# Horizontal movement
 	var target_speed = 0
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left")&&!blockPlayer:
 		target_speed -= 1
 		if(!$AudioStep.playing &&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_right") and direction == 1:
@@ -132,10 +163,10 @@ func _physics_process(delta):
 				update_ignis()
 
 	
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right")||blockPlayer:
 		target_speed += 1
 		if(!$AudioStep.playing&&on_floor):$AudioStep.play()
-		if not Input.is_action_pressed("ui_left") and direction == -1:
+		if not Input.is_action_pressed("ui_left") and direction == -1 &&!blockPlayer:
 			direction = 1
 			sprite.flip_h = false
 			$CharacterShape.scale.x *= -1
@@ -169,6 +200,7 @@ func _physics_process(delta):
 	#if is_on_ceiling():
 		#linear_vel.y = 0
 		#jumping = false
+
 	if on_stairs > 0:
 		linear_vel.y = 0
 		if Input.is_action_pressed("ui_up"):
@@ -182,13 +214,13 @@ func _physics_process(delta):
 			sprite.animation = "stay"
 		
 	else:
-		if on_floor and Input.is_action_pressed("jump"):
+		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 			jumping = true
 			sprite.animation = "jump"
 		
-		elif jumping==true:
+		elif jumping==true &&!blockPlayer:
 			if Input.is_action_pressed("jump") and height < jump_height_limit:
 				linear_vel.y = -jump_speed
 				height -= linear_vel.y * delta
@@ -406,7 +438,10 @@ func turn_on_hit_timer():
 	$TimerHit.start()
 	
 func hit():
+	if(endLevel):
+		return
 	if $TimerHit.is_stopped():
+		HitPlay(randi()%5+1)
 		$Informator.health -= 1
 		emit_signal("health_changed")
 		if $Informator.health == 0:
@@ -414,6 +449,7 @@ func hit():
 			
 		if $Informator.ignis_status==$Informator.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+			emit_signal("torch_hit")
 		turn_on_hit_timer()
 	pass
 
@@ -431,6 +467,13 @@ func switch_weapons(type):
 func _on_Lever_lever_taken():
 	$Informator.has_instruments[Instruments_type.LEVER] = true
 	pass # Replace with function body.
+
+func after_die():
+	endLevel=true
+	visible=false
+	turn_off_ignis()
+	$Informator.health=0;
+
 
 
 func take_heart():

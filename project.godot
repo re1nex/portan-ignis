@@ -45,6 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SceneSwitcher="*res://src/sceneSwitcher/SceneSwitcher.gd"
+AudioController="*res://src/ui/audio/AudioController.gd"
 
 [display]
 

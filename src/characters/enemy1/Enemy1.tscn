@@ -1,14 +1,9 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://resource/sounds/monster/2.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/characters/enemy1/Enemy1.gd" type="Script" id=2]
 [ext_resource path="res://resource/sprites/characters/characters.png" type="Texture" id=3]
 [ext_resource path="res://resource/sounds/steps/5.wav" type="AudioStream" id=4]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell4.wav" type="AudioStream" id=5]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav" type="AudioStream" id=6]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav" type="AudioStream" id=7]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell2.wav" type="AudioStream" id=8]
-[ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell1.wav" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -171,26 +166,6 @@ attenuation = 2.0
 [node name="AudioStep" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 max_distance = 100.0
-
-[node name="AudioHit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-volume_db = -15.0
-
-[node name="AudioHit2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-volume_db = -15.0
-
-[node name="AudioHit3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -15.0
-
-[node name="AudioHit4" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-volume_db = -15.0
-
-[node name="AudioHit5" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -15.0
 [connection signal="area_entered" from="CatchArea" to="." method="_on_CatchArea_area_entered"]
 [connection signal="area_exited" from="CatchArea" to="." method="_on_CatchArea_area_exited"]
 [connection signal="body_entered" from="CatchArea" to="." method="_on_CatchArea_body_entered"]

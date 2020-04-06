@@ -4,7 +4,7 @@ var posRD
 var posLU
 
 signal level_complete
-
+signal player_stop
 
 func _ready():
 	posRD = $PositionRD.position
@@ -21,3 +21,8 @@ func _ready():
 func _on_LevelEnd_body_entered(body):
 	if body.has_method("get_informator"):
 		emit_signal("level_complete")
+
+
+func _on_LevelEndStop_body_entered(body):
+	if body.has_method("get_informator"):
+		emit_signal("player_stop")

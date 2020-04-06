@@ -36,25 +36,9 @@ func _ready():
 	x_scale = $Visibility.scale.x
 	pass
 
-func HitPlay(num):
-	if(!$AudioHit.playing && !$AudioHit2.playing && !$AudioHit3.playing && !$AudioHit4.playing && !$AudioHit5.playing ):
-		hitPlay(num)
-func hitPlay(num):
-	if(num == 1):
-		$AudioHit.play()
-	elif(num ==2):
-		$AudioHit2.play()
-	elif(num ==3):
-		$AudioHit3.play()
-	elif(num ==4):
-		$AudioHit4.play()
-	elif(num ==5):
-		$AudioHit5.play()
-
 
 func _process(_delta):
 	if player_target:
-		HitPlay(randi()%5+1)
 		$AnimatedSprite.animation = "punch"
 		$AnimatedSprite.speed_scale = 0.25
 		player_target.hit()
