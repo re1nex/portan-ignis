@@ -21,7 +21,7 @@ enum Instruments_type {
 
 const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 2
-const GRAVITY_VEC = Vector2(0,550)
+const GRAVITY = 550
 const FLOOR_NORMAL = Vector2(0, -1)
 export (int) var walk_speed = 115 # pixels/sec
 export (int) var jump_speed = 130
@@ -43,6 +43,8 @@ export (int) var health = 5
 
 var linear_vel = Vector2()
 var velocity = Vector2()
+var gravity_vec = Vector2()
+
 
 var instruments = []
 var weapons = []  
@@ -57,6 +59,8 @@ var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 
 var endLevel=false
+var on_stairs = 0
+
 var changeIgnis = false
 var blockPlayer=false
 # Called when the node enters the scene tree for the first time.
@@ -78,7 +82,10 @@ func _ready():
 	sprite = $AnimatedSprite1
 	sprite.animation = "walk"
 	
+	gravity_vec.y = GRAVITY
+	
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
+	
 
 func HitPlay(num):
 	if(num == 1):
@@ -118,6 +125,7 @@ func _process(delta):
 	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
+	
 
 func goAway():
 	var i=0
@@ -128,7 +136,7 @@ func _physics_process(delta):
 		return
 	### MOVEMENT ###
 	# Apply gravity
-	linear_vel += delta * GRAVITY_VEC
+	linear_vel += delta * gravity_vec
 	# Move and slide
 	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
@@ -168,6 +176,8 @@ func _physics_process(delta):
 	target_speed *= walk_speed
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
+	
+	
 	if on_floor:
 		if sprite.animation == "fall":
 			sprite.animation = "landing"
@@ -190,31 +200,54 @@ func _physics_process(delta):
 	#if is_on_ceiling():
 		#linear_vel.y = 0
 		#jumping = false
-	
-	if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
-		linear_vel.y = -jump_speed
-		height -= linear_vel.y * delta
-		jumping = true
-		sprite.animation = "jump"
-	
-	elif jumping==true &&!blockPlayer:
-		if Input.is_action_pressed("jump") and height < jump_height_limit:
+
+	if on_stairs > 0:
+		linear_vel.y = 0
+		if Input.is_action_pressed("ui_up"):
+			position.y -= walk_speed * delta
+			sprite.animation = "jump"
+			sprite.set_frame(1)
+		elif Input.is_action_pressed("ui_down"):
+			position.y += walk_speed * delta
+			sprite.animation = "fall"
+		else:
+			sprite.animation = "stay"
+		
+	else:
+		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
-		else:
-			jumping=false
+			jumping = true
+			sprite.animation = "jump"
+		
+		elif jumping==true &&!blockPlayer:
+			if Input.is_action_pressed("jump") and height < jump_height_limit:
+				linear_vel.y = -jump_speed
+				height -= linear_vel.y * delta
+			else:
+				jumping=false
 
 
 func _on_Area2D_area_entered(area):
 	if area.has_method("activate"):
 		on_player_area_node = area;
-		in_node_area=true
+		in_node_area = true
+	elif area.get_class() == "Stairs":
+		jumping = true
+		if on_stairs == 0:
+			linear_vel.y = 0
+			gravity_vec.y = 0
+		on_stairs += 1
 	pass # Replace with function body.
 
 
 func _on_Area2D_area_exited(area):
 	if on_player_area_node == area:
 		in_node_area = false
+	elif area.get_class() == "Stairs":
+		on_stairs -= 1
+		if on_stairs == 0:
+			gravity_vec.y = GRAVITY
 	pass # Replace with function body.
 
 
@@ -449,3 +482,8 @@ func take_heart():
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart
 	return false # heart not taken --> can't free heart
+
+
+func highway_to_hell(delta):
+	linear_vel.x = lerp(linear_vel.x, walk_speed, 1)
+	move_and_slide(linear_vel)
