@@ -14,11 +14,13 @@ func _ready():
 	$Player.connect("die", self, "_on_Player_die")
 	$WindowGameOver/CenterContainer.hide()
 	$WinWindow/CenterContainer.hide()
+	$Player.new_lvl()
 
 
 func _on_Player_die():
 	#$Player.queue_free()
-	get_tree().paused = true
+	$Player.after_die()
+	#get_tree().paused = true
 	$WindowGameOver._closeBefore()
 	$WindowGameOver/CenterContainer.show()
 	pass # Replace with function body.

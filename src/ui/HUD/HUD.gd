@@ -31,6 +31,7 @@ func init_player(plr):
 	init_ignis_bar_anim()
 	upd_chosen_ignis(informator.num_of_active_weapon)
 	# connect signals
+	player.connect("torch_hit", self, "_on_torch_hit")
 	player.connect("health_changed", self, "_on_health_changed")
 	player.connect("torch_changed", self, "_on_torch_changed")
 	player.connect("torch_reloaded", self, "_on_torch_reloaded")
@@ -173,3 +174,9 @@ func set_health_bar(lives):
 		$MainContainer/Hearts/Heart5.value = 1
 	else:
 		$MainContainer/Hearts/Heart5.value = 0
+
+
+func _on_torch_hit():
+	ignis_bar_changing=true
+	set_process(true)
+	pass

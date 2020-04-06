@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 signal die
+
+signal torch_hit
 signal health_changed
 signal torch_changed
 signal torch_reloaded
@@ -14,7 +16,7 @@ const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 2
 const INSTRUMENTS_NUM = 1
 const MAX_HEALTH = 5
-const GRAVITY_VEC = Vector2(0,550)
+const GRAVITY = 550
 const FLOOR_NORMAL = Vector2(0, -1)
 export (int) var walk_speed = 115 # pixels/sec
 export (int) var jump_speed = 130
@@ -36,6 +38,8 @@ var health = Transfer.health
 
 var linear_vel = Vector2()
 var velocity = Vector2()
+var gravity_vec = Vector2()
+
 
 var instruments = []
 var weapons = []  
@@ -49,10 +53,19 @@ var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 
+var endLevel=false
+var on_stairs = 0
+
 var changeIgnis = false
+var blockPlayer=false
 # Called when the node enters the scene tree for the first time.
+
+func new_lvl():
+	endLevel=false
+	blockPlayer=false
+
 func _ready():
-	
+	new_lvl()
 	scale.x=scale_x
 	scale.y=scale_y
 	
@@ -65,7 +78,25 @@ func _ready():
 	sprite = $AnimatedSprite1
 	sprite.animation = "walk"
 	
+	gravity_vec.y = GRAVITY
+	
 	$TimerIgnis.connect("timeout", self, "_on_Timer_timeout")
+	
+
+func HitPlay(num):
+	if(num == 1):
+		$AudioHit.play()
+	elif(num ==2):
+		$AudioHit2.play()
+	elif(num ==3):
+		$AudioHit3.play()
+	elif(num ==4):
+		$AudioHit4.play()
+	elif(num ==5):
+		$AudioHit5.play()
+
+
+
 
 
 func prepare_camera(var LU, var RD):
@@ -76,6 +107,9 @@ func prepare_camera(var LU, var RD):
 
 
 func _process(delta):
+	if(endLevel||blockPlayer):
+		update_ignis_timer_start(delta)
+		return
 	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
 		on_player_area_node.activate()
 	
@@ -87,12 +121,18 @@ func _process(delta):
 	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
+	
 
+func goAway():
+	var i=0
+	blockPlayer=true
 
 func _physics_process(delta):
+	if(endLevel):
+		return
 	### MOVEMENT ###
 	# Apply gravity
-	linear_vel += delta * GRAVITY_VEC
+	linear_vel += delta * gravity_vec
 	# Move and slide
 	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
@@ -108,7 +148,7 @@ func _physics_process(delta):
 
 	# Horizontal movement
 	var target_speed = 0
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left")&&!blockPlayer:
 		target_speed -= 1
 		if(!$AudioStep.playing &&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_right") and direction == 1:
@@ -119,10 +159,10 @@ func _physics_process(delta):
 				update_ignis()
 
 	
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right")||blockPlayer:
 		target_speed += 1
 		if(!$AudioStep.playing&&on_floor):$AudioStep.play()
-		if not Input.is_action_pressed("ui_left") and direction == -1:
+		if not Input.is_action_pressed("ui_left") and direction == -1 &&!blockPlayer:
 			direction = 1
 			sprite.flip_h = false
 			$CharacterShape.scale.x *= -1
@@ -131,6 +171,8 @@ func _physics_process(delta):
 	
 	target_speed *= walk_speed
 	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
+	
+	
 	
 	if on_floor:
 		if sprite.animation == "fall":
@@ -154,31 +196,54 @@ func _physics_process(delta):
 	#if is_on_ceiling():
 		#linear_vel.y = 0
 		#jumping = false
-	
-	if on_floor and Input.is_action_pressed("jump"):
-		linear_vel.y = -jump_speed
-		height -= linear_vel.y * delta
-		jumping = true
-		sprite.animation = "jump"
-	
-	elif jumping==true:
-		if Input.is_action_pressed("jump") and height < jump_height_limit:
+
+	if on_stairs > 0:
+		linear_vel.y = 0
+		if Input.is_action_pressed("ui_up"):
+			position.y -= walk_speed * delta
+			sprite.animation = "jump"
+			sprite.set_frame(1)
+		elif Input.is_action_pressed("ui_down"):
+			position.y += walk_speed * delta
+			sprite.animation = "fall"
+		else:
+			sprite.animation = "stay"
+		
+	else:
+		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
-		else:
-			jumping=false
+			jumping = true
+			sprite.animation = "jump"
+		
+		elif jumping==true &&!blockPlayer:
+			if Input.is_action_pressed("jump") and height < jump_height_limit:
+				linear_vel.y = -jump_speed
+				height -= linear_vel.y * delta
+			else:
+				jumping=false
 
 
 func _on_Area2D_area_entered(area):
 	if area.has_method("activate"):
 		on_player_area_node = area;
-		in_node_area=true
+		in_node_area = true
+	elif area.get_class() == "Stairs":
+		jumping = true
+		if on_stairs == 0:
+			linear_vel.y = 0
+			gravity_vec.y = 0
+		on_stairs += 1
 	pass # Replace with function body.
 
 
 func _on_Area2D_area_exited(area):
 	if on_player_area_node == area:
 		in_node_area = false
+	elif area.get_class() == "Stairs":
+		on_stairs -= 1
+		if on_stairs == 0:
+			gravity_vec.y = GRAVITY
 	pass # Replace with function body.
 
 
@@ -373,7 +438,10 @@ func turn_on_hit_timer():
 	$TimerHit.start()
 	
 func hit():
+	if(endLevel):
+		return
 	if $TimerHit.is_stopped():
+		HitPlay(randi()%5+1)
 		$Informator.health -= 1
 		emit_signal("health_changed")
 		if $Informator.health == 0:
@@ -381,6 +449,7 @@ func hit():
 			
 		if $Informator.ignis_status==GlobalVars.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+			emit_signal("torch_hit")
 		turn_on_hit_timer()
 	pass
 
@@ -399,6 +468,13 @@ func _on_Lever_lever_taken():
 	$Informator.has_instruments[GlobalVars.Instruments_type.LEVER] += 1
 	pass # Replace with function body.
 
+func after_die():
+	endLevel=true
+	visible=false
+	turn_off_ignis()
+	$Informator.health=0;
+
+
 
 func take_heart():
 	if $Informator.health < MAX_HEALTH:
@@ -406,3 +482,8 @@ func take_heart():
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart
 	return false # heart not taken --> can't free heart
+
+
+func highway_to_hell(delta):
+	linear_vel.x = lerp(linear_vel.x, walk_speed, 1)
+	move_and_slide(linear_vel)
