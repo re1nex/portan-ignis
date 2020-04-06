@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 signal die
-
+signal torch_hit
 class_name Player
 
 enum Ignis_type {
@@ -54,8 +54,13 @@ var endLevel=false
 var changeIgnis = false
 var blockPlayer=false
 # Called when the node enters the scene tree for the first time.
+
+func new_lvl():
+	endLevel=false
+	blockPlayer=false
+
 func _ready():
-	
+	new_lvl()
 	scale.x=scale_x
 	scale.y=scale_y
 	
@@ -94,6 +99,7 @@ func prepare_camera(var LU, var RD):
 
 func _process(delta):
 	if(endLevel||blockPlayer):
+		update_ignis_timer_start(delta)
 		return
 	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
 		on_player_area_node.activate()
@@ -403,6 +409,7 @@ func hit():
 			
 		if $Informator.ignis_status==$Informator.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+			emit_signal("torch_hit")
 		turn_on_hit_timer()
 	pass
 

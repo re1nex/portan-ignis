@@ -12,11 +12,11 @@
 size = 70
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 70
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 70
 font_data = ExtResource( 5 )
 
@@ -39,7 +39,6 @@ scale = Vector2( 1, 0.8 )
 texture = ExtResource( 1 )
 
 [node name="Pause" type="VBoxContainer" parent="CenterContainer"]
-visible = false
 light_mask = 2
 margin_left = 480.0
 margin_top = 220.0
@@ -151,6 +150,7 @@ position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="Settings" type="VBoxContainer" parent="CenterContainer"]
+visible = false
 light_mask = 2
 margin_left = 450.0
 margin_top = 237.0
@@ -164,10 +164,11 @@ custom_constants/separation = 30
 margin_right = 156.0
 margin_bottom = 60.0
 size_flags_horizontal = 0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "volume"
 
 [node name="HSlider" type="HSlider" parent="CenterContainer/Settings/Label2"]
+light_mask = 2
 margin_left = 180.0
 margin_top = 24.0
 margin_right = 430.0
@@ -188,7 +189,7 @@ margin_top = 90.0
 margin_right = 380.0
 margin_bottom = 150.0
 size_flags_horizontal = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "fullscreen mode"
 __meta__ = {
 "_edit_group_": true,
@@ -264,6 +265,7 @@ stream = ExtResource( 4 )
 [connection signal="pressed" from="CenterContainer/Pause/MainMenu" to="." method="_on_MainMenu_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/Settings/Label2" to="." method="_on_Label2_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Settings/Label2" to="." method="_on_Label2_mouse_exited"]
+[connection signal="gui_input" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_gui_input"]
 [connection signal="mouse_entered" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_mouse_exited"]
 [connection signal="value_changed" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_value_changed"]

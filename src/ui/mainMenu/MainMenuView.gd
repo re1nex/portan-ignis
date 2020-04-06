@@ -9,6 +9,7 @@ var soundLen=0.22
 var checkClick=false
 var soundSet=false
 var IgnisPlay=true
+var testPlay=false
 
 func _ready():
 	if OS.window_fullscreen:
@@ -537,7 +538,6 @@ func _on_HSlider_value_changed(value):
 	else:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
 	AudioController.changeVol(value)
-	$TestSound.play()
 
 
 func _on_Mute_pressed():
@@ -653,3 +653,8 @@ func _on_HSlider_mouse_exited():
 
 func _on_Mute_mouse_exited():
 	_on_Label2_mouse_exited()
+
+
+func _on_HSlider_gui_input(event):
+	if (event is InputEventMouseButton) && !event.pressed && (event.button_index == BUTTON_LEFT):
+		$TestSound.play()

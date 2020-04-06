@@ -9,8 +9,9 @@ func _ready():
 	$Menu/HUD.init_player($Player)
 	$WindowGameOver/CenterContainer.hide()
 	$Player.hit()
-	
-	
+	$Player.new_lvl()
+
+
 func _on_Player_die():
 	$Player.after_die()
 	$WindowGameOver._closeBefore()

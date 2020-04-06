@@ -14,6 +14,7 @@ func _ready():
 	$Player.connect("die", self, "_on_Player_die")
 	$WindowGameOver/CenterContainer.hide()
 	$WinWindow/CenterContainer.hide()
+	$Player.new_lvl()
 
 
 func _on_Player_die():

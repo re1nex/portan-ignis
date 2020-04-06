@@ -313,7 +313,6 @@ func _on_HSlider_value_changed(value):
 		return
 	$TestSound.stop()
 	AudioController.changeVol(value)
-	$TestSound.play()
 
 
 func _on_HSlider_mouse_exited():
@@ -360,3 +359,8 @@ func _on_CheckBox_mouse_entered():
 
 func _on_CheckBox_mouse_exited():
 	_on_Label_mouse_exited()
+
+
+func _on_HSlider_gui_input(event):
+	if (event is InputEventMouseButton) && !event.pressed && (event.button_index == BUTTON_LEFT):
+		$TestSound.play()
