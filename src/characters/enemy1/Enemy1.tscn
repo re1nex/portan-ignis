@@ -44,15 +44,15 @@ region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 0, 64, 64 )
+region = Rect2( 704, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 704, 0, 64, 64 )
+region = Rect2( 832, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 0, 64, 64 )
+region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
@@ -60,7 +60,7 @@ region = Rect2( 704, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
-region = Rect2( 832, 0, 64, 64 )
+region = Rect2( 768, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
@@ -79,15 +79,15 @@ animations = [ {
 "name": "jump",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "slash",
-"speed": 2.0
-}, {
-"frames": [ SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "punch",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "slash",
+"speed": 2.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=15]
@@ -111,7 +111,6 @@ position = Vector2( 0, -8 )
 scale = Vector2( 0.65, 0.65 )
 frames = SubResource( 14 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="CatchArea" type="Area2D" parent="."]

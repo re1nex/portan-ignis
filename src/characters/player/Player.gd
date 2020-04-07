@@ -290,6 +290,7 @@ func fill_weapons():
 	weapons[Ignis_type.REGULAR].disable()
 	
 	node = preload("res://src/objects/IgnisSectorInner/IgnisSectorInner.tscn").instance()
+	node.priority = 2
 	weapons[Ignis_type.SECTOR] = node
 	add_child(weapons[Ignis_type.SECTOR])
 	weapons[Ignis_type.SECTOR].disable()

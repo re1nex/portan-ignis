@@ -110,8 +110,8 @@ func _physics_process(delta):
 		
 		
 		# jumping #
-		var tar_tg = target_dir.y / target_dir.x
-		if on_floor and target_dir.y < -SMALL_RADIUS and tar_tg < -0.92 and can_jump:
+		var tar_tg = target_dir.y / abs(target_dir.x)
+		if on_floor and target_dir.y < -SMALL_RADIUS and tar_tg < -0.75 and can_jump:
 			can_jump = false
 			$JumpTimer.start()
 			$AnimatedSprite.animation = "jump"
@@ -128,7 +128,7 @@ func _physics_process(delta):
 				jumping = false
 				#$AnimatedSprite.animation = "landing"
 		velocity.x = direction * run_speed
-	update()
+	#update()
 
 func _draw():
 #	if global_position:
@@ -138,7 +138,7 @@ func _draw():
 #		if targets:
 #			for i in range(targets.size()):
 #				draw_line(vision_center, targets[i].global_position - position, greenColor, 1)
-	#draw_circle(Vector2(0, -$BodyShape.shape.height), $Visibility/VisibilyShape.shape.radius, color)
+	#draw_circle(Vector2(0, -10), 10 * $Visibility/VisibilyShape.scale.x, color)
 	#if recent_tar != null:
 		#draw_line(Vector2(0, -$BodyShape.shape.height), recent_tar.global_position - position, lazerColor)
 	pass
@@ -185,7 +185,6 @@ func check_chase():
 	var i = 0
 	while (i < targets.size()):
 		current = targets[i]
-		update()
 		target_dir = current.global_position - position - vision_center
 		var res = space_state.intersect_ray(global_position + vision_center, current.global_position, [self], collision_mask, true, true)
 		if not res and target_dir.x * direction > 0:
