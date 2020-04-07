@@ -21,6 +21,8 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="SearchArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
 
 [node name="SearchShape" type="CollisionShape2D" parent="SearchArea"]
 position = Vector2( 0, 35 )

@@ -28,19 +28,19 @@ region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 256, 0, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
@@ -71,12 +71,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ) ],
 "loop": false,
-"name": "landing",
+"name": "jump",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 7 ), SubResource( 8 ) ],
 "loop": false,
-"name": "jump",
+"name": "landing",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
@@ -100,6 +100,7 @@ points = PoolVector2Array( 0, 10, 2.588, 9.659, 5, 8.66, 7.071, 7.071, 8.66, 5, 
 points = PoolVector2Array( 0, -14, 8, -2, 8, 13, -8, 13, -8, -2 )
 
 [node name="Enemy" type="KinematicBody2D"]
+collision_layer = 33
 script = ExtResource( 2 )
 walk_speed = 50
 run_speed = 130
@@ -111,6 +112,7 @@ position = Vector2( 0, -8 )
 scale = Vector2( 0.65, 0.65 )
 frames = SubResource( 14 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="CatchArea" type="Area2D" parent="."]
