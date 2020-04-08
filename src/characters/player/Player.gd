@@ -52,6 +52,7 @@ var jumping = false
 var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
+var floor_vel = Vector2()
 
 var endLevel=false
 var on_stairs = 0
@@ -140,9 +141,7 @@ func _physics_process(delta):
 	# Move and slide
 	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
-	
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
-
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
 	
@@ -174,11 +173,12 @@ func _physics_process(delta):
 				update_ignis()
 	
 	target_speed *= walk_speed
-	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
+	
 	
 	
 	
 	if on_floor:
+		linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 		if sprite.animation == "fall":
 			sprite.animation = "landing"
 			$TimerLanding.set_wait_time(landing_time)
@@ -189,6 +189,8 @@ func _physics_process(delta):
 			else:
 				sprite.animation = "stay"
 	else:
+		linear_vel.x = target_speed
+		linear_vel.x += floor_vel.x
 		if linear_vel.y < 0:
 			sprite.animation = "jump"
 			pass
