@@ -71,7 +71,7 @@ scale = Vector2( 0.873188, 1.17247 )
 shape = SubResource( 1 )
 
 [node name="IgnisRegularOuter" parent="." instance=ExtResource( 7 )]
-position = Vector2( 593, 736 )
+position = Vector2( 568.565, 720.525 )
 
 [node name="Ignises" type="Node2D" parent="."]
 
