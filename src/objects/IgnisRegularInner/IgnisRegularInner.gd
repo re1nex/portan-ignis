@@ -38,7 +38,7 @@ func _ready():
 # Called in ignisRegularLevel and ...Outer to increase radiuses
 func init_radius(mul):
 	texture_scale *= mul
-	$Area2D/CollisionShape2D.shape.radius *= mul
+	$Area2D.scale *= mul
 	minScale = texture_scale - 0.01
 	$VisibilityEnabler2D.scale *= mul
 
