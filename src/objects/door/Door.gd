@@ -43,3 +43,17 @@ func _on_IgnisRegularLevel_not_active():
 	linear_vel.y = SPEED
 	step = SPEED
 	pass # Replace with function body.
+
+
+func _on_Mechanism_active(time):
+	var num = max_height / time
+	linear_vel.y = -num
+	step = -num
+	pass # Replace with function body.
+
+
+func _on_Mechanism_not_active(time):
+	var num = max_height / time
+	linear_vel.y = num
+	step = num
+	pass # Replace with function body.
