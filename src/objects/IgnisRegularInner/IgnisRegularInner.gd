@@ -70,6 +70,7 @@ func _process(delta):
 func checkEnergy():
 	if energy <= energyMin:
 		finish_disabling()
+		set_process(false)
 		switchedOff = true
 
 
@@ -91,6 +92,7 @@ func finish_disabling():
 func enable():
 	switchingOff = false
 	energy = energyMax
+	set_process(true)
 
 
 func finish_enabling():

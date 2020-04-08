@@ -89,6 +89,7 @@ func finishDisabling():
 	$Circle.energy = 0
 	energy = 0
 	switchedOff = true
+	set_process(false)
 	emit_signal("disabled")
 
 
@@ -96,6 +97,7 @@ func enable():
 	switchingOff = false
 	energy = energyMax
 	$Circle.energy = energyMax
+	set_process(true)
 
 
 func finishEnabling():
