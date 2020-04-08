@@ -99,3 +99,11 @@ texture = ExtResource( 4 )
 amount = 32
 process_material = SubResource( 11 )
 texture = ExtResource( 2 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0.766579, 3.8147e-06 )
+scale = Vector2( 11.6553, 11.6808 )
+pause_animations = false
+freeze_bodies = false
+pause_particles = false
+pause_animated_sprites = false

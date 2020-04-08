@@ -6,6 +6,8 @@ var step = 20
 
 
 func _ready():
+	if not $VisibilityEnabler2D.is_on_screen():
+		set_process(false)
 	pass # Replace with function body.
 
 
