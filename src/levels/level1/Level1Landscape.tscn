@@ -197,13 +197,13 @@ position = Vector2( 1264, 576 )
 type = "down"
 
 [node name="Mechanism" parent="." instance=ExtResource( 13 )]
-position = Vector2( 650.467, 723.872 )
+position = Vector2( 1395.7, 339.764 )
 
 [node name="Lever" parent="." instance=ExtResource( 14 )]
-position = Vector2( 720.356, 736.236 )
+position = Vector2( 1297.88, 447.049 )
 
 [node name="Door2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 784.175, 718.354 )
+position = Vector2( 1503.98, 336.057 )
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
 [connection signal="body_entered" from="LevelEndStop" to="." method="_on_LevelEndStop_body_entered"]
 [connection signal="active" from="Mechanism" to="Door2" method="_on_Mechanism_active"]

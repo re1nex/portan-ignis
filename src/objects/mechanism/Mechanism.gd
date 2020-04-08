@@ -5,7 +5,7 @@ signal not_active
 
 export var up_time = 7
 export var down_time = 1
-
+export var corner = PI /2
 var time
 var body_informator = null
 var activated = false
@@ -21,7 +21,7 @@ func _ready():
 func activate():
 	if not ready:
 		if body_informator.has_instruments[GlobalVars.Instruments_type.LEVER] > 0:
-			$handle.show()
+			$Handle.show()
 			body_informator.has_instruments[GlobalVars.Instruments_type.LEVER] -= 1
 
 			ready = true
@@ -47,10 +47,12 @@ func disactivate():
 func _process(delta):
 	if not activated:
 		time += delta * up_time / down_time
-		$handle.rotate(up_time/ (delta * up_time / down_time))
+		$Handle.rotate(-(delta * up_time / down_time) / up_time * corner)
 		if time >= up_time:
 			time = up_time
 			set_process(false)
+	else:
+		$Handle.rotate(delta / up_time * corner)
 
 
 
