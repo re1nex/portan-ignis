@@ -4,7 +4,6 @@ var pos = -1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var first=true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,11 +27,9 @@ func _musicPlay(num):
 	elif(num==3):$music3.play()
 
 
-func _process(delta):
-	if($CenterContainer.is_visible_in_tree()):
-		if first:
-			first=false
-			_musicPlay(randi()%3+1)
+func show():
+	_musicPlay(randi()%3+1)
+	$CenterContainer.show()
 
 
 func _input(event):
@@ -85,7 +82,6 @@ func _ChangePos():
 
 func _on_Restart_pressed():
 	$AudioClick.play()
-	first=true
 	pos=-1
 	$CenterContainer/VBoxContainer/Restart/ResLight.disable()
 	$CenterContainer/VBoxContainer/Restart/ResLight.hide()
@@ -114,7 +110,6 @@ func _on_MainMenu_mouse_exited():
 
 func _on_MainMenu_pressed():
 	$AudioClick.play()
-	first=true
 	pos=-1
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.disable()
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.hide()

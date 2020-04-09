@@ -23,7 +23,7 @@ func _on_Player_die():
 	#get_tree().paused = true
 	$Player.after_die()
 	$WindowGameOver._closeBefore()
-	$WindowGameOver/CenterContainer.show()
+	$WindowGameOver.show()
 
 
 func _on_Death_body_entered(body):
@@ -35,7 +35,7 @@ func _on_Death_body_entered(body):
 
 func _on_Win_body_entered(body):
 	if body.has_method("get_informator"):
-		$WinWindow/CenterContainer.show()
+		$WinWindow.show()
 		$Player.goAway()
 
 
