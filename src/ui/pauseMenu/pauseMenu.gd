@@ -43,6 +43,7 @@ func _ready():
 	if OS.window_fullscreen:
 		$CenterContainer/Settings/Label/CheckBox.pressed = true
 		_full_screen()
+	begin=false
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -326,6 +327,7 @@ func _on_Label2_mouse_exited():
 		$IgnisSound.stop()
 	volSet=false
 	$CenterContainer/Settings/Label2/VolLight.hide()
+	$TestSound.stop()
 
 
 func _on_Label2_mouse_entered():
