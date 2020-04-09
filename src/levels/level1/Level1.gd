@@ -21,6 +21,7 @@ func _on_Player_die():
 func complete():
 	$Player.goAway()
 	$WinWindow.show()
+	Transfer.copy_chars($Player)
 	#get_tree().paused = true
 
 

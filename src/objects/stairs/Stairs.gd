@@ -1,15 +1,24 @@
-extends TileMap
+extends Area2D
 
+class_name Stairs
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export (String, "up", "down", "med") var type
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$med.hide()
+	if type == "up":
+		$up.show()
+	elif type == "down":
+		$down.show()
+	else:
+		$med.show() 
 	pass # Replace with function body.
 
+
+func get_class():
+	return "Stairs"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -31,12 +31,17 @@ func _deferred_goto_scene(scene):
 	var new_scene
 	if scene == Scenes.SCENE_STAGE_0:
 		new_scene = ResourceLoader.load("res://src/levels/level0/Level0.tscn")
+		Transfer.set_default_chars()
 	elif scene == Scenes.SCENE_STAGE_1:
 		new_scene = ResourceLoader.load("res://src/levels/level1/Level1.tscn")
+		Transfer.set_default_chars()
 	elif scene == Scenes.SCENE_STAGE_2:
 		new_scene = ResourceLoader.load("res://src/levels/level2/Level2.tscn")
+		if Transfer.levels_passed == 0:
+			Transfer.set_default_level2_chars()
 	elif scene == Scenes.SCENE_MAIN_MENU:
 		new_scene = ResourceLoader.load("res://src/ui/mainMenu/MainMenuView.tscn")
+		Transfer.set_default_chars()
 	elif scene == Scenes.SCENE_RESTART:
 		get_tree().reload_current_scene()
 		return
