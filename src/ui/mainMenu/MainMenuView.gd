@@ -537,8 +537,10 @@ func _on_HSlider_value_changed(value):
 	$TestSound.stop()
 	if value==0:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/Label2/Mute.pressed=true
 	else:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
+		$Settings/VBoxContainer/Label2/Mute.pressed=false
 	AudioController.changeVol(value)
 
 

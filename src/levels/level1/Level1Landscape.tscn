@@ -101,7 +101,7 @@ position = Vector2( 1472, 360 )
 position = Vector2( -182.252, -79.1311 )
 
 [node name="PositionRD" type="Position2D" parent="."]
-position = Vector2( 1882.76, 844.316 )
+position = Vector2( 1686.59, 866.523 )
 
 [node name="MovingPlatform" type="Node2D" parent="."]
 position = Vector2( 1264, 368 )
