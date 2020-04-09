@@ -50,9 +50,7 @@ func _input(event):
 			_closeBeforeChange()
 			keyboard=false
 			pos=-1
-
-func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel"):
 		if($CenterContainer/Pause.is_visible_in_tree()||!game_paused):
 			_close_esc()
 			game_paused = !game_paused
@@ -62,29 +60,33 @@ func _process(delta):
 			_on_backSettings_pressed()
 		pos=-1
 	if(game_paused):
-		if Input.is_action_just_pressed("ui_down"):
+		if event.is_action_pressed("ui_down"):
 			_closeBeforeChange()
 			pos+=1
 			keyboard=true
 			_changePos()
-		if Input.is_action_just_pressed("ui_up"):
+		if event.is_action_pressed("ui_up"):
 			_closeBeforeChange()
 			pos-=1
 			keyboard=true
 			_changePos()
-		if Input.is_action_just_pressed("ui_accept"):
+		if event.is_action_pressed("ui_accept"):
 			_pressButt()
 			_closeBeforeChange()
 			pos=-1
 		if(volSet):
-			if Input.is_action_just_pressed("ui_left"):
+			if event.is_action_pressed("ui_left"):
 				var vol = AudioController.sound-4
 				if(vol<0):vol=0
 				$CenterContainer/Settings/Label2/HSlider.value=vol
-			if Input.is_action_just_pressed("ui_right"):
+				$TestSound.play()
+			if event.is_action_pressed("ui_right"):
 				var vol = AudioController.sound+4
 				if(vol>100):vol=100
 				$CenterContainer/Settings/Label2/HSlider.value=vol
+				$TestSound.play()
+
+
 
 
 func _pressButt():
