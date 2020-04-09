@@ -11,7 +11,10 @@ var soundSet=false
 var IgnisPlay=true
 var testPlay=false
 
+var begin=true
 func _ready():
+	if(AudioController.sound!=null):
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=AudioController.sound
 	if OS.window_fullscreen:
 		fullScreen=true
 		_full_Screen()
@@ -534,6 +537,9 @@ func _on_CheckBox_stretch_pressed():
 
 
 func _on_HSlider_value_changed(value):
+	if(begin):
+		begin=false
+		return
 	$TestSound.stop()
 	if value==0:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()

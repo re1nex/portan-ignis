@@ -43,6 +43,7 @@ func _ready():
 	if OS.window_fullscreen:
 		$CenterContainer/Settings/Label/CheckBox.pressed = true
 		_full_screen()
+	begin=false
 
 func _input(event):
 	if event is InputEventMouseMotion:
