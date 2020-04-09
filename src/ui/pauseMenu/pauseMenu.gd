@@ -327,6 +327,7 @@ func _on_Label2_mouse_exited():
 		$IgnisSound.stop()
 	volSet=false
 	$CenterContainer/Settings/Label2/VolLight.hide()
+	$TestSound.stop()
 
 
 func _on_Label2_mouse_entered():

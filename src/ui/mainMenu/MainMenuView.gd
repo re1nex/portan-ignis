@@ -21,6 +21,7 @@ func _ready():
 	if SceneSwitcher.strech:
 		_stretch()
 	$IgnisSound.play()
+	begin=false
 
 
 func checkIgnisSettings():
