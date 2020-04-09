@@ -22,5 +22,5 @@ func _on_Player_die():
 	$Player.after_die()
 	#get_tree().paused = true
 	$WindowGameOver._closeBefore()
-	$WindowGameOver/CenterContainer.show()
+	$WindowGameOver.show()
 	pass # Replace with function body.

@@ -48,10 +48,12 @@ func _input(event):
 			var vol = AudioController.sound-4
 			if(vol<0):vol=0
 			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
+			$TestSound.play()
 		if event.is_action_pressed("ui_right"):
 			var vol = AudioController.sound+4
 			if(vol>100):vol=100
 			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
+			$TestSound.play()
 	if(event.is_action_pressed("ui_accept")):
 		_pressButt()
 		if(!checkClick):

@@ -2,7 +2,6 @@ extends CanvasLayer
 var keyboard=false
 var pos = -1
 var coef = 1.5
-var first =true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,11 +20,11 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _process(delta):
-	if($CenterContainer.is_visible_in_tree()):
-		if first:
-			first=false
-			$music.play()
+func show():
+	$music.play()
+	$CenterContainer.show()
+
+
 
 func _input(event):
 	if($CenterContainer.is_visible_in_tree()):
@@ -76,7 +75,6 @@ func _ChangePos():
 		_on_MainMenu_mouse_entered()
 
 func _on_NextLvl_pressed():
-	first=true
 	$AudioClick.play()
 	pos=-1
 	$CenterContainer/VBoxContainer/NextLvl/ResLight.disable()
@@ -105,7 +103,6 @@ func _on_MainMenu_mouse_exited():
 
 
 func _on_MainMenu_pressed():
-	first=true
 	$AudioClick.play()
 	pos=-1
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.disable()

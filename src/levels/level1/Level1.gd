@@ -15,12 +15,12 @@ func _ready():
 func _on_Player_die():
 	$Player.after_die()
 	$WindowGameOver._closeBefore()
-	$WindowGameOver/CenterContainer.show()
+	$WindowGameOver.show()
 	pass # Replace with function body.
 	
 func complete():
 	$Player.goAway()
-	$WinWindow/CenterContainer.show()
+	$WinWindow.show()
 	Transfer.copy_chars($Player)
 	#get_tree().paused = true
 
