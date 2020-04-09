@@ -9,8 +9,6 @@ var energyMax
 var switchingOff
 var switchedOff
 
-signal enabled
-signal disabled
 var priority = 1
 
 var reflected = 1
@@ -26,17 +24,19 @@ enum Ignis_layer{
 func _ready():
 	minScale = texture_scale - 0.01
 	energyMax = 1.2
-	switchingOff = not enabled
-	switchedOff = enabled
-	if switchedOff:
-		finish_disabling()
+	switchingOff = false
+	switchedOff = true
+	finish_disabling()
+	set_process(false)
+	set_visibility_flags(true)
 	pass # Replace with function body
 
 # Called in ignisRegularLevel and ...Outer to increase radiuses
 func init_radius(mul):
 	texture_scale *= mul
-	$Area2D/CollisionShape2D.shape.radius *= mul
+	$Area2D.scale *= mul
 	minScale = texture_scale - 0.01
+	$VisibilityEnabler2D.scale *= mul
 
 
 func set_light_layer(layer):
@@ -70,6 +70,8 @@ func _process(delta):
 func checkEnergy():
 	if energy <= energyMin:
 		finish_disabling()
+		set_process(false)
+		set_visibility_flags(false)
 		switchedOff = true
 
 
@@ -85,12 +87,13 @@ func finish_disabling():
 	enabled = false
 	energy = 0
 	switchedOff = true
-	emit_signal("disabled")
 
 
 func enable():
 	switchingOff = false
 	energy = energyMax
+	set_process(true)
+	set_visibility_flags(true)
 
 
 func finish_enabling():
@@ -101,7 +104,6 @@ func finish_enabling():
 		$Area2D/CollisionShape2D.disabled = false
 	enabled = true
 	energy = energyMax
-	emit_signal("enabled")
 
 
 func mirror():
@@ -111,3 +113,8 @@ func mirror():
 
 func rotate_ignis(degree):
 	pass
+
+
+func set_visibility_flags(val):
+	$VisibilityEnabler2D.process_parent = val
+	$VisibilityEnabler2D.pause_particles = val
