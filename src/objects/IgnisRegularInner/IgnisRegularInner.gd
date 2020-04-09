@@ -9,8 +9,6 @@ var energyMax
 var switchingOff
 var switchedOff
 
-signal enabled
-signal disabled
 var priority = 1
 
 var reflected = 1
@@ -26,13 +24,11 @@ enum Ignis_layer{
 func _ready():
 	minScale = texture_scale - 0.01
 	energyMax = 1.2
-	switchingOff = not enabled
-	switchedOff = enabled
-	if switchedOff:
-		finish_disabling()
+	switchingOff = false
+	switchedOff = true
+	finish_disabling()
+	set_process(false)
 	set_visibility_flags(true)
-	if not $VisibilityEnabler2D.is_on_screen():
-		set_process(false)
 	pass # Replace with function body
 
 # Called in ignisRegularLevel and ...Outer to increase radiuses
