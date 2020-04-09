@@ -87,7 +87,6 @@ func finish_disabling():
 	enabled = false
 	energy = 0
 	switchedOff = true
-	emit_signal("disabled")
 
 
 func enable():
@@ -105,7 +104,6 @@ func finish_enabling():
 		$Area2D/CollisionShape2D.disabled = false
 	enabled = true
 	energy = energyMax
-	emit_signal("enabled")
 
 
 func mirror():

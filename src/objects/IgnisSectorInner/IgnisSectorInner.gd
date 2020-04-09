@@ -13,8 +13,6 @@ var energyMax
 var switchingOff
 var switchedOff
 
-signal enabled
-signal disabled
 var priority = 1
 
 
@@ -23,10 +21,9 @@ func _ready():
 	minScaleCircle = $Circle.texture_scale
 	rotate(PI / 2)
 	energyMax = 1.2
-	switchingOff = not enabled
-	switchedOff = enabled
-	if switchedOff:
-		finishDisabling()
+	switchingOff = false
+	switchedOff = true
+	finishDisabling()
 	
 	pass # Replace with function body.
 
@@ -90,7 +87,6 @@ func finishDisabling():
 	energy = 0
 	switchedOff = true
 	set_process(false)
-	emit_signal("disabled")
 
 
 func enable():
@@ -109,4 +105,3 @@ func finishEnabling():
 	$Circle.enabled = true
 	energy = energyMax
 	$Circle.energy = energyMax
-	emit_signal("enabled")
