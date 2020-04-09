@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/levels/level1/Level1Landscape.gd" type="Script" id=1]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/door/Door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/objects/stairs/Stairs.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/objects/mechanism/Mechanism.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/objects/lever/Lever.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 41.4907, 65.2372 )
@@ -193,5 +195,16 @@ type = "down"
 [node name="Stairs11" parent="Stairs" instance=ExtResource( 12 )]
 position = Vector2( 1264, 576 )
 type = "down"
+
+[node name="Mechanism" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1395.7, 339.764 )
+
+[node name="Lever" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1297.88, 447.049 )
+
+[node name="Door2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1503.98, 336.057 )
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
 [connection signal="body_entered" from="LevelEndStop" to="." method="_on_LevelEndStop_body_entered"]
+[connection signal="active" from="Mechanism" to="Door2" method="_on_Mechanism_active"]
+[connection signal="not_active" from="Mechanism" to="Door2" method="_on_Mechanism_not_active"]

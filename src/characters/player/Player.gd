@@ -110,8 +110,13 @@ func _process(delta):
 	if(endLevel||blockPlayer):
 		update_ignis_timer_start(delta)
 		return
-	if Input.is_action_just_pressed("ui_interaction") and in_node_area:
-		on_player_area_node.activate()
+		
+	if in_node_area:
+		if Input.is_action_just_pressed("ui_interaction"):
+			on_player_area_node.activate()
+		elif Input.is_action_just_released("ui_interaction") and on_player_area_node.has_method("disactivate"):
+			on_player_area_node.disactivate()
+			
 	
 	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "activated" in on_player_area_node:
 		recharge()
@@ -240,6 +245,8 @@ func _on_Area2D_area_entered(area):
 
 func _on_Area2D_area_exited(area):
 	if on_player_area_node == area:
+		if on_player_area_node.has_method("disactivate"):
+			on_player_area_node.disactivate()
 		in_node_area = false
 	elif area.get_class() == "Stairs":
 		on_stairs -= 1

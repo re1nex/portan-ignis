@@ -80,6 +80,21 @@ func _on_IgnisRegularLevel_not_active():
 	set_process(true)
 	pass # Replace with function body.
 
+
+func _on_Mechanism_active(time):
+	var num = max_height / time
+	linear_vel.y = -num
+	step = -num
+	pass # Replace with function body.
+
+
+func _on_Mechanism_not_active(time):
+	var num = max_height / time
+	linear_vel.y = num
+	step = num
+	pass # Replace with function body.
+
+
 #func _draw():
 #	var s = $CollisionShape2D.shape.extents
 #	var pos = $CollisionShape2D.position
