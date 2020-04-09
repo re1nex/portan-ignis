@@ -52,7 +52,6 @@ func _process(_delta):
 
 func _physics_process(delta):
 	
-	
 	check_chase()
 	
 	##  Moving logic  ##
@@ -182,10 +181,12 @@ func evaluate_roaming():
 		direction = 1.0
 		sprite.flip_h = false
 		$Visibility.scale.x = x_scale
+		$CatchArea.scale.x = x_scale
 	if not $RayDownRight.is_colliding() or $RayRight.is_colliding():
 		direction = -1.0
 		sprite.flip_h = true
 		$Visibility.scale.x = -x_scale
+		$CatchArea.scale.x = -x_scale
 	sprite.animation = "walk"
 
 func evaluate_chasing():
@@ -199,10 +200,12 @@ func evaluate_chasing():
 			direction = 1
 			sprite.flip_h = false
 			$Visibility.scale.x = x_scale
+			$CatchArea.scale.x = x_scale
 		elif target_dir.x < 0:
 			direction = -1
 			sprite.flip_h = true
 			$Visibility.scale.x = -x_scale
+			$CatchArea.scale.x = -x_scale
 		else:
 			ex_direction = direction
 			direction = 0

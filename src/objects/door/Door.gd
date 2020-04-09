@@ -55,7 +55,7 @@ func _process(delta):
 			position.y += height
 			height = 0
 			step = 0
-	update()
+	#update()
 
 func move(delta):
 	var del = position.y
@@ -76,12 +76,13 @@ func _on_IgnisRegularLevel_not_active():
 	pass # Replace with function body.
 
 func _draw():
-	var s = $CollisionShape2D.shape.extents
-	var pos = $CollisionShape2D.position
-	var r = Rect2(Vector2(pos.x - s.x, pos.y - s.y), s * 2)
-	var r2 = Rect2(- $SearchArea/SearchShape.shape.extents + $SearchArea/SearchShape.position, 2 * $SearchArea/SearchShape.shape.extents )
-	draw_rect(r, Color(0.960784, 0, 0))
-	draw_rect(r2, Color(0.9, 0.9, 0))
+#	var s = $CollisionShape2D.shape.extents
+#	var pos = $CollisionShape2D.position
+#	var r = Rect2(Vector2(pos.x - s.x, pos.y - s.y), s * 2)
+#	var r2 = Rect2(- $SearchArea/SearchShape.shape.extents + $SearchArea/SearchShape.position, 2 * $SearchArea/SearchShape.shape.extents )
+#	draw_rect(r, Color(0.960784, 0, 0))
+#	draw_rect(r2, Color(0.9, 0.9, 0))
+	pass
 
 
 func _on_SearchArea_body_entered(body):
