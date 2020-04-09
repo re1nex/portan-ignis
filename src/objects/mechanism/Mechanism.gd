@@ -5,7 +5,7 @@ signal not_active
 
 export var up_time = 7
 export var down_time = 1
-export var corner = PI /2
+export var corner = 2 * PI
 var time
 var body_informator = null
 var activated = false

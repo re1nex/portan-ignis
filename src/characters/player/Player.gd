@@ -245,6 +245,8 @@ func _on_Area2D_area_entered(area):
 
 func _on_Area2D_area_exited(area):
 	if on_player_area_node == area:
+		if on_player_area_node.has_method("disactivate"):
+			on_player_area_node.disactivate()
 		in_node_area = false
 	elif area.get_class() == "Stairs":
 		on_stairs -= 1
