@@ -215,13 +215,22 @@ func _physics_process(delta):
 			position.y -= walk_speed * delta
 			sprite.animation = "jump"
 			sprite.set_frame(1)
+			if not $AudioStairs.playing:
+				$AudioStairs.play()
 		elif Input.is_action_pressed("ui_down"):
 			position.y += walk_speed * delta
 			sprite.animation = "fall"
+			if not $AudioStairs.playing:
+				$AudioStairs.play()
 		else:
 			sprite.animation = "stay"
+			if $AudioStairs.playing:
+				$AudioStairs.stop()
 		
 	else:
+		if $AudioStairs.playing:
+			$AudioStairs.stop()
+				
 		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
