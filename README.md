@@ -39,6 +39,20 @@ Portan Ignis is a puzzle-platformer adventure game developed for PC. The game ta
 
 ![alt text](https://github.com/re1nex/portan-ignis/blob/dev/instruction/run.png)
 
+# Установка для пользователей
+1. Откройте ветку installer
+
+![alt text](https://github.com/re1nex/portan-ignis/blob/dev/instruction/openBranch.png)
+
+2. Скачайте архив с установщиком из репозитория, для этого нужно нажать на кнопку Clone or download, затем Download ZIP
+
+![alt text](https://github.com/re1nex/portan-ignis/blob/dev/instruction/download.png)
+
+3. Распакуйте скачанный архив и запустите setup.exe, лежащий внутри
+4. Следуйте инструкциям внутри установщика
+5. Для запуска игры можете использовать ярлык на рабочем столе (если он был создан) или Portan Ignis.exe в выбранной для установки папке 
+
+
 
 # Правила комментирования коммитов
 1. В начале комментариев указывается номер issuses, к которому он относится (в формате #номер)
