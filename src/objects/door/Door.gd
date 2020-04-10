@@ -84,6 +84,7 @@ func _on_Mechanism_active(time):
 	var num = max_height / time
 	linear_vel.y = -num
 	step = -num
+	set_process(true)
 	pass # Replace with function body.
 
 
