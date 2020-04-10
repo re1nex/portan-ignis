@@ -261,10 +261,10 @@ func _on_IgnisRegularOuter_ignis_regular_taken(type):
 	
 	if type == GlobalVars.Ignis_type.REGULAR :
 		$Informator.has_weapons[GlobalVars.Ignis_type.REGULAR] = true
-		#turn_on_ignis(Ignis_type.REGULAR)
+		turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 		#switch_sprites($iconWithIgnis)
 	
-	if type == GlobalVars.Ignis_type.REGULAR:
+	if type == GlobalVars.Ignis_type.SECTOR:
 		$Informator.has_weapons[GlobalVars.Ignis_type.SECTOR] = true
 		turn_on_ignis(GlobalVars.Ignis_type.SECTOR)
 		#switch_sprites($iconWithIgnis)
