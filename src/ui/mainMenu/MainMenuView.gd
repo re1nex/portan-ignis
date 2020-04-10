@@ -11,13 +11,17 @@ var soundSet=false
 var IgnisPlay=true
 var testPlay=false
 
+var begin=true
 func _ready():
+	if(AudioController.sound!=null):
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=AudioController.sound
 	if OS.window_fullscreen:
 		fullScreen=true
 		_full_Screen()
 	if SceneSwitcher.strech:
 		_stretch()
 	$IgnisSound.play()
+	begin=false
 
 
 func checkIgnisSettings():
@@ -48,10 +52,12 @@ func _input(event):
 			var vol = AudioController.sound-4
 			if(vol<0):vol=0
 			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
+			$TestSound.play()
 		if event.is_action_pressed("ui_right"):
 			var vol = AudioController.sound+4
 			if(vol>100):vol=100
 			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
+			$TestSound.play()
 	if(event.is_action_pressed("ui_accept")):
 		_pressButt()
 		if(!checkClick):
@@ -532,11 +538,16 @@ func _on_CheckBox_stretch_pressed():
 
 
 func _on_HSlider_value_changed(value):
+	if(begin):
+		begin=false
+		return
 	$TestSound.stop()
 	if value==0:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/Label2/Mute.pressed=true
 	else:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
+		$Settings/VBoxContainer/Label2/Mute.pressed=false
 	AudioController.changeVol(value)
 
 

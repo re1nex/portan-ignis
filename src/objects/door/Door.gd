@@ -13,6 +13,7 @@ var bodies_below = 0
 func _ready():
 	src_height = $CollisionShape2D.shape.extents.y
 	max_height = $CollisionShape2D.shape.extents.y * 2
+	set_process(false)
 	pass # Replace with function body.
 
 #func _pro(delta):
@@ -46,6 +47,7 @@ func _process(delta):
 			position.y += height - max_height
 			height = max_height
 			step = 0
+			set_process(false)
 	elif step > 0 and bodies_below == 0:
 		$CollisionShape2D.shape.extents.y = height + src_height
 		var del = move(delta)
@@ -55,6 +57,7 @@ func _process(delta):
 			position.y += height
 			height = 0
 			step = 0
+			set_process(false)
 	#update()
 
 func move(delta):
@@ -67,22 +70,37 @@ func move(delta):
 func _on_IgnisRegularLevel_active():
 	linear_vel.y = -SPEED
 	step = -SPEED
+	set_process(true)
 	pass # Replace with function body.
 
 
 func _on_IgnisRegularLevel_not_active():
 	linear_vel.y = SPEED
 	step = SPEED
+	set_process(true)
 	pass # Replace with function body.
 
-func _draw():
+func _on_Mechanism_active(time):
+	var num = max_height / time
+	linear_vel.y = -num
+	step = -num
+	pass # Replace with function body.
+
+
+func _on_Mechanism_not_active(time):
+	var num = max_height / time
+	linear_vel.y = num
+	step = num
+	pass # Replace with function body.
+
+
+#func _draw():
 #	var s = $CollisionShape2D.shape.extents
 #	var pos = $CollisionShape2D.position
 #	var r = Rect2(Vector2(pos.x - s.x, pos.y - s.y), s * 2)
 #	var r2 = Rect2(- $SearchArea/SearchShape.shape.extents + $SearchArea/SearchShape.position, 2 * $SearchArea/SearchShape.shape.extents )
 #	draw_rect(r, Color(0.960784, 0, 0))
 #	draw_rect(r2, Color(0.9, 0.9, 0))
-	pass
 
 
 func _on_SearchArea_body_entered(body):
