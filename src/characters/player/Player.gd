@@ -153,7 +153,7 @@ func _physics_process(delta):
 	var target_speed = 0
 	if Input.is_action_pressed("ui_left")&&!blockPlayer:
 		target_speed -= 1
-		if(!$AudioStep.playing &&on_floor):$AudioStep.play()
+		#if(!$AudioStep.playing &&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_right") and direction == 1:
 			direction = -1
 			sprite.flip_h = true
@@ -164,7 +164,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("ui_right")||blockPlayer:
 		target_speed += 1
-		if(!$AudioStep.playing&&on_floor):$AudioStep.play()
+		#if(!$AudioStep.playing&&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_left") and direction == -1 &&!blockPlayer:
 			direction = 1
 			sprite.flip_h = false
@@ -177,10 +177,13 @@ func _physics_process(delta):
 	
 	
 	
+	
 	if on_floor:
 		linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 		if sprite.animation == "fall":
 			sprite.animation = "landing"
+			$AudioLanding.play()
+			
 			$TimerLanding.set_wait_time(landing_time)
 			$TimerLanding.start()
 		if $TimerLanding.is_stopped():
@@ -198,6 +201,9 @@ func _physics_process(delta):
 			sprite.animation = "fall"
 			
 	
+	
+	if sprite.animation == "walk" and (sprite.get_frame() == 0 or sprite.get_frame() == 2) and not $AudioStep.playing:
+		$AudioStep.play()
 	# Jumping
 	#if is_on_ceiling():
 		#linear_vel.y = 0
@@ -209,18 +215,28 @@ func _physics_process(delta):
 			position.y -= walk_speed * delta
 			sprite.animation = "jump"
 			sprite.set_frame(1)
-		elif Input.is_action_pressed("ui_down"):
+			if not $AudioStairs.playing:
+				$AudioStairs.play()
+		elif Input.is_action_pressed("ui_down") and not on_floor:
 			position.y += walk_speed * delta
 			sprite.animation = "fall"
+			if not $AudioStairs.playing:
+				$AudioStairs.play()
 		else:
 			sprite.animation = "stay"
+			if $AudioStairs.playing:
+				$AudioStairs.stop()
 		
 	else:
+		if $AudioStairs.playing:
+			$AudioStairs.stop()
+				
 		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 			jumping = true
 			sprite.animation = "jump"
+			$AudioJump.play()
 		
 		elif jumping==true &&!blockPlayer:
 			if Input.is_action_pressed("jump") and height < jump_height_limit:
