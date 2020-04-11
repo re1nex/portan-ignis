@@ -36,12 +36,11 @@ func _ready():
 	$CenterContainer/Settings/Label2/VolLight.set_enemy_visible(false)
 	$CenterContainer/Settings/Label/LightFsc.set_enemy_visible(false)
 	
-	$CenterContainer/Settings/Label2/HSlider.value=AudioController.sound
+	$CenterContainer/Settings/Label2/HSlider.value= Settings.Sound["Volume"]
 	
 	if hide_at_start:
 		$CenterContainer.hide()
-	if OS.window_fullscreen:
-		$CenterContainer/Settings/Label/CheckBox.pressed = true
+	if Settings.Graphics["Fullscreen"]:
 		_full_screen()
 	begin=false
 
@@ -77,12 +76,12 @@ func _input(event):
 			pos=-1
 		if(volSet):
 			if event.is_action_pressed("ui_left"):
-				var vol = AudioController.sound-4
+				var vol = Settings.Sound["Volume"] -4
 				if(vol<0):vol=0
 				$CenterContainer/Settings/Label2/HSlider.value=vol
 				$TestSound.play()
 			if event.is_action_pressed("ui_right"):
-				var vol = AudioController.sound+4
+				var vol = Settings.Sound["Volume"] +4
 				if(vol>100):vol=100
 				$CenterContainer/Settings/Label2/HSlider.value=vol
 				$TestSound.play()
@@ -193,7 +192,7 @@ func _on_backSettings_pressed():
 	$IgnisSound.stop()
 
 func _full_screen():
-	if OS.window_fullscreen:
+	if Settings.Graphics["Fullscreen"]:
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.enable()
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.show()
 	else:
@@ -202,7 +201,7 @@ func _full_screen():
 
 func _on_CheckBox_pressed():
 	$AudioClick.play()
-	OS.window_fullscreen = !OS.window_fullscreen
+	GraphicsController.set_fullscreen(!Settings.Graphics["Fullscreen"])
 	_full_screen()
 
 

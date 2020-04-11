@@ -24,7 +24,7 @@ points = PoolVector2Array( 2.13727, 16, 10.3586, 0, 23.5561, 0, 26.0982, 16 )
 "shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-0/z_index = 0
+0/z_index = 5
 1/name = "Stone 2"
 1/texture = ExtResource( 1 )
 1/tex_offset = Vector2( 0, 0 )
@@ -40,4 +40,4 @@ points = PoolVector2Array( 2.13727, 16, 10.3586, 0, 23.5561, 0, 26.0982, 16 )
 "shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-1/z_index = 0
+1/z_index = 5

@@ -7,6 +7,9 @@
 extents = Vector2( 10.8794, 10.9422 )
 
 [node name="Heart" type="Area2D"]
+z_index = 3
+z_as_relative = false
+collision_layer = 8
 script = ExtResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

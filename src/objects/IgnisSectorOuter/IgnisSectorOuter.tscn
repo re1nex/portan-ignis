@@ -7,6 +7,9 @@
 extents = Vector2( 8.75684, 9.20014 )
 
 [node name="IgnisSectorOuter" type="Area2D"]
+z_index = 3
+z_as_relative = false
+collision_layer = 8
 script = ExtResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

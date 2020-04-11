@@ -2,7 +2,6 @@ extends MarginContainer
 signal ChangePos
 
 var keyboard = false
-var fullScreen = false
 var pos = -1
 var soundLen=0.22
 
@@ -13,12 +12,14 @@ var testPlay=false
 
 var begin=true
 func _ready():
-	if(AudioController.sound!=null):
-		$Settings/VBoxContainer/VolumeSettings/HSlider.value=AudioController.sound
-	if OS.window_fullscreen:
-		fullScreen=true
+	#if(Settings.Sound["Volume"] != null):
+	$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
+	if Settings.Sound["Mute"]:
+		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
+	if Settings.Graphics["Fullscreen"]:
 		_full_Screen()
-	if SceneSwitcher.strech:
+	if Settings.Graphics["Stretching"]:
 		_stretch()
 	$IgnisSound.play()
 	begin=false
@@ -49,12 +50,12 @@ func _input(event):
 		pos=-1
 	if(soundSet):
 		if event.is_action_pressed("ui_left"):
-			var vol = AudioController.sound-4
+			var vol = Settings.Sound["Volume"] -4
 			if(vol<0):vol=0
 			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
 			$TestSound.play()
 		if event.is_action_pressed("ui_right"):
-			var vol = AudioController.sound+4
+			var vol = Settings.Sound["Volume"] +4
 			if(vol>100):vol=100
 			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
 			$TestSound.play()
@@ -241,6 +242,7 @@ func _on_About_pressed():
 func _on_Exit_pressed():
 	$ClickSound.play()
 	while($ClickSound.get_playback_position()<soundLen):pos=-1
+	ConfigSave.save_to()
 	get_tree().quit()
 
 
@@ -256,7 +258,7 @@ func _on_backSettings_pressed():
 
 
 func _full_Screen():
-	if(fullScreen):
+	if(Settings.Graphics["Fullscreen"]):
 		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.enable()
 		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.show()
 	else:
@@ -264,8 +266,7 @@ func _full_Screen():
 
 func _on_CheckBox_pressed():
 	$ClickSound.play()
-	OS.window_fullscreen = !OS.window_fullscreen
-	fullScreen=!fullScreen
+	GraphicsController.set_fullscreen(!Settings.Graphics["Fullscreen"])
 	_full_Screen()
 
 
@@ -519,21 +520,17 @@ func _ChangePos():
 
 
 func _stretch():
-	$Settings/VBoxContainer/stretchSettings/CheckBox.pressed = true
-	$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.enable()
-	$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.show()
+	if Settings.Graphics["Stretching"]:
+		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.enable()
+		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.show()
+	else:
+		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.hide()
 
 
 func _on_CheckBox_stretch_pressed():
 	$ClickSound.play()
-	SceneSwitcher.strech = !SceneSwitcher.strech
-	if SceneSwitcher.strech:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1280, 720))
-		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.enable()
-		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.show()
-	else:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(1280, 720))
-		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.hide()
+	GraphicsController.set_strecthing(!Settings.Graphics["Stretching"])
+	_stretch()
 	pass
 
 
@@ -544,18 +541,16 @@ func _on_HSlider_value_changed(value):
 	$TestSound.stop()
 	if value==0:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
-		$Settings/VBoxContainer/Label2/Mute.pressed=true
 	else:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
-		$Settings/VBoxContainer/Label2/Mute.pressed=false
 	AudioController.changeVol(value)
 
 
 func _on_Mute_pressed():
 	$ClickSound.play()
-	if AudioController.mute:
+	if Settings.Sound["Mute"]:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
-		$Settings/VBoxContainer/VolumeSettings/HSlider.value=AudioController.sound
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 		AudioController.turnVol(true)
 	else:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
