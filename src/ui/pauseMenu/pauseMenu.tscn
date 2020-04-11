@@ -25,7 +25,7 @@ pause_mode = 2
 script = ExtResource( 11 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-light_mask = 2
+light_mask = 4
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
@@ -73,8 +73,11 @@ __meta__ = {
 
 [node name="ContLight" parent="CenterContainer/Pause/Continue" instance=ExtResource( 3 )]
 visible = false
+light_mask = 4
 position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
 
 [node name="Restart" type="Button" parent="CenterContainer/Pause"]
 light_mask = 2
@@ -98,8 +101,11 @@ __meta__ = {
 
 [node name="ResLight" parent="CenterContainer/Pause/Restart" instance=ExtResource( 3 )]
 visible = false
+light_mask = 4
 position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
 
 [node name="Settings" type="Button" parent="CenterContainer/Pause"]
 light_mask = 2
@@ -123,8 +129,11 @@ __meta__ = {
 
 [node name="SetLight" parent="CenterContainer/Pause/Settings" instance=ExtResource( 3 )]
 visible = false
+light_mask = 4
 position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
 
 [node name="MainMenu" type="Button" parent="CenterContainer/Pause"]
 light_mask = 2
@@ -146,8 +155,11 @@ __meta__ = {
 
 [node name="MenuLight" parent="CenterContainer/Pause/MainMenu" instance=ExtResource( 3 )]
 visible = false
+light_mask = 4
 position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
 
 [node name="Settings" type="VBoxContainer" parent="CenterContainer"]
 visible = false
@@ -180,8 +192,11 @@ __meta__ = {
 
 [node name="VolLight" parent="CenterContainer/Settings/Label2" instance=ExtResource( 3 )]
 visible = false
+light_mask = 4
 position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
 
 [node name="Label" type="Label" parent="CenterContainer/Settings"]
 light_mask = 2

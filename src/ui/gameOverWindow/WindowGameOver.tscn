@@ -22,7 +22,7 @@ pause_mode = 2
 script = ExtResource( 4 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-light_mask = 2
+light_mask = 4
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 6.10352e-05
@@ -79,6 +79,8 @@ __meta__ = {
 visible = false
 position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
 
 [node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
 light_mask = 2
@@ -98,8 +100,11 @@ __meta__ = {
 
 [node name="MenuLight" parent="CenterContainer/VBoxContainer/MainMenu" instance=ExtResource( 1 )]
 visible = false
+light_mask = 4
 position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
+range_item_cull_mask = 4
+shadow_item_cull_mask = 4
 
 [node name="AudioClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

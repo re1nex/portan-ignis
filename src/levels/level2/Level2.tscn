@@ -27,7 +27,6 @@ script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 288, 148 )
-z_index = 1
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 672, 208 )

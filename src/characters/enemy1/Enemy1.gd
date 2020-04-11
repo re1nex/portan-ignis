@@ -38,7 +38,8 @@ var sprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#vision_center = Vector2(0, -$BodyShape.shape.height)
-	vision_center = Vector2(0, 0)
+	#vision_center = Vector2(0, 0)
+	vision_center = $VisionPoint.position
 	x_scale = $Visibility.scale.x
 	sprite = $AnimatedSprite
 	pass
@@ -163,7 +164,14 @@ func check_chase():
 	while (i < targets.size()):
 		current = targets[i]
 		target_dir = current.global_position - position - vision_center
-		var res = space_state.intersect_ray(global_position + vision_center, current.global_position, [self], collision_mask, true, true)
+		var res = space_state.intersect_ray(
+			global_position + vision_center, 
+			current.global_position, 
+			[self], 
+			#ProjectSettings.get_setting("layer_names/2d_physics/layer_3"), 
+			1 << 2,
+			true, 
+			true)
 		if not res and target_dir.x * direction > 0:
 			mode = CHASING
 			recent_tar = current

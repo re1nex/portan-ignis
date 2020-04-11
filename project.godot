@@ -198,6 +198,20 @@ jump={
  ]
 }
 
+[layer_names]
+
+2d_render/layer_1="Landscape"
+2d_physics/layer_1="Player"
+2d_render/layer_2="UI"
+2d_physics/layer_2="Enemy"
+2d_render/layer_3="Menu"
+2d_physics/layer_3="Blocks/Platforms"
+2d_physics/layer_4="Objects_Player"
+2d_physics/layer_5="Light"
+2d_physics/layer_6="Menu_Light"
+2d_physics/layer_7="Objects_Common"
+2d_physics/layer_8="Objects_Enemy"
+
 [rendering]
 
 quality/2d/use_pixel_snap=true
