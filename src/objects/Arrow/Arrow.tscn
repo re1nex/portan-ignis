@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/objects/Arrow/Arrow.gd" type="Script" id=1]
+
+[node name="Arrow" type="Area2D"]
+gravity = 300.0
+collision_layer = 0
+collision_mask = 71
+script = ExtResource( 1 )
+speed = 300
+
+[node name="ArrowPoly" type="Polygon2D" parent="."]
+position = Vector2( -1, 0 )
+polygon = PoolVector2Array( -3, -3, 6, 0, -3, 3 )
+
+[node name="Shape" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -4, -3, 5, 0, -4, 3 )
+[connection signal="body_entered" from="." to="." method="_on_Arrow_body_entered"]
