@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://resource/sprites/objects/door.png" type="Texture" id=1]
 [ext_resource path="res://src/objects/door/Door.gd" type="Script" id=2]
+[ext_resource path="res://resource/sounds/objects/door/doorLoop.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -29,5 +30,9 @@ collision_mask = 3
 [node name="SearchShape" type="CollisionShape2D" parent="SearchArea"]
 position = Vector2( 0, 35 )
 shape = SubResource( 2 )
+
+[node name="AudioLoop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+max_distance = 500.0
 [connection signal="body_entered" from="SearchArea" to="." method="_on_SearchArea_body_entered"]
 [connection signal="body_exited" from="SearchArea" to="." method="_on_SearchArea_body_exited"]

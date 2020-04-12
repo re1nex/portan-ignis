@@ -278,11 +278,13 @@ func _on_IgnisRegularOuter_ignis_regular_taken(type):
 	if type == GlobalVars.Ignis_type.REGULAR :
 		$Informator.has_weapons[GlobalVars.Ignis_type.REGULAR] = true
 		turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
+		$AudioIgnisOn.play()
 		#switch_sprites($iconWithIgnis)
 	
 	if type == GlobalVars.Ignis_type.SECTOR:
 		$Informator.has_weapons[GlobalVars.Ignis_type.SECTOR] = true
 		turn_on_ignis(GlobalVars.Ignis_type.SECTOR)
+		$AudioPickUp.play()
 		#switch_sprites($iconWithIgnis)
 	pass # Replace with function body.
 
@@ -414,6 +416,7 @@ func recharge():
 			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 			#switch_sprites($iconWithIgnis)
 		turn_on_ignis($Informator.num_of_active_weapon)
+		$AudioIgnisOn.play()
 		emit_signal("torch_reloaded")
 
 
@@ -485,11 +488,13 @@ func switch_weapons(type):
 			changeIgnis=true
 			turn_off_ignis()
 		turn_on_ignis(type)
+		$AudioIgnisSwitch.play()
 		emit_signal("torch_changed")
 
 
 func _on_Lever_lever_taken():
 	$Informator.has_instruments[GlobalVars.Instruments_type.LEVER] += 1
+	$AudioPickUp.play()
 	pass # Replace with function body.
 
 func after_die():
@@ -502,6 +507,7 @@ func after_die():
 
 func take_heart():
 	if $Informator.health < MAX_HEALTH:
+		$AudioPickUp.play()
 		$Informator.health += 1
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart

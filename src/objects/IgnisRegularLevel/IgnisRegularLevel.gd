@@ -48,6 +48,7 @@ func activate():
 	else:
 		if body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
 			$AudioOff.stop()
+			$AudioOn.play()
 			$AudioLoop.play()
 			activated = true
 			$Light2D.enable()
