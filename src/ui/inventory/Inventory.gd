@@ -44,7 +44,7 @@ func update():
 		$Control/Weapons.add_child(node)
 	
 	#INSTRUMENTS
-	if informator.has_instruments[GlobalVars.Instruments_type.LEVER]>0:
+	for i in range(informator.has_instruments[GlobalVars.Instruments_type.LEVER]):
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
 		node.set_picture("res://resource/sprites/objects/DungeonCrawl_ProjectUtumnoTileset.png")
 		$Control/Instruments.add_child(node)
