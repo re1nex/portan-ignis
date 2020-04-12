@@ -357,6 +357,7 @@ func turn_on_ignis(num):
 		$AudioIngisLoop.play()
 	update_ignis()
 	weapons[num].enable()
+	$AudioIgnisOn.play()
 	emit_signal("torch_changed")
 
 func turn_on_ignis_timer():
