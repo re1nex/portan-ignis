@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://resource/tileres/flowers_grass.tres" type="TileSet" id=1]
 [ext_resource path="res://resource/tileres/background_stone.tres" type="TileSet" id=2]
@@ -6,8 +6,10 @@
 [ext_resource path="res://resource/tileres/cavern_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=5]
 [ext_resource path="res://src/objects/door/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/levels/level4/Level4Landscape.gd" type="Script" id=7]
 
 [node name="Level4Landscape" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="Landscape" type="Node2D" parent="."]
 
@@ -51,6 +53,12 @@ collision_layer = 0
 collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 29, 0, 458756, 327683, 0, 458755, 327693, 0, 458755, 458775, 0, 458756, 720926, 0, 327684, 851991, 0, 458755, 983055, 0, 458756, 983060, 0, 327684 )
+
+[node name="PositionLU" type="Position2D" parent="."]
+position = Vector2( -32, -192 )
+
+[node name="PositionRD" type="Position2D" parent="."]
+position = Vector2( 1280, 384 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
