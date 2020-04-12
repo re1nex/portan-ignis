@@ -45,10 +45,13 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
+Settings="*res://src/globals/settings/Settings.gd"
+AudioController="*res://src/globals/settings/AudioController.gd"
+GraphicsController="*res://src/globals/settings/GraphicsController.gd"
+ConfigSave="*res://src/globals/config_save/ConfigSave.gd"
 GlobalVars="*res://src/globals/global_vars/GlobalVars.gd"
 SceneSwitcher="*res://src/globals/sceneSwitcher/SceneSwitcher.gd"
 Transfer="*res://src/globals/transfer/Transfer.gd"
-AudioController="*res://src/globals/audio/AudioController.gd"
 
 [display]
 
@@ -194,6 +197,20 @@ jump={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_render/layer_1="Landscape"
+2d_physics/layer_1="Player"
+2d_render/layer_2="UI"
+2d_physics/layer_2="Enemy"
+2d_render/layer_3="Menu"
+2d_physics/layer_3="Blocks/Platforms"
+2d_physics/layer_4="Objects_Player"
+2d_physics/layer_5="Light"
+2d_physics/layer_6="Menu_Light"
+2d_physics/layer_7="Objects_Common"
+2d_physics/layer_8="Objects_Enemy"
 
 [rendering]
 

@@ -11,8 +11,6 @@ enum Scenes{
 
 var cur_scene
 
-var strech = false
-
 func _ready():
 	cur_scene = Scenes.SCENE_MAIN_MENU
 	
