@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://resource/sounds/ignis/lighterClick.wav" type="AudioStream" id=1]
+[ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=1]
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_level/torchOff.png" type="Texture" id=2]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.gd" type="Script" id=4]
