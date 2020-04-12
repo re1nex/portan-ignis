@@ -45,13 +45,15 @@ func shoot(where):
 		$Sprite.flip_h = false
 	if dir.x * $ArrowPos.position.x < 0:
 		$ArrowPos.position.x *= -1
-	var a_pos = global_position + $ArrowPos.position
+	var a_pos = position + $ArrowPos.position
 	dir = where - a_pos
 	var b = arrow.instance()
 	var v = b.speed
 	var g = b.gravity
 	var k = (sqrt(pow(v,4) + 2 * dir.y * g * v * v - pow(dir.x, 2) * g * g) - v * v) /(dir.x * g)
 	var a = atan(k)
+	if dir.x < 0:
+		a += PI
 	b.start(a_pos, a)
 	get_parent().add_child(b)
 	can_shoot = false

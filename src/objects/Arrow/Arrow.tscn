@@ -1,18 +1,28 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/objects/Arrow/Arrow.gd" type="Script" id=1]
+[ext_resource path="res://resource/sprites/objects/Arrow.png" type="Texture" id=2]
 
 [node name="Arrow" type="Area2D"]
+position = Vector2( 10, 0 )
+scale = Vector2( 0.3, 0.3 )
 gravity = 300.0
 collision_layer = 0
 collision_mask = 71
 script = ExtResource( 1 )
 speed = 300
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -42, 4.15 )
+rotation = 1.5708
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+
 [node name="ArrowPoly" type="Polygon2D" parent="."]
+visible = false
 position = Vector2( -1, 0 )
-polygon = PoolVector2Array( -3, -3, 6, 0, -3, 3 )
+polygon = PoolVector2Array( -3, -3, 6, 0, -3, 3, -3, 1, -37, 1, -37, -1, -3, -1 )
 
 [node name="Shape" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -4, -3, 5, 0, -4, 3 )
+polygon = PoolVector2Array( -6.2, -5.8, 12, 0, -6.2, 5.8 )
 [connection signal="body_entered" from="." to="." method="_on_Arrow_body_entered"]

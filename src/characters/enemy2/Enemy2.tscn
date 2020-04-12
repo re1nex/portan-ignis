@@ -14,7 +14,7 @@ radius = 300.0
 collision_layer = 6
 collision_mask = 5
 script = ExtResource( 1 )
-fire_rate = 0.1
+fire_rate = 0.5
 arrow = ExtResource( 3 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
@@ -28,7 +28,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="ArrowPos" type="Position2D" parent="."]
-position = Vector2( 15, -10 )
+position = Vector2( 25, -10 )
 
 [node name="Visibility" type="Area2D" parent="."]
 collision_layer = 0
