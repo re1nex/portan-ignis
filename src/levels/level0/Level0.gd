@@ -15,6 +15,7 @@ func _ready():
 	$WindowGameOver/CenterContainer.hide()
 	$WinWindow/CenterContainer.hide()
 	$Player.new_lvl()
+	MusicController.playMusic(true)
 
 
 func _on_Player_die():
@@ -23,4 +24,5 @@ func _on_Player_die():
 	#get_tree().paused = true
 	$WindowGameOver._closeBefore()
 	$WindowGameOver.show()
+	MusicController.playMusic(false)
 	pass # Replace with function body.

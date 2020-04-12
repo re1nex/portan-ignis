@@ -309,16 +309,22 @@ func _on_backHelp_pressed():
 
 func _on_level0_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_0)
 
 func _on_level1_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
 
 func _on_level2_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_2)
 
 

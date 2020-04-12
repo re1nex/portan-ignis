@@ -228,6 +228,7 @@ func _on_Settings_pressed():
 
 
 func _on_MainMenu_pressed():
+	MusicController.playMusic(false)
 	$IgnisSound.stop()
 	$AudioClick.play()
 	pos=-1
@@ -288,6 +289,7 @@ func _on_backSettings_mouse_exited():
 
 
 func _on_Restart_pressed():
+	MusicController.playMusic(false)
 	$IgnisSound.stop()
 	$AudioClick.play()
 	$CenterContainer/Pause/Restart/ResLight.hide()

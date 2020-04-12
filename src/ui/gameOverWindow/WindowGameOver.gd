@@ -21,14 +21,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func _musicPlay(num):
-	if(num==1):$music.play()
-	elif(num==2):$music2.play()
-	elif(num==3):$music3.play()
+
 
 
 func show():
-	_musicPlay(randi()%3+1)
+	$music.play()
 	$CenterContainer.show()
 
 
