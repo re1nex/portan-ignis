@@ -46,8 +46,12 @@ func shoot(where):
 	if dir.x * $ArrowPos.position.x < 0:
 		$ArrowPos.position.x *= -1
 	var a_pos = global_position + $ArrowPos.position
+	dir = where - a_pos
 	var b = arrow.instance()
-	var a = (where - a_pos).angle() - 0.0015 * dir.x
+	var v = b.speed
+	var g = b.gravity
+	var k = (sqrt(pow(v,4) + 2 * dir.y * g * v * v - pow(dir.x, 2) * g * g) - v * v) /(dir.x * g)
+	var a = atan(k)
 	b.start(a_pos, a)
 	get_parent().add_child(b)
 	can_shoot = false
