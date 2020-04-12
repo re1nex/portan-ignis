@@ -13,17 +13,19 @@ func _ready():
 	$Control.hide()
 	pass # Replace with function body.
 
+
 func _input(event):
 	if event.is_action_pressed("ui_inventory"):
-		if active:
+		if not active:
+			active = true
+			update()
+			$Control.show()
+			get_tree().paused = true
+		else:
 			$Control.hide()
 			clear()
 			active = false
-		else:
-			update()
-			$Control.show()
-			active = true
-
+			get_tree().paused = false
 
 func set_player(player):
 	informator = player.get_informator()
