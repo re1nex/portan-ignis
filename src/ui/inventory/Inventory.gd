@@ -21,11 +21,13 @@ func _input(event):
 			update()
 			$Control.show()
 			get_tree().paused = true
+			pause_mode = PAUSE_MODE_PROCESS
 		else:
 			$Control.hide()
 			clear()
 			active = false
 			get_tree().paused = false
+			pause_mode = PAUSE_MODE_INHERIT
 
 func set_player(player):
 	informator = player.get_informator()
