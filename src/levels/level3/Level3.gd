@@ -31,6 +31,7 @@ func _ready():
 	$WindowGameOver/CenterContainer.hide()
 	$Inventory.set_player($Player)
 	$Player.new_lvl()
+	MusicController.playMusic(true)
 
 
 
@@ -39,12 +40,14 @@ func _on_Player_die():
 	$Player.after_die()
 	$WindowGameOver._closeBefore()
 	$WindowGameOver.show()
+	MusicController.playMusic(false)
 
 
 func _on_Win_body_entered(body):
 	if body.has_method("get_informator"):
 		$WinWindow.show()
 		$Player.goAway()
+		MusicController.playMusic(false)
 
 
 func _on_End_body_entered(body):
