@@ -70,7 +70,7 @@ func _physics_process(delta):
 		evaluate_chasing()
 		# jumping while chasing #
 		var tar_tg = target_dir.y / abs(target_dir.x)
-		if on_floor and target_dir.y < -SMALL_RADIUS and tar_tg < -0.75 and can_jump:
+		if on_floor and target_dir.y < -SMALL_RADIUS and tar_tg < -0.65 and can_jump:
 			can_jump = false
 			$JumpTimer.start()
 			velocity.y = -jump_speed

@@ -232,6 +232,7 @@ func _physics_process(delta):
 			$AudioStairs.stop()
 				
 		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
+			floor_vel = get_floor_velocity()
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 			jumping = true
