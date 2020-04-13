@@ -4,12 +4,12 @@ signal falls
 signal win
 
 func _ready():
-	$Player.prepare_camera($Level3Landscape.posLU, $Level3Landscape.posRD)
+	$Player.prepare_camera($Level2Landscape.posLU, $Level2Landscape.posRD)
 	connect("falls", self, "_on_Player_die")
 	$Player.connect("die", self, "_on_Player_die")
 	
-	$Ignises/IgnisDoor.connect("active", $Level3Landscape/Doors/Door2, "_on_IgnisRegularLevel_active")
-	$Ignises/IgnisDoor.connect("not_active", $Level3Landscape/Doors/Door2, "_on_IgnisRegularLevel_not_active")
+	$Ignises/IgnisDoor.connect("active", $Level2Landscape/Doors/Door2, "_on_IgnisRegularLevel_active")
+	$Ignises/IgnisDoor.connect("not_active", $Level2Landscape/Doors/Door2, "_on_IgnisRegularLevel_not_active")
 	$Ignises/IgnisDoor.activate_at_start()
 	$Ignises/IgnisActivated.activate_at_start()
 	

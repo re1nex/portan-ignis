@@ -12,7 +12,6 @@
 [ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=11]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 32 )
 
@@ -22,10 +21,10 @@ extents = Vector2( 32, 64 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 48.2012, 91.917 )
 
-[node name="Level3" type="Node2D"]
+[node name="Level2" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Level3Landscape" parent="." instance=ExtResource( 3 )]
+[node name="Level2Landscape" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 288, 148 )
@@ -61,7 +60,7 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Win" type="Area2D" parent="."]
-position = Vector2( 1416, 32 )
+position = Vector2( 1368, 40 )
 __meta__ = {
 "_edit_group_": true
 }
