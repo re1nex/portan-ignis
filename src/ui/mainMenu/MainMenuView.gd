@@ -86,7 +86,7 @@ func _pressButt():
 			_on_About_pressed()
 		return
 	if($StartView.is_visible_in_tree()):
-		if(pos==3 && $StartView/BackStart/LightBackStart.is_visible_in_tree()):
+		if(pos==4 && $StartView/BackStart/LightBackStart.is_visible_in_tree()):
 			_on_BackStart_pressed()
 			return
 		if(pos==0 && $StartView/VBoxContainer/level0/LightLevel0.is_visible_in_tree()):
@@ -96,6 +96,8 @@ func _pressButt():
 			_on_level1_pressed()
 		if(pos==2 && $StartView/VBoxContainer/level2/LightLevel2.is_visible_in_tree()):
 			_on_level2_pressed()
+		if(pos==3 && $StartView/VBoxContainer/level3/LightLevel3.is_visible_in_tree()):
+			_on_level3_pressed()
 		return
 	if($Settings.is_visible_in_tree() && $Settings.is_visible_in_tree()):
 		if(pos>=4 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
@@ -157,7 +159,7 @@ func _closeBeforeChange():
 			_on_About_mouse_exited()
 		return
 	if($StartView.is_visible_in_tree()):
-		if(pos==3):
+		if(pos==4):
 			_on_BackStart_mouse_exited()
 			return
 		if(pos==0):
@@ -167,6 +169,9 @@ func _closeBeforeChange():
 			_on_level1_mouse_exited()
 		if(pos==2):
 			_on_level2_mouse_exited()
+			return
+		if(pos==3):
+			_on_level3_mouse_exited()
 			return
 		return
 	if($Settings.is_visible_in_tree()):
@@ -304,6 +309,10 @@ func _on_level1_pressed():
 func _on_level2_pressed():
 	pos=0
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_2)
+	
+func _on_level3_pressed():
+	pos=0
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_3)
 
 
 
@@ -398,6 +407,19 @@ func _on_level2_mouse_exited():
 	IgnisPlay=false
 	$StartView/VBoxContainer/level2/LightLevel2.hide()
 
+func _on_level3_mouse_entered():
+	pos=3
+	$IgnisSound.play()
+	IgnisPlay=true
+	$StartView/VBoxContainer/level3/LightLevel3.show()
+	$StartView/VBoxContainer/level3/LightLevel3.enable()
+
+
+func _on_level3_mouse_exited():
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/VBoxContainer/level3/LightLevel3.hide()
+
 func _on_BackStart_pressed():
 	pos=0
 	$StartView/BackStart/LightBackStart.hide()
@@ -484,7 +506,7 @@ func _ChangePos():
 			_on_About_mouse_entered()
 		return
 	if($StartView.is_visible_in_tree()):
-		if(pos>=3):
+		if(pos>=4):
 			_on_BackStart_mouse_entered()
 			return
 		if(pos==0):
@@ -494,6 +516,8 @@ func _ChangePos():
 			_on_level1_mouse_entered()
 		if(pos==2):
 			_on_level2_mouse_entered()
+		if(pos==3):
+			_on_level3_mouse_entered()
 		return
 	if($Settings.is_visible_in_tree()):
 		if(pos>=4):
