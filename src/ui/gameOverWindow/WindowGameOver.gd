@@ -7,10 +7,10 @@ var pos = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#var en = $CenterContainer/VBoxContainer/Restart/ResLight.Ignis_layer.MENU
+	var en = $CenterContainer/VBoxContainer/Restart/ResLight.Ignis_layer.MENU
 	
-	#$CenterContainer/VBoxContainer/Restart/ResLight.set_light_layer(en)
-	#$CenterContainer/VBoxContainer/MainMenu/MenuLight.set_light_layer(en)
+	$CenterContainer/VBoxContainer/Restart/ResLight.set_light_layer(en)
+	$CenterContainer/VBoxContainer/MainMenu/MenuLight.set_light_layer(en)
 	
 	$CenterContainer/VBoxContainer/Restart/ResLight.disable()
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.disable()

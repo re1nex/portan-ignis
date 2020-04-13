@@ -334,6 +334,9 @@ func _on_level2_pressed():
 	
 func _on_level3_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
+	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_3)
 
 
