@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://resource/sprites/characters/player/player.png" type="Texture" id=1]
 [ext_resource path="res://src/characters/player/Player.gd" type="Script" id=2]
@@ -14,29 +14,31 @@
 [ext_resource path="res://resource/sounds/player/landing.wav" type="AudioStream" id=12]
 [ext_resource path="res://resource/sounds/player/jump.wav" type="AudioStream" id=13]
 [ext_resource path="res://resource/sounds/player/stairs.wav" type="AudioStream" id=14]
+[ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=15]
+[ext_resource path="res://resource/sounds/objects/pickUpSound.wav" type="AudioStream" id=16]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.8201
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 64 )
+region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 64 )
+region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
@@ -44,42 +46,42 @@ region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 64, 64 )
+region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "stay",
+"name": "landing",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "fall",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 8 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
-"name": "landing",
+"name": "stay",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
 "loop": false,
 "name": "jump",
 "speed": 15.0
+}, {
+"frames": [ SubResource( 10 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
@@ -176,5 +178,14 @@ stream = ExtResource( 13 )
 stream = ExtResource( 14 )
 volume_db = -5.0
 pitch_scale = 2.0
+
+[node name="AudioIgnisSwitch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="AudioPickUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="AudioIgnisOn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]

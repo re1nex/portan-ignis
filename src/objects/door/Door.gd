@@ -47,7 +47,7 @@ func _process(delta):
 			position.y += height - max_height
 			height = max_height
 			step = 0
-			set_process(false)
+			stop_process()
 	elif step > 0 and bodies_below == 0:
 		$CollisionShape2D.shape.extents.y = height + src_height
 		var del = move(delta)
@@ -57,7 +57,7 @@ func _process(delta):
 			position.y += height
 			height = 0
 			step = 0
-			set_process(false)
+			stop_process()
 	#update()
 
 func move(delta):
@@ -71,6 +71,7 @@ func _on_IgnisRegularLevel_active():
 	linear_vel.y = -SPEED
 	step = -SPEED
 	set_process(true)
+	$AudioLoop.play()
 	pass # Replace with function body.
 
 
@@ -78,6 +79,7 @@ func _on_IgnisRegularLevel_not_active():
 	linear_vel.y = SPEED
 	step = SPEED
 	set_process(true)
+	$AudioLoop.play()
 	pass # Replace with function body.
 
 func _on_Mechanism_active(time):
@@ -85,6 +87,7 @@ func _on_Mechanism_active(time):
 	linear_vel.y = -num
 	step = -num
 	set_process(true)
+	$AudioLoop.play()
 	pass # Replace with function body.
 
 
@@ -113,3 +116,8 @@ func _on_SearchArea_body_exited(body):
 	bodies_below -= 1
 	pass # Replace with function body.
 
+
+func stop_process():
+	$AudioLoop.stop()
+	$AudioLoop.seek(0)
+	set_process(false)

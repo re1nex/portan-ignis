@@ -171,12 +171,14 @@ func _closeBeforeChange():
 
 func process_pause():
 	if game_paused:
+		pause_mode = PAUSE_MODE_PROCESS
 		get_tree().paused = true
 		$CenterContainer.show()
 	else:
 		get_tree().paused = false
 		reset_menu();
 		$CenterContainer.hide()
+		pause_mode = PAUSE_MODE_INHERIT
 
 func reset_menu():
 	$CenterContainer/Settings.hide()
