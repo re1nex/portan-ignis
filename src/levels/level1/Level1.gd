@@ -1,23 +1,37 @@
 extends Node2D
 
-
 func _ready():
 	$Level1Landscape/IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
+	$Level1Landscape/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
 	$Player.prepare_camera($Level1Landscape.posLU, $Level1Landscape.posRD)
 	$Player.connect("die", self, "_on_Player_die")
 	$Level1Landscape.connect("level_complete", self, "complete")
-	$WinWindow/MarginContainer.hide()
+	$WinWindow/CenterContainer.hide()
 	$Menu/HUD.init_player($Player)
-	$WindowGameOver/MarginContainer.hide()
+	$WindowGameOver/CenterContainer.hide()
 	$Player.hit()
-	
-	
+	$Player.new_lvl()
+	MusicController.playMusic(true)
+
+
 func _on_Player_die():
-	get_tree().paused = true
+	$Player.after_die()
 	$WindowGameOver._closeBefore()
-	$WindowGameOver/MarginContainer.show()
+	$WindowGameOver.show()
+	MusicController.playMusic(false)
 	pass # Replace with function body.
 	
 func complete():
-	$WinWindow/MarginContainer.show()
-	get_tree().paused = true
+	$Player.goAway()
+	$WinWindow.show()
+	Transfer.copy_chars($Player)
+	MusicController.playMusic(false)
+	#get_tree().paused = true
+
+
+
+
+
+
+func _on_Level1Landscape_player_stop():
+	$Player.endLevel=true

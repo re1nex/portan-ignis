@@ -2,17 +2,47 @@ extends MarginContainer
 signal ChangePos
 
 var keyboard = false
-var fullScreen = false
 var pos = -1
 var soundLen=0.22
 
-func _ready():
-	if OS.window_fullscreen:
-		fullScreen=true
-		_full_Screen()
-	if SceneSwitcher.strech:
-		_stretch()
+var checkClick=false
+var soundSet=false
+var IgnisPlay=true
+var testPlay=false
+var secondPlay=false
 
+var begin=true
+func _ready():
+	#if(Settings.Sound["Volume"] != null):
+	$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
+	if Settings.Sound["Mute"]:
+		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
+	if Settings.Graphics["Fullscreen"]:
+		_full_Screen()
+	if Settings.Graphics["Stretching"]:
+		_stretch()
+	$IgnisSound.play()
+	begin=false
+	$Music2.stop()
+	secondPlay=false
+	$Music.play()
+	
+
+func _process(delta):
+	if(!secondPlay):
+		if(!$Music.is_playing()):
+			secondPlay=true
+			$Music2.play()
+			return
+	else:
+		if(!$Music2.is_playing()):
+			secondPlay=false
+			$Music.play()
+
+
+func checkIgnisSettings():
+	return $Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.is_visible_in_tree()||$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.is_visible_in_tree()||$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.is_visible_in_tree()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -34,71 +64,101 @@ func _input(event):
 		_closeBeforeChange()
 		_backToMain()
 		pos=-1
+	if(soundSet):
+		if event.is_action_pressed("ui_left"):
+			var vol = Settings.Sound["Volume"] -4
+			if(vol<0):vol=0
+			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
+			$TestSound.play()
+		if event.is_action_pressed("ui_right"):
+			var vol = Settings.Sound["Volume"] +4
+			if(vol>100):vol=100
+			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
+			$TestSound.play()
 	if(event.is_action_pressed("ui_accept")):
 		_pressButt()
-		_closeBeforeChange()
-		pos=-1
+		if(!checkClick):
+			_closeBeforeChange()
+			pos=-1
+		checkClick=false
 
 
 
 func _pressButt():
-	if($HBoxContainer/VBoxContainer/mainView.is_visible_in_tree()):
-		if(pos==4 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.switchingOff):
+	if($Main/mainView.is_visible_in_tree()):
+		if(pos==4 && $Main/mainView/Exit/LightExit.is_visible_in_tree()):
 			_on_Exit_pressed()
 			return
-		if(pos==0 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.switchingOff):
+		if(pos==0 && $Main/mainView/Start/LightStart.is_visible_in_tree()):
 			_on_Start_pressed()
 			return
-		if(pos==1 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.switchingOff):
+		if(pos==1 && $Main/mainView/Settings/LightSettings.is_visible_in_tree()):
 			_on_Settings_pressed()
 			return
-		if(pos==2 && !$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.switchingOff):
+		if(pos==2 && $Main/mainView/Help/LightHelp.is_visible_in_tree()):
 			_on_Help_pressed()
 			return
-		if(pos==3 && !$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.switchingOff):
+		if(pos==3 && $Main/mainView/About/LightAbout.is_visible_in_tree()):
 			_on_About_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos==3 && !$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.switchingOff):
+	if($StartView.is_visible_in_tree()):
+		if(pos==4 && $StartView/BackStart/LightBackStart.is_visible_in_tree()):
 			_on_BackStart_pressed()
 			return
-		if(pos==0 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.switchingOff):
+		if(pos==0 && $StartView/VBoxContainer/level0/LightLevel0.is_visible_in_tree()):
 			_on_level0_pressed()
 			return
-		if(pos==1 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.switchingOff):
+		if(pos==1 && $StartView/VBoxContainer/level1/LightLevel1.is_visible_in_tree()):
 			_on_level1_pressed()
-		if(pos==2 && !$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.switchingOff):
+		if(pos==2 && $StartView/VBoxContainer/level2/LightLevel2.is_visible_in_tree()):
 			_on_level2_pressed()
+		if(pos==3 && $StartView/VBoxContainer/level3/LightLevel3.is_visible_in_tree()):
+			_on_level3_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.switchingOff):
-		_on_backSettings_pressed()
+	if($Settings.is_visible_in_tree() && $Settings.is_visible_in_tree()):
+		if(pos>=4 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
+			_on_backSettings_pressed()
+			return
+		if(pos==0 && $Settings/VBoxContainer/Label/LightFsc.is_visible_in_tree()):
+			_on_CheckBox_pressed()
+			checkClick=true
+			$Settings/VBoxContainer/Label/LightFsc.show()
+			return
+		if(pos==1 && $Settings/VBoxContainer/stretchSettings/LightStr.is_visible_in_tree()):
+			_on_CheckBox_stretch_pressed()
+			checkClick=true
+			return
+		if(pos==2 && $Settings/VBoxContainer/Label2/LightMut.is_visible_in_tree()):
+			_on_Mute_pressed()
+			checkClick=true
+			return
 		return
-	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.switchingOff):
+	if($About.is_visible_in_tree() && $About/BackAbout/LightBackAbout.is_visible_in_tree()):
 		_on_BackAbout_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree() && !$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.switchingOff):
+	if($Help.is_visible_in_tree() && $Help/BackHelp/LightbackHelp.is_visible_in_tree()):
 		_on_backHelp_pressed()
 		return
 
 func _backToMain():
-	if($HBoxContainer/VBoxContainer/mainView.is_visible_in_tree()):
-		_closeBeforeChange()
-		return
-	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
+	if(!IgnisPlay):
+		$IgnisSound.play()
+		IgnisPlay=true
+	if($StartView.is_visible_in_tree()):
 		_on_BackStart_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree()):
+	if($Settings.is_visible_in_tree()):
 		_on_backSettings_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree()):
+	if($About.is_visible_in_tree()):
 		_on_BackAbout_pressed()
 		return
-	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree()):
+	if($Help.is_visible_in_tree()):
 		_on_backHelp_pressed()
 		return
 
 func _closeBeforeChange():
-	if($HBoxContainer/VBoxContainer/mainView.is_visible_in_tree()):
+	if($Main/mainView.is_visible_in_tree()):
 		if(pos==4):
 			_on_Exit_mouse_exited()
 			return
@@ -114,8 +174,8 @@ func _closeBeforeChange():
 		if(pos==3):
 			_on_About_mouse_exited()
 		return
-	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos==3):
+	if($StartView.is_visible_in_tree()):
+		if(pos==4):
 			_on_BackStart_mouse_exited()
 			return
 		if(pos==0):
@@ -126,75 +186,84 @@ func _closeBeforeChange():
 		if(pos==2):
 			_on_level2_mouse_exited()
 			return
+		if(pos==3):
+			_on_level3_mouse_exited()
+			return
 		return
-	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree()):
-		_on_backSettings_mouse_exited()
+	if($Settings.is_visible_in_tree()):
+		if(pos>=4):
+			_on_backSettings_mouse_exited()
+			return
+		if(pos==0):
+			_on_Label_mouse_exited()
+			return
+		if(pos==1):
+			_on_stretchSettings_mouse_exited()
+			return
+		if(pos==2):
+			_on_Label2_mouse_exited()
+			return
+		if(pos==3):
+			_on_VolumeSettings_mouse_exited()
 		return
-	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree()):
+	if($About.is_visible_in_tree()):
 		_on_BackAbout_mouse_exited()
 		return
-	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree()):
+	if($Help.is_visible_in_tree()):
 		_on_backHelp_mouse_exited()
 		return
 
 
-func _disableMain():
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.hide()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.hide()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.hide()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.hide()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.disable()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.hide()
-
-func _disableStart():
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.disable()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.hide()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.disable()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.hide()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.disable()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.hide()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.disable()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.hide()
-
 func _on_Start_pressed():
+	$IgnisSound.stop()
+	IgnisPlay=false
 	pos=-1
+	$Main/mainView/Start/LightStart.hide()
+	$Main/Logo.hide()
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/mainView.hide()
-	$HBoxContainer/VBoxContainer/StartView.show()
-	_disableMain()
+	$Main/mainView.hide()
+	$StartView.show()
 
 func _on_Settings_pressed():
 	pos=-1
+	$Main/mainView/Settings/LightSettings.hide()
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/mainView.hide()
-	$HBoxContainer/Logo.hide()
-	$HBoxContainer/VBoxContainer/Settings.show()
-	_disableMain()
+	$Main/mainView.hide()
+	$Main/Logo.hide()
+	$Settings.show()
+	if(checkIgnisSettings()):
+		$IgnisSound.play()
+		IgnisPlay=true
+	else:
+		$IgnisSound.stop()
+		IgnisPlay=false
 
 func _on_Help_pressed():
+	$IgnisSound.stop()
+	IgnisPlay=false
 	pos=-1
+	$Main/mainView/Help/LightHelp.hide()
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/mainView.hide()
-	$HBoxContainer/VBoxContainer/Help.show()
-	_disableMain()
+	$Main/Logo.hide()
+	$Main/mainView.hide()
+	$Help.show()
 
 
 func _on_About_pressed():
+	$IgnisSound.stop()
+	IgnisPlay=false
 	pos=-1
+	$Main/mainView/About/LightAbout.hide()
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/mainView.hide()
-	$HBoxContainer/Logo.hide()
-	$HBoxContainer/VBoxContainer/About.show()
-	_disableMain()
+	$Main/mainView.hide()
+	$Main/Logo.hide()
+	$About.show()
 
 
 func _on_Exit_pressed():
 	$ClickSound.play()
 	while($ClickSound.get_playback_position()<soundLen):pos=-1
+	ConfigSave.save_to()
 	get_tree().quit()
 
 
@@ -203,24 +272,22 @@ func _on_Exit_pressed():
 func _on_backSettings_pressed():
 	pos=-1
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/Settings.hide()
-	$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.disable()
-	$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.hide()
-	$HBoxContainer/VBoxContainer/mainView.show()
-	$HBoxContainer/Logo.show()
+	$Settings.hide()
+	$Settings/BackSettings/LightBackStg.hide()
+	$Main/mainView.show()
+	$Main/Logo.show()
 
 
 func _full_Screen():
-	if(fullScreen):
-		$HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox/CheckBoxLight.enable()
-		$HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox/CheckBoxLight.show()
+	if(Settings.Graphics["Fullscreen"]):
+		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.enable()
+		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.show()
 	else:
-		$HBoxContainer/VBoxContainer/Settings/Sprite/Label/CheckBox/CheckBoxLight.disable()
+		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.hide()
 
 func _on_CheckBox_pressed():
 	$ClickSound.play()
-	OS.window_fullscreen = !OS.window_fullscreen
-	fullScreen=!fullScreen
+	GraphicsController.set_fullscreen(!Settings.Graphics["Fullscreen"])
 	_full_Screen()
 
 
@@ -228,174 +295,226 @@ func _on_CheckBox_pressed():
 func _on_BackAbout_pressed():
 	pos=-1
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/About.hide()
-	$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.disable()
-	$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.hide()
-	$HBoxContainer/VBoxContainer/mainView.show()
-	$HBoxContainer/Logo.show()
+	$About.hide()
+	$About/BackAbout/LightBackAbout.hide()
+	$Main/mainView.show()
+	$Main/Logo.show()
 
 
 
 func _on_backHelp_pressed():
 	pos=-1
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.disable()
-	$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.hide()
-	$HBoxContainer/VBoxContainer/Help.hide()
-	$HBoxContainer/VBoxContainer/mainView.show()
+	$Help/BackHelp/LightbackHelp.hide()
+	$Help.hide()
+	$Main/mainView.show()
+	$Main/Logo.show()
 
 
 
 func _on_level0_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_0)
-	_disableStart()
 
 func _on_level1_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
-	_disableStart()
 
 func _on_level2_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_2)
-	_disableStart()
+	
+func _on_level3_pressed():
+	pos=0
+	$Music2.stop()
+	$Music.stop()
+	$ClickSound.play()
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_3)
 
 
 
 func _on_Start_mouse_exited():
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.disable()
+	$Main/mainView/Start/LightStart.hide()
 
 
 
 func _on_Start_mouse_entered():
 	pos=0
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Start/LightStart.enable()
+	$Main/mainView/Start/LightStart.show()
+	$Main/mainView/Start/LightStart.enable()
 
 
 func _on_Settings_mouse_entered():
 	pos=1
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.enable()
+	$Main/mainView/Settings/LightSettings.show()
+	$Main/mainView/Settings/LightSettings.enable()
 
 
 func _on_Settings_mouse_exited():
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Settings/LightSettings.disable()
+	$Main/mainView/Settings/LightSettings.hide()
 
 
 func _on_Help_mouse_entered():
 	pos=2
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.enable()
+	$Main/mainView/Help/LightHelp.show()
+	$Main/mainView/Help/LightHelp.enable()
 
 
 func _on_Help_mouse_exited():
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Help/LightHelp.disable()
+	$Main/mainView/Help/LightHelp.hide()
 
 
 func _on_About_mouse_entered():
 	pos=3
-	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.enable()
+	$Main/mainView/About/LightAbout.show()
+	$Main/mainView/About/LightAbout.enable()
 
 
 func _on_About_mouse_exited():
-	$HBoxContainer/VBoxContainer/mainView/Sprite/About/LightAbout.disable()
+	$Main/mainView/About/LightAbout.hide()
 
 
 func _on_Exit_mouse_entered():
 	pos=4
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.show()
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.enable()
+	$Main/mainView/Exit/LightExit.show()
+	$Main/mainView/Exit/LightExit.enable()
 
 
 func _on_Exit_mouse_exited():
-	$HBoxContainer/VBoxContainer/mainView/Sprite/Exit/LightExit.disable()
+	$Main/mainView/Exit/LightExit.hide()
 
 
 func _on_level0_mouse_entered():
 	pos=0
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.show()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.enable()
+	$IgnisSound.play()
+	IgnisPlay=true
+	$StartView/VBoxContainer/level0/LightLevel0.show()
+	$StartView/VBoxContainer/level0/LightLevel0.enable()
 
 
 func _on_level0_mouse_exited():
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level0/LightLevel0.disable()
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/VBoxContainer/level0/LightLevel0.hide()
 
 
 func _on_level1_mouse_entered():
 	pos=1
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.show()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.enable()
+	$IgnisSound.play()
+	IgnisPlay=true
+	$StartView/VBoxContainer/level1/LightLevel1.show()
+	$StartView/VBoxContainer/level1/LightLevel1.enable()
 
 
 func _on_level1_mouse_exited():
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level1/LightLevel1.disable()
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/VBoxContainer/level1/LightLevel1.hide()
 
 func _on_level2_mouse_entered():
 	pos=2
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.show()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.enable()
+	$IgnisSound.play()
+	IgnisPlay=true
+	$StartView/VBoxContainer/level2/LightLevel2.show()
+	$StartView/VBoxContainer/level2/LightLevel2.enable()
 
 
 func _on_level2_mouse_exited():
-	$HBoxContainer/VBoxContainer/StartView/Sprite/level2/LightLevel2.disable()
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/VBoxContainer/level2/LightLevel2.hide()
+
+func _on_level3_mouse_entered():
+	pos=3
+	$IgnisSound.play()
+	IgnisPlay=true
+	$StartView/VBoxContainer/level3/LightLevel3.show()
+	$StartView/VBoxContainer/level3/LightLevel3.enable()
+
+
+func _on_level3_mouse_exited():
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/VBoxContainer/level3/LightLevel3.hide()
 
 func _on_BackStart_pressed():
 	pos=0
+	$StartView/BackStart/LightBackStart.hide()
 	$ClickSound.play()
-	$HBoxContainer/VBoxContainer/mainView.show()
-	$HBoxContainer/VBoxContainer/StartView.hide()
-	_disableStart()
-	
+	$Main/mainView.show()
+	$StartView.hide()
+	$Main/Logo.show()
 
 
 func _on_BackStart_mouse_entered():
+	$IgnisSound.play()
+	IgnisPlay=true
 	pos=3
-	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.show()
-	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.enable()
+	$StartView/BackStart/LightBackStart.show()
+	$StartView/BackStart/LightBackStart.enable()
 
 
 func _on_BackStart_mouse_exited():
-	$HBoxContainer/VBoxContainer/StartView/Sprite/BackStart/LightBackStart.disable()
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/BackStart/LightBackStart.hide()
 
 
 func _on_backSettings_mouse_entered():
-	pos=0
-	$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.show()
-	$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.enable()
+	pos=4
+	if(!IgnisPlay):
+		IgnisPlay=true
+		$IgnisSound.play()
+	$Settings/BackSettings/LightBackStg.show()
+	$Settings/BackSettings/LightBackStg.enable()
 
 
 func _on_backSettings_mouse_exited():
-	$HBoxContainer/VBoxContainer/Settings/Sprite/backSettings/LightBackStg.disable()
+	if(!checkIgnisSettings()):
+		$IgnisSound.stop()
+		IgnisPlay=false
+	$Settings/BackSettings/LightBackStg.hide()
 
 
 func _on_BackAbout_mouse_entered():
 	pos=0
-	$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.show()
-	$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.enable()
+	IgnisPlay=true
+	$IgnisSound.play()
+	$About/BackAbout/LightBackAbout.show()
+	$About/BackAbout/LightBackAbout.enable()
 
 
 func _on_BackAbout_mouse_exited():
-	$HBoxContainer/VBoxContainer/About/Sprite/BackAbout/LightBackAbout.disable()
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$About/BackAbout/LightBackAbout.hide()
 
 
 func _on_backHelp_mouse_entered():
 	pos=0
-	$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.show()
-	$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.enable()
+	IgnisPlay=true
+	$IgnisSound.play()
+	$Help/BackHelp/LightbackHelp.show()
+	$Help/BackHelp/LightbackHelp.enable()
 
 
 func _on_backHelp_mouse_exited():
-	$HBoxContainer/VBoxContainer/Help/Sprite/backHelp/LightbackHelp.disable()
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$Help/BackHelp/LightbackHelp.hide()
 
 
 func _ChangePos():
 	if(pos<0):pos=0
-	if($HBoxContainer/VBoxContainer/mainView.is_visible_in_tree()):
+	if($Main/mainView.is_visible_in_tree()):
 		if(pos>=4):
 			_on_Exit_mouse_entered()
 			return
@@ -411,8 +530,8 @@ func _ChangePos():
 		if(pos==3):
 			_on_About_mouse_entered()
 		return
-	if($HBoxContainer/VBoxContainer/StartView.is_visible_in_tree()):
-		if(pos>=3):
+	if($StartView.is_visible_in_tree()):
+		if(pos>=4):
 			_on_BackStart_mouse_entered()
 			return
 		if(pos==0):
@@ -422,35 +541,175 @@ func _ChangePos():
 			_on_level1_mouse_entered()
 		if(pos==2):
 			_on_level2_mouse_entered()
+		if(pos==3):
+			_on_level3_mouse_entered()
 		return
-	if($HBoxContainer/VBoxContainer/Settings.is_visible_in_tree()):
-		pos=0 
-		_on_backSettings_mouse_entered()
+	if($Settings.is_visible_in_tree()):
+		if(pos>=4):
+			_on_backSettings_mouse_entered()
+			return
+		if(pos==0):
+			_on_Label_mouse_entered()
+			return
+		if(pos==1):
+			_on_stretchSettings_mouse_entered()
+		if(pos==2):
+			_on_Label2_mouse_entered()
+		if(pos==3):
+			_on_VolumeSettings_mouse_entered()
 		return
-	if($HBoxContainer/VBoxContainer/About.is_visible_in_tree()):
+	if($About.is_visible_in_tree()):
 		pos=0 
 		_on_BackAbout_mouse_entered()
 		return
-	if($HBoxContainer/VBoxContainer/Help.is_visible_in_tree()):
+	if($Help.is_visible_in_tree()):
 		pos=0
 		_on_backHelp_mouse_entered()
 		return
 
 
 func _stretch():
-	$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox.pressed = true
-	$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.enable()
-	$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.show()
+	if Settings.Graphics["Stretching"]:
+		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.enable()
+		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.show()
+	else:
+		$Settings/VBoxContainer/stretchSettings/CheckBox/CheckBoxLight.hide()
 
 
 func _on_CheckBox_stretch_pressed():
 	$ClickSound.play()
-	SceneSwitcher.strech = !SceneSwitcher.strech
-	if SceneSwitcher.strech:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1280, 720))
-		$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.enable()
-		$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.show()
-	else:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(1280, 720))
-		$HBoxContainer/VBoxContainer/Settings/Sprite/stretchSettings/CheckBox/CheckBoxLight.disable()
+	GraphicsController.set_strecthing(!Settings.Graphics["Stretching"])
+	_stretch()
 	pass
+
+
+func _on_HSlider_value_changed(value):
+	if(begin):
+		begin=false
+		return
+	$TestSound.stop()
+	if value==0:
+		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+	else:
+		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
+	AudioController.changeVol(value)
+
+
+func _on_Mute_pressed():
+	$ClickSound.play()
+	if Settings.Sound["Mute"]:
+		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
+		AudioController.turnVol(true)
+	else:
+		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
+		AudioController.turnVol(false)
+
+
+func _on_Label_mouse_entered():
+	if(!IgnisPlay):
+		IgnisPlay=true
+		$IgnisSound.play()
+	pos=0
+	$Settings/VBoxContainer/Label/LightFsc.enable()
+	$Settings/VBoxContainer/Label/LightFsc.show()
+
+
+func _on_Label_mouse_exited():
+	if(!checkIgnisSettings()):
+		$IgnisSound.stop()
+		IgnisPlay=false
+	$Settings/VBoxContainer/Label/LightFsc.hide()
+
+
+func _on_stretchSettings_mouse_entered():
+	if(!IgnisPlay):
+		IgnisPlay=true
+		$IgnisSound.play()
+	pos=1
+	$Settings/VBoxContainer/stretchSettings/LightStr.enable()
+	$Settings/VBoxContainer/stretchSettings/LightStr.show()
+
+
+func _on_stretchSettings_mouse_exited():
+	if(!checkIgnisSettings()):
+		$IgnisSound.stop()
+		IgnisPlay=false
+	$Settings/VBoxContainer/stretchSettings/LightStr.hide()
+
+
+func _on_Label2_mouse_entered():
+	if(!IgnisPlay):
+		IgnisPlay=true
+		$IgnisSound.play()
+	pos=2
+	$Settings/VBoxContainer/Label2/LightMut.enable()
+	$Settings/VBoxContainer/Label2/LightMut.show()
+
+
+func _on_Label2_mouse_exited():
+	if(!checkIgnisSettings()):
+		$IgnisSound.stop()
+		IgnisPlay=false
+	$Settings/VBoxContainer/Label2/LightMut.hide()
+
+
+func _on_VolumeSettings_mouse_entered():
+	if(!IgnisPlay):
+		IgnisPlay=true
+		$IgnisSound.play()
+	pos=3
+	soundSet=true
+	$Settings/VBoxContainer/VolumeSettings/LightVol.enable()
+	$Settings/VBoxContainer/VolumeSettings/LightVol.show()
+
+
+func _on_VolumeSettings_mouse_exited():
+	if(!checkIgnisSettings()):
+		$IgnisSound.stop()
+		IgnisPlay=false
+	$TestSound.stop()
+	soundSet=false
+	$Settings/VBoxContainer/VolumeSettings/LightVol.hide()
+
+
+
+
+
+func _on_CheckBox_mouse_entered():
+	_on_Label_mouse_entered()
+
+
+func _on_CheckBox_mouse_exited():
+	_on_Label_mouse_exited()
+
+
+func _on_CheckBoxStr_mouse_entered():
+	_on_stretchSettings_mouse_entered()
+
+
+
+func _on_CheckBoxStr_mouse_exited():
+	_on_stretchSettings_mouse_exited()
+
+
+func _on_Mute_mouse_entered():
+	_on_Label2_mouse_entered()
+
+
+func _on_HSlider_mouse_entered():
+	_on_VolumeSettings_mouse_entered()
+
+
+func _on_HSlider_mouse_exited():
+	_on_VolumeSettings_mouse_exited()
+
+
+func _on_Mute_mouse_exited():
+	_on_Label2_mouse_exited()
+
+
+func _on_HSlider_gui_input(event):
+	if (event is InputEventMouseButton) && !event.pressed && (event.button_index == BUTTON_LEFT):
+		$TestSound.play()

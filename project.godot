@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/enemy1/Enemy1.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Enemy2",
+"language": "GDScript",
+"path": "res://src/characters/enemy2/Enemy2.gd"
+}, {
 "base": "Node2D",
 "class": "MovingPlatform",
 "language": "GDScript",
@@ -23,11 +28,18 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/characters/player/Player.gd"
+}, {
+"base": "Area2D",
+"class": "Stairs",
+"language": "GDScript",
+"path": "res://src/objects/stairs/Stairs.gd"
 } ]
 _global_script_class_icons={
 "Enemy1": "",
+"Enemy2": "",
 "MovingPlatform": "",
-"Player": ""
+"Player": "",
+"Stairs": ""
 }
 
 [application]
@@ -35,10 +47,18 @@ _global_script_class_icons={
 config/name="portan-ignis"
 run/main_scene="res://src/ui/mainMenu/MainMenuView.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-SceneSwitcher="*res://src/sceneSwitcher/SceneSwitcher.gd"
+Settings="*res://src/globals/settings/Settings.gd"
+AudioController="*res://src/globals/settings/AudioController.gd"
+GraphicsController="*res://src/globals/settings/GraphicsController.gd"
+ConfigSave="*res://src/globals/config_save/ConfigSave.gd"
+GlobalVars="*res://src/globals/global_vars/GlobalVars.gd"
+SceneSwitcher="*res://src/globals/sceneSwitcher/SceneSwitcher.gd"
+Transfer="*res://src/globals/transfer/Transfer.gd"
+MusicController="*res://src/globals/musicController/MusicController.tscn"
 
 [display]
 
@@ -179,13 +199,25 @@ switch_ignis={
 }
 jump={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_render/layer_1="Landscape"
+2d_physics/layer_1="Player"
+2d_render/layer_2="UI"
+2d_physics/layer_2="Enemy"
+2d_render/layer_3="Menu"
+2d_physics/layer_3="Blocks/Platforms"
+2d_physics/layer_4="Objects_Player"
+2d_physics/layer_5="Light"
+2d_physics/layer_6="Menu_Light"
+2d_physics/layer_7="Objects_Common"
+2d_physics/layer_8="Objects_Enemy"
 
 [rendering]
 

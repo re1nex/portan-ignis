@@ -6,7 +6,9 @@ signal not_active
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const activated_at_start = false
+const radius_multiplier = 1.5
+
+export (bool) var activated_at_start = false
 var body_informator = null
 var activated = false
 
@@ -17,26 +19,22 @@ func _init():
 
 
 func _ready():
+	$Light2D.init_radius(radius_multiplier)
 	if activated_at_start:
 		activated = true
 		$AudioLoop.play()
-		$SpriteTorchOn.show()
-		$SpriteTorchOff.hide()
 		$Light2D.enable()
 		emit_signal("active")
 	else:
 		activated = false
-		$SpriteTorchOn.hide()
-		$SpriteTorchOff.show()
 		$Light2D.disable()
 		emit_signal("not_active")
 	pass # Replace with function body.
-	
+
+
 func activate_at_start():
 	activated = true
 	$Light2D.enable()
-	$SpriteTorchOn.show()
-	$SpriteTorchOff.hide()
 	emit_signal("active")
 
 
@@ -44,19 +42,16 @@ func activate():
 	if activated:
 		$AudioLoop.stop()
 		$AudioOff.play()
-		$SpriteTorchOff.show()
-		$SpriteTorchOn.hide()
 		$Light2D.disable()
 		activated = false
 		emit_signal("not_active")
 	else:
-		if body_informator != null and body_informator.ignis_status == body_informator.Is_ignis.HAS_IGNIS:
+		if body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
 			$AudioOff.stop()
+			$AudioOn.play()
 			$AudioLoop.play()
 			activated = true
 			$Light2D.enable()
-			$SpriteTorchOn.show()
-			$SpriteTorchOff.hide()
 			emit_signal("active")
 
 

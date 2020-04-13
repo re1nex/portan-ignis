@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/7.wav-49cf14fdc2c1418d8cd96c55211fc909.sample"
+
+[deps]
+
+source_file="res://resource/sounds/music/game/7.wav"
+dest_files=[ "res://.import/7.wav-49cf14fdc2c1418d8cd96c55211fc909.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

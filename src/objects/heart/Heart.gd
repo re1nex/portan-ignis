@@ -6,6 +6,8 @@ var step = 20
 
 
 func _ready():
+	if not $VisibilityEnabler2D.is_on_screen():
+		set_process(false)
 	pass # Replace with function body.
 
 
@@ -21,9 +23,7 @@ func activate():
 	pass
 
 func _on_Heart_body_entered(body):
-	if body.has_method("get_informator"):
-		var body_informator = body.get_informator()
-		if body_informator != null and body_informator.health < 5:
-			body_informator.health += 1
+	if body.has_method("take_heart"):
+		if body.take_heart():
 			queue_free()
 	pass # Replace with function body.
