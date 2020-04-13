@@ -59,7 +59,7 @@ tile_data = PoolIntArray( 327716, 0, 458755, 327720, 0, 65536, 327721, 0, 65536,
 position = Vector2( -32, -192 )
 
 [node name="PositionRD" type="Position2D" parent="."]
-position = Vector2( 1520, 456 )
+position = Vector2( 1376, 456 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false

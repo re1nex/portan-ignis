@@ -60,7 +60,7 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Win" type="Area2D" parent="."]
-position = Vector2( 1416, 32 )
+position = Vector2( 1368, 40 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -71,7 +71,7 @@ shape = SubResource( 2 )
 [node name="Hearts" type="Node2D" parent="."]
 
 [node name="Heart" parent="Hearts" instance=ExtResource( 11 )]
-position = Vector2( 1176, 80 )
+position = Vector2( 1184, 80 )
 
 [node name="Heart2" parent="Hearts" instance=ExtResource( 11 )]
 position = Vector2( 472, 208 )
@@ -83,6 +83,7 @@ position = Vector2( 472, 208 )
 [node name="WindowGameOver" parent="." instance=ExtResource( 10 )]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="HUD" parent="HUD" instance=ExtResource( 9 )]
 margin_bottom = 104.0

@@ -299,6 +299,28 @@ visible = false
 position = Vector2( -30, 40 )
 scale = Vector2( 1, 1 )
 
+[node name="level3" type="Button" parent="StartView/VBoxContainer"]
+margin_top = 246.0
+margin_right = 243.0
+margin_bottom = 329.0
+focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 1 )
+enabled_focus_mode = 0
+text = "level 3"
+flat = true
+align = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LightLevel3" parent="StartView/VBoxContainer/level3" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 40 )
+scale = Vector2( 1, 1 )
+
 [node name="BackStart" type="Button" parent="StartView"]
 margin_top = 429.0
 margin_right = 140.0
@@ -915,6 +937,9 @@ volume_db = 5.0
 [connection signal="mouse_entered" from="StartView/VBoxContainer/level2" to="." method="_on_level2_mouse_entered"]
 [connection signal="mouse_exited" from="StartView/VBoxContainer/level2" to="." method="_on_level2_mouse_exited"]
 [connection signal="pressed" from="StartView/VBoxContainer/level2" to="." method="_on_level2_pressed"]
+[connection signal="mouse_entered" from="StartView/VBoxContainer/level3" to="." method="_on_level2_mouse_entered"]
+[connection signal="mouse_exited" from="StartView/VBoxContainer/level3" to="." method="_on_level2_mouse_exited"]
+[connection signal="pressed" from="StartView/VBoxContainer/level3" to="." method="_on_level2_pressed"]
 [connection signal="mouse_entered" from="StartView/BackStart" to="." method="_on_BackStart_mouse_entered"]
 [connection signal="mouse_exited" from="StartView/BackStart" to="." method="_on_BackStart_mouse_exited"]
 [connection signal="pressed" from="StartView/BackStart" to="." method="_on_BackStart_pressed"]

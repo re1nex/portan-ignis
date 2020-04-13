@@ -29,6 +29,7 @@ func set_default_chars():
 		
 	levels_passed = 0
 
+
 func set_default_level2_chars():
 	health = 4
 	cur_ignis_num = 0
@@ -42,6 +43,22 @@ func set_default_level2_chars():
 		instruments.append(0)
 		
 	levels_passed = 0
+
+
+func set_default_level3_chars():
+	health = 4
+	cur_ignis_num = 0
+	cur_ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
+	
+	for i in range(WEAPONS_NUM):
+		weapons.append(false)
+	weapons[GlobalVars.Ignis_type.REGULAR] = true
+		
+	for i in range(INSTRUMENTS_NUM):
+		instruments.append(0)
+		
+	levels_passed = 0
+
 
 func copy_chars(player):
 	var info
