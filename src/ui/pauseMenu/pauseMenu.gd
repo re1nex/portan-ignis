@@ -197,8 +197,10 @@ func _full_screen():
 	if Settings.Graphics["Fullscreen"]:
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.enable()
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.show()
+		$CenterContainer/Settings/Label/CheckBox.pressed=true
 	else:
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.hide()
+		$CenterContainer/Settings/Label/CheckBox.pressed=false
 
 
 func _on_CheckBox_pressed():

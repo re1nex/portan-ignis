@@ -29,6 +29,9 @@ OutputBaseFilename=setup
 SetupIconFile=C:\Users\User\portan-ignis\icon.ico
 Compression=lzma
 SolidCompression=yes
+AlwaysShowDirOnReadyPage=yes
+CreateUninstallRegKey=yes
+DirExistsWarning=auto
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"; LicenseFile: "LICENSE.txt"
