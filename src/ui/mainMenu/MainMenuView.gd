@@ -9,6 +9,7 @@ var checkClick=false
 var soundSet=false
 var IgnisPlay=true
 var testPlay=false
+var secondPlay=false
 
 var begin=true
 func _ready():
@@ -23,6 +24,21 @@ func _ready():
 		_stretch()
 	$IgnisSound.play()
 	begin=false
+	$Music2.stop()
+	secondPlay=false
+	$Music.play()
+	
+
+func _process(delta):
+	if(!secondPlay):
+		if(!$Music.is_playing()):
+			secondPlay=true
+			$Music2.play()
+			return
+	else:
+		if(!$Music2.is_playing()):
+			secondPlay=false
+			$Music.play()
 
 
 func checkIgnisSettings():
@@ -293,16 +309,22 @@ func _on_backHelp_pressed():
 
 func _on_level0_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_0)
 
 func _on_level1_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_1)
 
 func _on_level2_pressed():
 	pos=0
+	$Music2.stop()
+	$Music.stop()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_2)
 
 

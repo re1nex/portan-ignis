@@ -12,18 +12,21 @@ func _ready():
 	$WindowGameOver/CenterContainer.hide()
 	$Player.hit()
 	$Player.new_lvl()
+	MusicController.playMusic(true)
 
 
 func _on_Player_die():
 	$Player.after_die()
 	$WindowGameOver._closeBefore()
 	$WindowGameOver.show()
+	MusicController.playMusic(false)
 	pass # Replace with function body.
 	
 func complete():
 	$Player.goAway()
 	$WinWindow.show()
 	Transfer.copy_chars($Player)
+	MusicController.playMusic(false)
 	#get_tree().paused = true
 
 
