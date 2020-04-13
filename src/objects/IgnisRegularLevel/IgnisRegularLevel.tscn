@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=1]
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_level/torchOff.png" type="Texture" id=2]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.gd" type="Script" id=4]
@@ -39,5 +40,8 @@ attenuation = 4.0
 stream = ExtResource( 5 )
 max_distance = 400.0
 attenuation = 4.0
+
+[node name="AudioOn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_IgnisRegularLevel_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_IgnisRegularLevel_body_exited"]

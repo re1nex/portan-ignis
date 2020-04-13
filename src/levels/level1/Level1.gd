@@ -8,6 +8,7 @@ func _ready():
 	$Level1Landscape.connect("level_complete", self, "complete")
 	$WinWindow/CenterContainer.hide()
 	$Menu/HUD.init_player($Player)
+	$Inventory.set_player($Player)
 	$WindowGameOver/CenterContainer.hide()
 	$Player.hit()
 	$Player.new_lvl()

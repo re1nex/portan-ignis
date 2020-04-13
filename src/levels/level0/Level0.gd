@@ -11,6 +11,7 @@ func _ready():
 	$Player.prepare_camera(posLU, posRD)
 	$IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
 	$CanvasLayer/HUD.init_player($Player)
+	$Inventory.set_player($Player)
 	$Player.connect("die", self, "_on_Player_die")
 	$WindowGameOver/CenterContainer.hide()
 	$WinWindow/CenterContainer.hide()

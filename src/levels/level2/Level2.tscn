@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/level2/Level2.gd" type="Script" id=2]
 [ext_resource path="res://src/levels/level2/Level2Landscape.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/ui/inventory/Inventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/enemy1/Enemy1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/ui/pauseMenu/pauseMenu.tscn" type="PackedScene" id=7]
@@ -94,6 +95,8 @@ position = Vector2( 1627.7, 33.2409 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
 position = Vector2( 27.4359, 6.85899 )
 shape = SubResource( 3 )
+
+[node name="Inventory" parent="." instance=ExtResource( 4 )]
 [connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
