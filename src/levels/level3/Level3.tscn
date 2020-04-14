@@ -33,12 +33,15 @@ position = Vector2( 128, 608 )
 
 [node name="IgnisDoor1" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 592, 480 )
+type = "column"
 
 [node name="IgnisDoor2" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 1392, 544 )
+type = "column"
 
 [node name="IgnisDoor3" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 1664, -224 )
+type = "column"
 
 [node name="IgnisRegularLevel1" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 440, 480 )

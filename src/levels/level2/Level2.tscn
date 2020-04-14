@@ -36,6 +36,7 @@ position = Vector2( 672, 208 )
 
 [node name="IgnisDoor" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 544, 232 )
+type = "column"
 
 [node name="IgnisDoor2" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 408, 160 )
@@ -43,6 +44,7 @@ activated_at_start = true
 
 [node name="IgnisActivated" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 128, 168 )
+type = "column"
 
 [node name="IgnisRegularLevel" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 1152, 96 )
