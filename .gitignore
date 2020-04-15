@@ -1,3 +1,33 @@
 .import/*
 export/Output/*
 export/Portan Ignis.exe
+
+# sounds
+resource/sounds/clicks/2.wav*
+resource/sounds/ignis/flameOff.wav*
+resource/sounds/ignis/IgnisOn.wav*
+resource/sounds/ignis/loop.wav*
+resource/sounds/monster/1.wav*
+resource/sounds/monster/2.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanDeath1.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanDeath2.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell1.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell2.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell4.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/preview.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieDeath1.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieDeath2.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieDeath3.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieDeath4.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell1.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell2.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell3.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell4.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell5.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell6.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell7.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell8.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell9.wav*
+resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/zombieYell10.wav*
