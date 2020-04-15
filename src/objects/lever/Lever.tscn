@@ -21,3 +21,11 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0, -8 )
+pause_animations = false
+freeze_bodies = false
+pause_particles = false
+pause_animated_sprites = false
+process_parent = true
