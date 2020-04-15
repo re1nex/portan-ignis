@@ -1,11 +1,32 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/ui/inventory/TextureRect.gd" type="Script" id=1]
+[ext_resource path="res://resource/ui/inventory/frame.png" type="Texture" id=2]
 
 [node name="TextureRect" type="TextureRect"]
-margin_right = 40.0
-margin_bottom = 40.0
+pause_mode = 2
+anchor_right = 0.031
+anchor_bottom = 0.056
+margin_right = 0.32
+margin_bottom = -0.32
+texture = ExtResource( 2 )
+stretch_mode = 6
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Textur" type="TextureRect" parent="."]
+anchor_left = 0.094
+anchor_top = 0.094
+anchor_right = 0.906
+anchor_bottom = 0.906
+margin_left = 0.24
+margin_top = 0.24
+margin_right = -0.240002
+margin_bottom = -0.240002
+expand = true
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
