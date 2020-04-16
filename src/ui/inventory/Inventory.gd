@@ -46,6 +46,10 @@ func update():
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
 		node.set_picture("res://resource/sprites/ignis/ignis_sector_outer/lens.png")
 		$Control/Weapons.add_child(node)
+	if informator.has_weapons[GlobalVars.Ignis_type.LONG_SECTOR]:
+		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
+		node.set_picture("res://resource/sprites/ignis/ignis_long_sector_outer/long_sector_oriented.png")
+		$Control/Weapons.add_child(node)
 	
 	#INSTRUMENTS
 	for i in range(informator.has_instruments[GlobalVars.Instruments_type.LEVER]):
