@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/levels/level1/Level1Landscape.gd" type="Script" id=1]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
@@ -11,8 +11,6 @@
 [ext_resource path="res://src/objects/MovingBlock/MovingPlatform.gd" type="Script" id=9]
 [ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/door/Door.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/objects/stairs/Stairs.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/objects/mechanism/Mechanism.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/objects/lever/Lever.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -165,62 +163,7 @@ position = Vector2( 1536, 336 )
 position = Vector2( 1969.93, 321.103 )
 shape = SubResource( 3 )
 
-[node name="Stairs" type="Node2D" parent="."]
-
-[node name="Stairs7" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1264, 480 )
-type = "med"
-
-[node name="Stairs3" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1296, 592 )
-
-[node name="Stairs2" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1296, 624 )
-type = "med"
-
-[node name="Stairs" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1296, 656 )
-type = "med"
-
-[node name="Stairs4" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1296, 688 )
-type = "down"
-
-[node name="Stairs5" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1264, 544 )
-type = "med"
-
-[node name="Stairs6" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1264, 512 )
-type = "med"
-
-[node name="Stairs8" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1264, 448 )
-
-[node name="Stairs9" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1328, 368 )
-type = "med"
-
-[node name="Stairs12" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1328, 336 )
-
-[node name="Stairs10" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1328, 400 )
-type = "down"
-
-[node name="Stairs11" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1264, 576 )
-type = "down"
-
-[node name="Mechanism" parent="." instance=ExtResource( 13 )]
-position = Vector2( 1395.7, 339.764 )
-
 [node name="Lever" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1297.88, 447.049 )
-
-[node name="Door2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1503.98, 336.057 )
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
 [connection signal="body_entered" from="LevelEndStop" to="." method="_on_LevelEndStop_body_entered"]
-[connection signal="active" from="Mechanism" to="Door2" method="_on_Mechanism_active"]
-[connection signal="not_active" from="Mechanism" to="Door2" method="_on_Mechanism_not_active"]
