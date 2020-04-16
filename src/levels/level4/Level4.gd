@@ -16,6 +16,7 @@ func _ready():
 	$Objects/Mechanism.connect("not_active", $Level4Landscape/Doors/Door4, "_on_Mechanism_not_active")
 	
 	$Ignises/IgnisActivated.activate_at_start()
+	$Ignises/IgnisActivated2.activate_at_start()
 	
 	$Objects/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
 	
@@ -41,6 +42,7 @@ func _on_Win_body_entered(body):
 		$WinWindow.show()
 		$Player.goAway()
 		MusicController.playMusic(false)
+		Transfer.copy_chars($Player)
 
 
 func _on_End_body_entered(body):

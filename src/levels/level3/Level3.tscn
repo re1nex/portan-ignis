@@ -71,7 +71,8 @@ position = Vector2( 1488, -384 )
 position = Vector2( 128, 608 )
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 376, 272 )
+position = Vector2( 376, 320 )
+falling_at_start = true
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 1016, -120 )

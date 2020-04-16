@@ -48,6 +48,7 @@ func _on_Win_body_entered(body):
 		$WinWindow.show()
 		$Player.goAway()
 		MusicController.playMusic(false)
+		Transfer.copy_chars($Player)
 
 
 func _on_End_body_entered(body):
