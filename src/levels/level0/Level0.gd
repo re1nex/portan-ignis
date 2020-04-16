@@ -1,11 +1,11 @@
 extends Node2D
 
 func _ready():
-	$Level1Landscape/IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
-	$Level1Landscape/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
-	$Player.prepare_camera($Level1Landscape.posLU, $Level1Landscape.posRD)
+	$Level0Landscape/IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
+	$Level0Landscape/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
+	$Player.prepare_camera($Level0Landscape.posLU, $Level0Landscape.posRD)
 	$Player.connect("die", self, "_on_Player_die")
-	$Level1Landscape.connect("level_complete", self, "complete")
+	$Level0Landscape.connect("level_complete", self, "complete")
 	$WinWindow/CenterContainer.hide()
 	$Menu/HUD.init_player($Player)
 	$WindowGameOver/CenterContainer.hide()
@@ -33,5 +33,5 @@ func complete():
 
 
 
-func _on_Level1Landscape_player_stop():
+func _on_Level0Landscape_player_stop():
 	$Player.endLevel=true
