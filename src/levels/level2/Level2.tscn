@@ -78,8 +78,6 @@ position = Vector2( 1200, 80 )
 [node name="Heart2" parent="Hearts" instance=ExtResource( 11 )]
 position = Vector2( 472, 208 )
 
-[node name="PauseMenu" parent="." instance=ExtResource( 7 )]
-
 [node name="WinWindow" parent="." instance=ExtResource( 8 )]
 
 [node name="WindowGameOver" parent="." instance=ExtResource( 10 )]
@@ -101,6 +99,8 @@ position = Vector2( -1.33514e-05, 4.76837e-07 )
 shape = SubResource( 3 )
 
 [node name="Inventory" parent="." instance=ExtResource( 4 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 7 )]
 [connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]

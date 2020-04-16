@@ -16,6 +16,8 @@ func _ready():
 	$CenterContainer/Pause/Restart/ResLight.set_light_layer(en)
 	$CenterContainer/Settings/Label2/VolLight.set_light_layer(en)
 	$CenterContainer/Settings/Label/LightFsc.set_light_layer(en)
+	$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.set_light_layer(en)
+	$CenterContainer/Settings/Mute/LightMute.set_light_layer(en)
 	
 	$CenterContainer/Pause/Continue/ContLight.hide()
 	$CenterContainer/Pause/Settings/SetLight.hide()
@@ -25,6 +27,8 @@ func _ready():
 	$CenterContainer/Pause/Restart/ResLight.hide()
 	$CenterContainer/Settings/Label2/VolLight.hide()
 	$CenterContainer/Settings/Label/LightFsc.hide()
+	$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.hide()
+	$CenterContainer/Settings/Mute/LightMute.hide()
 	
 	$CenterContainer/Pause/Restart/ResLight.set_enemy_visible(false)
 	$CenterContainer/Pause/Continue/ContLight.set_enemy_visible(false)
@@ -34,8 +38,13 @@ func _ready():
 	$CenterContainer/Settings/Label/CheckBox/CheckLight.set_enemy_visible(false)
 	$CenterContainer/Settings/Label2/VolLight.set_enemy_visible(false)
 	$CenterContainer/Settings/Label/LightFsc.set_enemy_visible(false)
+	$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.set_enemy_visible(false)
+	$CenterContainer/Settings/Mute/LightMute.set_enemy_visible(false)
 	
-	$CenterContainer/Settings/Label2/HSlider.value= Settings.Sound["Volume"]
+	if Settings.Sound["Mute"]:
+		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/Label2/Mute.pressed=true
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
 	
 	if Settings.Graphics["Fullscreen"]:
 		_full_screen()
@@ -101,10 +110,13 @@ func _pressButt():
 			_on_MainMenu_pressed()
 			return
 	if($CenterContainer/Settings.is_visible_in_tree()):
-		if(pos==1 && $CenterContainer/Settings/Label/LightFsc.is_visible_in_tree()):
+		if(pos==1 && $CenterContainer/Settings/Mute/LightMute.is_visible_in_tree()):
+			_on_MuteCheckBox_pressed()
+			return
+		if(pos==2 && $CenterContainer/Settings/Label/LightFsc.is_visible_in_tree()):
 			_on_CheckBox_pressed()
 			return
-		if(pos==2 && $CenterContainer/Settings/backSettings/backLight.is_visible_in_tree()):
+		if(pos==3 && $CenterContainer/Settings/backSettings/backLight.is_visible_in_tree()):
 			_on_backSettings_pressed()
 		return
 
@@ -143,9 +155,12 @@ func _changePos():
 			_on_Label2_mouse_entered()
 			return
 		if(pos==1):
-			_on_Label_mouse_entered()
+			_on_Mute_mouse_entered()
 			return
 		if(pos==2):
+			_on_Label_mouse_entered()
+			return
+		if(pos==3):
 			_on_backSettings_mouse_entered()
 		return
 
@@ -158,13 +173,17 @@ func _closeBeforeChange():
 			_on_Label2_mouse_exited()
 			return
 		if(pos==1):
-			_on_Label_mouse_exited()
+			_on_Mute_mouse_exited()
 			return
 		if(pos==2):
+			_on_Label_mouse_exited()
+			return
+		if(pos==3):
 			_on_backSettings_mouse_exited()
 		return
 
-
+func checkIgnisPlay():
+	return $CenterContainer/Settings/Label/CheckBox/CheckLight.is_visible_in_tree()||$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.is_visible_in_tree()
 
 func process_pause():
 	if game_paused:
@@ -196,8 +215,10 @@ func _full_screen():
 	if Settings.Graphics["Fullscreen"]:
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.enable()
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.show()
+		$CenterContainer/Settings/Label/CheckBox.pressed=true
 	else:
 		$CenterContainer/Settings/Label/CheckBox/CheckLight.hide()
+		$CenterContainer/Settings/Label/CheckBox.pressed=false
 
 
 func _on_CheckBox_pressed():
@@ -276,15 +297,15 @@ func _on_Settings_mouse_exited():
 
 
 func _on_backSettings_mouse_entered():
-	if(!$CenterContainer/Settings/Label/CheckBox/CheckLight.is_visible_in_tree()):
+	if(!checkIgnisPlay()):
 		$IgnisSound.play()
-	pos=2
+	pos=3
 	$CenterContainer/Settings/backSettings/backLight.enable()
 	$CenterContainer/Settings/backSettings/backLight.show()
 
 
 func _on_backSettings_mouse_exited():
-	if(!$CenterContainer/Settings/Label/CheckBox/CheckLight.is_visible_in_tree()):
+	if(!checkIgnisPlay()):
 		$IgnisSound.stop()
 	$CenterContainer/Settings/backSettings/backLight.hide()
 
@@ -317,6 +338,12 @@ func _on_HSlider_value_changed(value):
 		begin=false
 		return
 	$TestSound.stop()
+	if value==0:
+		$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.show()
+		$CenterContainer/Settings/Mute/MuteCheckBox.pressed=true
+	else:
+		$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.hide()
+		$CenterContainer/Settings/Mute/MuteCheckBox.pressed=false
 	AudioController.changeVol(value)
 
 
@@ -325,7 +352,7 @@ func _on_HSlider_mouse_exited():
 
 
 func _on_Label2_mouse_exited():
-	if(!$CenterContainer/Settings/Label/CheckBox/CheckLight.is_visible_in_tree()):
+	if(!checkIgnisPlay()):
 		$IgnisSound.stop()
 	volSet=false
 	$CenterContainer/Settings/Label2/VolLight.hide()
@@ -333,7 +360,7 @@ func _on_Label2_mouse_exited():
 
 
 func _on_Label2_mouse_entered():
-	if(!$CenterContainer/Settings/Label/CheckBox/CheckLight.is_visible_in_tree()):
+	if(!checkIgnisPlay()):
 		$IgnisSound.play()
 	volSet=true
 	pos=0 
@@ -342,15 +369,15 @@ func _on_Label2_mouse_entered():
 
 
 func _on_Label_mouse_entered():
-	if(!$CenterContainer/Settings/Label/CheckBox/CheckLight.is_visible_in_tree()):
+	if(!checkIgnisPlay()):
 		$IgnisSound.play()
-	pos=1 
+	pos=2
 	$CenterContainer/Settings/Label/LightFsc.enable()
 	$CenterContainer/Settings/Label/LightFsc.show()
 
 
 func _on_Label_mouse_exited():
-	if(!$CenterContainer/Settings/Label/CheckBox/CheckLight.is_visible_in_tree()):
+	if(!checkIgnisPlay()):
 		$IgnisSound.stop()
 	$CenterContainer/Settings/Label/LightFsc.hide()
 
@@ -370,3 +397,39 @@ func _on_CheckBox_mouse_exited():
 func _on_HSlider_gui_input(event):
 	if (event is InputEventMouseButton) && !event.pressed && (event.button_index == BUTTON_LEFT):
 		$TestSound.play()
+
+
+func _on_Mute_mouse_entered():
+	if(!checkIgnisPlay()):
+		$IgnisSound.play()
+	pos=1 
+	$CenterContainer/Settings/Mute/LightMute.enable()
+	$CenterContainer/Settings/Mute/LightMute.show()
+
+
+func _on_Mute_mouse_exited():
+	if(!checkIgnisPlay()):
+		$IgnisSound.stop()
+	$CenterContainer/Settings/Mute/LightMute.hide()
+
+
+func _on_MuteCheckBox_pressed():
+	$AudioClick.play()
+	if Settings.Sound["Mute"]:
+		$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.hide()
+		$CenterContainer/Settings/Mute/MuteCheckBox.pressed=false
+		$CenterContainer/Settings/Label2/HSlider.value=Settings.Sound["Volume"]
+		AudioController.turnVol(true)
+	else:
+		$CenterContainer/Settings/Mute/MuteCheckBox.pressed=true
+		$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.show()
+		$CenterContainer/Settings/Label2/HSlider.value=0
+		AudioController.turnVol(false)
+
+
+func _on_MuteCheckBox_mouse_entered():
+	_on_Mute_mouse_entered()
+
+
+func _on_MuteCheckBox_mouse_exited():
+	_on_Mute_mouse_exited()
