@@ -13,10 +13,8 @@ func _ready():
 	$Ignises/IgnisDoor.activate_at_start()
 	$Ignises/IgnisActivated.activate_at_start()
 	
-	$WinWindow/CenterContainer.hide()
 	$HUD/HUD.init_player($Player)
 	$Inventory.set_player($Player)
-	$WindowGameOver/CenterContainer.hide()
 	$Player.new_lvl()
 	MusicController.playMusic(true)
 	

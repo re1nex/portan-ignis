@@ -1,7 +1,6 @@
 extends CanvasLayer
 var keyboard = false
 var game_paused = false
-export (bool) var hide_at_start = true
 var pos = -1
 var begin=true
 var volSet=false
@@ -38,8 +37,6 @@ func _ready():
 	
 	$CenterContainer/Settings/Label2/HSlider.value= Settings.Sound["Volume"]
 	
-	if hide_at_start:
-		$CenterContainer.hide()
 	if Settings.Graphics["Fullscreen"]:
 		_full_screen()
 	begin=false

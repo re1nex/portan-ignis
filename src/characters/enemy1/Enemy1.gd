@@ -52,8 +52,6 @@ func _process(_delta):
 		player_target.hit()
 	elif torch_area and "activated" in torch_area and torch_area.activated:
 		torch_area.activate()
-	print("dir", direction)
-	print("tar", targets.size())
 
 func _physics_process(delta):
 	

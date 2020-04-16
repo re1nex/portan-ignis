@@ -6,17 +6,22 @@ signal win
 func _ready():
 	$Player.prepare_camera($Level4Landscape.posLU, $Level4Landscape.posRD)
 	
-	$Ignises/IgnisDoor.connect("active", $Level4Landscape/Doors/Door3, "_on_IgnisRegularLevel_active")
-	$Ignises/IgnisDoor.connect("not_active", $Level4Landscape/Doors/Door3, "_on_IgnisRegularLevel_not_active")
+	$Ignises/IgnisDoor1.connect("active", $Level4Landscape/Doors/Door2, "_on_IgnisRegularLevel_active")
+	$Ignises/IgnisDoor1.connect("not_active", $Level4Landscape/Doors/Door2, "_on_IgnisRegularLevel_not_active")
 	
-	$Ignises/IgnisDoor2.connect("active", $Level4Landscape/Doors/Door2, "_on_IgnisRegularLevel_active")
-	$Ignises/IgnisDoor2.connect("not_active", $Level4Landscape/Doors/Door2, "_on_IgnisRegularLevel_not_active")
+	$Ignises/IgnisDoor2.connect("active", $Level4Landscape/Doors/Door4, "_on_IgnisRegularLevel_active")
+	$Ignises/IgnisDoor2.connect("not_active", $Level4Landscape/Doors/Door4, "_on_IgnisRegularLevel_not_active")
 
-	$Objects/Mechanism.connect("active", $Level4Landscape/Doors/Door4, "_on_Mechanism_active")
-	$Objects/Mechanism.connect("not_active", $Level4Landscape/Doors/Door4, "_on_Mechanism_not_active")
+	$Ignises/IgnisDoor3.connect("active", $Level4Landscape/Doors/Door5, "_on_IgnisRegularLevel_active")
+	$Ignises/IgnisDoor3.connect("not_active", $Level4Landscape/Doors/Door5, "_on_IgnisRegularLevel_not_active")
 	
-	$Ignises/IgnisActivated.activate_at_start()
-	$Ignises/IgnisActivated2.activate_at_start()
+	$Objects/Mechanism.connect("active", $Level4Landscape/Doors/Door3, "_on_Mechanism_active")
+	$Objects/Mechanism.connect("not_active", $Level4Landscape/Doors/Door3, "_on_Mechanism_not_active")
+	
+	$Ignises/IgnisDoor1.activate_at_start()
+	$Ignises/IgnisRegularLevel1.activate_at_start()
+	$Ignises/IgnisRegularLevel2.activate_at_start()
+	$Ignises/IgnisRegularLevel10.activate_at_start()
 	
 	$Objects/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
 	
