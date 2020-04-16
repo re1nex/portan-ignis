@@ -18,6 +18,7 @@ fire_rate = 0.5
 arrow = ExtResource( 3 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 rect = Rect2( -10, -20, 20, 40 )
 process_parent = true
 
@@ -28,7 +29,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="ArrowPos" type="Position2D" parent="."]
-position = Vector2( 25, -10 )
+position = Vector2( 10, -10 )
 
 [node name="Visibility" type="Area2D" parent="."]
 collision_layer = 0
@@ -38,6 +39,11 @@ collision_mask = 16
 shape = SubResource( 2 )
 
 [node name="ShootTimer" type="Timer" parent="."]
+
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 [connection signal="area_entered" from="Visibility" to="." method="_on_Visibility_area_entered"]
 [connection signal="area_exited" from="Visibility" to="." method="_on_Visibility_area_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_TurnTimer_timeout"]
