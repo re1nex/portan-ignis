@@ -4,6 +4,8 @@ signal falls
 signal win
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	$Player.prepare_camera($Level3Landscape.posLU, $Level3Landscape.posRD)
 	
 	$Ignises/IgnisDoor.connect("active", $Level3Landscape/Doors/Door3, "_on_IgnisRegularLevel_active")

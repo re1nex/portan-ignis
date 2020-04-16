@@ -61,7 +61,7 @@ func set_default_level3_chars():
 
 
 func set_default_level4_chars():
-	health = 4
+	health = 5
 	cur_ignis_num = 0
 	cur_ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
 	

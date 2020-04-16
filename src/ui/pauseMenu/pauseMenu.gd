@@ -171,10 +171,12 @@ func process_pause():
 		pause_mode = PAUSE_MODE_PROCESS
 		get_tree().paused = true
 		$CenterContainer.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		get_tree().paused = false
 		reset_menu();
 		$CenterContainer.hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		pause_mode = PAUSE_MODE_INHERIT
 
 func reset_menu():

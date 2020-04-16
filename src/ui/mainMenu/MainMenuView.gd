@@ -13,6 +13,7 @@ var secondPlay=false
 
 var begin=true
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	#if(Settings.Sound["Volume"] != null):
 	$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 	if Settings.Sound["Mute"]:

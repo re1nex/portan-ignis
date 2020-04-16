@@ -4,6 +4,8 @@ signal falls
 signal win
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	$Player.prepare_camera($Level2Landscape.posLU, $Level2Landscape.posRD)
 	connect("falls", self, "_on_Player_die")
 	$Player.connect("die", self, "_on_Player_die")
