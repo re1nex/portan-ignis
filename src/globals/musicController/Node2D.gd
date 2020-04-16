@@ -17,7 +17,15 @@ func _ready():
 
 func playMusic(on):
 	turnOn=on
+	off(numPlay)
 
+func off(num):
+	if(num==1):
+		$MusicGame1.stop()
+	if(num==2):
+		$MusicGame2.stop()
+	if(num==3):
+		$MusicGame3.stop()
 
 func play(num):
 	while(num==numPlay):
