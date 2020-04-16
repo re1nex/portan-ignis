@@ -13,6 +13,7 @@ var secondPlay=false
 
 var begin=true
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	#if(Settings.Sound["Volume"] != null):
 	$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 	if Settings.Sound["Mute"]:
@@ -107,7 +108,7 @@ func _pressButt():
 			_on_About_pressed()
 		return
 	if($StartView.is_visible_in_tree()):
-		if(pos==4 && $StartView/BackStart/LightBackStart.is_visible_in_tree()):
+		if(pos==5 && $StartView/BackStart/LightBackStart.is_visible_in_tree()):
 			_on_BackStart_pressed()
 			return
 		if(pos==0 && $StartView/VBoxContainer/level0/LightLevel0.is_visible_in_tree()):
@@ -119,6 +120,8 @@ func _pressButt():
 			_on_level2_pressed()
 		if(pos==3 && $StartView/VBoxContainer/level3/LightLevel3.is_visible_in_tree()):
 			_on_level3_pressed()
+		if(pos==4 && $StartView/VBoxContainer/level4/LightLevel4.is_visible_in_tree()):
+			_on_level4_pressed()
 		return
 	if($Settings.is_visible_in_tree() && $Settings.is_visible_in_tree()):
 		if(pos>=4 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
@@ -180,7 +183,7 @@ func _closeBeforeChange():
 			_on_About_mouse_exited()
 		return
 	if($StartView.is_visible_in_tree()):
-		if(pos==4):
+		if(pos==5):
 			_on_BackStart_mouse_exited()
 			return
 		if(pos==0):
@@ -193,6 +196,9 @@ func _closeBeforeChange():
 			return
 		if(pos==3):
 			_on_level3_mouse_exited()
+			return
+		if(pos==4):
+			_on_level4_mouse_exited()
 			return
 		return
 	if($Settings.is_visible_in_tree()):
@@ -345,6 +351,13 @@ func _on_level3_pressed():
 	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_3)
+	
+func _on_level4_pressed():
+	pos=0
+	$Music2.stop()
+	$Music.stop()
+	$ClickSound.play()
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_4)
 
 
 
@@ -451,6 +464,19 @@ func _on_level3_mouse_exited():
 	$IgnisSound.stop()
 	IgnisPlay=false
 	$StartView/VBoxContainer/level3/LightLevel3.hide()
+	
+func _on_level4_mouse_entered():
+	pos=4
+	$IgnisSound.play()
+	IgnisPlay=true
+	$StartView/VBoxContainer/level4/LightLevel4.show()
+	$StartView/VBoxContainer/level4/LightLevel4.enable()
+
+
+func _on_level4_mouse_exited():
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/VBoxContainer/level4/LightLevel4.hide()
 
 func _on_BackStart_pressed():
 	pos=0
@@ -464,7 +490,7 @@ func _on_BackStart_pressed():
 func _on_BackStart_mouse_entered():
 	$IgnisSound.play()
 	IgnisPlay=true
-	pos=3
+	pos=5
 	$StartView/BackStart/LightBackStart.show()
 	$StartView/BackStart/LightBackStart.enable()
 
@@ -538,7 +564,7 @@ func _ChangePos():
 			_on_About_mouse_entered()
 		return
 	if($StartView.is_visible_in_tree()):
-		if(pos>=4):
+		if(pos>=5):
 			_on_BackStart_mouse_entered()
 			return
 		if(pos==0):
@@ -550,6 +576,8 @@ func _ChangePos():
 			_on_level2_mouse_entered()
 		if(pos==3):
 			_on_level3_mouse_entered()
+		if(pos==4):
+			_on_level4_mouse_entered()
 		return
 	if($Settings.is_visible_in_tree()):
 		if(pos>=4):

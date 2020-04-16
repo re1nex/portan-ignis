@@ -1,6 +1,8 @@
 extends Node2D
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	$Level0Landscape/IgnisRegularOuter.connect("ignis_regular_taken", $Player, "_on_IgnisRegularOuter_ignis_regular_taken")
 	$Level0Landscape/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
 	$Player.prepare_camera($Level0Landscape.posLU, $Level0Landscape.posRD)

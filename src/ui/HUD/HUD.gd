@@ -16,6 +16,7 @@ var ignis_bar_changing
 
 
 func _ready():
+	self.show()
 	$MainContainer/ChosenIgnis/Sector.hide()
 	$MainContainer/ChosenIgnis/Torch.hide()
 	ignis_bar_changing = false

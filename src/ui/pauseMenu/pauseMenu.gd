@@ -1,7 +1,6 @@
 extends CanvasLayer
 var keyboard = false
 var game_paused = false
-export (bool) var hide_at_start = true
 var pos = -1
 var begin=true
 var volSet=false
@@ -47,8 +46,6 @@ func _ready():
 		$Settings/VBoxContainer/Label2/Mute.pressed=true
 		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
 	
-	if hide_at_start:
-		$CenterContainer.hide()
 	if Settings.Graphics["Fullscreen"]:
 		_full_screen()
 	begin=false
@@ -193,10 +190,12 @@ func process_pause():
 		pause_mode = PAUSE_MODE_PROCESS
 		get_tree().paused = true
 		$CenterContainer.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		get_tree().paused = false
 		reset_menu();
 		$CenterContainer.hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		pause_mode = PAUSE_MODE_INHERIT
 
 func reset_menu():
