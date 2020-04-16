@@ -930,7 +930,7 @@ stream = ExtResource( 6 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 5.0
+volume_db = 3.0
 
 [node name="Music2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
