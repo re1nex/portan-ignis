@@ -22,7 +22,6 @@ position = Vector2( 536, 704 )
 
 [node name="WindowGameOver" parent="." instance=ExtResource( 7 )]
 
-[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
-
 [node name="WinWindow" parent="." instance=ExtResource( 8 )]
-[connection signal="player_stop" from="Level1Landscape" to="." method="_on_Level0Landscape_player_stop"]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 3 )]

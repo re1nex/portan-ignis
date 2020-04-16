@@ -106,8 +106,6 @@ position = Vector2( 1616, 304 )
 [node name="Heart3" parent="Hearts" instance=ExtResource( 8 )]
 position = Vector2( 368, -288 )
 
-[node name="PauseMenu" parent="." instance=ExtResource( 10 )]
-
 [node name="WinWindow" parent="." instance=ExtResource( 11 )]
 
 [node name="WindowGameOver" parent="." instance=ExtResource( 9 )]
@@ -144,6 +142,8 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Inventory" parent="." instance=ExtResource( 14 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 10 )]
 [connection signal="die" from="Player" to="." method="_on_Player_die"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]

@@ -17,6 +17,7 @@ func _ready():
 	$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 	if Settings.Sound["Mute"]:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/Label2/Mute.pressed=true
 		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
 	if Settings.Graphics["Fullscreen"]:
 		_full_Screen()
@@ -27,7 +28,11 @@ func _ready():
 	$Music2.stop()
 	secondPlay=false
 	$Music.play()
+	#testModeOff()
 	
+func testModeOff():
+	$StartView/VBoxContainer/level0.disabled
+	$StartView/VBoxContainer/level0.hide()
 
 func _process(delta):
 	if(!secondPlay):
@@ -282,8 +287,10 @@ func _full_Screen():
 	if(Settings.Graphics["Fullscreen"]):
 		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.enable()
 		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.show()
+		$Settings/VBoxContainer/Label/CheckBox.pressed=true
 	else:
 		$Settings/VBoxContainer/Label/CheckBox/CheckBoxLight.hide()
+		$Settings/VBoxContainer/Label/CheckBox.pressed=false
 
 func _on_CheckBox_pressed():
 	$ClickSound.play()
@@ -590,8 +597,10 @@ func _on_HSlider_value_changed(value):
 	$TestSound.stop()
 	if value==0:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
+		$Settings/VBoxContainer/Label2/Mute.pressed=true
 	else:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
+		$Settings/VBoxContainer/Label2/Mute.pressed=false
 	AudioController.changeVol(value)
 
 
@@ -599,9 +608,11 @@ func _on_Mute_pressed():
 	$ClickSound.play()
 	if Settings.Sound["Mute"]:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
+		$Settings/VBoxContainer/Label2/Mute.pressed=false
 		$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 		AudioController.turnVol(true)
 	else:
+		$Settings/VBoxContainer/Label2/Mute.pressed=true
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
 		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
 		AudioController.turnVol(false)

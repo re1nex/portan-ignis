@@ -164,12 +164,12 @@ shadow_item_cull_mask = 4
 visible = false
 light_mask = 2
 margin_left = 450.0
-margin_top = 237.0
+margin_top = 229.0
 margin_right = 830.0
-margin_bottom = 483.0
+margin_bottom = 490.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_constants/separation = 30
+custom_constants/separation = 5
 
 [node name="Label2" type="Label" parent="CenterContainer/Settings"]
 margin_right = 156.0
@@ -197,11 +197,47 @@ scale = Vector2( 1, 1 )
 range_item_cull_mask = 4
 shadow_item_cull_mask = 4
 
+[node name="Mute" type="Label" parent="CenterContainer/Settings"]
+light_mask = 2
+margin_top = 65.0
+margin_right = 285.0
+margin_bottom = 125.0
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 3 )
+text = "global mute"
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MuteCheckBox" type="CheckBox" parent="CenterContainer/Settings/Mute"]
+light_mask = 2
+margin_left = 380.0
+margin_top = -8.0
+margin_right = 404.0
+margin_bottom = 16.0
+rect_scale = Vector2( 3, 3 )
+focus_mode = 0
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MuteCheckLight" parent="CenterContainer/Settings/Mute/MuteCheckBox" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 12.1226, 11.0909 )
+scale = Vector2( 1, 1 )
+
+[node name="LightMute" parent="CenterContainer/Settings/Mute" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
+
 [node name="Label" type="Label" parent="CenterContainer/Settings"]
 light_mask = 2
-margin_top = 90.0
+margin_top = 130.0
 margin_right = 380.0
-margin_bottom = 150.0
+margin_bottom = 190.0
 size_flags_horizontal = 0
 custom_fonts/font = SubResource( 3 )
 text = "fullscreen mode"
@@ -236,9 +272,9 @@ scale = Vector2( 1, 1 )
 [node name="backSettings" type="Button" parent="CenterContainer/Settings"]
 light_mask = 2
 margin_left = 134.0
-margin_top = 180.0
+margin_top = 195.0
 margin_right = 246.0
-margin_bottom = 246.0
+margin_bottom = 261.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -283,6 +319,11 @@ stream = ExtResource( 4 )
 [connection signal="mouse_entered" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_mouse_exited"]
 [connection signal="value_changed" from="CenterContainer/Settings/Label2/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="mouse_entered" from="CenterContainer/Settings/Mute" to="." method="_on_Mute_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/Settings/Mute" to="." method="_on_Mute_mouse_exited"]
+[connection signal="mouse_entered" from="CenterContainer/Settings/Mute/MuteCheckBox" to="." method="_on_MuteCheckBox_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/Settings/Mute/MuteCheckBox" to="." method="_on_MuteCheckBox_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/Settings/Mute/MuteCheckBox" to="." method="_on_MuteCheckBox_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/Settings/Label" to="." method="_on_Label_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/Settings/Label" to="." method="_on_Label_mouse_exited"]
 [connection signal="mouse_entered" from="CenterContainer/Settings/Label/CheckBox" to="." method="_on_CheckBox_mouse_entered"]
