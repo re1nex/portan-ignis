@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/roguelikeDungeon_transparent.png-c76afd19050d7e18aa710e2ff1074962.stex"
+path="res://.import/ign.png-492182d7c7bbfc286dd7937a6caacd65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/tiles/level_0/roguelikeDungeon_transparent.png"
-dest_files=[ "res://.import/roguelikeDungeon_transparent.png-c76afd19050d7e18aa710e2ff1074962.stex" ]
+source_file="res://resource/sprites/ignis/ignis_regular_level/ign.png"
+dest_files=[ "res://.import/ign.png-492182d7c7bbfc286dd7937a6caacd65.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

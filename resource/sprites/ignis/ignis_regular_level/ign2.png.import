@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background.jpg-b17e9294d2e5a64e6ee5a3544b996931.stex"
+path="res://.import/ign2.png-56a730d05bdb46eb98e0a57edc80f1e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/tiles/level_0/background.jpg"
-dest_files=[ "res://.import/background.jpg-b17e9294d2e5a64e6ee5a3544b996931.stex" ]
+source_file="res://resource/sprites/ignis/ignis_regular_level/ign2.png"
+dest_files=[ "res://.import/ign2.png-56a730d05bdb46eb98e0a57edc80f1e5.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
