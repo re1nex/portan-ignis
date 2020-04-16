@@ -11,8 +11,9 @@ func _ready():
 	pass # Replace with function body.
 
 func set_picture(path):
+	$Textur.set_texture(load(path))
+	$Textur.set_stretch_mode(TextureRect.STRETCH_KEEP_ASPECT_CENTERED)
 
-	set_texture(load(path))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

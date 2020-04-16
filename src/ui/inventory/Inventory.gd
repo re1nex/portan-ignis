@@ -17,12 +17,16 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("ui_inventory"):
 		if not active:
+			$AudioOpen.play()
 			active = true
-			update()
+			#update()
 			$Control.show()
 			get_tree().paused = true
 			pause_mode = PAUSE_MODE_PROCESS
+			
+			update()
 		else:
+			$AudioClose.play()
 			$Control.hide()
 			clear()
 			active = false
