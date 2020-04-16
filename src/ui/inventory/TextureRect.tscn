@@ -9,6 +9,7 @@ anchor_right = 0.031
 anchor_bottom = 0.056
 margin_right = 0.32
 margin_bottom = -0.32
+rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 2 )
 stretch_mode = 6
 script = ExtResource( 1 )
