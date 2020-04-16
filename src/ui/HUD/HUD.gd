@@ -87,16 +87,25 @@ func process_switcher(ignis_status):
 func status_set_sector():
 	$MainContainer/ChosenIgnis/Sector.show()
 	$MainContainer/ChosenIgnis/Torch.hide()
+	$MainContainer/ChosenIgnis/LongSector.hide()
 
 
 func status_set_torch():
 	$MainContainer/ChosenIgnis/Sector.hide()
 	$MainContainer/ChosenIgnis/Torch.show()
+	$MainContainer/ChosenIgnis/LongSector.hide()
+
+
+func status_set_long_sector():
+	$MainContainer/ChosenIgnis/Sector.hide()
+	$MainContainer/ChosenIgnis/Torch.hide()
+	$MainContainer/ChosenIgnis/LongSector.show()
 
 
 func status_set_none():
 	$MainContainer/ChosenIgnis/Sector.hide()
 	$MainContainer/ChosenIgnis/Torch.hide()
+	$MainContainer/ChosenIgnis/LongSector.hide()
 
 
 func upd_chosen_ignis(active_weapon):
@@ -110,6 +119,8 @@ func upd_chosen_ignis(active_weapon):
 			status_set_torch()
 		1: 
 			status_set_sector()
+		2:
+			status_set_long_sector()
 	pass
 
 
