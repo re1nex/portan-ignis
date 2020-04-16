@@ -6,7 +6,7 @@ var cur_ignis_num
 var cur_ignis_status
 var weapons = []
 var instruments = []
-const WEAPONS_NUM = 2#load("res://src/characters/player/Player.gd").WEAPONS_NUM
+const WEAPONS_NUM = 3#load("res://src/characters/player/Player.gd").WEAPONS_NUM
 const INSTRUMENTS_NUM = 1
 
 var levels_passed
