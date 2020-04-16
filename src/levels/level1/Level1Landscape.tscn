@@ -115,6 +115,9 @@ position = Vector2( 96, 192 )
 [node name="IgnisRegularLevel3" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 832, 704 )
 
+[node name="IgnisRegularLevel8" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 1072, 704 )
+
 [node name="IgnisRegularLevel4" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 480, 512 )
 

@@ -149,34 +149,31 @@ stream = ExtResource( 5 )
 
 [node name="AudioHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -15.0
 
 [node name="AudioHit2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -15.0
 
 [node name="AudioHit3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-volume_db = -15.0
 
 [node name="AudioHit4" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -15.0
 
 [node name="AudioHit5" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = -15.0
 
 [node name="AudioLanding" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
-volume_db = -10.0
+volume_db = -13.5
+pitch_scale = 2.0
 
 [node name="AudioJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
+volume_db = -2.0
 
 [node name="AudioStairs" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-volume_db = -5.0
+volume_db = -1.0
 pitch_scale = 2.0
 
 [node name="AudioIgnisSwitch" type="AudioStreamPlayer" parent="."]
@@ -184,8 +181,10 @@ stream = ExtResource( 16 )
 
 [node name="AudioPickUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
+volume_db = 5.0
 
 [node name="AudioIgnisOn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
+volume_db = -10.0
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]
