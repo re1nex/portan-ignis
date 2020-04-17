@@ -3,6 +3,7 @@ extends Node
 enum Ignis_type {
 		REGULAR,
 		SECTOR,
+		LONG_SECTOR,
 }
 
 enum Instruments_type {
