@@ -13,6 +13,10 @@ texture = ExtResource( 1 )
 texture_scale = 0.3
 color = Color( 0.909804, 0.596078, 0.101961, 1 )
 energy = 1.2
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_filter = 1
+shadow_filter_smooth = 3.0
 script = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -34,3 +38,7 @@ texture = ExtResource( 3 )
 texture = ExtResource( 2 )
 texture_scale = 0.5
 color = Color( 0.909804, 0.596078, 0.101961, 1 )
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_filter = 1
+shadow_filter_smooth = 3.0
