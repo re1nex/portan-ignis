@@ -21,6 +21,7 @@ func _ready():
 #	pass
 
 func show():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$music.play()
 	$CenterContainer.show()
 

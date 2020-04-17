@@ -46,7 +46,7 @@ func _deferred_goto_scene(scene):
 	elif scene == Scenes.SCENE_STAGE_4:
 		new_scene = ResourceLoader.load("res://src/levels/level4/Level4.tscn")
 		if Transfer.levels_passed == 0:
-			Transfer.set_default_level3_chars()
+			Transfer.set_default_level4_chars()
 	elif scene == Scenes.SCENE_MAIN_MENU:
 		new_scene = ResourceLoader.load("res://src/ui/mainMenu/MainMenuView.tscn")
 		Transfer.set_default_chars()

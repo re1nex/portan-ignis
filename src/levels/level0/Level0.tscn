@@ -23,8 +23,8 @@ position = Vector2( 536, 704 )
 
 [node name="WindowGameOver" parent="." instance=ExtResource( 7 )]
 
-[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
-
 [node name="WinWindow" parent="." instance=ExtResource( 8 )]
 
 [node name="Inventory" parent="." instance=ExtResource( 5 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
