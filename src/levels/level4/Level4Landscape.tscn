@@ -299,6 +299,7 @@ position = Vector2( 96, 464 )
 
 [node name="Door2" parent="Doors" instance=ExtResource( 8 )]
 position = Vector2( 528, 464 )
+OPENED = true
 
 [node name="Door3" parent="Doors" instance=ExtResource( 8 )]
 position = Vector2( 1432, 560 )
