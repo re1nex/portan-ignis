@@ -15,13 +15,18 @@ func _ready():
 
 
 func _on_Player_die():
+	$PauseMenu.set_process_input(false)
+	$Inventory.set_process_input(false)
 	$Player.after_die()
 	$WindowGameOver._closeBefore()
 	$WindowGameOver.show()
 	MusicController.playMusic(false)
 	pass # Replace with function body.
-	
+
+
 func complete():
+	$PauseMenu.set_process_input(false)
+	$Inventory.set_process_input(false)
 	$Player.goAway()
 	$WinWindow.show()
 	Transfer.copy_chars($Player)
