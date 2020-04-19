@@ -29,7 +29,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="ArrowPos" type="Position2D" parent="."]
-position = Vector2( 10, -10 )
+position = Vector2( 12, -5 )
 
 [node name="Visibility" type="Area2D" parent="."]
 collision_layer = 0
