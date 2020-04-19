@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DungeonCrawl_ProjectUtumnoTileset.png-e62c62c04e89d77137536bce1e25852d.stex"
+path="res://.import/mechanism.png-dcd1b7223dc8c046ef2f7211050b63c9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/objects/DungeonCrawl_ProjectUtumnoTileset.png"
-dest_files=[ "res://.import/DungeonCrawl_ProjectUtumnoTileset.png-e62c62c04e89d77137536bce1e25852d.stex" ]
+source_file="res://resource/sprites/objects/mechanism/mechanism.png"
+dest_files=[ "res://.import/mechanism.png-dcd1b7223dc8c046ef2f7211050b63c9.stex" ]
 
 [params]
 

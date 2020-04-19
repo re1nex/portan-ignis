@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/door.png-409db3791dfead324c7aff18bfd1ccec.stex"
+path="res://.import/DungeonCrawl_ProjectUtumnoTileset.png-6841343e8724424d74d7f41c40f92f2e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/objects/door.png"
-dest_files=[ "res://.import/door.png-409db3791dfead324c7aff18bfd1ccec.stex" ]
+source_file="res://resource/sprites/objects/lever/DungeonCrawl_ProjectUtumnoTileset.png"
+dest_files=[ "res://.import/DungeonCrawl_ProjectUtumnoTileset.png-6841343e8724424d74d7f41c40f92f2e.stex" ]
 
 [params]
 
