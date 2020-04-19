@@ -81,10 +81,10 @@ color = Color( 0, 0, 0, 1 )
 [node name="Stairs" type="Node2D" parent="."]
 
 [node name="Stairs2" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1040, 464 )
+position = Vector2( 1040, 472 )
 
 [node name="Stairs3" parent="Stairs" instance=ExtResource( 12 )]
-position = Vector2( 1040, 496 )
+position = Vector2( 1040, 504 )
 type = "down"
 
 [node name="LevelEnd" type="Area2D" parent="."]
