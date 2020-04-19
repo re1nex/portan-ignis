@@ -1,20 +1,22 @@
-extends KinematicBody2D
+extends Node2D
 
 
-var height = 0
-var step = 0
-var max_height
-var src_height
-export var SPEED = 60
-var linear_vel = Vector2()
+var cur_height = 0
+var closed_pos = Vector2(0, 0)
+var opened_pos = Vector2(0, 0)
+export var SPEED = 32	# pixels per second
+export var OPENED = false
+var cur_speed = 0
 var bodies_below = 0
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	src_height = $CollisionShape2D.shape.extents.y
-	max_height = $CollisionShape2D.shape.extents.y * 2
+	opened_pos.y = -$Sprite.texture.get_height()
+	if OPENED:
+		$HardDoor/HardDoor.set_deferred("disabled", true)
+		$Sprite.position = opened_pos
 	set_process(false)
-	pass # Replace with function body.
+	pass
 
 #func _pro(delta):
 #	if step != 0:
@@ -40,62 +42,58 @@ func _ready():
 
 
 func _process(delta):
-	if step < 0:
-		$CollisionShape2D.shape.extents.y = src_height
-		move(delta)
-		if height > max_height:
-			position.y += height - max_height
-			height = max_height
-			step = 0
-			stop_process()
-	elif step > 0 and bodies_below == 0:
-		$CollisionShape2D.shape.extents.y = height + src_height
-		var del = move(delta)
-		$CollisionShape2D.shape.extents.y += del / 2
-		if height <= 0:
-			$CollisionShape2D.shape.extents.y += height
-			position.y += height
-			height = 0
-			step = 0
-			stop_process()
-	#update()
+	if bodies_below == 0:
+		if cur_speed < 0:
+			if $Sprite.position == opened_pos:
+				OPENED = true
+				$HardDoor/HardDoor.set_deferred("disabled", true)
+				cur_speed = 0
+				stop_process()
+				return
+			else:
+				var step = max(delta * cur_speed, opened_pos.y - $Sprite.position.y)
+				$Sprite.position.y += step
+				return
+		else:
+			if $Sprite.position == closed_pos:
+				OPENED = false
+				cur_speed = 0
+				stop_process()
+				return
+			else:
+				var step = min(delta * cur_speed, closed_pos.y - $Sprite.position.y)
+				$Sprite.position.y += step
+				return
 
-func move(delta):
-	var del = position.y
-	move_and_collide(linear_vel * delta)
-	del -= position.y
-	height += del
-	return del
 
 func _on_IgnisRegularLevel_active():
-	linear_vel.y = -SPEED
-	step = -SPEED
+	cur_speed = -SPEED
 	set_process(true)
 	$AudioLoop.play()
-	pass # Replace with function body.
+	pass
 
 
 func _on_IgnisRegularLevel_not_active():
-	linear_vel.y = SPEED
-	step = SPEED
+	if bodies_below == 0:
+		$HardDoor/HardDoor.set_deferred("disabled", false)
+	cur_speed = SPEED
 	set_process(true)
 	$AudioLoop.play()
-	pass # Replace with function body.
+	pass
+
 
 func _on_Mechanism_active(time):
-	var num = max_height / time
-	linear_vel.y = -num
-	step = -num
+	cur_speed = -(opened_pos - closed_pos).length() / time
 	set_process(true)
 	$AudioLoop.play()
-	pass # Replace with function body.
+	pass
 
 
 func _on_Mechanism_not_active(time):
-	var num = max_height / time
-	linear_vel.y = num
-	step = num
-	pass # Replace with function body.
+	cur_speed = (opened_pos - closed_pos).length() / time
+	set_process(true)
+	$AudioLoop.play()
+	pass
 
 
 #func _draw():
@@ -107,14 +105,16 @@ func _on_Mechanism_not_active(time):
 #	draw_rect(r2, Color(0.9, 0.9, 0))
 
 
-func _on_SearchArea_body_entered(body):
+func _on_UnderGate_body_entered(body):
 	bodies_below += 1
-	pass # Replace with function body.
+	pass
 
 
-func _on_SearchArea_body_exited(body):
+func _on_UnderGate_body_exited(body):
 	bodies_below -= 1
-	pass # Replace with function body.
+	if cur_speed != 0 and bodies_below == 0:
+		$HardDoor/HardDoor.set_deferred("disabled", false)
+	pass
 
 
 func stop_process():

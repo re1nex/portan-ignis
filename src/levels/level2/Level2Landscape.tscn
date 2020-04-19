@@ -72,3 +72,4 @@ position = Vector2( 192, 144 )
 
 [node name="Door2" parent="Doors" instance=ExtResource( 7 )]
 position = Vector2( 1248, 80 )
+OPENED = true
