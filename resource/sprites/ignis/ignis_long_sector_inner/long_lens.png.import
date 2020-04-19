@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blocks.png-4578a76ad931e46861dc4e0c228bad84.stex"
+path="res://.import/long_lens.png-cf4d9fbbd2241c08f14810325fa52369.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/tiles/level_0/blocks.png"
-dest_files=[ "res://.import/blocks.png-4578a76ad931e46861dc4e0c228bad84.stex" ]
+source_file="res://resource/sprites/ignis/ignis_long_sector_inner/long_lens.png"
+dest_files=[ "res://.import/long_lens.png-cf4d9fbbd2241c08f14810325fa52369.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

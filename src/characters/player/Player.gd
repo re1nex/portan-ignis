@@ -13,7 +13,7 @@ class_name Player
 
 
 const SMALL_TWITCHING = 5
-const WEAPONS_NUM = 2
+const WEAPONS_NUM = 3
 const INSTRUMENTS_NUM = 1
 const MAX_HEALTH = 5
 const GRAVITY = 550
@@ -287,6 +287,11 @@ func _on_IgnisRegularOuter_ignis_regular_taken(type):
 		turn_on_ignis(GlobalVars.Ignis_type.SECTOR)
 		$AudioPickUp.play()
 		#switch_sprites($iconWithIgnis)
+	
+	if type == GlobalVars.Ignis_type.LONG_SECTOR:
+		$Informator.has_weapons[GlobalVars.Ignis_type.LONG_SECTOR] = true
+		turn_on_ignis(GlobalVars.Ignis_type.LONG_SECTOR)
+		$AudioPickUp.play()
 	pass # Replace with function body.
 
 func get_informator():
@@ -338,6 +343,9 @@ func control_weapons():
 		
 		if Input.is_action_just_pressed("ui_2") and $Informator.has_weapons[GlobalVars.Ignis_type.SECTOR]:
 			switch_weapons(GlobalVars.Ignis_type.SECTOR)
+		
+		if Input.is_action_just_pressed("ui_3") and $Informator.has_weapons[GlobalVars.Ignis_type.LONG_SECTOR]:
+			switch_weapons(GlobalVars.Ignis_type.LONG_SECTOR)
 
 
 func turn_off_ignis():
@@ -384,6 +392,11 @@ func fill_weapons():
 	weapons[GlobalVars.Ignis_type.SECTOR] = node
 	add_child(weapons[GlobalVars.Ignis_type.SECTOR])
 	weapons[GlobalVars.Ignis_type.SECTOR].disable()
+	
+	node = preload("res://src/objects/IgnisLongSectorInner/IgnisLongSectorInner.tscn").instance()
+	weapons[GlobalVars.Ignis_type.LONG_SECTOR] = node
+	add_child(weapons[GlobalVars.Ignis_type.LONG_SECTOR])
+	weapons[GlobalVars.Ignis_type.LONG_SECTOR].disable()
 	
 	if Transfer.cur_ignis_num != -1 and Transfer.cur_ignis_status != GlobalVars.Is_ignis.NO_IGNIS:
 		turn_on_ignis(Transfer.cur_ignis_num)

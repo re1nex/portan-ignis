@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background.jpg-b17e9294d2e5a64e6ee5a3544b996931.stex"
+path="res://.import/long_sector_oriented.png-b6723b25b0efa500eeaa0a1ad6ca9b24.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/tiles/level_0/background.jpg"
-dest_files=[ "res://.import/background.jpg-b17e9294d2e5a64e6ee5a3544b996931.stex" ]
+source_file="res://resource/sprites/ignis/ignis_long_sector_outer/long_sector_oriented.png"
+dest_files=[ "res://.import/long_sector_oriented.png-b6723b25b0efa500eeaa0a1ad6ca9b24.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

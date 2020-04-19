@@ -34,6 +34,7 @@ shape = SubResource( 2 )
 
 [node name="AudioLoop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-max_distance = 500.0
+volume_db = 3.0
+max_distance = 300.0
 [connection signal="body_entered" from="SearchArea" to="." method="_on_SearchArea_body_entered"]
 [connection signal="body_exited" from="SearchArea" to="." method="_on_SearchArea_body_exited"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/level1/Level1.gd" type="Script" id=2]
 [ext_resource path="res://src/ui/pauseMenu/pauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/levels/level1/Level1Landscape.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ui/inventory/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/ui/HUD/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/ui/winWindow/WinWindow.tscn" type="PackedScene" id=8]
@@ -22,7 +23,9 @@ position = Vector2( 536, 704 )
 
 [node name="WindowGameOver" parent="." instance=ExtResource( 7 )]
 
-[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
-
 [node name="WinWindow" parent="." instance=ExtResource( 8 )]
+
+[node name="Inventory" parent="." instance=ExtResource( 5 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 [connection signal="player_stop" from="Level1Landscape" to="." method="_on_Level1Landscape_player_stop"]

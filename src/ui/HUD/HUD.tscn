@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://resource/ui/hud/torch_bar_bg.png" type="Texture" id=1]
 [ext_resource path="res://resource/ui/hud/torch_bar_fill.png" type="Texture" id=2]
+[ext_resource path="res://resource/ui/hud/torchWithLongLens.png" type="Texture" id=3]
 [ext_resource path="res://resource/ui/hud/heartBlack.png" type="Texture" id=4]
 [ext_resource path="res://resource/ui/hud/heart.png" type="Texture" id=5]
 [ext_resource path="res://src/ui/HUD/HUD.gd" type="Script" id=6]
@@ -9,6 +10,7 @@
 [ext_resource path="res://resource/ui/hud/TorchWithLens.png" type="Texture" id=8]
 
 [node name="HUD" type="MarginContainer"]
+visible = false
 light_mask = 0
 anchor_right = 1.0
 custom_constants/margin_right = 20
@@ -21,16 +23,19 @@ __meta__ = {
 }
 
 [node name="MainContainer" type="HBoxContainer" parent="."]
+light_mask = 0
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1260.0
 margin_bottom = 86.0
 
 [node name="Hearts" type="HBoxContainer" parent="MainContainer"]
+light_mask = 0
 margin_right = 336.0
 margin_bottom = 66.0
 
 [node name="Heart1" type="TextureProgress" parent="MainContainer/Hearts"]
+light_mask = 0
 margin_right = 64.0
 margin_bottom = 66.0
 max_value = 1.0
@@ -38,6 +43,7 @@ texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
 [node name="Heart2" type="TextureProgress" parent="MainContainer/Hearts"]
+light_mask = 0
 margin_left = 68.0
 margin_right = 132.0
 margin_bottom = 66.0
@@ -46,6 +52,7 @@ texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
 [node name="Heart3" type="TextureProgress" parent="MainContainer/Hearts"]
+light_mask = 0
 margin_left = 136.0
 margin_right = 200.0
 margin_bottom = 66.0
@@ -54,6 +61,7 @@ texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
 [node name="Heart4" type="TextureProgress" parent="MainContainer/Hearts"]
+light_mask = 0
 margin_left = 204.0
 margin_right = 268.0
 margin_bottom = 66.0
@@ -62,6 +70,7 @@ texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 
 [node name="Heart5" type="TextureProgress" parent="MainContainer/Hearts"]
+light_mask = 0
 margin_left = 272.0
 margin_right = 336.0
 margin_bottom = 66.0
@@ -73,6 +82,7 @@ __meta__ = {
 }
 
 [node name="torchStatus" type="TextureProgress" parent="MainContainer"]
+light_mask = 0
 margin_left = 340.0
 margin_right = 588.0
 margin_bottom = 66.0
@@ -85,6 +95,7 @@ __meta__ = {
 }
 
 [node name="ChosenIgnis" type="CenterContainer" parent="MainContainer"]
+light_mask = 0
 margin_left = 592.0
 margin_right = 622.0
 margin_bottom = 66.0
@@ -92,6 +103,7 @@ rect_min_size = Vector2( 30, 66 )
 size_flags_vertical = 3
 
 [node name="Torch" type="TextureRect" parent="MainContainer/ChosenIgnis"]
+light_mask = 0
 margin_right = 30.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 30, 66 )
@@ -101,10 +113,18 @@ texture = ExtResource( 7 )
 expand = true
 
 [node name="Sector" type="TextureRect" parent="MainContainer/ChosenIgnis"]
+light_mask = 0
 margin_right = 30.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 30, 66 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 8 )
+expand = true
+
+[node name="LongSector" type="TextureRect" parent="MainContainer/ChosenIgnis"]
+margin_right = 30.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 30, 66 )
+texture = ExtResource( 3 )
 expand = true
