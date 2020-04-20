@@ -4,6 +4,8 @@ signal falls
 signal win
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	$Player.prepare_camera($Level2Landscape.posLU, $Level2Landscape.posRD)
 	connect("falls", self, "_on_Player_die")
 	$Player.connect("die", self, "_on_Player_die")
@@ -13,15 +15,16 @@ func _ready():
 	$Ignises/IgnisDoor.activate_at_start()
 	$Ignises/IgnisActivated.activate_at_start()
 	
-	$WinWindow/CenterContainer.hide()
 	$HUD/HUD.init_player($Player)
 	$Inventory.set_player($Player)
-	$WindowGameOver/CenterContainer.hide()
 	$Player.new_lvl()
 	MusicController.playMusic(true)
-	
+
+
 func _on_Player_die():
 	#get_tree().paused = true
+	$PauseMenu.set_process_input(false)
+	$Inventory.set_process_input(false)
 	$Player.after_die()
 	$WindowGameOver._closeBefore()
 	$WindowGameOver.show()
@@ -37,9 +40,12 @@ func _on_Death_body_entered(body):
 
 func _on_Win_body_entered(body):
 	if body.has_method("get_informator"):
+		$PauseMenu.set_process_input(false)
+		$Inventory.set_process_input(false)
 		MusicController.playMusic(false)
 		$WinWindow.show()
 		$Player.goAway()
+		Transfer.copy_chars($Player)
 
 
 func _on_End_body_entered(body):

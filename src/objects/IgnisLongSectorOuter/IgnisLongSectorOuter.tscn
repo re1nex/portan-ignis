@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resource/sprites/ignis/ignis_long_sector_outer/long_sector_oriented.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/IgnisLongSectorOuter/IgnisLongSectorOuter.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.29796, 6.24734 )
+
+[node name="IgnisLongSectorOuter" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 2 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -0.0550925, 0.165272 )
+scale = Vector2( 0.719033, 0.619868 )
+pause_animations = false
+freeze_bodies = false
+pause_particles = false
+pause_animated_sprites = false
+process_parent = true
+physics_process_parent = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_IgnisLongSectorOuter_body_entered"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/roguelikeDungeon_transparent.png-c76afd19050d7e18aa710e2ff1074962.stex"
+path="res://.import/DungeonCrawl_ProjectUtumnoTileset.png-6841343e8724424d74d7f41c40f92f2e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/tiles/level_0/roguelikeDungeon_transparent.png"
-dest_files=[ "res://.import/roguelikeDungeon_transparent.png-c76afd19050d7e18aa710e2ff1074962.stex" ]
+source_file="res://resource/sprites/objects/lever/DungeonCrawl_ProjectUtumnoTileset.png"
+dest_files=[ "res://.import/DungeonCrawl_ProjectUtumnoTileset.png-6841343e8724424d74d7f41c40f92f2e.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

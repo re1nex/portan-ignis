@@ -8,6 +8,7 @@ signal not_active
 # var b = "text"
 const radius_multiplier = 1.5
 
+export (String, "simple", "column", "post") var type
 export (bool) var activated_at_start = false
 var body_informator = null
 var activated = false
@@ -19,6 +20,14 @@ func _init():
 
 
 func _ready():
+	
+	if type == "column":
+		$TorchSprite.hide()
+		$ColumnSprite.show()
+	elif type == "post":
+		$TorchSprite.hide()
+		$PostSprite.show()
+	
 	$Light2D.init_radius(radius_multiplier)
 	if activated_at_start:
 		activated = true

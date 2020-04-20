@@ -10,6 +10,7 @@ export (int) var run_speed = 230
 export (int) var jump_speed = 100
 export (int) var jump_height_limit = 30
 export (float) var landing_time = 0.2
+export (bool) var falling_at_start = false
 
 const ROAMING = 0
 const CHASING = 1 
@@ -42,6 +43,7 @@ func _ready():
 	vision_center = $VisionPoint.position
 	x_scale = $Visibility.scale.x
 	sprite = $AnimatedSprite
+	jumping = falling_at_start
 	pass
 
 
@@ -66,6 +68,8 @@ func _physics_process(delta):
 	sprite.play()
 	if mode == ROAMING:
 		evaluate_roaming()
+		if on_floor:
+			jumping = false
 	elif mode == CHASING:
 		evaluate_chasing()
 		# jumping while chasing #
@@ -185,13 +189,15 @@ func check_chase():
 
 func evaluate_roaming():
 	velocity.x = direction * walk_speed
-	if not $RayDownLeft.is_colliding() or $RayLeft.is_colliding():
+	if (not $RayDownLeft.is_colliding() and not jumping) or $RayLeft.is_colliding():
 		direction = 1.0
+		ex_direction = direction
 		sprite.flip_h = false
 		$Visibility.scale.x = x_scale
 		$CatchArea.scale.x = x_scale
-	if not $RayDownRight.is_colliding() or $RayRight.is_colliding():
+	if (not $RayDownRight.is_colliding() and not jumping) or $RayRight.is_colliding():
 		direction = -1.0
+		ex_direction = direction
 		sprite.flip_h = true
 		$Visibility.scale.x = -x_scale
 		$CatchArea.scale.x = -x_scale
@@ -206,11 +212,13 @@ func evaluate_chasing():
 		sprite.speed_scale = 2
 		if target_dir.x > 0:
 			direction = 1
+			ex_direction = direction
 			sprite.flip_h = false
 			$Visibility.scale.x = x_scale
 			$CatchArea.scale.x = x_scale
 		elif target_dir.x < 0:
 			direction = -1
+			ex_direction = direction
 			sprite.flip_h = true
 			$Visibility.scale.x = -x_scale
 			$CatchArea.scale.x = -x_scale

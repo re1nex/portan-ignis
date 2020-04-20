@@ -12,14 +12,18 @@ var hit_pos
 var can_shoot = true
 var target_radius = 0
 var radCoef = 0.25
+var idle = true
 
 func _ready():
 	$ShootTimer.wait_time = fire_rate
 
 func _physics_process(delta):
 	if target:
+		idle = false
 		aim()
 		update()
+	else:
+		idle = true
 
 func aim():
 	var pos = target.global_position
@@ -31,9 +35,8 @@ func aim():
 		hit_pos.append(pos + Vector2(radCoef * target_radius, 0))
 		hit_pos.append(pos - Vector2(radCoef * target_radius, 0))
 	for i in range(len(hit_pos)):
-		var result = space_state.intersect_ray(position + $ArrowPos.position,
-				hit_pos[i], [self], 1 << 2)
-		if not result and can_shoot:
+		var result = space_state.intersect_ray(position + $ArrowPos.position, hit_pos[i], [self], 1 << 2)
+		if not result.size() and can_shoot:
 			shoot(pos)
 			return
 
@@ -50,8 +53,8 @@ func shoot(where):
 	var b = arrow.instance()
 	var v = b.speed
 	var g = b.gravity
-	var k = (sqrt(pow(v,4) + 2 * dir.y * g * v * v - pow(dir.x, 2) * g * g) - v * v) /(dir.x * g)
-	var a = atan(k)
+	var k = (sqrt(pow(v,4) + 2 * dir.y * g * v * v - pow(dir.x, 2) * g * g) - v * v) / (dir.x * g)
+	var a = atan(k) + rand_range(-0.05, 0.05)
 	if dir.x < 0:
 		a += PI
 	b.start(a_pos, a)
@@ -60,9 +63,9 @@ func shoot(where):
 	$ShootTimer.start()
 
 func _draw():
-#	if hit_pos:
-#		for hit in hit_pos:
-#			draw_line(Vector2() + $ArrowPos.position, (hit - position), laser_color)
+	if hit_pos:
+		for hit in hit_pos:
+			draw_line(Vector2() + $ArrowPos.position, (hit - position), laser_color)
 	pass
 
 func _on_Visibility_area_entered(area):
@@ -81,3 +84,9 @@ func _on_Visibility_area_exited(area):
 
 func _on_ShootTimer_timeout():
 	can_shoot = true
+
+
+func _on_TurnTimer_timeout():
+	if idle:
+		$Sprite.flip_h = not $Sprite.flip_h
+		$ArrowPos.position.x *= -1

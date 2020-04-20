@@ -30,19 +30,21 @@ script = ExtResource( 2 )
 position = Vector2( 288, 148 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 672, 208 )
+position = Vector2( 640, 200 )
 
 [node name="Ignises" type="Node2D" parent="."]
 
 [node name="IgnisDoor" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 544, 232 )
+type = "column"
 
 [node name="IgnisDoor2" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 408, 160 )
 activated_at_start = true
 
 [node name="IgnisActivated" parent="Ignises" instance=ExtResource( 6 )]
-position = Vector2( 128, 168 )
+position = Vector2( 128, 160 )
+type = "column"
 
 [node name="IgnisRegularLevel" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 1152, 96 )
@@ -60,7 +62,7 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Win" type="Area2D" parent="."]
-position = Vector2( 1368, 40 )
+position = Vector2( 1360, 40 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -71,12 +73,10 @@ shape = SubResource( 2 )
 [node name="Hearts" type="Node2D" parent="."]
 
 [node name="Heart" parent="Hearts" instance=ExtResource( 11 )]
-position = Vector2( 1184, 80 )
+position = Vector2( 1200, 80 )
 
 [node name="Heart2" parent="Hearts" instance=ExtResource( 11 )]
 position = Vector2( 472, 208 )
-
-[node name="PauseMenu" parent="." instance=ExtResource( 7 )]
 
 [node name="WinWindow" parent="." instance=ExtResource( 8 )]
 
@@ -86,16 +86,21 @@ position = Vector2( 472, 208 )
 layer = 2
 
 [node name="HUD" parent="HUD" instance=ExtResource( 9 )]
-margin_bottom = 104.0
+margin_bottom = 106.0
 
 [node name="End" type="Area2D" parent="."]
-position = Vector2( 1627.7, 33.2409 )
+position = Vector2( 1624, 32 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
-position = Vector2( 27.4359, 6.85899 )
+position = Vector2( -1.33514e-05, 4.76837e-07 )
 shape = SubResource( 3 )
 
 [node name="Inventory" parent="." instance=ExtResource( 4 )]
+
+[node name="PauseMenu" parent="." instance=ExtResource( 7 )]
 [connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=1]
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_level/torchOff.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.gd" type="Script" id=4]
 [ext_resource path="res://resource/sounds/ignis/flameOff.wav" type="AudioStream" id=5]
 [ext_resource path="res://resource/sounds/ignis/loop.wav" type="AudioStream" id=6]
+[ext_resource path="res://resource/sprites/ignis/ignis_regular_level/ign2.png" type="Texture" id=7]
+[ext_resource path="res://resource/sprites/ignis/ignis_regular_level/ign.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 24 )
@@ -24,6 +26,16 @@ __meta__ = {
 position = Vector2( 0, -29 )
 texture = ExtResource( 2 )
 
+[node name="ColumnSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -20 )
+texture = ExtResource( 8 )
+
+[node name="PostSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -13 )
+texture = ExtResource( 7 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -24 )
 shape = SubResource( 1 )
@@ -33,8 +45,9 @@ position = Vector2( -2.38419e-07, -34 )
 
 [node name="AudioLoop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+volume_db = 3.0
 max_distance = 200.0
-attenuation = 4.0
+attenuation = 2.07053
 
 [node name="AudioOff" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
@@ -43,5 +56,6 @@ attenuation = 4.0
 
 [node name="AudioOn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
+volume_db = -3.0
 [connection signal="body_entered" from="." to="." method="_on_IgnisRegularLevel_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_IgnisRegularLevel_body_exited"]

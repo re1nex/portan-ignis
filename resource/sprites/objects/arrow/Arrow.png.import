@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/door.png-409db3791dfead324c7aff18bfd1ccec.stex"
+path="res://.import/Arrow.png-42f8b58532b92f0f336b729479056142.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/objects/door.png"
-dest_files=[ "res://.import/door.png-409db3791dfead324c7aff18bfd1ccec.stex" ]
+source_file="res://resource/sprites/objects/arrow/Arrow.png"
+dest_files=[ "res://.import/Arrow.png-42f8b58532b92f0f336b729479056142.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

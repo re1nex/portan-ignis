@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Arrow.png-45cc40c70b0c11e2182075d530047398.stex"
+path="res://.import/mechanism.png-dcd1b7223dc8c046ef2f7211050b63c9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/sprites/objects/Arrow.png"
-dest_files=[ "res://.import/Arrow.png-45cc40c70b0c11e2182075d530047398.stex" ]
+source_file="res://resource/sprites/objects/mechanism/mechanism.png"
+dest_files=[ "res://.import/mechanism.png-dcd1b7223dc8c046ef2f7211050b63c9.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
