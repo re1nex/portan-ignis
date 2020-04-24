@@ -3,10 +3,10 @@
 [ext_resource path="res://resource/sprites/tiles/level_1/cavern_textures.png" type="Texture" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 6.04242, 6.19086, 11.9488, 0, 21.3601, 0, 27.9805, 16, 6.1073, 16 )
+points = PoolVector2Array( 11.1569, 0, 22.1389, 0, 22.1389, 16, 11.079, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 2.13727, 16, 10.3586, 0, 23.5561, 0, 26.0982, 16 )
+points = PoolVector2Array( 10.1444, 0, 22.061, 0, 22.3726, 16, 10.1444, 16 )
 
 [resource]
 0/name = "Stone 1"
