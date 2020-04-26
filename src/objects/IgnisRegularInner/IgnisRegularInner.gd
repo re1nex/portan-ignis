@@ -3,11 +3,33 @@ extends Light2D
 const deltaScale = 0.0025
 const energyDec = 0.025
 const energyMin = 0.1
+const default_health = GlobalVars.Ignis_state.LIFE_MAX
+const health_to_index = {
+	GlobalVars.Ignis_state.OFF: 0,
+	GlobalVars.Ignis_state.LIFE_1: 1,
+	GlobalVars.Ignis_state.LIFE_2: 2,
+	GlobalVars.Ignis_state.LIFE_3: 3,
+	GlobalVars.Ignis_state.LIFE_MAX: 4,
+}
+const index_to_health = [
+	GlobalVars.Ignis_state.OFF,
+	GlobalVars.Ignis_state.LIFE_1,
+	GlobalVars.Ignis_state.LIFE_2,
+	GlobalVars.Ignis_state.LIFE_3,
+	GlobalVars.Ignis_state.LIFE_MAX,
+]
+const energy_levels = [0, 0.75, 0.85, 0.95, 1.00]
+const scale_levels = [0, 0.75, 0.85, 0.95, 1.00]
 
 var minScale
 var energyMax
 var switchingOff
 var switchedOff
+var health = default_health
+var true_scale # when the health is max
+var true_energy
+var true_area2D_scale
+var true_vis_enabler_scale
 
 var priority = 1
 
@@ -22,11 +44,16 @@ enum Ignis_layer{
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	true_area2D_scale = $Area2D.scale
+	true_vis_enabler_scale = $VisibilityEnabler2D.scale
 	minScale = texture_scale - 0.01
+	true_scale = texture_scale
 	energyMax = 1.2
+	true_energy = energyMax
 	switchingOff = false
 	switchedOff = true
 	finish_disabling()
+	set_state()
 	set_process(false)
 	set_visibility_flags(true)
 	pass # Replace with function body
@@ -37,6 +64,9 @@ func init_radius(mul):
 	$Area2D.scale *= mul
 	minScale = texture_scale - 0.01
 	$VisibilityEnabler2D.scale *= mul
+	true_scale = minScale
+	true_area2D_scale = $Area2D.scale
+	true_vis_enabler_scale = $VisibilityEnabler2D.scale
 
 
 func set_light_layer(layer):
@@ -118,3 +148,31 @@ func rotate_ignis(degree):
 func set_visibility_flags(val):
 	$VisibilityEnabler2D.process_parent = val
 	$VisibilityEnabler2D.pause_particles = val
+
+
+func set_state():
+	_set_state_by_default()
+
+
+func _set_state_by_default():
+	var ind = health_to_index[health]
+	_set_state_params(scale_levels[ind], energy_levels[ind])
+
+
+func _set_state_params(scale_part, energy_part):
+	minScale = true_scale * scale_part - 0.01
+	energyMax = true_energy * energy_part
+	$Area2D.scale = true_area2D_scale * scale_part
+	$VisibilityEnabler2D.scale = true_vis_enabler_scale * scale_part
+
+
+func hit():
+	var ind = health_to_index[health]
+	if ind > 0:
+		ind -= 1
+	health = index_to_health[ind]
+	set_state()
+
+# source state is GlobalVars.Ignis_state enum
+func reload(source_state):
+	health = source_state
