@@ -120,10 +120,11 @@ func finish_disabling():
 
 
 func enable():
-	switchingOff = false
-	energy = energyMax
-	set_process(true)
-	set_visibility_flags(true)
+	if health != GlobalVars.Ignis_state.OFF:
+		switchingOff = false
+		energy = energyMax
+		set_process(true)
+		set_visibility_flags(true)
 
 
 func finish_enabling():
@@ -156,7 +157,14 @@ func set_state():
 
 func _set_state_by_default():
 	var ind = health_to_index[health]
-	_set_state_params(scale_levels[ind], energy_levels[ind])
+	if ind == 0:
+		_handle_state_off()
+	else:
+		_set_state_params(scale_levels[ind], energy_levels[ind])
+
+
+func _handle_state_off():
+	disable()
 
 
 func _set_state_params(scale_part, energy_part):
