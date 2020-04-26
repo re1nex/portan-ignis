@@ -179,7 +179,6 @@ func check_chase():
 		var ang = abs(target_dir.angle())
 		if $CatchArea.scale.x < 0:
 			ang = PI - ang
-		print(ang)
 		if not res and ang <= 7 * PI / 12:
 			mode = CHASING
 			recent_tar = current
