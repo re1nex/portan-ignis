@@ -196,3 +196,7 @@ func set_health_params(new_scales, new_energies):
 	scale_list = new_scales
 	energy_list = new_energies
 	set_state()
+
+
+func get_health():
+	return health
