@@ -18,18 +18,20 @@ const index_to_health = [
 	GlobalVars.Ignis_state.LIFE_3,
 	GlobalVars.Ignis_state.LIFE_MAX,
 ]
-const energy_levels = [0, 0.75, 0.85, 0.95, 1.00]
-const scale_levels = [0, 0.75, 0.85, 0.95, 1.00]
+const energy_levels = [0, 0.75, 0.85, 0.95, 1.00] # default for inner
+const scale_levels = [0, 0.75, 0.85, 0.95, 1.00] # default for inner
 
 var minScale
 var energyMax
 var switchingOff
 var switchedOff
 var health = default_health
-var true_scale # when the health is max
+var true_scale # when the health is max (start values)
 var true_energy
 var true_area2D_scale
 var true_vis_enabler_scale
+var scale_list # can be changed in IgnisRegularLevel
+var energy_list # call set_health_params() to change
 
 var priority = 1
 
@@ -44,6 +46,8 @@ enum Ignis_layer{
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	scale_list = scale_levels # default parameters
+	energy_list = energy_levels # default parameters
 	true_area2D_scale = $Area2D.scale
 	true_vis_enabler_scale = $VisibilityEnabler2D.scale
 	minScale = texture_scale - 0.01
@@ -152,15 +156,11 @@ func set_visibility_flags(val):
 
 
 func set_state():
-	_set_state_by_default()
-
-
-func _set_state_by_default():
 	var ind = health_to_index[health]
 	if ind == 0:
 		_handle_state_off()
 	else:
-		_set_state_params(scale_levels[ind], energy_levels[ind])
+		_set_state_params(scale_list[ind], energy_list[ind])
 
 
 func _handle_state_off():
@@ -184,3 +184,9 @@ func hit():
 # source state is GlobalVars.Ignis_state enum
 func reload(source_state):
 	health = source_state
+
+
+func set_health_params(new_scales, new_energies):
+	scale_list = new_scales
+	energy_list = new_energies
+	set_state()
