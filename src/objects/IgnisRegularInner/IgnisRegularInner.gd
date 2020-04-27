@@ -189,6 +189,7 @@ func hit():
 func reload(source_state = GlobalVars.Ignis_state.LIFE_MAX):
 	health = source_state
 	last_health = health
+	set_state()
 
 
 func set_health_params(new_scales, new_energies):
