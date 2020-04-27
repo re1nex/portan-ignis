@@ -54,7 +54,7 @@ func update():
 	#INSTRUMENTS
 	for i in range(informator.has_instruments[GlobalVars.Instruments_type.LEVER]):
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
-		node.set_picture("res://resource/sprites/objects/DungeonCrawl_ProjectUtumnoTileset.png")
+		node.set_picture("res://resource/sprites/objects/lever/DungeonCrawl_ProjectUtumnoTileset.png")
 		$Control/Instruments.add_child(node)
 
 
