@@ -20,6 +20,8 @@ const index_to_health = [
 ]
 const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for inner
 const scale_levels = [0, 0.60, 0.75, 0.85, 1.00] # default for inner
+const flame_particle_count = [0, 4, 8, 16, 32]
+const smoke_particle_count = [0, 4, 6, 8]
 
 var minScale
 var energyMax
@@ -142,7 +144,6 @@ func finish_enabling():
 
 func mirror():
 	reflected *= -1
-	pass
 
 
 func rotate_ignis(degree):
@@ -176,6 +177,9 @@ func _set_state_by_params(scale_part, energy_part):
 	$Area2D.scale = true_area2D_scale * scale_part
 	$VisibilityEnabler2D.scale = true_vis_enabler_scale * scale_part
 	energy = energyMax
+	var ind = health_to_index[health]
+	$Flame.amount = flame_particle_count[ind] # constants for all regular ignises
+	$Smoke.amount = smoke_particle_count[ind]
 
 
 func hit():
