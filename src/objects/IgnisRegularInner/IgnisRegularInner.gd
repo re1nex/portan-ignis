@@ -18,7 +18,7 @@ const index_to_health = [
 	GlobalVars.Ignis_state.LIFE_3,
 	GlobalVars.Ignis_state.LIFE_MAX,
 ]
-const energy_levels = [0, 0.40, 0.60, 0.80, 1.00] # default for inner
+const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for inner
 const scale_levels = [0, 0.60, 0.75, 0.85, 1.00] # default for inner
 
 var minScale
@@ -175,6 +175,7 @@ func _set_state_by_params(scale_part, energy_part):
 	energyMax = true_energy * energy_part
 	$Area2D.scale = true_area2D_scale * scale_part
 	$VisibilityEnabler2D.scale = true_vis_enabler_scale * scale_part
+	energy = energyMax
 
 
 func hit():
