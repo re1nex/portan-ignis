@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://resource/ui/hud/torch_bar_bg.png" type="Texture" id=1]
 [ext_resource path="res://resource/ui/hud/torch_bar_fill.png" type="Texture" id=2]
@@ -8,9 +8,10 @@
 [ext_resource path="res://src/ui/HUD/HUD.gd" type="Script" id=6]
 [ext_resource path="res://resource/ui/hud/torch.png" type="Texture" id=7]
 [ext_resource path="res://resource/ui/hud/TorchWithLens.png" type="Texture" id=8]
+[ext_resource path="res://resource/ui/hud/Torch_bar_mini_bg.png" type="Texture" id=9]
+[ext_resource path="res://resource/ui/hud/Torch_bar_mini_fill.png" type="Texture" id=10]
 
 [node name="HUD" type="MarginContainer"]
-visible = false
 light_mask = 0
 anchor_right = 1.0
 custom_constants/margin_right = 20
@@ -94,10 +95,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="torchBars" type="HBoxContainer" parent="MainContainer"]
+margin_left = 592.0
+margin_right = 844.0
+margin_bottom = 66.0
+
+[node name="Bar1" type="TextureProgress" parent="MainContainer/torchBars"]
+margin_right = 60.0
+margin_bottom = 66.0
+max_value = 1.0
+step = 0.01
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 10 )
+
+[node name="Bar2" type="TextureProgress" parent="MainContainer/torchBars"]
+margin_left = 64.0
+margin_right = 124.0
+margin_bottom = 66.0
+max_value = 1.0
+step = 0.01
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 10 )
+
+[node name="Bar3" type="TextureProgress" parent="MainContainer/torchBars"]
+margin_left = 128.0
+margin_right = 188.0
+margin_bottom = 66.0
+max_value = 1.0
+step = 0.01
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 10 )
+
+[node name="Bar4" type="TextureProgress" parent="MainContainer/torchBars"]
+margin_left = 192.0
+margin_right = 252.0
+margin_bottom = 66.0
+max_value = 1.0
+step = 0.01
+texture_under = ExtResource( 9 )
+texture_progress = ExtResource( 10 )
+
 [node name="ChosenIgnis" type="CenterContainer" parent="MainContainer"]
 light_mask = 0
-margin_left = 592.0
-margin_right = 622.0
+margin_left = 848.0
+margin_right = 878.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 30, 66 )
 size_flags_vertical = 3
