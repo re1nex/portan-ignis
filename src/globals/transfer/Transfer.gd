@@ -6,6 +6,7 @@ var cur_ignis_num
 var cur_ignis_status
 var weapons = []
 var instruments = []
+var ignis_health
 const WEAPONS_NUM = 3#load("res://src/characters/player/Player.gd").WEAPONS_NUM
 const INSTRUMENTS_NUM = 1
 
@@ -28,6 +29,7 @@ func set_default_chars():
 		instruments.append(0)
 		
 	levels_passed = 0
+	ignis_health = GlobalVars.Ignis_state.LIFE_MAX
 
 
 func set_default_level2_chars():
@@ -43,6 +45,7 @@ func set_default_level2_chars():
 		instruments.append(0)
 		
 	levels_passed = 0
+	ignis_health = GlobalVars.Ignis_state.LIFE_MAX
 
 
 func set_default_level3_chars():
@@ -58,6 +61,7 @@ func set_default_level3_chars():
 		instruments.append(0)
 		
 	levels_passed = 0
+	ignis_health = GlobalVars.Ignis_state.LIFE_MAX
 
 
 func set_default_level4_chars():
@@ -73,6 +77,7 @@ func set_default_level4_chars():
 		instruments.append(0)
 		
 	levels_passed = 0
+	ignis_health = GlobalVars.Ignis_state.LIFE_MAX
 
 
 func copy_chars(player):
@@ -94,3 +99,4 @@ func copy_chars(player):
 		instruments[i] = info.has_instruments[i]
 		
 	levels_passed += 1
+	ignis_health = info.ignis_health
