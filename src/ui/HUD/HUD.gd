@@ -2,6 +2,8 @@ extends MarginContainer
 
 
 const fading_delta = 0.1
+const max_ignis_bar_value = 1
+const ignis_bars_count = 4
 
 var informator
 var health
@@ -67,10 +69,16 @@ func init_ignis_bar_anim():
 	old_status = informator.ignis_status
 	progress_bar_fading = false
 	fading_in = false 
-	max_alpha = $MainContainer/torchStatus.modulate.a
+	max_alpha = $MainContainer/torchBars/Bar1.modulate.a
 	min_alpha = 0
 	if old_status == GlobalVars.Is_ignis.NO_IGNIS:
-		$MainContainer/torchStatus.modulate.a = 0 # hide
+		pb_hide_all()
+
+
+func pb_hide_all():
+	for ind in range(ignis_bars_count):
+		var pb_cur = get_ignis_bar_by_number(ind)
+		pb_cur.modulate.a = 0
 
 
 func _process(delta):
@@ -143,26 +151,81 @@ func ignis_bar_anim():
 	if not progress_bar_fading:
 		return
 	if fading_in:
-		$MainContainer/torchStatus.modulate.a += fading_delta
-		if $MainContainer/torchStatus.modulate.a >= max_alpha:
-			$MainContainer/torchStatus.modulate.a = max_alpha
-			progress_bar_fading = false # stop animation
+		pb_fading_in_anim()
 	else:
-		$MainContainer/torchStatus.modulate.a -= fading_delta
-		if $MainContainer/torchStatus.modulate.a <= min_alpha:
-			$MainContainer/torchStatus.modulate.a = min_alpha
-			progress_bar_fading = false # stop animation
+		pb_fading_out_anim()
+
+
+func pb_fading_in_anim():
+	for pb_ind in range(ignis_bars_count):
+		var current_bar = get_ignis_bar_by_number(pb_ind)
+		current_bar.modulate.a += fading_delta
+		if current_bar.modulate.a >= max_alpha:
+			current_bar.modulate.a = max_alpha
+			progress_bar_fading = false
+
+
+func pb_fading_out_anim():
+	for pb_ind in range(ignis_bars_count):
+		var current_bar = get_ignis_bar_by_number(pb_ind)
+		current_bar.modulate.a -= fading_delta
+		if current_bar.modulate.a <= min_alpha:
+			current_bar.modulate.a = min_alpha
+			progress_bar_fading = false
 
 
 func set_ignis_bar(value):
-	if $MainContainer/torchStatus.value != value:
-		ignis_bar_changing = true
+	#if value == max_ignis_bar_value:
+	#	fill_ignis_health_full(ignis_bars_count)
+	#else:
+		var cur_ignis_health = informator.ignis_health
+		var current_bar = get_ignis_bar_by_number(cur_ignis_health - 1) # starts with 0 
+		if current_bar == null: # ignis is OFF completely
+			fill_ignis_health_full(0)
+			ignis_bar_changing = false
+			return
+		fill_ignis_health_full(cur_ignis_health)
+		if current_bar.value == value and value == 0:
+			ignis_bar_changing = false
+		else:
+			ignis_bar_changing = true
+		if informator.ignis_status == GlobalVars.Is_ignis.NO_IGNIS:
+			fill_ignis_health_full(0) # make all bars empty
+			ignis_bar_changing = false
+		else:
+			current_bar.value = value
+
+
+func get_ignis_bar_by_number(num):
+	match num:
+		0:
+			return $MainContainer/torchBars/Bar1
+		1:
+			return $MainContainer/torchBars/Bar2
+		2:
+			return $MainContainer/torchBars/Bar3
+		3:
+			return $MainContainer/torchBars/Bar4
+
+
+func fill_ignis_health_full(full_cnt):
+	if full_cnt >= 1:
+		$MainContainer/torchBars/Bar1.value = max_ignis_bar_value
 	else:
-		ignis_bar_changing = false
-	if informator.ignis_status == GlobalVars.Is_ignis.NO_IGNIS:
-		$MainContainer/torchStatus.value = 0
+		$MainContainer/torchBars/Bar1.value = 0
+	if full_cnt >= 2:
+		$MainContainer/torchBars/Bar2.value = max_ignis_bar_value
 	else:
-		$MainContainer/torchStatus.value = value
+		$MainContainer/torchBars/Bar2.value = 0
+	if full_cnt >= 3:
+		$MainContainer/torchBars/Bar3.value = max_ignis_bar_value
+	else:
+		$MainContainer/torchBars/Bar3.value = 0
+	if full_cnt >= 4:
+		$MainContainer/torchBars/Bar4.value = max_ignis_bar_value
+	else:
+		$MainContainer/torchBars/Bar4.value = 0
+	pass
 
 
 func set_health_bar(lives):
