@@ -143,9 +143,11 @@ func _physics_process(delta):
 	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
-	var obj = get_slide_collision(0)
-	if obj and obj.collider.get_name() == "Platform":
-		is_on_platform = true
+	var obj = null #get_slide_collision(0)
+	if get_slide_count() != 0:
+		obj = get_slide_collision(0)
+		if obj and obj.collider.get_name() == "Platform":
+			is_on_platform = true
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
 	if not on_floor:
@@ -239,6 +241,8 @@ func _physics_process(delta):
 		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 			if is_on_platform:
 				floor_vel = get_floor_velocity()
+			else:
+				floor_vel = Vector2.ZERO
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 			jumping = true
