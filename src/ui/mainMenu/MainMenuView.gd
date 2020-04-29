@@ -102,12 +102,12 @@ func _input(event):
 			var vol = Settings.Sound["MusicVol"] -4
 			if(vol<0):vol=0
 			$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=vol
-			$TestSound.play()
+			$TestSound2.play()
 		if event.is_action_pressed("ui_right"):
 			var vol = Settings.Sound["MusicVol"] +4
 			if(vol>100):vol=100
 			$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=vol
-			$TestSound.play()
+			$TestSound2.play()
 	if(event.is_action_pressed("ui_accept")):
 		_pressButt()
 		if(!checkClick&&!textActivate):
@@ -864,14 +864,14 @@ func _on_MusicSettings_mouse_exited():
 	if(!checkIgnisSettings()):
 		$IgnisSound.stop()
 		IgnisPlay=false
-	$TestSound.stop()
+	$TestSound2.stop()
 	musicSet=false
 	$Settings/VBoxContainer/MusicSettings/LightMusic.hide()
 
 
 func _on_MusicHSlider_value_changed(value):
 	if(!begin1):
-		$TestSound.stop()
+		$TestSound2.stop()
 	else:
 		begin1=false
 		return
@@ -889,7 +889,7 @@ func _on_MusicHSlider_mouse_exited():
 
 func _on_MusicHSlider_gui_input(event):
 	if (event is InputEventMouseButton) && !event.pressed && (event.button_index == BUTTON_LEFT):
-		$TestSound.play()
+		$TestSound2.play()
 
 
 func _on_RichTextLabel_mouse_entered():

@@ -49,6 +49,10 @@ run/main_scene="res://src/ui/mainMenu/MainMenuView.tscn"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
+[audio]
+
+default_bus_layout="res://resource/sounds/bus/music_bus.tres"
+
 [autoload]
 
 Settings="*res://src/globals/settings/Settings.gd"

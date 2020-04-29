@@ -1,6 +1,7 @@
 extends Node
 
 
+
 func changeVol(value):
 	if(value==0):
 		turnVol(false)
