@@ -19,7 +19,7 @@ const index_to_health = [
 	GlobalVars.Ignis_state.LIFE_3,
 	GlobalVars.Ignis_state.LIFE_MAX,
 ]
-const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for sector
+const energy_levels = [0, 0.40, 0.60, 0.80, 1.00] # default for sector
 const scale_levels = [0, 0.70, 0.83, 0.93, 1.00] # default for sector
 
 var reflected = 1
