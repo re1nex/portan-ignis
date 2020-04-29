@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Torch_bar_mini_fill.png-bd61a926e0462ddb93eefd467576e46b.stex"
+path="res://.import/pb_fill_1.png-8048dae283a3386a61c4620645e39998.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/ui/hud/Torch_bar_mini_fill.png"
-dest_files=[ "res://.import/Torch_bar_mini_fill.png-bd61a926e0462ddb93eefd467576e46b.stex" ]
+source_file="res://resource/ui/hud/pb_fill_1.png"
+dest_files=[ "res://.import/pb_fill_1.png-8048dae283a3386a61c4620645e39998.stex" ]
 
 [params]
 

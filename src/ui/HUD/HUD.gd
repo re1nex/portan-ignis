@@ -69,7 +69,7 @@ func init_ignis_bar_anim():
 	old_status = informator.ignis_status
 	progress_bar_fading = false
 	fading_in = false 
-	max_alpha = $MainContainer/torchBars/Bar1.modulate.a
+	max_alpha = $MainContainer/TBCenterContainer/torchBars/Bar1.modulate.a
 	min_alpha = 0
 	if old_status == GlobalVars.Is_ignis.NO_IGNIS:
 		pb_hide_all()
@@ -199,32 +199,32 @@ func set_ignis_bar(value):
 func get_ignis_bar_by_number(num):
 	match num:
 		0:
-			return $MainContainer/torchBars/Bar1
+			return $MainContainer/TBCenterContainer/torchBars/Bar1
 		1:
-			return $MainContainer/torchBars/Bar2
+			return $MainContainer/TBCenterContainer/torchBars/Bar2
 		2:
-			return $MainContainer/torchBars/Bar3
+			return $MainContainer/TBCenterContainer/torchBars/Bar3
 		3:
-			return $MainContainer/torchBars/Bar4
+			return $MainContainer/TBCenterContainer/torchBars/Bar4
 
 
 func fill_ignis_health_full(full_cnt):
 	if full_cnt >= 1:
-		$MainContainer/torchBars/Bar1.value = max_ignis_bar_value
+		$MainContainer/TBCenterContainer/torchBars/Bar1.value = max_ignis_bar_value
 	else:
-		$MainContainer/torchBars/Bar1.value = 0
+		$MainContainer/TBCenterContainer/torchBars/Bar1.value = 0
 	if full_cnt >= 2:
-		$MainContainer/torchBars/Bar2.value = max_ignis_bar_value
+		$MainContainer/TBCenterContainer/torchBars/Bar2.value = max_ignis_bar_value
 	else:
-		$MainContainer/torchBars/Bar2.value = 0
+		$MainContainer/TBCenterContainer/torchBars/Bar2.value = 0
 	if full_cnt >= 3:
-		$MainContainer/torchBars/Bar3.value = max_ignis_bar_value
+		$MainContainer/TBCenterContainer/torchBars/Bar3.value = max_ignis_bar_value
 	else:
-		$MainContainer/torchBars/Bar3.value = 0
+		$MainContainer/TBCenterContainer/torchBars/Bar3.value = 0
 	if full_cnt >= 4:
-		$MainContainer/torchBars/Bar4.value = max_ignis_bar_value
+		$MainContainer/TBCenterContainer/torchBars/Bar4.value = max_ignis_bar_value
 	else:
-		$MainContainer/torchBars/Bar4.value = 0
+		$MainContainer/TBCenterContainer/torchBars/Bar4.value = 0
 	pass
 
 
