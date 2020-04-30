@@ -9,18 +9,30 @@ var step
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	step = STEP
-	#set_process(false)
+	set_process(false)
 	pass # Replace with function body.
 
 func _process(delta):
 	var x = $Sprites.get_modulate()
-	if x.a > 0.95:
+	var alpha = x.a
+	
+	alpha += step
+	if alpha >= 1:
+		alpha = 1
 		step = -STEP
-	elif x.a < 0.05:
+	if alpha <= 0:
+		alpha = 0
 		step = STEP
-	x.a += step
+		set_process(false)
+	
+	x.a = alpha
 	$Sprites.set_modulate(x)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func init_player(player):
+	# connect signals
+	player.connect("got_hit", self, "_on_got_hit")
+
+func _on_got_hit():
+	set_process(true)
+	step = STEP
