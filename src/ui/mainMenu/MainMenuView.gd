@@ -4,28 +4,37 @@ signal ChangePos
 var keyboard = false
 var pos = -1
 var soundLen=0.22
+var ScrollRange=56
 
 var checkClick=false
 var soundSet=false
+var musicSet=false
 var IgnisPlay=true
 var testPlay=false
 var secondPlay=false
+var changeMute=false
+var textActivate=false
 
 var begin=true
+var begin1=true
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	#if(Settings.Sound["Volume"] != null):
-	$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 	if Settings.Sound["Mute"]:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
 		$Settings/VBoxContainer/Label2/Mute.pressed=true
 		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
+		$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=0
+	else:
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
+		$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=Settings.Sound["MusicVol"]
 	if Settings.Graphics["Fullscreen"]:
 		_full_Screen()
 	if Settings.Graphics["Stretching"]:
 		_stretch()
 	$IgnisSound.play()
 	begin=false
+	begin1=false
 	$Music2.stop()
 	secondPlay=false
 	$Music.play()
@@ -54,22 +63,29 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		if(keyboard) :
 			_closeBeforeChange()
+			textActivate=false
 			keyboard=false
 			pos=-1
 	if event.is_action_pressed("ui_down"): 
-		_closeBeforeChange()
-		pos+=1
-		keyboard=true
-		_ChangePos()
+		if(!textActivate):
+			_closeBeforeChange()
+			pos+=1
+			keyboard=true
+			_ChangePos()
+		else:
+			scrollDown()
 	if event.is_action_pressed("ui_up"):
-		_closeBeforeChange()
-		pos-=1
-		keyboard=true
-		_ChangePos()
+		if(!textActivate):
+			_closeBeforeChange()
+			pos-=1
+			keyboard=true
+			_ChangePos()
+		else:
+			scrollUp()
 	if(event.is_action_pressed("ui_cancel")):
 		_closeBeforeChange()
 		_backToMain()
-		pos=-1
+
 	if(soundSet):
 		if event.is_action_pressed("ui_left"):
 			var vol = Settings.Sound["Volume"] -4
@@ -81,14 +97,53 @@ func _input(event):
 			if(vol>100):vol=100
 			$Settings/VBoxContainer/VolumeSettings/HSlider.value=vol
 			$TestSound.play()
+	if(musicSet):
+		if event.is_action_pressed("ui_left"):
+			var vol = Settings.Sound["MusicVol"] -4
+			if(vol<0):vol=0
+			$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=vol
+			$TestSound2.play()
+		if event.is_action_pressed("ui_right"):
+			var vol = Settings.Sound["MusicVol"] +4
+			if(vol>100):vol=100
+			$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=vol
+			$TestSound2.play()
 	if(event.is_action_pressed("ui_accept")):
 		_pressButt()
-		if(!checkClick):
+		if(!checkClick&&!textActivate):
 			_closeBeforeChange()
 			pos=-1
 		checkClick=false
 
+func scrollDown():
+	if $About.is_visible_in_tree():
+		var num = $About/RichTextLabel.get_v_scroll().max_value
+		var pos = $About/RichTextLabel.get_v_scroll().value
+		if(pos+ScrollRange<num):
+			$About/RichTextLabel.get_v_scroll().value=pos+ScrollRange
+		else:
+			$About/RichTextLabel.get_v_scroll().value=num
+	if $Help.is_visible_in_tree():
+		var num = $Help/VBoxContainer/ScrollContainer.get_v_scrollbar().max_value
+		var pos = $Help/VBoxContainer/ScrollContainer.get_v_scrollbar().value
+		if(pos+ScrollRange<num):
+			$Help/VBoxContainer/ScrollContainer.get_v_scrollbar().value=pos+ScrollRange
+		else:
+			$Help/VBoxContainer/ScrollContainer.get_v_scrollbar().value=num
 
+func scrollUp():
+	if $About.is_visible_in_tree():
+		var pos = $About/RichTextLabel.get_v_scroll().value
+		if(pos-ScrollRange>0):
+			$About/RichTextLabel.get_v_scroll().value=pos-ScrollRange
+		else:
+			$About/RichTextLabel.get_v_scroll().value=0
+	if $Help.is_visible_in_tree():
+		var pos = $Help/VBoxContainer/ScrollContainer.get_v_scrollbar().value
+		if(pos-ScrollRange>0):
+			$Help/VBoxContainer/ScrollContainer.get_v_scrollbar().value=pos-ScrollRange
+		else:
+			$Help/VBoxContainer/ScrollContainer.get_v_scrollbar().value=0
 
 func _pressButt():
 	if($Main/mainView.is_visible_in_tree()):
@@ -124,7 +179,7 @@ func _pressButt():
 			_on_level4_pressed()
 		return
 	if($Settings.is_visible_in_tree() && $Settings.is_visible_in_tree()):
-		if(pos>=4 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
+		if(pos>=5 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
 			_on_backSettings_pressed()
 			return
 		if(pos==0 && $Settings/VBoxContainer/Label/LightFsc.is_visible_in_tree()):
@@ -141,11 +196,21 @@ func _pressButt():
 			checkClick=true
 			return
 		return
-	if($About.is_visible_in_tree() && $About/BackAbout/LightBackAbout.is_visible_in_tree()):
-		_on_BackAbout_pressed()
+	if($About.is_visible_in_tree()):
+		if(pos>=1 && $About/BackAbout/LightBackAbout.is_visible_in_tree()):
+			_on_BackAbout_pressed()
+			return
+		if(pos==0 && $About/AboutText.is_visible_in_tree()):
+			$ClickSound.play()
+			textActivate=true
 		return
-	if($Help.is_visible_in_tree() && $Help/BackHelp/LightbackHelp.is_visible_in_tree()):
-		_on_backHelp_pressed()
+	if($Help.is_visible_in_tree() ):
+		if(pos>=1 && $Help/BackHelp/LightbackHelp.is_visible_in_tree()):
+			_on_backHelp_pressed()
+			return
+		if(pos==0 && $Help/VBoxContainer/ScrollHelpLight.is_visible_in_tree()):
+			$ClickSound.play()
+			textActivate=true
 		return
 
 func _backToMain():
@@ -154,15 +219,25 @@ func _backToMain():
 		IgnisPlay=true
 	if($StartView.is_visible_in_tree()):
 		_on_BackStart_pressed()
+		pos=-1
 		return
 	if($Settings.is_visible_in_tree()):
 		_on_backSettings_pressed()
+		pos=-1
 		return
 	if($About.is_visible_in_tree()):
-		_on_BackAbout_pressed()
+		if(textActivate):
+			textActivate=false
+		else:
+			pos=-1
+			_on_BackAbout_pressed()
 		return
 	if($Help.is_visible_in_tree()):
-		_on_backHelp_pressed()
+		if(textActivate):
+			textActivate=false
+		else:
+			pos=-1
+			_on_backHelp_pressed()
 		return
 
 func _closeBeforeChange():
@@ -202,7 +277,7 @@ func _closeBeforeChange():
 			return
 		return
 	if($Settings.is_visible_in_tree()):
-		if(pos>=4):
+		if(pos>=5):
 			_on_backSettings_mouse_exited()
 			return
 		if(pos==0):
@@ -216,12 +291,20 @@ func _closeBeforeChange():
 			return
 		if(pos==3):
 			_on_VolumeSettings_mouse_exited()
+		if(pos==4):
+			_on_MusicSettings_mouse_exited()
 		return
 	if($About.is_visible_in_tree()):
-		_on_BackAbout_mouse_exited()
+		if(pos>=1):
+			_on_BackAbout_mouse_exited()
+		if(pos==0&&!textActivate):
+			_on_RichTextLabel_mouse_exited()
 		return
 	if($Help.is_visible_in_tree()):
-		_on_backHelp_mouse_exited()
+		if(pos>=1):
+			_on_backHelp_mouse_exited()
+		if(pos==0&&!textActivate):
+			_on_ScrollContainer_mouse_exited()
 		return
 
 
@@ -502,7 +585,7 @@ func _on_BackStart_mouse_exited():
 
 
 func _on_backSettings_mouse_entered():
-	pos=4
+	pos=5
 	if(!IgnisPlay):
 		IgnisPlay=true
 		$IgnisSound.play()
@@ -518,7 +601,7 @@ func _on_backSettings_mouse_exited():
 
 
 func _on_BackAbout_mouse_entered():
-	pos=0
+	pos=1
 	IgnisPlay=true
 	$IgnisSound.play()
 	$About/BackAbout/LightBackAbout.show()
@@ -532,7 +615,7 @@ func _on_BackAbout_mouse_exited():
 
 
 func _on_backHelp_mouse_entered():
-	pos=0
+	pos=1
 	IgnisPlay=true
 	$IgnisSound.play()
 	$Help/BackHelp/LightbackHelp.show()
@@ -580,7 +663,7 @@ func _ChangePos():
 			_on_level4_mouse_entered()
 		return
 	if($Settings.is_visible_in_tree()):
-		if(pos>=4):
+		if(pos>=5):
 			_on_backSettings_mouse_entered()
 			return
 		if(pos==0):
@@ -592,14 +675,20 @@ func _ChangePos():
 			_on_Label2_mouse_entered()
 		if(pos==3):
 			_on_VolumeSettings_mouse_entered()
+		if(pos==4):
+			_on_MusicSettings_mouse_entered()
 		return
 	if($About.is_visible_in_tree()):
-		pos=0 
-		_on_BackAbout_mouse_entered()
+		if(pos>=1):
+			_on_BackAbout_mouse_entered()
+		if(pos==0):
+			_on_RichTextLabel_mouse_entered()
 		return
 	if($Help.is_visible_in_tree()):
-		pos=0
-		_on_backHelp_mouse_entered()
+		if(pos>=1):
+			_on_backHelp_mouse_entered()
+		if(pos==0):
+			_on_ScrollContainer_mouse_entered()
 		return
 
 
@@ -619,10 +708,8 @@ func _on_CheckBox_stretch_pressed():
 
 
 func _on_HSlider_value_changed(value):
-	if(begin):
-		begin=false
-		return
-	$TestSound.stop()
+	if(!begin):
+		$TestSound.stop()
 	if value==0:
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
 		$Settings/VBoxContainer/Label2/Mute.pressed=true
@@ -630,20 +717,27 @@ func _on_HSlider_value_changed(value):
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
 		$Settings/VBoxContainer/Label2/Mute.pressed=false
 	AudioController.changeVol(value)
+	if(begin):
+		begin=false
+
 
 
 func _on_Mute_pressed():
 	$ClickSound.play()
+	changeMute=true
 	if Settings.Sound["Mute"]:
+		$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
 		$Settings/VBoxContainer/Label2/Mute.pressed=false
-		$Settings/VBoxContainer/VolumeSettings/HSlider.value=Settings.Sound["Volume"]
 		AudioController.turnVol(true)
+		$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=Settings.Sound["MusicVol"]
 	else:
 		$Settings/VBoxContainer/Label2/Mute.pressed=true
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
 		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
+		$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=0
 		AudioController.turnVol(false)
+	changeMute=false
 
 
 func _on_Label_mouse_entered():
@@ -752,3 +846,71 @@ func _on_Mute_mouse_exited():
 func _on_HSlider_gui_input(event):
 	if (event is InputEventMouseButton) && !event.pressed && (event.button_index == BUTTON_LEFT):
 		$TestSound.play()
+
+
+func _on_MusicSettings_mouse_entered():
+	if(!IgnisPlay):
+		IgnisPlay=true
+		$IgnisSound.play()
+	pos=4
+	musicSet=true
+	$Settings/VBoxContainer/MusicSettings/LightMusic.enable()
+	$Settings/VBoxContainer/MusicSettings/LightMusic.show()
+
+
+func _on_MusicSettings_mouse_exited():
+	if(!checkIgnisSettings()):
+		$IgnisSound.stop()
+		IgnisPlay=false
+	$TestSound2.stop()
+	musicSet=false
+	$Settings/VBoxContainer/MusicSettings/LightMusic.hide()
+
+
+func _on_MusicHSlider_value_changed(value):
+	if(!begin1):
+		$TestSound2.stop()
+	else:
+		begin1=false
+		return
+	if !Settings.Sound["Mute"]:
+		AudioController.changeMusicVol(value)
+
+
+func _on_MusicHSlider_mouse_entered():
+	_on_MusicSettings_mouse_entered()
+
+
+func _on_MusicHSlider_mouse_exited():
+	_on_MusicSettings_mouse_exited()
+
+
+func _on_MusicHSlider_gui_input(event):
+	if (event is InputEventMouseButton) && !event.pressed && (event.button_index == BUTTON_LEFT):
+		$TestSound2.play()
+
+
+func _on_RichTextLabel_mouse_entered():
+	pos=0 
+	$IgnisSound.play()
+	$About/AboutText.enable()
+	$About/AboutText.show()
+
+
+func _on_RichTextLabel_mouse_exited():
+	textActivate=false
+	$About/AboutText.hide()
+	$IgnisSound.stop()
+
+
+func _on_ScrollContainer_mouse_entered():
+	pos=0 
+	$IgnisSound.play()
+	$Help/VBoxContainer/ScrollHelpLight.enable()
+	$Help/VBoxContainer/ScrollHelpLight.show()
+
+
+func _on_ScrollContainer_mouse_exited():
+	textActivate=false
+	$Help/VBoxContainer/ScrollHelpLight.hide()
+	$IgnisSound.stop()
