@@ -7,6 +7,7 @@ signal health_changed
 signal torch_changed
 signal torch_reloaded
 signal torch_hidden
+signal got_hit
 
 class_name Player
 
@@ -485,6 +486,7 @@ func hit():
 		HitPlay(randi()%5+1)
 		$Informator.health -= 1
 		emit_signal("health_changed")
+		emit_signal("got_hit")
 		if $Informator.health == 0:
 			emit_signal("die")
 			
