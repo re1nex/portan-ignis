@@ -502,6 +502,8 @@ func hit():
 			
 		if $Informator.ignis_status==GlobalVars.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+			$Informator.ignis_health = max(0, $Informator.ignis_health - 1)
+			weapons[$Informator.num_of_active_weapon].hit()
 			emit_signal("torch_hit")
 		turn_on_hit_timer()
 	pass
