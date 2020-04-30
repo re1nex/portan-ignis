@@ -33,6 +33,7 @@ var true_scale # when the health is max (start values)
 var true_energy
 var true_area2D_scale
 var last_health # to restore health after switching off
+var enable_in_process = true
 
 var priority = 1
 
@@ -60,7 +61,7 @@ func _process(delta):
 		energy -= energyDec
 		$Circle.energy -= energyDec
 		checkEnergy()
-	if not switchingOff and health == GlobalVars.Ignis_state.OFF:
+	if not switchingOff and enable_in_process:
 		# light needs to be switched on
 		finishEnabling()
 
@@ -98,6 +99,7 @@ func checkEnergy():
 
 func disable():
 	switchingOff = true
+	enable_in_process = false
 
 
 func finishDisabling():
@@ -119,6 +121,7 @@ func enable():
 		energy = energyMax
 		$Circle.energy = energyMax
 		set_process(true)
+		enable_in_process = true
 
 
 func finishEnabling():

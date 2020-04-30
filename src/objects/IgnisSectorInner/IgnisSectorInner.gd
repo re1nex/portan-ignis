@@ -19,7 +19,7 @@ const index_to_health = [
 	GlobalVars.Ignis_state.LIFE_3,
 	GlobalVars.Ignis_state.LIFE_MAX,
 ]
-const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for sector
+const energy_levels = [0, 0.40, 0.60, 0.80, 1.00] # default for sector
 const scale_levels = [0, 0.70, 0.83, 0.93, 1.00] # default for sector
 
 var reflected = 1
@@ -33,6 +33,7 @@ var true_scale # when the health is max (start values)
 var true_energy
 var true_area2D_scale
 var last_health # to restore health after switching off
+var enable_in_process
 
 var priority = 1
 
@@ -60,7 +61,7 @@ func _process(delta):
 		energy -= energyDec
 		$Circle.energy -= energyDec
 		checkEnergy()
-	if not switchingOff and health == GlobalVars.Ignis_state.OFF:
+	if not switchingOff and enable_in_process:
 		# light needs to be switched on
 		finishEnabling()
 
@@ -99,6 +100,7 @@ func checkEnergy():
 
 func disable():
 	switchingOff = true
+	enable_in_process = false
 
 
 func finishDisabling():
@@ -120,6 +122,7 @@ func enable():
 		energy = energyMax
 		$Circle.energy = energyMax
 		set_process(true)
+		enable_in_process = true
 
 
 func finishEnabling():

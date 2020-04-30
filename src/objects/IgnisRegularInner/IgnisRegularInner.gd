@@ -21,7 +21,7 @@ const index_to_health = [
 const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for inner
 const scale_levels = [0, 0.60, 0.75, 0.85, 1.00] # default for inner
 const flame_particle_count = [0, 4, 8, 16, 32]
-const smoke_particle_count = [0, 4, 6, 8]
+const smoke_particle_count = [0, 4, 6, 7, 8]
 
 var minScale
 var energyMax
@@ -34,6 +34,7 @@ var true_vis_enabler_scale
 var scale_list # can be changed in IgnisRegularLevel
 var energy_list # call set_health_params() to change
 var last_health # to restore health after switching off
+var enable_in_process = true
 
 var priority = 1
 
@@ -97,7 +98,7 @@ func _process(delta):
 		# switching off is in process
 		energy -= energyDec
 		checkEnergy()
-	if not switchingOff and health == GlobalVars.Ignis_state.OFF:
+	if not switchingOff and enable_in_process:
 		# light needs to be switched on
 		finish_enabling()
 
@@ -111,6 +112,7 @@ func checkEnergy():
 
 func disable():
 	switchingOff = true
+	enable_in_process = false
 
 
 func finish_disabling():
@@ -130,6 +132,7 @@ func enable():
 		energy = true_energy
 		set_process(true)
 		set_visibility_flags(true)
+		enable_in_process = true
 
 
 func finish_enabling():

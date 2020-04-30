@@ -27,7 +27,7 @@ export (float) var scale_x = 1
 export (float) var scale_y = 1
 
 export (float) var recharge_coef = 1.5
-export (float) var life_time_of_ignis = 3
+export (float) var life_time_of_ignis = 1 # for each life of ignis
 export (float) var hit_time = 1
 
 export (float) var dead_zone = 0.2
@@ -367,6 +367,7 @@ func turn_on_ignis(num):
 		$AudioIngisOff.stop()
 		$AudioIngisLoop.play()
 	update_ignis()
+	weapons[num].reload($Informator.ignis_health)
 	weapons[num].enable()
 	emit_signal("torch_changed")
 
@@ -378,7 +379,13 @@ func turn_off_ignis_time():
 	$TimerIgnis.stop()
 
 func _on_Timer_timeout():
-	$Informator.ignis_status = GlobalVars.Is_ignis.NO_IGNIS
+	if $Informator.ignis_health != GlobalVars.Ignis_state.OFF:
+		$Informator.ignis_health -= 1
+	if $Informator.ignis_health != GlobalVars.Ignis_state.OFF:
+		$TimerIgnis.set_wait_time(life_time_of_ignis)
+		$TimerIgnis.start()
+	else:
+		$Informator.ignis_status = GlobalVars.Is_ignis.NO_IGNIS
 
 
 func fill_weapons():
