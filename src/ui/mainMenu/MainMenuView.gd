@@ -717,9 +717,7 @@ func _on_HSlider_value_changed(value):
 		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.hide()
 		$Settings/VBoxContainer/Label2/Mute.pressed=false
 	AudioController.changeVol(value)
-	if(!begin&&!changeMute):
-		$Settings/VBoxContainer/MusicSettings/MusicHSlider.value=value
-	else:
+	if(begin):
 		begin=false
 
 

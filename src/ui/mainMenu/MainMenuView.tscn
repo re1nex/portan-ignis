@@ -494,7 +494,7 @@ margin_right = 487.0
 margin_bottom = 398.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 4 )
-text = "volume of sound"
+text = "general volume"
 
 [node name="HSlider" type="HSlider" parent="Settings/VBoxContainer/VolumeSettings"]
 margin_left = 562.0

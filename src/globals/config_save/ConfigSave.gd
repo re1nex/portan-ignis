@@ -16,6 +16,7 @@ func _ready():
 
 
 func save_to():
+	conf.set_value("Sound", "MusicVol", Settings.Sound["MusicVol"])
 	conf.set_value("Sound", "Volume", Settings.Sound["Volume"])
 	conf.set_value("Sound", "Mute", Settings.Sound["Mute"])
 	
@@ -29,6 +30,7 @@ func save_to():
 
 
 func read_from():
+	AudioController.changeMusicVol(conf.get_value("Sound", "MusicVol", Settings.Sound["MusicVol"]))
 	AudioController.changeVol(conf.get_value("Sound", "Volume", Settings.Sound["Volume"]))
 	AudioController.turnVol(!conf.get_value("Sound", "Mute", Settings.Sound["Mute"]))
 		
