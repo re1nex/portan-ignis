@@ -437,7 +437,7 @@ func recharge():
 		$Informator.ignis_health = max_health
 		if on_player_area_node.health == GlobalVars.Ignis_state.OFF:
 			on_player_area_node.activate()
-		on_player_area_node.health = max_health
+		on_player_area_node.reload(max_health)
 		#if $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
 			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 			#switch_sprites($iconWithIgnis)

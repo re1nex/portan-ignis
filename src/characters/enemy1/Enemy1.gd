@@ -50,8 +50,8 @@ func _ready():
 func _process(_delta):
 	if player_target:
 		player_target.hit()
-	elif torch_area and "activated" in torch_area and torch_area.activated:
-		torch_area.activate()
+	elif torch_area: #and "health" in torch_area and torch_area.health != GlobalVars.Ignis_state.OFF:
+		torch_area.hit()
 
 func _physics_process(delta):
 	

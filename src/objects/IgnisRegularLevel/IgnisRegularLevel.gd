@@ -56,15 +56,14 @@ func activate():
 		$Light2D.disable()
 		health = GlobalVars.Ignis_state.OFF
 		emit_signal("not_active")
-	else:
-		if body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
-			$AudioOff.stop()
-			$AudioOn.play()
-			$AudioLoop.play()
-			health = body_informator.ignis_health
-			$Light2D.reload(body_informator.ignis_health)
-			$Light2D.enable()
-			emit_signal("active")
+	elif body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
+		$AudioOff.stop()
+		$AudioOn.play()
+		$AudioLoop.play()
+		health = body_informator.ignis_health
+		$Light2D.reload(body_informator.ignis_health)
+		$Light2D.enable()
+		emit_signal("active")
 
 
 func _on_IgnisRegularLevel_body_entered(body):
@@ -81,4 +80,16 @@ func _on_IgnisRegularLevel_body_exited(body):
 
 
 func hit():
+	var need_switch_off = (max(min(health, health - 1), 0) == 0 and health != 0)
 	$Light2D.hit()
+	if health != $Light2D.health and $Light2D.health == GlobalVars.Ignis_state.OFF:
+		activate()
+	health = $Light2D.health
+
+
+func reload(arg):
+	var need_activate = (min(health, arg) == 0 and max(health, arg) != 0)
+	$Light2D.reload(arg)
+	health = $Light2D.health
+	if need_activate:
+		activate()

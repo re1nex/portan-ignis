@@ -107,3 +107,7 @@ texture = ExtResource( 4 )
 amount = 32
 process_material = SubResource( 11 )
 texture = ExtResource( 2 )
+
+[node name="TimerHit" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="TimerHit" to="." method="_on_TimerHit_timeout"]
