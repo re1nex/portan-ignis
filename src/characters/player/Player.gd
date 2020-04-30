@@ -118,7 +118,7 @@ func _process(delta):
 			on_player_area_node.disactivate()
 			
 	
-	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "activated" in on_player_area_node:
+	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "health" in on_player_area_node:
 		recharge()
 	
 	control_weapons()
@@ -428,11 +428,16 @@ func update_ignis_timer_start(delta):
 
 
 func recharge():
-	if on_player_area_node.activated and $Informator.ignis_status != GlobalVars.Is_ignis.HAS_IGNIS:
+	if $Informator.ignis_health != on_player_area_node.health:
 		if not $TimerIgnis.is_stopped():
 			turn_off_ignis_time()
 		$Informator.ignis_timer_start = life_time_of_ignis
 		$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
+		var max_health = max($Informator.ignis_health, on_player_area_node.health)
+		$Informator.ignis_health = max_health
+		if on_player_area_node.health == GlobalVars.Ignis_state.OFF:
+			on_player_area_node.activate()
+		on_player_area_node.health = max_health
 		#if $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
 			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 			#switch_sprites($iconWithIgnis)
