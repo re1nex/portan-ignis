@@ -63,8 +63,8 @@ func _physics_process(delta):
 	var on_floor = is_on_floor()
 	if on_floor:
 		height=0
-		if(!$AudioStep.playing):$AudioStep.play()
-	if(!$AudioVoice.playing):$AudioVoice.play()
+		if (!$AudioStep.playing) : $AudioStep.play()
+	if (!$AudioVoice.playing) : $AudioVoice.play()
 	sprite.play()
 	if mode == ROAMING:
 		evaluate_roaming()
@@ -176,7 +176,10 @@ func check_chase():
 			1 << 2,
 			true, 
 			true)
-		if not res and target_dir.x * direction > 0:
+		var ang = abs(target_dir.angle())
+		if $CatchArea.scale.x < 0:
+			ang = PI - ang
+		if not res and ang <= 7 * PI / 12:
 			mode = CHASING
 			recent_tar = current
 			return
@@ -191,21 +194,20 @@ func evaluate_roaming():
 	velocity.x = direction * walk_speed
 	if (not $RayDownLeft.is_colliding() and not jumping) or $RayLeft.is_colliding():
 		direction = 1.0
-		ex_direction = direction
 		sprite.flip_h = false
 		$Visibility.scale.x = x_scale
 		$CatchArea.scale.x = x_scale
 	if (not $RayDownRight.is_colliding() and not jumping) or $RayRight.is_colliding():
 		direction = -1.0
-		ex_direction = direction
 		sprite.flip_h = true
 		$Visibility.scale.x = -x_scale
 		$CatchArea.scale.x = -x_scale
+	ex_direction = direction
 	sprite.animation = "walk"
 
 func evaluate_chasing():
 	if abs(target_dir.x) < SMALL_RADIUS:
-		ex_direction = direction
+		#ex_direction = direction
 		direction = 0
 		sprite.stop()
 	else:
@@ -223,6 +225,6 @@ func evaluate_chasing():
 			$Visibility.scale.x = -x_scale
 			$CatchArea.scale.x = -x_scale
 		else:
-			ex_direction = direction
+			#ex_direction = direction
 			direction = 0
 			sprite.stop()

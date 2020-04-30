@@ -78,7 +78,7 @@ func disable():
 
 
 func finishDisabling():
-	$Area2D/SectorCollisionShape.disabled = true
+	$Area2D/CollisionShape2D.disabled = true
 	$Area2D/Circle.disabled = true
 	$Lens.hide()
 	enabled = false
@@ -98,7 +98,7 @@ func enable():
 
 func finishEnabling():
 	switchedOff = false
-	$Area2D/SectorCollisionShape.disabled = false
+	$Area2D/CollisionShape2D.disabled = false
 	$Area2D/Circle.disabled = false
 	$Lens.show()
 	enabled = true
