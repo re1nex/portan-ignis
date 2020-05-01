@@ -24,6 +24,7 @@ func _ready():
 	
 	$WinWindow/CenterContainer.hide()
 	$HUD/HUD.init_player($Player)
+	$Hit.init_player($Player)
 	$WindowGameOver/CenterContainer.hide()
 	$Inventory.set_player($Player)
 	$Player.new_lvl()

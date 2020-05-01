@@ -7,7 +7,8 @@ extends CanvasLayer
 
 var informator
 var active = false
-
+onready var weapons = get_node("Control/Types/Weapons/WeaponsGrid")
+onready var instriments = get_node("Control/Types/Instruments/InstrumentsGrid")
 # Called when the node enters the scene tree for the first time.
 #func _ready():
 #	$Control.hide()
@@ -41,31 +42,31 @@ func update():
 	if informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
 		node.set_picture("res://resource/sprites/ignis/ignis_regular_outer/torch.png")
-		$Control/Weapons.add_child(node)
+		weapons.add_child(node)
 	if informator.has_weapons[GlobalVars.Ignis_type.SECTOR]:
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
 		node.set_picture("res://resource/sprites/ignis/ignis_sector_outer/lens.png")
-		$Control/Weapons.add_child(node)
+		weapons.add_child(node)
 	if informator.has_weapons[GlobalVars.Ignis_type.LONG_SECTOR]:
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
 		node.set_picture("res://resource/sprites/ignis/ignis_long_sector_outer/long_sector_oriented.png")
-		$Control/Weapons.add_child(node)
+		weapons.add_child(node)
 	
 	#INSTRUMENTS
 	for i in range(informator.has_instruments[GlobalVars.Instruments_type.LEVER]):
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
-		node.set_picture("res://resource/sprites/objects/DungeonCrawl_ProjectUtumnoTileset.png")
-		$Control/Instruments.add_child(node)
+		node.set_picture("res://resource/sprites/objects/lever/DungeonCrawl_ProjectUtumnoTileset.png")
+		instriments.add_child(node)
 
 
 func clear():
-	var childs = $Control/Weapons.get_children()
+	var childs = weapons.get_children()
 	for i in childs:
-		$Control/Weapons.remove_child(i)
+		weapons.remove_child(i)
 	
-	childs = $Control/Instruments.get_children()
+	childs = instriments.get_children()
 	for i in childs:
-		$Control/Instruments.remove_child(i)
+		instriments.remove_child(i)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -35,35 +35,26 @@ light_mask = 2
 scale = Vector2( 1, 0.8 )
 texture = ExtResource( 6 )
 
-[node name="Weapons" type="GridContainer" parent="Control"]
-margin_left = -230.698
-margin_top = -110.0
-margin_right = -30.0
-margin_bottom = 130.0
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
-columns = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Instruments" type="GridContainer" parent="Control"]
-margin_left = 30.0
-margin_top = -110.0
-margin_right = 230.0
-margin_bottom = 130.0
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
-columns = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelWeapons" type="Label" parent="Control"]
+[node name="Types" type="HBoxContainer" parent="Control"]
 margin_left = -230.0
 margin_top = -155.0
-margin_right = -30.0
-margin_bottom = -105.0
+margin_right = 230.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 460, 310 )
+custom_constants/separation = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapons" type="VBoxContainer" parent="Control/Types"]
+margin_right = 200.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 200, 280 )
+
+[node name="WeaponsLabel" type="Label" parent="Control/Types/Weapons"]
+margin_right = 200.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
 custom_fonts/font = SubResource( 1 )
 text = "weapons"
 align = 1
@@ -72,15 +63,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelInstruments" type="Label" parent="Control"]
-margin_left = 30.0
-margin_top = -155.735
-margin_right = 230.0
-margin_bottom = -105.735
+[node name="WeaponsGrid" type="GridContainer" parent="Control/Types/Weapons"]
+margin_top = 40.0
+margin_right = 200.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 200, 240 )
+rect_clip_content = true
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instruments" type="VBoxContainer" parent="Control/Types"]
+margin_left = 260.0
+margin_right = 460.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 200, 280 )
+
+[node name="InstrumentsLabel" type="Label" parent="Control/Types/Instruments"]
+margin_right = 200.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
 custom_fonts/font = SubResource( 1 )
 text = "instruments"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InstrumentsGrid" type="GridContainer" parent="Control/Types/Instruments"]
+margin_top = 40.0
+margin_right = 200.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 200, 240 )
+rect_clip_content = true
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AudioOpen" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

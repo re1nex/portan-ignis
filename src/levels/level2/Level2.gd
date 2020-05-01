@@ -16,6 +16,7 @@ func _ready():
 	$Ignises/IgnisActivated.activate_at_start()
 	
 	$HUD/HUD.init_player($Player)
+	$Hit.init_player($Player)
 	$Inventory.set_player($Player)
 	$Player.new_lvl()
 	MusicController.playMusic(true)

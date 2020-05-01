@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resource/sprites/ignis/ignis_long_sector_inner/long_sector.png" type="Texture" id=1]
 [ext_resource path="res://resource/sprites/ignis/ignis_long_sector_inner/spot.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.0
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( -35, -204, 35, -204, 0, 0 )
 
 [node name="IgnisLongSectorInner" type="Light2D"]
 texture = ExtResource( 1 )
@@ -26,8 +29,8 @@ collision_mask = 0
 [node name="Circle" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="SectorCollisionShape" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( -34.4835, -203.62, 0, 0, 0, 0, 34.9245, -203.62 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
 
 [node name="Lens" type="Sprite" parent="."]
 position = Vector2( 0, -1 )
