@@ -9,11 +9,12 @@ signal not_active
 const radius_multiplier = 1.5
 const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for ignis level
 const scale_levels = [0, 0.60, 0.75, 0.85, 1.00] # default for ignis level
+const default_health_if_activated = 4 # maximum
 
 export (String, "simple", "column", "post") var type
-export (bool) var activated_at_start = false
 var body_informator = null
 var health
+export (int, "0", "1", "2", "3", "4") var health_at_start = 0
 
 
 func _init():
@@ -32,11 +33,8 @@ func _ready():
 	
 	$Light2D.init_radius(radius_multiplier)
 	$Light2D.set_health_params(scale_levels, energy_levels)
-	if activated_at_start:
-		health = GlobalVars.Ignis_state.LIFE_MAX
-		$AudioLoop.play()
-		$Light2D.enable()
-		emit_signal("active")
+	if health_at_start != 0:
+		activate_at_start()
 	else:
 		health = GlobalVars.Ignis_state.OFF
 		$Light2D.disable()
@@ -45,6 +43,13 @@ func _ready():
 
 
 func activate_at_start():
+	if health == GlobalVars.Ignis_state.LIFE_MAX: # already activated
+		return
+	if health_at_start == 0:
+		health_at_start = default_health_if_activated
+	health = health_at_start
+	$AudioLoop.play()
+	$Light2D.reload(health)
 	$Light2D.enable()
 	emit_signal("active")
 

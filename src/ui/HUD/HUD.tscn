@@ -14,6 +14,7 @@
 [ext_resource path="res://resource/ui/hud/pb_fill_3.png" type="Texture" id=12]
 
 [node name="HUD" type="MarginContainer"]
+visible = false
 light_mask = 0
 anchor_right = 1.0
 custom_constants/margin_right = 20

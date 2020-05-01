@@ -34,6 +34,7 @@ position = Vector2( 128, 608 )
 [node name="IgnisDoor1" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 592, 480 )
 type = "column"
+health_at_start = 1
 
 [node name="IgnisDoor2" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 1392, 568 )
@@ -45,9 +46,11 @@ type = "column"
 
 [node name="IgnisRegularLevel1" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 440, 480 )
+health_at_start = 4
 
 [node name="IgnisRegularLevel2" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 1016, 544 )
+health_at_start = 4
 
 [node name="IgnisRegularLevel4" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 880, 384 )
@@ -63,6 +66,7 @@ position = Vector2( 1248, -160 )
 
 [node name="IgnisRegularLevel10" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 1488, -384 )
+health_at_start = 4
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 128, 608 )

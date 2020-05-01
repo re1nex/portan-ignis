@@ -20,10 +20,10 @@ func _ready():
 	$Objects/Mechanism.connect("active", $Level4Landscape/Doors/Door3, "_on_Mechanism_active")
 	$Objects/Mechanism.connect("not_active", $Level4Landscape/Doors/Door3, "_on_Mechanism_not_active")
 	
-	$Ignises/IgnisDoor1.activate_at_start()
-	$Ignises/IgnisRegularLevel1.activate_at_start()
-	$Ignises/IgnisRegularLevel2.activate_at_start()
-	$Ignises/IgnisRegularLevel10.activate_at_start()
+	#$Ignises/IgnisDoor1.activate_at_start()
+	#$Ignises/IgnisRegularLevel1.activate_at_start()
+	#$Ignises/IgnisRegularLevel2.activate_at_start()
+	#$Ignises/IgnisRegularLevel10.activate_at_start()
 	
 	$Objects/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
 	
