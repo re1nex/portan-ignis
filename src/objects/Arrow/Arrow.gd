@@ -20,3 +20,7 @@ func _on_Arrow_body_entered(body):
 		body.hit()
 	queue_free()
 	pass # Replace with function body.
+
+
+func _on_Arrow_area_entered(area):
+	_on_Arrow_body_entered(area)
