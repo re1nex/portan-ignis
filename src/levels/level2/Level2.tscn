@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/level2/Level2.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/ui/HUD/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/ui/visualHit/Hit.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 32 )
@@ -101,6 +102,8 @@ shape = SubResource( 3 )
 [node name="Inventory" parent="." instance=ExtResource( 4 )]
 
 [node name="PauseMenu" parent="." instance=ExtResource( 7 )]
+
+[node name="Hit" parent="." instance=ExtResource( 12 )]
 [connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]

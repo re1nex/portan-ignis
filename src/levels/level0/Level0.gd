@@ -10,6 +10,7 @@ func _ready():
 	$Level0Landscape.connect("level_complete", self, "complete")
 	$WinWindow/CenterContainer.hide()
 	$Menu/HUD.init_player($Player)
+	$Hit.init_player($Player)
 	$Inventory.set_player($Player)
 	$WindowGameOver/CenterContainer.hide()
 	$Player.hit()

@@ -7,6 +7,7 @@ signal health_changed
 signal torch_changed
 signal torch_reloaded
 signal torch_hidden
+signal got_hit
 
 class_name Player
 
@@ -53,6 +54,7 @@ var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 var floor_vel = Vector2()
+var is_on_platform = true
 
 var endLevel=false
 var on_stairs = 0
@@ -142,9 +144,15 @@ func _physics_process(delta):
 	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
+	var obj = null #get_slide_collision(0)
+	if get_slide_count() != 0:
+		obj = get_slide_collision(0)
+		if obj and obj.collider.get_name() == "Platform":
+			is_on_platform = true
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
-	
+	if not on_floor:
+		is_on_platform = false
 	if on_floor:
 		height=0
 	### CONTROL ###
@@ -232,7 +240,10 @@ func _physics_process(delta):
 			$AudioStairs.stop()
 				
 		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
-			floor_vel = get_floor_velocity()
+			if is_on_platform:
+				floor_vel = get_floor_velocity()
+			else:
+				floor_vel = Vector2.ZERO
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 			jumping = true
@@ -485,6 +496,7 @@ func hit():
 		HitPlay(randi()%5+1)
 		$Informator.health -= 1
 		emit_signal("health_changed")
+		emit_signal("got_hit")
 		if $Informator.health == 0:
 			emit_signal("die")
 			
