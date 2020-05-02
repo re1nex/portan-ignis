@@ -5,6 +5,11 @@ class_name Enemy1
 var color = Color(.867, .91, .247, 0.1)
 var lazerColor = Color(1, 0.007843, 0.007843, 0.9)
 var greenColor = Color(0.015686, 0.996078, 0.215686)
+
+enum GlanceEnum {LEFT = -1, RIGHT = 1}
+enum Modes {STAYING = 0, ROAMING, CHASING}
+export (GlanceEnum) var glance_dir = GlanceEnum.RIGHT
+export (int, "staying", "walking") var start_mode = 0
 export (int) var walk_speed = 100
 export (int) var run_speed = 230
 export (int) var jump_speed = 100
@@ -12,42 +17,44 @@ export (int) var jump_height_limit = 30
 export (float) var landing_time = 0.2
 export (bool) var falling_at_start = false
 
-const ROAMING = 0
-const CHASING = 1 
 const SMALL_RADIUS = 5
 const FLOOR_NORMAL = Vector2(0, -1)
 const GRAVITY_VEC = Vector2(0, 550)
 
-var direction = 1
-var ex_direction
+var direction: int = 1
+var ex_direction: int
 var velocity = Vector2()
 var vision_center
-var mode = ROAMING
+var mode = Modes.STAYING
 var targets = []
 var recent_tar = null
 var target_dir
 var torch_area = null
 var player_target = null
-var x_scale
 
 var height = 0
 var can_jump = true
 var jumping = false
+var v_scale
 
 var sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#vision_center = Vector2(0, -$BodyShape.shape.height)
-	#vision_center = Vector2(0, 0)
 	vision_center = $VisionPoint.position
-	x_scale = $Visibility.scale.x
+	v_scale = $Visibility.scale.x
 	sprite = $AnimatedSprite
+	sprite.animation = "stay"
 	jumping = falling_at_start
+	direction = start_mode * glance_dir
+	if start_mode == 0:
+		mode = Modes.STAYING
+	elif start_mode == 1:
+		mode = Modes.ROAMING
 	pass
 
 
-func _process(_delta):
+func _process(delta):
 	if player_target:
 		player_target.hit()
 	elif torch_area and "activated" in torch_area and torch_area.activated:
@@ -56,21 +63,22 @@ func _process(_delta):
 func _physics_process(delta):
 	
 	check_chase()
-	
+	sprite.play()
 	##  Moving logic  ##
 	velocity += GRAVITY_VEC * delta
 	velocity = move_and_slide(velocity, FLOOR_NORMAL, false, 4, 0.523598776)
 	var on_floor = is_on_floor()
 	if on_floor:
 		height=0
-		if (!$AudioStep.playing) : $AudioStep.play()
-	if (!$AudioVoice.playing) : $AudioVoice.play()
-	sprite.play()
-	if mode == ROAMING:
+		if (!$AudioStep.playing) : 
+			$AudioStep.play()
+	if (!$AudioVoice.playing) : 
+		$AudioVoice.play()
+	if mode == Modes.ROAMING:
 		evaluate_roaming()
 		if on_floor:
 			jumping = false
-	elif mode == CHASING:
+	elif mode == Modes.CHASING:
 		evaluate_chasing()
 		# jumping while chasing #
 		var tar_tg = target_dir.y / abs(target_dir.x)
@@ -87,6 +95,7 @@ func _physics_process(delta):
 			else:
 				jumping = false
 		velocity.x = direction * run_speed
+	flip_areas(glance_dir)
 	
 	if sprite.animation != "punch" && sprite.animation != "slash":
 		if on_floor:
@@ -95,15 +104,12 @@ func _physics_process(delta):
 				$TimerLanding.set_wait_time(landing_time)
 				$TimerLanding.start()
 			if $TimerLanding.is_stopped():
-				sprite.animation = "walk"
-		else:
-			if velocity.y < 0:
-				sprite.animation = "jump"
-				pass
-			elif velocity.y > 0:
-				sprite.animation = "fall"
-		
-	#update()
+				if mode == Modes.STAYING:
+					sprite.animation = "stay"
+				else:
+					sprite.animation = "walk"
+
+
 
 func _draw():
 #	if global_position:
@@ -149,7 +155,7 @@ func _on_CatchArea_body_exited(body):
 		player_target = null
 
 func _on_CatchArea_area_entered(area):
-	if area.has_method("activate"):
+	if area.has_method("activate") and area.activated:
 		sprite.animation = "punch"
 		torch_area = area
 
@@ -160,6 +166,16 @@ func _on_CatchArea_area_exited(area):
 
 func _on_JumpTimer_timeout():
 	can_jump = true
+
+func flip_areas(dir):
+	if dir == GlanceEnum.LEFT:
+		sprite.flip_h = true
+		$Visibility.scale.x = glance_dir * v_scale
+		$CatchArea.scale.x = glance_dir * v_scale
+	elif dir == GlanceEnum.RIGHT:
+		sprite.flip_h = false
+		$Visibility.scale.x = glance_dir * v_scale 
+		$CatchArea.scale.x = glance_dir * v_scale 
 
 func check_chase():
 	var space_state = get_world_2d().direct_space_state
@@ -180,12 +196,12 @@ func check_chase():
 		if $CatchArea.scale.x < 0:
 			ang = PI - ang
 		if not res and ang <= 7 * PI / 12:
-			mode = CHASING
+			mode = Modes.CHASING
 			recent_tar = current
 			return
 		i += 1 
-	if i == targets.size():
-		mode = ROAMING
+	if i == targets.size() and mode != Modes.STAYING:
+		mode = Modes.ROAMING
 		recent_tar = null
 		if direction == 0:
 			direction = ex_direction
@@ -194,37 +210,26 @@ func evaluate_roaming():
 	velocity.x = direction * walk_speed
 	if (not $RayDownLeft.is_colliding() and not jumping) or $RayLeft.is_colliding():
 		direction = 1.0
-		sprite.flip_h = false
-		$Visibility.scale.x = x_scale
-		$CatchArea.scale.x = x_scale
+		glance_dir = GlanceEnum.RIGHT
 	if (not $RayDownRight.is_colliding() and not jumping) or $RayRight.is_colliding():
 		direction = -1.0
-		sprite.flip_h = true
-		$Visibility.scale.x = -x_scale
-		$CatchArea.scale.x = -x_scale
+		glance_dir = GlanceEnum.LEFT
 	ex_direction = direction
-	sprite.animation = "walk"
+	#if sprite.animation != "slash":
+		#sprite.animation = "walk"
 
 func evaluate_chasing():
 	if abs(target_dir.x) < SMALL_RADIUS:
 		#ex_direction = direction
 		direction = 0
-		sprite.stop()
+		#sprite.stop()
 	else:
 		sprite.speed_scale = 2
 		if target_dir.x > 0:
 			direction = 1
 			ex_direction = direction
-			sprite.flip_h = false
-			$Visibility.scale.x = x_scale
-			$CatchArea.scale.x = x_scale
+			glance_dir = GlanceEnum.RIGHT
 		elif target_dir.x < 0:
 			direction = -1
 			ex_direction = direction
-			sprite.flip_h = true
-			$Visibility.scale.x = -x_scale
-			$CatchArea.scale.x = -x_scale
-		else:
-			#ex_direction = direction
-			direction = 0
-			sprite.stop()
+			glance_dir = GlanceEnum.LEFT
