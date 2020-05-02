@@ -39,3 +39,11 @@ func complete():
 
 func _on_Level0Landscape_player_stop():
 	$Player.endLevel=true
+
+
+func _on_Level0Landscape_hint_disactivate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
+func _on_Level0Landscape_hint_activate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
