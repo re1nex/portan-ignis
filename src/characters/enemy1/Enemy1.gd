@@ -9,7 +9,7 @@ var greenColor = Color(0.015686, 0.996078, 0.215686)
 enum GlanceEnum {LEFT = -1, RIGHT = 1}
 enum Modes {STAYING = 0, ROAMING, CHASING}
 export (GlanceEnum) var glance_dir = GlanceEnum.RIGHT
-export (int, "staying", "walking") var start_mode = 0
+export (int, "walking", "staying") var start_mode = 0
 export (int) var walk_speed = 100
 export (int) var run_speed = 230
 export (int) var jump_speed = 100
@@ -25,7 +25,7 @@ var direction: int = 1
 var ex_direction: int
 var velocity = Vector2()
 var vision_center
-var mode = Modes.STAYING
+var mode = Modes.ROAMING
 var targets = []
 var recent_tar = null
 var target_dir
@@ -46,11 +46,11 @@ func _ready():
 	sprite = $AnimatedSprite
 	sprite.animation = "stay"
 	jumping = falling_at_start
-	direction = start_mode * glance_dir
+	direction = (start_mode ^ 1) * glance_dir
 	if start_mode == 0:
-		mode = Modes.STAYING
-	elif start_mode == 1:
 		mode = Modes.ROAMING
+	elif start_mode == 1:
+		mode = Modes.STAYING
 	pass
 
 
