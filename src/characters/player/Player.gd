@@ -128,7 +128,6 @@ func _process(delta):
 	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
-	
 
 func goAway():
 	var i=0
@@ -183,9 +182,6 @@ func _physics_process(delta):
 	target_speed *= walk_speed
 	
 	
-	
-	
-	
 	if on_floor:
 		linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 		if sprite.animation == "fall":
@@ -218,27 +214,30 @@ func _physics_process(delta):
 		#jumping = false
 
 	if on_stairs > 0:
+		
+		ignis_pos = $IgnisPositionOnStairs.get_position()
+		update_ignis()
 		linear_vel.y = 0
 		if Input.is_action_pressed("ui_up"):
 			position.y -= walk_speed * delta
-			sprite.animation = "jump"
-			sprite.set_frame(1)
+			sprite.animation = "stairsMove"
 			if not $AudioStairs.playing:
 				$AudioStairs.play()
 		elif Input.is_action_pressed("ui_down") and not on_floor:
 			position.y += walk_speed * delta
-			sprite.animation = "fall"
+			sprite.animation = "stairsMove"
 			if not $AudioStairs.playing:
 				$AudioStairs.play()
 		else:
-			sprite.animation = "stay"
+			sprite.animation = "stairsStay"
 			if $AudioStairs.playing:
 				$AudioStairs.stop()
 		
 	else:
 		if $AudioStairs.playing:
 			$AudioStairs.stop()
-				
+		ignis_pos = $IgnisPosition.get_position()
+		update_ignis()
 		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
 			if is_on_platform:
 				floor_vel = get_floor_velocity()
@@ -475,7 +474,8 @@ func check_rotate_ignis(delta):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
 
 func update_ignis():
-	ignis_pos.x = direction * $IgnisPosition.position.x
+	if ignis_pos.x * direction < 0:
+		ignis_pos.x *= -1
 
 	for i in range(WEAPONS_NUM):
 		weapons[i].set_position(ignis_pos)
