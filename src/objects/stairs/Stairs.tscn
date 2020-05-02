@@ -5,9 +5,8 @@
 [ext_resource path="res://resource/sprites/objects/stairs/stairs_down.png" type="Texture" id=3]
 [ext_resource path="res://src/objects/stairs/Stairs.gd" type="Script" id=4]
 
-[sub_resource type="SegmentShape2D" id=1]
-a = Vector2( 0, -8 )
-b = Vector2( 0, 8 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 10 )
 
 [node name="Stairs" type="Area2D"]
 z_index = 2
