@@ -48,9 +48,9 @@ func _input(event):
 			_closeBeforeChange()
 			pos-=1
 		if event.is_action_pressed("ui_accept"):
-			if(pos==0 && !$CenterContainer/VBoxContainer/NextLvl/ResLight.switchingOff):
+			if(pos==0 && $CenterContainer/VBoxContainer/NextLvl/ResLight.is_visible_in_tree()):
 				_on_NextLvl_pressed()
-			if(pos==1 && !$CenterContainer/VBoxContainer/MainMenu/MenuLight.switchingOff):
+			if(pos==1 && $CenterContainer/VBoxContainer/MainMenu/MenuLight.is_visible_in_tree()):
 				_on_MainMenu_pressed()
 
 func _closeBeforeChange():
@@ -78,7 +78,6 @@ func _ChangePos():
 func _on_NextLvl_pressed():
 	$AudioClick.play()
 	pos=-1
-	$CenterContainer/VBoxContainer/NextLvl/ResLight.disable()
 	$CenterContainer/VBoxContainer/NextLvl/ResLight.hide()
 	get_tree().paused=false
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_NEXT_SCENE)
@@ -90,7 +89,7 @@ func _on_NextLvl_mouse_entered():
 
 
 func _on_NextLvl_mouse_exited():
-	$CenterContainer/VBoxContainer/NextLvl/ResLight.disable()
+	$CenterContainer/VBoxContainer/NextLvl/ResLight.hide()
 
 
 func _on_MainMenu_mouse_entered():
@@ -100,13 +99,12 @@ func _on_MainMenu_mouse_entered():
 
 
 func _on_MainMenu_mouse_exited():
-	$CenterContainer/VBoxContainer/MainMenu/MenuLight.disable()
+	$CenterContainer/VBoxContainer/MainMenu/MenuLight.hide()
 
 
 func _on_MainMenu_pressed():
 	$AudioClick.play()
 	pos=-1
-	$CenterContainer/VBoxContainer/MainMenu/MenuLight.disable()
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.hide()
 	get_tree().paused=false
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
