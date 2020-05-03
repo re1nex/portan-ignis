@@ -24,17 +24,17 @@ func _input(event):
 
 
 func activate():
+	$TextureRect/Light2D.enabled=true
 	pause_mode = PAUSE_MODE_PROCESS
 	get_tree().paused = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	emit_signal("activate")
 	$TextureRect.visible=true
 	activated=true
 
 func disactivate():
+	$TextureRect/Light2D.enabled=false
 	get_tree().paused = false
 	pause_mode = PAUSE_MODE_INHERIT
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	emit_signal("disactivate")
 	$TextureRect.visible=false
 	activated=false

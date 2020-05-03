@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/ui/windows/background2.png" type="Texture" id=2]
 [ext_resource path="res://resource/ui/windows/ok.png" type="Texture" id=3]
 [ext_resource path="res://src/ui/hint/Hint.gd" type="Script" id=4]
+[ext_resource path="res://resource/ui/windows/backgroundLight.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -21,6 +22,10 @@ texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Light2D" type="Light2D" parent="TextureRect"]
+position = Vector2( 277.5, 204 )
+texture = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
 margin_left = 60.0
