@@ -139,19 +139,23 @@ func _physics_process(delta):
 	### MOVEMENT ###
 	# Apply gravity
 	linear_vel += delta * gravity_vec
+	
 	# Move and slide
 	changeIgnis = false
-	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
+	var snap =  Vector2.DOWN * 15 if !jumping and on_stairs == 0 else Vector2.ZERO
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
+	
 	var obj = null #get_slide_collision(0)
 	if get_slide_count() != 0:
 		obj = get_slide_collision(0)
 		if obj and obj.collider.get_name() == "Platform":
 			is_on_platform = true
+		else:
+			is_on_platform = false
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
-	if not on_floor:
-		is_on_platform = false
+	if not is_on_platform:
+		floor_vel = Vector2.ZERO
 	if on_floor:
 		height=0
 	### CONTROL ###
@@ -160,7 +164,6 @@ func _physics_process(delta):
 	var target_speed = 0
 	if Input.is_action_pressed("ui_left") and not blockPlayer:
 		target_speed -= 1
-		#if(!$AudioStep.playing &&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_right") and direction == 1:
 			direction = -1
 			sprite.flip_h = true
@@ -171,7 +174,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("ui_right") || blockPlayer:
 		target_speed += 1
-		#if(!$AudioStep.playing&&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_left") and direction == -1 and not blockPlayer:
 			direction = 1
 			sprite.flip_h = false
@@ -186,7 +188,6 @@ func _physics_process(delta):
 	
 	# STAIRS
 	if on_stairs > 0:
-		
 		var target_speed_y = 0
 		if Input.is_action_pressed("ui_up"):
 			target_speed_y = - walk_speed
@@ -262,10 +263,10 @@ func _on_Area2D_area_entered(area):
 		on_player_area_node = area;
 		in_node_area = true
 	elif area.get_class() == "Stairs":
-		jumping = true
 		if on_stairs == 0:
 			linear_vel.y = 0
 			gravity_vec.y = 0
+			floor_vel = Vector2.ZERO
 			ignis_pos = $IgnisPositionOnStairs.get_position()
 			update_ignis()
 		on_stairs += 1
