@@ -231,7 +231,7 @@ position = Vector2( 1297.88, 447.049 )
 position = Vector2( 1503.98, 336.057 )
 
 [node name="Hint" parent="." instance=ExtResource( 17 )]
-position = Vector2( 615.677, 621.252 )
+position = Vector2( 623.246, 628.563 )
 scale = Vector2( 0.2, 0.2 )
 text = "Hello "
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]

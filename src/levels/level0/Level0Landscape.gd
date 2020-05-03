@@ -14,7 +14,7 @@ func _ready():
 	posRD = $PositionRD.position
 	posLU = $PositionLU.position
 	
-	$CanvasModulate.visible = false
+	$CanvasModulate.visible = true
 	
 	$Ignises/IgnisDoor.connect("active", $Door, "_on_IgnisRegularLevel_active")
 	$Ignises/IgnisDoor.connect("not_active", $Door, "_on_IgnisRegularLevel_not_active")
