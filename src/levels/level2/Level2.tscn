@@ -104,6 +104,8 @@ shape = SubResource( 3 )
 [node name="PauseMenu" parent="." instance=ExtResource( 7 )]
 
 [node name="Hit" parent="." instance=ExtResource( 12 )]
+[connection signal="hint_activate" from="Level2Landscape" to="." method="_on_Level2Landscape_hint_activate"]
+[connection signal="hint_disactivate" from="Level2Landscape" to="." method="_on_Level2Landscape_hint_disactivate"]
 [connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]

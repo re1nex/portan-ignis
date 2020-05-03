@@ -2,7 +2,7 @@ extends CanvasLayer
 var keyboard=false
 var pos = -1
 var coef = 1.5
-
+var lastlvl =false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var en = $CenterContainer/VBoxContainer/NextLvl/ResLight.Ignis_layer.MENU
@@ -15,7 +15,11 @@ func _ready():
 
 	$CenterContainer/VBoxContainer/NextLvl/ResLight.set_enemy_visible(false)
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.set_enemy_visible(false)
-
+	$CenterContainer.hide()
+	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_4):
+		lastlvl=true
+		$CenterContainer/VBoxContainer/NextLvl.hide()
+		$CenterContainer/VBoxContainer/Label.text = "to be continued"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -28,30 +32,49 @@ func show():
 
 
 func _input(event):
-	if($CenterContainer.is_visible_in_tree()):
-		if event is InputEventMouseMotion:
-			if(keyboard) :
+	if(!lastlvl):
+		if($CenterContainer.is_visible_in_tree()):
+			if event is InputEventMouseMotion:
+				if(keyboard) :
+					_closeBeforeChange()
+					keyboard=false
+					pos=-1
+			if event.is_action_pressed("ui_down"): 
 				_closeBeforeChange()
-				keyboard=false
-				pos=-1
-		if event.is_action_pressed("ui_down"): 
-			_closeBeforeChange()
-			pos+=1
-			keyboard=true
-			_ChangePos()
-		if event.is_action_pressed("ui_up"):
-			_closeBeforeChange()
-			pos-=1
-			keyboard=true
-			_ChangePos()
-		if event.is_action_pressed("ui_cancel"):
-			_closeBeforeChange()
-			pos-=1
-		if event.is_action_pressed("ui_accept"):
-			if(pos==0 && $CenterContainer/VBoxContainer/NextLvl/ResLight.is_visible_in_tree()):
-				_on_NextLvl_pressed()
-			if(pos==1 && $CenterContainer/VBoxContainer/MainMenu/MenuLight.is_visible_in_tree()):
-				_on_MainMenu_pressed()
+				pos+=1
+				keyboard=true
+				_ChangePos()
+			if event.is_action_pressed("ui_up"):
+				_closeBeforeChange()
+				pos-=1
+				keyboard=true
+				_ChangePos()
+			if event.is_action_pressed("ui_cancel"):
+				_closeBeforeChange()
+				pos-=1
+			if event.is_action_pressed("ui_accept"):
+				if(pos==0 && !$CenterContainer/VBoxContainer/NextLvl/ResLight.switchingOff):
+					_on_NextLvl_pressed()
+				if(pos==1 && !$CenterContainer/VBoxContainer/MainMenu/MenuLight.switchingOff):
+					_on_MainMenu_pressed()
+	else:
+		if($CenterContainer.is_visible_in_tree()):
+			if event is InputEventMouseMotion:
+				if(keyboard) :
+					_on_MainMenu_mouse_exited()
+					keyboard=false
+			if event.is_action_pressed("ui_down"): 
+				_on_MainMenu_mouse_entered()
+				keyboard=true
+			if event.is_action_pressed("ui_up"):
+				_on_MainMenu_mouse_entered()
+				keyboard=true
+			if event.is_action_pressed("ui_cancel"):
+				_on_MainMenu_mouse_exited()
+			if event.is_action_pressed("ui_accept"):
+				if($CenterContainer/VBoxContainer/MainMenu/MenuLight.is_visible_in_tree()):
+					_on_MainMenu_pressed()
+	
 
 func _closeBeforeChange():
 	if(pos==0):
@@ -78,6 +101,7 @@ func _ChangePos():
 func _on_NextLvl_pressed():
 	$AudioClick.play()
 	pos=-1
+	$CenterContainer/VBoxContainer/NextLvl/ResLight.disable()
 	$CenterContainer/VBoxContainer/NextLvl/ResLight.hide()
 	get_tree().paused=false
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_NEXT_SCENE)
@@ -89,7 +113,7 @@ func _on_NextLvl_mouse_entered():
 
 
 func _on_NextLvl_mouse_exited():
-	$CenterContainer/VBoxContainer/NextLvl/ResLight.hide()
+	$CenterContainer/VBoxContainer/NextLvl/ResLight.disable()
 
 
 func _on_MainMenu_mouse_entered():
@@ -99,12 +123,13 @@ func _on_MainMenu_mouse_entered():
 
 
 func _on_MainMenu_mouse_exited():
-	$CenterContainer/VBoxContainer/MainMenu/MenuLight.hide()
+	$CenterContainer/VBoxContainer/MainMenu/MenuLight.disable()
 
 
 func _on_MainMenu_pressed():
 	$AudioClick.play()
 	pos=-1
+	$CenterContainer/VBoxContainer/MainMenu/MenuLight.disable()
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.hide()
 	get_tree().paused=false
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
