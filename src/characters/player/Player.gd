@@ -189,7 +189,7 @@ func _physics_process(delta):
 	# STAIRS
 	if on_stairs > 0:
 		var target_speed_y = 0
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed("ui_up") and not is_on_ceiling():
 			target_speed_y = - walk_speed
 			
 		elif Input.is_action_pressed("ui_down") and not on_floor:
