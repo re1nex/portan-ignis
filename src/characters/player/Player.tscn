@@ -160,6 +160,7 @@ one_shot = true
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 16 )
 animation = "stairsMove"
+frame = 2
 playing = true
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
