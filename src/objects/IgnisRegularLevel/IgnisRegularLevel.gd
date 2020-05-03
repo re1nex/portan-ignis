@@ -37,6 +37,7 @@ func _ready():
 		activate_at_start()
 	else:
 		health = GlobalVars.Ignis_state.OFF
+		collision_layer = 1 << 3
 		$Light2D.disable()
 		emit_signal("not_active")
 	pass # Replace with function body.
@@ -47,6 +48,7 @@ func activate_at_start():
 		return
 	if health_at_start == 0:
 		health_at_start = default_health_if_activated
+	collision_layer = 1 << 6
 	health = health_at_start
 	$AudioLoop.play()
 	$Light2D.reload(health)
@@ -56,12 +58,14 @@ func activate_at_start():
 
 func activate():
 	if health != GlobalVars.Ignis_state.OFF:
+		collision_layer = 1 << 3
 		$AudioLoop.stop()
 		$AudioOff.play()
 		$Light2D.disable()
 		health = GlobalVars.Ignis_state.OFF
 		emit_signal("not_active")
 	elif body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
+		collision_layer = 1 << 6
 		$AudioOff.stop()
 		$AudioOn.play()
 		$AudioLoop.play()
