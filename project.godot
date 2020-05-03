@@ -63,7 +63,6 @@ GlobalVars="*res://src/globals/global_vars/GlobalVars.gd"
 SceneSwitcher="*res://src/globals/sceneSwitcher/SceneSwitcher.gd"
 Transfer="*res://src/globals/transfer/Transfer.gd"
 MusicController="*res://src/globals/musicController/MusicController.tscn"
-IgnisSound="*res://src/globals/ignisSound/IgnisSound.tscn"
 
 [display]
 
