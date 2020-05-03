@@ -11,7 +11,6 @@ func _ready():
 	$med.hide()
 	if type == "up":
 		$up.show()
-		$UpperLimit/CollisionShape2D.disabled = false
 	elif type == "down":
 		$down.show()
 	else:
@@ -21,3 +20,15 @@ func _ready():
 
 func get_class():
 	return "Stairs"
+
+
+func _on_Stairs_area_entered(area):
+	if type == "up":
+		$UpperLimit/CollisionShape2D.set_deferred("disabled", false)
+	pass # Replace with function body.
+
+
+func _on_Stairs_area_exited(area):
+	if type == "up":
+		$UpperLimit/CollisionShape2D.set_deferred("disabled", true)
+	pass # Replace with function body.

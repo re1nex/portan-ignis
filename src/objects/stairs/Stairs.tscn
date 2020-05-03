@@ -41,7 +41,9 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpperLimit"]
 position = Vector2( 0, -33 )
 rotation = 3.14159
-scale = Vector2( 1.8, 1 )
+scale = Vector2( 2, 1 )
 shape = SubResource( 2 )
 disabled = true
 one_way_collision = true
+[connection signal="area_entered" from="." to="." method="_on_Stairs_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Stairs_area_exited"]
