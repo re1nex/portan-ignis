@@ -445,15 +445,15 @@ func recharge():
 		$Informator.ignis_timer_start = life_time_of_ignis
 		$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
 		var max_health = max($Informator.ignis_health, on_player_area_node.health)
-		$Informator.ignis_health = max_health
-		if on_player_area_node.health == GlobalVars.Ignis_state.OFF:
-			on_player_area_node.activate()
-		on_player_area_node.reload(max_health)
+		if $Informator.ignis_health != max_health:
+			$Informator.ignis_health = max_health
+			turn_on_ignis($Informator.num_of_active_weapon)
+			$AudioIgnisOn.play()
+		if on_player_area_node.health != max_health:
+			on_player_area_node.reload(max_health)
 		#if $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
 			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 			#switch_sprites($iconWithIgnis)
-		turn_on_ignis($Informator.num_of_active_weapon)
-		$AudioIgnisOn.play()
 		emit_signal("torch_reloaded")
 
 

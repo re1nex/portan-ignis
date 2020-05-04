@@ -98,7 +98,9 @@ func hit():
 
 func reload(arg):
 	var need_activate = (min(health, arg) == 0 and max(health, arg) != 0)
-	$Light2D.reload(arg)
-	health = $Light2D.health
 	if need_activate:
 		activate()
+	elif health != arg:
+		$Light2D.reload(arg)
+		health = $Light2D.health
+		$AudioOn.play()
