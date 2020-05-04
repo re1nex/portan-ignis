@@ -7,10 +7,10 @@ export (PackedScene) var arrow
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
 
-var target
+var targets = []
+var recent_target
 var hit_pos
 var can_shoot = true
-var target_radius = 0
 var radCoef = 0.25
 var idle = true
 
@@ -18,7 +18,7 @@ func _ready():
 	$ShootTimer.wait_time = fire_rate
 
 func _physics_process(delta):
-	if target:
+	if targets:
 		idle = false
 		aim()
 		update()
@@ -26,18 +26,13 @@ func _physics_process(delta):
 		idle = true
 
 func aim():
-	var pos = target.global_position
-	hit_pos = [pos]
 	var space_state = get_world_2d().direct_space_state
-	if target_radius:
-		hit_pos.append(pos + Vector2(0, radCoef * target_radius))
-		hit_pos.append(pos - Vector2(0, radCoef * target_radius))
-		hit_pos.append(pos + Vector2(radCoef * target_radius, 0))
-		hit_pos.append(pos - Vector2(radCoef * target_radius, 0))
+	get_positions()
 	for i in range(len(hit_pos)):
+		var res = space_state.intersect_ray(hit_pos[0], hit_pos[i], [self], 1 << 2)
 		var result = space_state.intersect_ray(position + $ArrowPos.position, hit_pos[i], [self], 1 << 2)
-		if not result.size() and can_shoot:
-			shoot(pos)
+		if not result.size() and not res.size() and can_shoot:
+			shoot(hit_pos[i])
 			return
 
 func shoot(where):
@@ -62,6 +57,28 @@ func shoot(where):
 	can_shoot = false
 	$ShootTimer.start()
 
+
+func get_positions():
+	recent_target = targets[0]
+	var pos = targets[0].global_position
+	var sc = targets[0].get_parent().scale
+	var target_shape = targets[0].get_node('CollisionShape2D').shape
+	hit_pos = [pos]
+	if target_shape is CircleShape2D:
+		var rad = target_shape.radius
+		hit_pos.append(pos + Vector2(0, radCoef * rad))
+		hit_pos.append(pos - Vector2(0, radCoef * rad))
+		hit_pos.append(pos + Vector2(radCoef * rad, 0))
+		hit_pos.append(pos - Vector2(radCoef * rad, 0))
+	elif target_shape is ConvexPolygonShape2D:
+		for p1 in target_shape.points:
+			if p1 != Vector2.ZERO:
+				hit_pos.append(pos + sc * p1.rotated(targets[0].get_parent().rotation))
+			for p2 in target_shape.points:
+				if p1 != p2:
+					hit_pos.append(pos + ((p1 + p2) / 2 * sc).rotated(targets[0].get_parent().rotation))
+#		target_radius = 0
+	
 func _draw():
 	if hit_pos:
 		for hit in hit_pos:
@@ -69,18 +86,25 @@ func _draw():
 	pass
 
 func _on_Visibility_area_entered(area):
-	if target:
-		return
-	target = area
-	var t = target.get_node('CollisionShape2D').shape
-	if target.get_node('CollisionShape2D').shape is CircleShape2D:
-		target_radius = target.get_node('CollisionShape2D').shape.radius
+	var pr = area.get_parent().priority
+	if pr == 1:
+		targets.push_back(area)
 	else:
-		target_radius = 0
+		var i = 0
+		while (i < targets.size() and targets[i].get_parent().priority > pr):
+			i += 1
+		if i == targets.size():
+			targets.push_back(area)
+		else:
+			targets.insert(i, area)
+	
 
 func _on_Visibility_area_exited(area):
-	if area == target:
-		target = null
+	targets.erase(area)
+	if recent_target == area:
+		recent_target = null
+		hit_pos = null
+
 
 func _on_ShootTimer_timeout():
 	can_shoot = true
