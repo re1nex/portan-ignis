@@ -80,9 +80,9 @@ func get_positions():
 #		target_radius = 0
 	
 func _draw():
-	if hit_pos:
-		for hit in hit_pos:
-			draw_line(Vector2() + $ArrowPos.position, (hit - position), laser_color)
+	#if hit_pos:
+	#	for hit in hit_pos:
+	#		draw_line(Vector2() + $ArrowPos.position, (hit - position), laser_color)
 	pass
 
 func _on_Visibility_area_entered(area):
