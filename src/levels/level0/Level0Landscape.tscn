@@ -105,6 +105,7 @@ position = Vector2( 96, 192 )
 
 [node name="IgnisRegularLevel3" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 832, 704 )
+health_at_start = 4
 
 [node name="IgnisRegularLevel4" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 464, 480 )

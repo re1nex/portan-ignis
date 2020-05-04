@@ -17,20 +17,21 @@
 [ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=15]
 [ext_resource path="res://resource/sounds/objects/pickUpSound.wav" type="AudioStream" id=16]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 14.8201
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( 0, -12 )
+b = Vector2( 0, 12 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
@@ -58,15 +59,15 @@ region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ) ],
-"loop": false,
-"name": "jump",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "landing",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"loop": false,
+"name": "jump",
+"speed": 15.0
 }, {
 "frames": [ SubResource( 5 ) ],
 "loop": true,
@@ -85,7 +86,7 @@ animations = [ {
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
-points = PoolVector2Array( -10, 1, 0, -6, 10.1, 1, 10.1, 7, 10.1, 18, 0, 18, -4, 18, -10, 8, -10, 8 )
+points = PoolVector2Array( -10, 1, 0, -6, 10.1, 1, 10.1, 7, 10.1, 18, 0, 18, -10, 18, -10, 8, -10, 8 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 6

@@ -17,13 +17,14 @@ func _ready():
 	$Objects/Mechanism.connect("active", $Level3Landscape/Doors/Door4, "_on_Mechanism_active")
 	$Objects/Mechanism.connect("not_active", $Level3Landscape/Doors/Door4, "_on_Mechanism_not_active")
 	
-	$Ignises/IgnisActivated.activate_at_start()
-	$Ignises/IgnisActivated2.activate_at_start()
+	#$Ignises/IgnisActivated.activate_at_start()
+	#$Ignises/IgnisActivated2.activate_at_start()
 	
 	$Objects/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
 	
 	$WinWindow/CenterContainer.hide()
 	$HUD/HUD.init_player($Player)
+	$Hit.init_player($Player)
 	$WindowGameOver/CenterContainer.hide()
 	$Inventory.set_player($Player)
 	$Player.new_lvl()

@@ -4,6 +4,8 @@ const deltaScale = 0.001
 const deltaScaleCircle = 0.1 # circle postfix means it's for circle light2D
 const energyDec = 0.025
 const energyMin = 0.1
+const maxAlpha = 1
+const minAlpha = 1
 const default_health = GlobalVars.Ignis_state.LIFE_MAX
 const health_to_index = {
 	GlobalVars.Ignis_state.OFF: 0,
@@ -34,6 +36,8 @@ var true_energy
 var true_area2D_scale
 var last_health # to restore health after switching off
 var enable_in_process = true
+var hit_time = 1
+var alphaDec = 0.05
 
 var priority = 1
 
@@ -60,10 +64,12 @@ func _process(delta):
 		# switching off is in process
 		energy -= energyDec
 		$Circle.energy -= energyDec
+		$Lens.modulate.a -= alphaDec
 		checkEnergy()
 	if not switchingOff and enable_in_process:
 		# light needs to be switched on
 		finishEnabling()
+		$Lens.modulate.a = maxAlpha
 
 
 func mirror():
@@ -95,6 +101,7 @@ func rotate_ignis(val):
 func checkEnergy():
 	if energy <= energyMin:
 		finishDisabling()
+		$Lens.modulate.a = minAlpha
 
 
 func disable():
@@ -103,7 +110,7 @@ func disable():
 
 
 func finishDisabling():
-	$Area2D/SectorCollisionShape.disabled = true
+	$Area2D/CollisionShape2D.disabled = true
 	$Area2D/Circle.disabled = true
 	$Lens.hide()
 	enabled = false
@@ -126,7 +133,7 @@ func enable():
 
 func finishEnabling():
 	health = last_health
-	$Area2D/SectorCollisionShape.disabled = false
+	$Area2D/CollisionShape2D.disabled = false
 	$Area2D/Circle.disabled = false
 	$Lens.show()
 	enabled = true
@@ -159,12 +166,17 @@ func _set_state_by_params(scale_part, energy_part):
 
 
 func hit():
-	var ind = health_to_index[health]
-	if ind > 0:
-		ind -= 1
-	health = index_to_health[ind]
-	last_health = health
-	set_state()
+	if $TimerHit.is_stopped():
+		var ind = health_to_index[health]
+		if ind > 0:
+			ind -= 1
+		reload(index_to_health[ind])
+		turn_on_hit_timer()
+
+
+func turn_on_hit_timer():
+	$TimerHit.set_wait_time(hit_time)
+	$TimerHit.start()
 
 # source state is GlobalVars.Ignis_state enum
 func reload(source_state = GlobalVars.Ignis_state.LIFE_MAX):
@@ -175,3 +187,7 @@ func reload(source_state = GlobalVars.Ignis_state.LIFE_MAX):
 
 func get_health():
 	return health
+
+
+func _on_TimerHit_timeout():
+	pass # Replace with function body.

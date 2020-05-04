@@ -8,6 +8,7 @@ func _ready():
 	$Player.connect("die", self, "_on_Player_die")
 	$Level1Landscape.connect("level_complete", self, "complete")
 	$Menu/HUD.init_player($Player)
+	$Hit.init_player($Player)
 	$Inventory.set_player($Player)
 	$Player.hit()
 	$Player.new_lvl()

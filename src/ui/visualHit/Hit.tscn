@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resource/ui/visual_hit/hit.png" type="Texture" id=2]
+[ext_resource path="res://src/ui/visualHit/Hit.gd" type="Script" id=3]
+
+[node name="Hit" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="Sprites" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+light_mask = 2
+
+[node name="lu" type="Sprite" parent="Sprites"]
+modulate = Color( 0.647059, 0, 0, 1 )
+light_mask = 0
+position = Vector2( 192, 192 )
+scale = Vector2( 12, 12 )
+texture = ExtResource( 2 )
+flip_h = true
+flip_v = true
+
+[node name="ru" type="Sprite" parent="Sprites"]
+modulate = Color( 0.647059, 0, 0, 1 )
+light_mask = 0
+position = Vector2( 1088, 192 )
+scale = Vector2( 12, 12 )
+texture = ExtResource( 2 )
+flip_v = true
+
+[node name="ld" type="Sprite" parent="Sprites"]
+modulate = Color( 0.647059, 0, 0, 1 )
+light_mask = 0
+position = Vector2( 192, 528 )
+scale = Vector2( 12, 12 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[node name="rd" type="Sprite" parent="Sprites"]
+modulate = Color( 0.647059, 0, 0, 1 )
+light_mask = 0
+position = Vector2( 1088, 528 )
+scale = Vector2( 12, 12 )
+texture = ExtResource( 2 )

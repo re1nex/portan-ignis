@@ -42,10 +42,11 @@ func _ready():
 	$CenterContainer/Settings/Mute/LightMute.set_enemy_visible(false)
 	
 	if Settings.Sound["Mute"]:
-		$Settings/VBoxContainer/Label2/Mute/CheckBoxLight.show()
-		$Settings/VBoxContainer/Label2/Mute.pressed=true
-		$Settings/VBoxContainer/VolumeSettings/HSlider.value=0
-	
+		$CenterContainer/Settings/Mute/MuteCheckBox/MuteCheckLight.show()
+		$CenterContainer/Settings/Mute/MuteCheckBox.pressed=true
+		$CenterContainer/Settings/Label2/HSlider.value=0
+	else:
+		$CenterContainer/Settings/Label2/HSlider.value=Settings.Sound["Volume"]
 	if Settings.Graphics["Fullscreen"]:
 		_full_screen()
 	begin=false

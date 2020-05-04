@@ -7,6 +7,7 @@ signal health_changed
 signal torch_changed
 signal torch_reloaded
 signal torch_hidden
+signal got_hit
 
 class_name Player
 
@@ -53,6 +54,7 @@ var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 var floor_vel = Vector2()
+var is_on_platform = true
 
 var endLevel=false
 var on_stairs = 0
@@ -118,7 +120,7 @@ func _process(delta):
 			on_player_area_node.disactivate()
 			
 	
-	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "activated" in on_player_area_node:
+	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "health" in on_player_area_node:
 		recharge()
 	
 	control_weapons()
@@ -142,9 +144,15 @@ func _physics_process(delta):
 	changeIgnis = false
 	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
+	var obj = null #get_slide_collision(0)
+	if get_slide_count() != 0:
+		obj = get_slide_collision(0)
+		if obj and obj.collider.get_name() == "Platform":
+			is_on_platform = true
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
-	
+	if not on_floor:
+		is_on_platform = false
 	if on_floor:
 		height=0
 	### CONTROL ###
@@ -232,7 +240,10 @@ func _physics_process(delta):
 			$AudioStairs.stop()
 				
 		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
-			floor_vel = get_floor_velocity()
+			if is_on_platform:
+				floor_vel = get_floor_velocity()
+			else:
+				floor_vel = Vector2.ZERO
 			linear_vel.y = -jump_speed
 			height -= linear_vel.y * delta
 			jumping = true
@@ -428,16 +439,21 @@ func update_ignis_timer_start(delta):
 
 
 func recharge():
-	if on_player_area_node.activated and $Informator.ignis_status != GlobalVars.Is_ignis.HAS_IGNIS:
+	if $Informator.ignis_health != on_player_area_node.health:
 		if not $TimerIgnis.is_stopped():
 			turn_off_ignis_time()
 		$Informator.ignis_timer_start = life_time_of_ignis
 		$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
+		var max_health = max($Informator.ignis_health, on_player_area_node.health)
+		if $Informator.ignis_health != max_health:
+			$Informator.ignis_health = max_health
+			turn_on_ignis($Informator.num_of_active_weapon)
+			$AudioIgnisOn.play()
+		if on_player_area_node.health != max_health:
+			on_player_area_node.reload(max_health)
 		#if $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
 			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 			#switch_sprites($iconWithIgnis)
-		turn_on_ignis($Informator.num_of_active_weapon)
-		$AudioIgnisOn.play()
 		emit_signal("torch_reloaded")
 
 
@@ -492,11 +508,14 @@ func hit():
 		HitPlay(randi()%5+1)
 		$Informator.health -= 1
 		emit_signal("health_changed")
+		emit_signal("got_hit")
 		if $Informator.health == 0:
 			emit_signal("die")
 			
 		if $Informator.ignis_status==GlobalVars.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+			$Informator.ignis_health = max(0, $Informator.ignis_health - 1)
+			weapons[$Informator.num_of_active_weapon].hit()
 			emit_signal("torch_hit")
 		turn_on_hit_timer()
 	pass
