@@ -27,13 +27,14 @@ func _physics_process(delta):
 
 func aim():
 	var space_state = get_world_2d().direct_space_state
-	get_positions()
-	for i in range(len(hit_pos)):
-		var res = space_state.intersect_ray(hit_pos[0], hit_pos[i], [self], 1 << 2)
-		var result = space_state.intersect_ray(position + $ArrowPos.position, hit_pos[i], [self], 1 << 2)
-		if not result.size() and not res.size() and can_shoot:
-			shoot(hit_pos[i])
-			return
+	for t in range(len(targets)):
+		get_positions(t)
+		for i in range(len(hit_pos)):
+			var res = space_state.intersect_ray(hit_pos[0], hit_pos[i], [self], 1 << 2)
+			var result = space_state.intersect_ray(position + $ArrowPos.position, hit_pos[i], [self], 1 << 2)
+			if not result.size() and not res.size() and can_shoot:
+				shoot(hit_pos[i])
+				return
 
 func shoot(where):
 	var dir = where - position
@@ -54,15 +55,16 @@ func shoot(where):
 		a += PI
 	b.start(a_pos, a)
 	get_parent().add_child(b)
+	$Shot.play()
 	can_shoot = false
 	$ShootTimer.start()
 
 
-func get_positions():
-	recent_target = targets[0]
-	var pos = targets[0].global_position
-	var sc = targets[0].get_parent().scale
-	var target_shape = targets[0].get_node('CollisionShape2D').shape
+func get_positions(i):
+	recent_target = targets[i]
+	var pos = targets[i].global_position
+	var sc = targets[i].get_parent().scale
+	var target_shape = targets[i].get_node('CollisionShape2D').shape
 	hit_pos = [pos]
 	if target_shape is CircleShape2D:
 		var rad = target_shape.radius

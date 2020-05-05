@@ -70,7 +70,7 @@ func _physics_process(delta):
 	var on_floor = is_on_floor()
 	if on_floor:
 		height=0
-		if (!$AudioStep.playing) : 
+		if (!$AudioStep.playing) and direction: 
 			$AudioStep.play()
 	if (!$AudioVoice.playing) : 
 		$AudioVoice.play()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/characters/enemy2/Enemy2.gd" type="Script" id=1]
 [ext_resource path="res://resource/sprites/characters/PrinceRanger (1).png" type="Texture" id=2]
 [ext_resource path="res://src/objects/Arrow/Arrow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resource/sounds/arrow/shot.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 16 )
@@ -36,6 +37,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="VisibilityShape" type="CollisionShape2D" parent="Visibility"]
+position = Vector2( 0.513351, 0 )
 shape = SubResource( 2 )
 
 [node name="ShootTimer" type="Timer" parent="."]
@@ -43,6 +45,9 @@ shape = SubResource( 2 )
 [node name="TurnTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="Shot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="area_entered" from="Visibility" to="." method="_on_Visibility_area_entered"]
 [connection signal="area_exited" from="Visibility" to="." method="_on_Visibility_area_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
