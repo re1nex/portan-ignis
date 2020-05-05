@@ -113,6 +113,8 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="Hit" parent="." instance=ExtResource( 14 )]
+[connection signal="hint_activate" from="Level3Landscape" to="." method="_on_Level3Landscape_hint_activate"]
+[connection signal="hint_disactivate" from="Level3Landscape" to="." method="_on_Level3Landscape_hint_disactivate"]
 [connection signal="die" from="Player" to="." method="_on_Player_die"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]

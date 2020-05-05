@@ -31,4 +31,6 @@ position = Vector2( 536, 704 )
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 
 [node name="Hit" parent="." instance=ExtResource( 9 )]
+[connection signal="hint_activate" from="Level1Landscape" to="." method="_on_Level1Landscape_hint_activate"]
+[connection signal="hint_disactivate" from="Level1Landscape" to="." method="_on_Level1Landscape_hint_disactivate"]
 [connection signal="player_stop" from="Level1Landscape" to="." method="_on_Level1Landscape_player_stop"]

@@ -35,3 +35,5 @@ position = Vector2( 1004.49, 634.459 )
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 
 [node name="Hit" parent="." instance=ExtResource( 10 )]
+[connection signal="hint_activate" from="Level0Landscape" to="." method="_on_Level0Landscape_hint_activate"]
+[connection signal="hint_disactivate" from="Level0Landscape" to="." method="_on_Level0Landscape_hint_disactivate"]

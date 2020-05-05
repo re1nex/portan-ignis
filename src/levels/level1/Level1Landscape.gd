@@ -5,6 +5,8 @@ var posLU
 
 signal level_complete
 signal player_stop
+signal hint_activate
+signal hint_disactivate
 
 func _ready():
 	posRD = $PositionRD.position
@@ -26,3 +28,11 @@ func _on_LevelEnd_body_entered(body):
 func _on_LevelEndStop_body_entered(body):
 	if body.has_method("get_informator"):
 		emit_signal("player_stop")
+
+
+func _on_Hint_activate():
+	emit_signal("hint_activate")
+
+
+func _on_Hint_disactivate():
+	emit_signal("hint_disactivate")
