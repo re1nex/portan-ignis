@@ -27,7 +27,7 @@ script = ExtResource( 4 )
 position = Vector2( 128, 608 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 336, 1076 )
+position = Vector2( 267.725, 1075.02 )
 
 [node name="Ignises" type="Node2D" parent="."]
 position = Vector2( 128, 608 )
@@ -47,7 +47,7 @@ type = "column"
 
 [node name="IgnisRegularLevel1" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 440, 480 )
-health_at_start = 4
+health_at_start = 1
 
 [node name="IgnisRegularLevel2" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 1016, 544 )
@@ -73,7 +73,7 @@ health_at_start = 4
 position = Vector2( 128, 608 )
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 376, 320 )
+position = Vector2( 371.739, 332.859 )
 falling_at_start = true
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 1 )]

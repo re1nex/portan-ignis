@@ -155,7 +155,7 @@ func _on_CatchArea_body_exited(body):
 		player_target = null
 
 func _on_CatchArea_area_entered(area):
-	if area.has_method("activate") and area.activated:
+	if area.has_method("activate") and area.health>0:
 		sprite.animation = "punch"
 		torch_area = area
 

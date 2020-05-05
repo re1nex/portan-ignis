@@ -41,7 +41,7 @@ health_at_start = 4
 
 [node name="IgnisActivated2" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 432, 256 )
-health_at_start = 4
+health_at_start = 1
 
 [node name="IgnisDoor" parent="Ignises" instance=ExtResource( 5 )]
 position = Vector2( 800, -75 )
