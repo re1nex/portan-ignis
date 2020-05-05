@@ -3,6 +3,8 @@ extends Node2D
 signal falls
 signal win
 
+
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
@@ -55,3 +57,11 @@ func _on_Win_body_entered(body):
 func _on_End_body_entered(body):
 	if body.has_method("get_informator"):
 		$Player.endLevel=true
+
+
+func _on_Level3Landscape_hint_activate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_Level3Landscape_hint_disactivate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
