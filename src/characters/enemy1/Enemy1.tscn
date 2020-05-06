@@ -29,87 +29,87 @@ region = Rect2( 704, 0, 64, 64 )
 atlas = ExtResource( 3 )
 region = Rect2( 832, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 3 )
-region = Rect2( 704, 0, 64, 64 )
-
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 704, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 256, 0, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 640, 0, 64, 64 )
+region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 704, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 0, 64, 64 )
+region = Rect2( 640, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 704, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 768, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 19 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "punch",
 "speed": 3.0
 }, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 8 ) ],
 "loop": false,
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": false,
 "name": "jump",
 "speed": 2.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "slash",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 13 ) ],
+"frames": [ SubResource( 11 ) ],
 "loop": false,
 "name": "landing",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 18 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "slash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ) ],
 "loop": false,
 "name": "stay",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 9, 15 )
 
-[sub_resource type="CircleShape2D" id=16]
+[sub_resource type="CircleShape2D" id=18]
 radius = 55.0
 
-[sub_resource type="ConvexPolygonShape2D" id=17]
+[sub_resource type="ConvexPolygonShape2D" id=19]
 points = PoolVector2Array( 0, -14, 8, -2, 8, 13, -8, 13, -8, -2 )
 
 [node name="Enemy" type="KinematicBody2D"]
@@ -129,9 +129,8 @@ freeze_bodies = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.65, 0.65 )
-frames = SubResource( 14 )
+frames = SubResource( 16 )
 animation = "punch"
-frame = 2
 playing = true
 
 [node name="CatchArea" type="Area2D" parent="."]
@@ -140,7 +139,7 @@ collision_mask = 193
 
 [node name="CatchShape" type="CollisionShape2D" parent="CatchArea"]
 position = Vector2( 2, 6 )
-shape = SubResource( 15 )
+shape = SubResource( 17 )
 
 [node name="VisionPoint" type="Position2D" parent="."]
 
@@ -177,11 +176,11 @@ collision_mask = 16
 
 [node name="VisibilyShape" type="CollisionShape2D" parent="Visibility"]
 z_as_relative = false
-shape = SubResource( 16 )
+shape = SubResource( 18 )
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
-shape = SubResource( 17 )
+shape = SubResource( 19 )
 
 [node name="JumpTimer" type="Timer" parent="."]
 wait_time = 2.0
