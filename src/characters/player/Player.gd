@@ -562,6 +562,16 @@ func take_heart():
 	return false # heart not taken --> can't free heart
 
 
+func take_fuel():
+	if $Informator.ignis_health < GlobalVars.Ignis_state.LIFE_MAX:
+		$AudioPickUp.play()
+		$Informator.ignis_health += 1
+		turn_on_ignis($Informator.num_of_active_weapon)
+		emit_signal("torch_reloaded")
+		return true # fuel taken --> can free fuel
+	return false # fuel not taken --> can't free fuel
+
+
 func highway_to_hell(delta):
 	linear_vel.x = lerp(linear_vel.x, walk_speed, 1)
 	move_and_slide(linear_vel)
