@@ -28,7 +28,7 @@ export (float) var scale_x = 1
 export (float) var scale_y = 1
 
 export (float) var recharge_coef = 1.5
-export (float) var life_time_of_ignis = 3
+export (float) var life_time_of_ignis = 1 # for each life of ignis
 export (float) var hit_time = 1
 
 export (float) var dead_zone = 0.2
@@ -120,7 +120,7 @@ func _process(delta):
 			on_player_area_node.disactivate()
 			
 	
-	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "activated" in on_player_area_node:
+	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "health" in on_player_area_node:
 		recharge()
 	
 	control_weapons()
@@ -385,6 +385,7 @@ func turn_on_ignis(num):
 		$AudioIngisOff.stop()
 		$AudioIngisLoop.play()
 	update_ignis()
+	weapons[num].reload($Informator.ignis_health)
 	weapons[num].enable()
 	emit_signal("torch_changed")
 
@@ -396,7 +397,13 @@ func turn_off_ignis_time():
 	$TimerIgnis.stop()
 
 func _on_Timer_timeout():
-	$Informator.ignis_status = GlobalVars.Is_ignis.NO_IGNIS
+	if $Informator.ignis_health != GlobalVars.Ignis_state.OFF:
+		$Informator.ignis_health -= 1
+	if $Informator.ignis_health != GlobalVars.Ignis_state.OFF:
+		$TimerIgnis.set_wait_time(life_time_of_ignis)
+		$TimerIgnis.start()
+	else:
+		$Informator.ignis_status = GlobalVars.Is_ignis.NO_IGNIS
 
 
 func fill_weapons():
@@ -441,16 +448,21 @@ func update_ignis_timer_start(delta):
 
 
 func recharge():
-	if on_player_area_node.activated and $Informator.ignis_status != GlobalVars.Is_ignis.HAS_IGNIS:
+	if $Informator.ignis_health != on_player_area_node.health:
 		if not $TimerIgnis.is_stopped():
 			turn_off_ignis_time()
 		$Informator.ignis_timer_start = life_time_of_ignis
 		$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
+		var max_health = max($Informator.ignis_health, on_player_area_node.health)
+		if $Informator.ignis_health != max_health:
+			$Informator.ignis_health = max_health
+			turn_on_ignis($Informator.num_of_active_weapon)
+			$AudioIgnisOn.play()
+		if on_player_area_node.health != max_health:
+			on_player_area_node.reload(max_health)
 		#if $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
 			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 			#switch_sprites($iconWithIgnis)
-		turn_on_ignis($Informator.num_of_active_weapon)
-		$AudioIgnisOn.play()
 		emit_signal("torch_reloaded")
 
 
@@ -512,6 +524,8 @@ func hit():
 			
 		if $Informator.ignis_status==GlobalVars.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+			$Informator.ignis_health = max(0, $Informator.ignis_health - 1)
+			weapons[$Informator.num_of_active_weapon].hit()
 			emit_signal("torch_hit")
 		turn_on_hit_timer()
 	pass
@@ -548,6 +562,16 @@ func take_heart():
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart
 	return false # heart not taken --> can't free heart
+
+
+func take_fuel():
+	if $Informator.ignis_health < GlobalVars.Ignis_state.LIFE_MAX:
+		$AudioPickUp.play()
+		$Informator.ignis_health += 1
+		turn_on_ignis($Informator.num_of_active_weapon)
+		emit_signal("torch_reloaded")
+		return true # fuel taken --> can free fuel
+	return false # fuel not taken --> can't free fuel
 
 
 func highway_to_hell(delta):
