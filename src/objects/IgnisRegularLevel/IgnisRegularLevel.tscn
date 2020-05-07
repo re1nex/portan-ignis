@@ -63,5 +63,8 @@ attenuation = 4.0
 [node name="AudioOn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
 volume_db = -3.0
+
+[node name="HintTimer" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_IgnisRegularLevel_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_IgnisRegularLevel_body_exited"]
+[connection signal="timeout" from="HintTimer" to="." method="_on_HintTimer_timeout"]

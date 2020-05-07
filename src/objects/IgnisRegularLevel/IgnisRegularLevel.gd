@@ -10,6 +10,7 @@ const radius_multiplier = 1.5
 const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for ignis level
 const scale_levels = [0, 0.60, 0.75, 0.85, 1.00] # default for ignis level
 const default_health_if_activated = 4 # maximum
+const hint_delay_time = 0.25
 
 export (String, "simple", "column", "post", "hint") var type
 var body_informator = null
@@ -75,7 +76,11 @@ func activate():
 		health = body_informator.ignis_health
 		$Light2D.reload(body_informator.ignis_health)
 		$Light2D.enable()
-		emit_signal("active")
+		if type == "hint":
+			$HintTimer.set_wait_time(hint_delay_time)
+			$HintTimer.start()
+		else:
+			emit_signal("active")
 
 
 func _on_IgnisRegularLevel_body_entered(body):
@@ -107,3 +112,8 @@ func reload(arg):
 		$Light2D.reload(arg)
 		health = $Light2D.health
 		$AudioOn.play()
+
+
+func _on_HintTimer_timeout():
+	emit_signal("active")
+	$HintTimer.stop()
