@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://resource/sprites/characters/player/player.png" type="Texture" id=1]
 [ext_resource path="res://src/characters/player/Player.gd" type="Script" id=2]
@@ -12,10 +12,16 @@
 [ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav" type="AudioStream" id=10]
 [ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav" type="AudioStream" id=11]
 [ext_resource path="res://resource/sounds/player/landing.wav" type="AudioStream" id=12]
-[ext_resource path="res://resource/sounds/player/jump.wav" type="AudioStream" id=13]
+[ext_resource path="res://resource/sounds/player/jump0.wav" type="AudioStream" id=13]
 [ext_resource path="res://resource/sounds/player/stairs.wav" type="AudioStream" id=14]
 [ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=15]
 [ext_resource path="res://resource/sounds/objects/pickUpSound.wav" type="AudioStream" id=16]
+[ext_resource path="res://resource/sounds/player/jump2.wav" type="AudioStream" id=17]
+[ext_resource path="res://resource/sounds/player/jump1.wav" type="AudioStream" id=18]
+[ext_resource path="res://resource/sounds/player/jump3.wav" type="AudioStream" id=19]
+[ext_resource path="res://resource/sounds/player/jump5.wav" type="AudioStream" id=20]
+[ext_resource path="res://resource/sounds/player/jump4.wav" type="AudioStream" id=21]
+[ext_resource path="res://resource/sounds/player/jump6.wav" type="AudioStream" id=22]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( 0, -12 )
@@ -35,31 +41,31 @@ region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 1152, 0, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 1344, 0, 64, 64 )
+region = Rect2( 1152, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 1152, 0, 64, 64 )
+region = Rect2( 1344, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 1216, 0, 64, 64 )
+region = Rect2( 1152, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 1280, 0, 64, 64 )
+region = Rect2( 1216, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 1280, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
@@ -91,22 +97,22 @@ animations = [ {
 }, {
 "frames": [ SubResource( 5 ) ],
 "loop": true,
-"name": "stairsStay",
+"name": "fall",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 6 ) ],
 "loop": true,
-"name": "fall",
+"name": "landing",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "stairsStay",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "stairsMove",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ) ],
-"loop": true,
-"name": "landing",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
@@ -160,7 +166,7 @@ one_shot = true
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 16 )
 animation = "stairsMove"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
@@ -202,10 +208,6 @@ stream = ExtResource( 12 )
 volume_db = -13.5
 pitch_scale = 2.0
 
-[node name="AudioJump" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
-volume_db = -2.0
-
 [node name="AudioStairs" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 volume_db = -1.0
@@ -221,5 +223,33 @@ volume_db = 5.0
 [node name="AudioIgnisOn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
 volume_db = -10.0
+
+[node name="AudioJump0" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -2.0
+
+[node name="AudioJump1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -15.0
+
+[node name="AudioJump2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -2.0
+
+[node name="AudioJump3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -15.0
+
+[node name="AudioJump4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -15.0
+
+[node name="AudioJump5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -15.0
+
+[node name="AudioJump6" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -15.0
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]

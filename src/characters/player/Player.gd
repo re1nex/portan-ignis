@@ -97,6 +97,21 @@ func HitPlay(num):
 	elif(num ==5):
 		$AudioHit5.play()
 
+func jump_play(num):
+	if(num == 0):
+		$AudioJump0.play()
+	elif(num ==1):
+		$AudioJump1.play()
+	elif(num ==2):
+		$AudioJump2.play()
+	elif(num ==3):
+		$AudioJump3.play()
+	elif(num ==4):
+		$AudioJump4.play()
+	elif(num ==5):
+		$AudioJump5.play()
+	elif(num ==6):
+		$AudioJump6.play()
 
 
 
@@ -237,7 +252,7 @@ func _physics_process(delta):
 				height -= linear_vel.y * delta
 				jumping = true
 				sprite.animation = "jump"
-				$AudioJump.play()
+				jump_play(randi()%7)
 		
 		#JUMPING
 		else:
