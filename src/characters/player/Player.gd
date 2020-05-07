@@ -414,11 +414,13 @@ func fill_weapons():
 	weapons[GlobalVars.Ignis_type.REGULAR].disable()
 	
 	node = preload("res://src/objects/IgnisSectorInner/IgnisSectorInner.tscn").instance()
+	node.priority = 2
 	weapons[GlobalVars.Ignis_type.SECTOR] = node
 	add_child(weapons[GlobalVars.Ignis_type.SECTOR])
 	weapons[GlobalVars.Ignis_type.SECTOR].disable()
 	
 	node = preload("res://src/objects/IgnisLongSectorInner/IgnisLongSectorInner.tscn").instance()
+	node.priority = 2
 	weapons[GlobalVars.Ignis_type.LONG_SECTOR] = node
 	add_child(weapons[GlobalVars.Ignis_type.LONG_SECTOR])
 	weapons[GlobalVars.Ignis_type.LONG_SECTOR].disable()
