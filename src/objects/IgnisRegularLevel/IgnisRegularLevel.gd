@@ -11,7 +11,7 @@ const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for ignis level
 const scale_levels = [0, 0.60, 0.75, 0.85, 1.00] # default for ignis level
 const default_health_if_activated = 4 # maximum
 
-export (String, "simple", "column", "post") var type
+export (String, "simple", "column", "post", "hint") var type
 var body_informator = null
 var health
 export (int, "0", "1", "2", "3", "4") var health_at_start = 0
@@ -30,6 +30,9 @@ func _ready():
 	elif type == "post":
 		$TorchSprite.hide()
 		$PostSprite.show()
+	elif type == "hint":
+		$TorchSprite.hide()
+		$HintSprite.show()
 	
 	$Light2D.init_radius(radius_multiplier)
 	$Light2D.set_health_params(scale_levels, energy_levels)

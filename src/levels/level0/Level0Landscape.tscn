@@ -111,8 +111,9 @@ health_at_start = 4
 [node name="IgnisRegularLevel4" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 464, 480 )
 
-[node name="IgnisRegularLevel5" parent="Ignises" instance=ExtResource( 6 )]
-position = Vector2( 936, 352 )
+[node name="IgnisHint" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 902.87, 348.226 )
+type = "hint"
 
 [node name="IgnisRegularLevel6" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 760, 560 )
@@ -235,6 +236,11 @@ position = Vector2( 1503.98, 336.057 )
 position = Vector2( 623.246, 628.563 )
 scale = Vector2( 0.2, 0.2 )
 text = "Hello "
+
+[node name="HintTorch" parent="." instance=ExtResource( 17 )]
+position = Vector2( 984.485, 286.653 )
+scale = Vector2( 0.3, 0.3 )
+text = "This is a hint activated by torch. Press Enter to close it"
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
 [connection signal="body_entered" from="LevelEndStop" to="." method="_on_LevelEndStop_body_entered"]
 [connection signal="active" from="Mechanism" to="Door2" method="_on_Mechanism_active"]

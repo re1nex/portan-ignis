@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=1]
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_level/torchOff.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://resource/sounds/ignis/loop.wav" type="AudioStream" id=6]
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_level/ign2.png" type="Texture" id=7]
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_level/ign.png" type="Texture" id=8]
+[ext_resource path="res://resource/sprites/ignis/ignis_regular_level/hintTorch.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 24 )
@@ -35,6 +36,11 @@ texture = ExtResource( 8 )
 visible = false
 position = Vector2( 0, -13 )
 texture = ExtResource( 7 )
+
+[node name="HintSprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 9 )
+offset = Vector2( 0, -18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -24 )
