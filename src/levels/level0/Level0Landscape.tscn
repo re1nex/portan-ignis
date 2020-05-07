@@ -247,3 +247,5 @@ text = "This is a hint activated by torch. Press Enter to close it"
 [connection signal="not_active" from="Mechanism" to="Door2" method="_on_Mechanism_not_active"]
 [connection signal="activate" from="Hint" to="." method="_on_Hint_activate"]
 [connection signal="disactivate" from="Hint" to="." method="_on_Hint_disactivate"]
+[connection signal="activate" from="HintTorch" to="." method="_on_Hint_activate"]
+[connection signal="disactivate" from="HintTorch" to="." method="_on_Hint_disactivate"]
