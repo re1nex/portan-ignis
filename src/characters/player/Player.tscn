@@ -12,16 +12,16 @@
 [ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav" type="AudioStream" id=10]
 [ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav" type="AudioStream" id=11]
 [ext_resource path="res://resource/sounds/player/landing.wav" type="AudioStream" id=12]
-[ext_resource path="res://resource/sounds/player/jump0.wav" type="AudioStream" id=13]
+[ext_resource path="res://resource/sounds/player/jump/jump0.wav" type="AudioStream" id=13]
 [ext_resource path="res://resource/sounds/player/stairs.wav" type="AudioStream" id=14]
 [ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=15]
 [ext_resource path="res://resource/sounds/objects/pickUpSound.wav" type="AudioStream" id=16]
-[ext_resource path="res://resource/sounds/player/jump2.wav" type="AudioStream" id=17]
-[ext_resource path="res://resource/sounds/player/jump1.wav" type="AudioStream" id=18]
-[ext_resource path="res://resource/sounds/player/jump3.wav" type="AudioStream" id=19]
-[ext_resource path="res://resource/sounds/player/jump5.wav" type="AudioStream" id=20]
-[ext_resource path="res://resource/sounds/player/jump4.wav" type="AudioStream" id=21]
-[ext_resource path="res://resource/sounds/player/jump6.wav" type="AudioStream" id=22]
+[ext_resource path="res://resource/sounds/player/jump/jump2.wav" type="AudioStream" id=17]
+[ext_resource path="res://resource/sounds/player/jump/jump1.wav" type="AudioStream" id=18]
+[ext_resource path="res://resource/sounds/player/jump/jump3.wav" type="AudioStream" id=19]
+[ext_resource path="res://resource/sounds/player/jump/jump5.wav" type="AudioStream" id=20]
+[ext_resource path="res://resource/sounds/player/jump/jump4.wav" type="AudioStream" id=21]
+[ext_resource path="res://resource/sounds/player/jump/jump6.wav" type="AudioStream" id=22]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( 0, -12 )
@@ -37,35 +37,35 @@ region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 1344, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 1152, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 1152, 0, 64, 64 )
+region = Rect2( 1216, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 1344, 0, 64, 64 )
+region = Rect2( 1280, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 1152, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
-region = Rect2( 1216, 0, 64, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
-region = Rect2( 1280, 0, 64, 64 )
+region = Rect2( 1152, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
@@ -92,27 +92,27 @@ animations = [ {
 }, {
 "frames": [ SubResource( 4 ) ],
 "loop": true,
-"name": "stay",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 5 ) ],
-"loop": true,
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "stairsMove",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "landing",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 10 ) ],
 "loop": true,
-"name": "stairsStay",
+"name": "stay",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 11 ) ],
 "loop": true,
-"name": "stairsMove",
+"name": "stairsStay",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
@@ -166,7 +166,7 @@ one_shot = true
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 16 )
 animation = "stairsMove"
-frame = 1
+frame = 3
 playing = true
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
