@@ -38,7 +38,7 @@ func _ready():
 	$Music2.stop()
 	secondPlay=false
 	$Music.play()
-	#testModeOff()
+	testModeOff()
 	
 func testModeOff():
 	$StartView/VBoxContainer/level0.disabled
