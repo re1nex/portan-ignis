@@ -144,6 +144,7 @@ func finish_enabling():
 		$Area2D/CollisionShape2D.disabled = false
 	enabled = true
 	energy = energyMax
+	enable_in_process = false
 
 
 func mirror():
