@@ -132,8 +132,9 @@ health_at_start = 1
 position = Vector2( 920, 352 )
 health_at_start = 2
 
-[node name="IgnisRegularLevel6" parent="Ignises" instance=ExtResource( 6 )]
-position = Vector2( 760, 576 )
+[node name="IgnisHint" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 752, 576 )
+type = "hint"
 
 [node name="IgnisDoor" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 1472, 352 )
