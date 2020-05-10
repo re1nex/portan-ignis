@@ -137,7 +137,7 @@ text = "Be careful, the enemy set an ambush for you. Press F to deactivate your 
 [node name="Hint2" parent="Hints" instance=ExtResource( 17 )]
 position = Vector2( 1672, 472 )
 scale = Vector2( 0.25, 0.25 )
-text = "You have gathered box with magnifier. Use it to see farther, then your regular Ignis can light up. Rotate Light Sector by pressing V and B"
+text = "You have gathered box with magnifier. Use it to see farther, then your regular Ignis can light up. Rotate Light Sector by pressing V and B. Press 1 and 2 to switch Ignis modes"
 
 [node name="PauseMenu" parent="." instance=ExtResource( 10 )]
 
