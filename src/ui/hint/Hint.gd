@@ -30,6 +30,7 @@ func activate():
 	emit_signal("activate")
 	$TextureRect.visible=true
 	activated=true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func disactivate():
 	$TextureRect/Light2D.enabled=false
@@ -38,6 +39,7 @@ func disactivate():
 	emit_signal("disactivate")
 	$TextureRect.visible=false
 	activated=false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _on_TextureButton_pressed():
 	disactivate()
