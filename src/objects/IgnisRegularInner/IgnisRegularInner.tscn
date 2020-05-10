@@ -6,7 +6,7 @@
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_inner/Smoke.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 114.018
+radius = 211.399
 
 [sub_resource type="Curve" id=2]
 min_value = -360.0
@@ -71,7 +71,7 @@ color = Color( 0.803922, 0.14902, 0.14902, 1 )
 [node name="Light2D" type="Light2D"]
 scale = Vector2( 0.42, 0.42 )
 texture = ExtResource( 1 )
-texture_scale = 3.0
+texture_scale = 5.0
 color = Color( 0.909804, 0.596078, 0.101961, 1 )
 energy = 1.2
 range_layer_max = 1
@@ -85,8 +85,8 @@ __meta__ = {
 }
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( 0.766579, 3.8147e-06 )
-scale = Vector2( 11.6553, 11.6808 )
+position = Vector2( 2.86242, -1.57187 )
+scale = Vector2( 22.1345, 21.7932 )
 pause_animations = false
 freeze_bodies = false
 pause_particles = false
