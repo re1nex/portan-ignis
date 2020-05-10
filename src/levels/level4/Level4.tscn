@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/characters/enemy1/Enemy1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/level4/Level4Landscape.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/ui/inventory/Inventory.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/ui/visualHit/Hit.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/objects/fuel/fuel.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/ui/hint/Hint.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 24 )
@@ -75,12 +76,21 @@ health_at_start = 3
 position = Vector2( 1504, -272 )
 health_at_start = 1
 
+[node name="IgnisHint" parent="Ignises" instance=ExtResource( 5 )]
+position = Vector2( 168, 448 )
+type = "hint"
+
+[node name="IgnisHint2" parent="Ignises" instance=ExtResource( 5 )]
+position = Vector2( 1736, -64 )
+type = "hint"
+
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 128, 608 )
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 277, 395 )
 start_mode = 1
+run_speed = 120
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 1016, -120 )
@@ -116,6 +126,18 @@ position = Vector2( 368, -288 )
 
 [node name="Fuel" parent="Fuel" instance=ExtResource( 16 )]
 position = Vector2( 984, 800 )
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="Hint" parent="Hints" instance=ExtResource( 17 )]
+position = Vector2( 144, 976 )
+scale = Vector2( 0.25, 0.25 )
+text = "Be careful, the enemy set an ambush for you. Press F to deactivate your Ignis and run to the end of the room. Press F again before your Ignis lives run out to activate it. If Ignis lives are over, try to restore fire near activated torch by pressing R"
+
+[node name="Hint2" parent="Hints" instance=ExtResource( 17 )]
+position = Vector2( 1672, 472 )
+scale = Vector2( 0.25, 0.25 )
+text = "You have gathered box with magnifier. Use it to see farther, then your regular Ignis can light up. Rotate Light Sector by pressing V and B"
 
 [node name="PauseMenu" parent="." instance=ExtResource( 10 )]
 
@@ -160,5 +182,7 @@ shape = SubResource( 1 )
 [connection signal="hint_activate" from="Level4Landscape" to="." method="_on_Level4Landscape_hint_activate"]
 [connection signal="hint_disactivate" from="Level4Landscape" to="." method="_on_Level4Landscape_hint_disactivate"]
 [connection signal="die" from="Player" to="." method="_on_Player_die"]
+[connection signal="active" from="Ignises/IgnisHint" to="Hints/Hint" method="activate"]
+[connection signal="active" from="Ignises/IgnisHint2" to="Hints/Hint2" method="activate"]
 [connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
