@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/level2/Level2.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/ui/visualHit/Hit.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/objects/fuel/fuel.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 32 )
@@ -28,21 +29,18 @@ script = ExtResource( 2 )
 [node name="Level2Landscape" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 288, 148 )
+position = Vector2( 374, 148 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 640, 200 )
+position = Vector2( 720, 200 )
+glance_dir = -1
 
 [node name="Ignises" type="Node2D" parent="."]
 
 [node name="IgnisDoor" parent="Ignises" instance=ExtResource( 6 )]
-position = Vector2( 544, 232 )
+position = Vector2( 544, 224 )
 type = "column"
-health_at_start = 4
-
-[node name="IgnisDoor2" parent="Ignises" instance=ExtResource( 6 )]
-position = Vector2( 408, 160 )
-health_at_start = 4
+health_at_start = 3
 
 [node name="IgnisActivated" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 128, 160 )
@@ -53,6 +51,10 @@ position = Vector2( 1152, 96 )
 
 [node name="IgnisRegularLevel2" parent="Ignises" instance=ExtResource( 6 )]
 position = Vector2( 792, 256 )
+
+[node name="IgnisRegularLevel3" parent="Ignises" instance=ExtResource( 6 )]
+position = Vector2( 856, 176 )
+health_at_start = 1
 
 [node name="Death" type="Area2D" parent="."]
 position = Vector2( 736, 528 )
@@ -75,10 +77,12 @@ shape = SubResource( 2 )
 [node name="Hearts" type="Node2D" parent="."]
 
 [node name="Heart" parent="Hearts" instance=ExtResource( 11 )]
-position = Vector2( 1200, 80 )
-
-[node name="Heart2" parent="Hearts" instance=ExtResource( 11 )]
 position = Vector2( 472, 208 )
+
+[node name="Fuels" type="Node2D" parent="."]
+
+[node name="Fuel" parent="Fuels" instance=ExtResource( 13 )]
+position = Vector2( 1192, 80 )
 
 [node name="WinWindow" parent="." instance=ExtResource( 8 )]
 
