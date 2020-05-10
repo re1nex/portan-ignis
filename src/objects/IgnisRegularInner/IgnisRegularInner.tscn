@@ -100,10 +100,12 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="Smoke" type="Particles2D" parent="."]
+pause_mode = 2
 process_material = SubResource( 6 )
 texture = ExtResource( 4 )
 
 [node name="Flame" type="Particles2D" parent="."]
+pause_mode = 2
 amount = 32
 process_material = SubResource( 11 )
 texture = ExtResource( 2 )
