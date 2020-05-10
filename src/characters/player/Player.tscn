@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://resource/sprites/characters/player/player.png" type="Texture" id=1]
 [ext_resource path="res://src/characters/player/Player.gd" type="Script" id=2]
@@ -19,9 +19,7 @@
 [ext_resource path="res://resource/sounds/player/jump/jump2.wav" type="AudioStream" id=17]
 [ext_resource path="res://resource/sounds/player/jump/jump1.wav" type="AudioStream" id=18]
 [ext_resource path="res://resource/sounds/player/jump/jump3.wav" type="AudioStream" id=19]
-[ext_resource path="res://resource/sounds/player/jump/jump5.wav" type="AudioStream" id=20]
 [ext_resource path="res://resource/sounds/player/jump/jump4.wav" type="AudioStream" id=21]
-[ext_resource path="res://resource/sounds/player/jump/jump6.wav" type="AudioStream" id=22]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( 0, -12 )
@@ -166,6 +164,7 @@ one_shot = true
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 16 )
 animation = "stairsMove"
+frame = 2
 playing = true
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
@@ -184,9 +183,13 @@ one_shot = true
 stream = ExtResource( 13 )
 volume_db = -2.0
 
+[node name="AudioJump1" type="AudioStreamPlayer" parent="Audio/Jump"]
+stream = ExtResource( 18 )
+volume_db = -22.0
+
 [node name="AudioJump2" type="AudioStreamPlayer" parent="Audio/Jump"]
 stream = ExtResource( 17 )
-volume_db = -2.0
+volume_db = -18.0
 
 [node name="AudioJump3" type="AudioStreamPlayer" parent="Audio/Jump"]
 stream = ExtResource( 19 )
@@ -195,18 +198,6 @@ volume_db = -15.0
 [node name="AudioJump4" type="AudioStreamPlayer" parent="Audio/Jump"]
 stream = ExtResource( 21 )
 volume_db = -21.0
-
-[node name="AudioJump5" type="AudioStreamPlayer" parent="Audio/Jump"]
-stream = ExtResource( 20 )
-volume_db = -22.0
-
-[node name="AudioJump6" type="AudioStreamPlayer" parent="Audio/Jump"]
-stream = ExtResource( 22 )
-volume_db = -15.0
-
-[node name="AudioJump1" type="AudioStreamPlayer" parent="Audio/Jump"]
-stream = ExtResource( 18 )
-volume_db = -15.0
 
 [node name="Hit" type="Node2D" parent="Audio"]
 
