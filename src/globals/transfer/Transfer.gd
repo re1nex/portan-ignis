@@ -45,11 +45,11 @@ func set_default_level2_chars():
 		instruments.append(0)
 		
 	levels_passed = 0
-	ignis_health = GlobalVars.Ignis_state.LIFE_MAX
+	ignis_health = GlobalVars.Ignis_state.LIFE_3
 
 
 func set_default_level3_chars():
-	health = 4
+	health = 5
 	cur_ignis_num = 0
 	cur_ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
 	
@@ -61,7 +61,7 @@ func set_default_level3_chars():
 		instruments.append(0)
 		
 	levels_passed = 0
-	ignis_health = GlobalVars.Ignis_state.LIFE_MAX
+	ignis_health = GlobalVars.Ignis_state.LIFE_3
 
 
 func set_default_level4_chars():
