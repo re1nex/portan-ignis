@@ -7,15 +7,19 @@ signal not_active
 # var a = 2
 # var b = "text"
 const radius_multiplier = 1.5
+const energy_levels = [0, 0.70, 0.80, 0.90, 1.00] # default for ignis level
+const scale_levels = [0, 0.60, 0.75, 0.85, 1.00] # default for ignis level
+const default_health_if_activated = 4 # maximum
+const hint_delay_time = 0.25
 
-export (String, "simple", "column", "post") var type
-export (bool) var activated_at_start = false
+export (String, "simple", "column", "post", "hint") var type
 var body_informator = null
-var activated = false
+var health
+export (int, "0", "1", "2", "3", "4") var health_at_start = 0
 
 
 func _init():
-	activated = false
+	health = GlobalVars.Ignis_state.OFF
 # Called when the node enters the scene tree for the first time.
 
 
@@ -27,40 +31,55 @@ func _ready():
 	elif type == "post":
 		$TorchSprite.hide()
 		$PostSprite.show()
+	elif type == "hint":
+		$TorchSprite.hide()
+		$HintSprite.show()
 	
 	$Light2D.init_radius(radius_multiplier)
-	if activated_at_start:
-		activated = true
-		$AudioLoop.play()
-		$Light2D.enable()
-		emit_signal("active")
+	$Light2D.set_health_params(scale_levels, energy_levels)
+	if health_at_start != 0:
+		activate_at_start()
 	else:
-		activated = false
+		health = GlobalVars.Ignis_state.OFF
+		collision_layer = 1 << 3
 		$Light2D.disable()
 		emit_signal("not_active")
 	pass # Replace with function body.
 
 
 func activate_at_start():
-	activated = true
+	if health == GlobalVars.Ignis_state.LIFE_MAX: # already activated
+		return
+	if health_at_start == 0:
+		health_at_start = default_health_if_activated
+	collision_layer = 1 << 6
+	health = health_at_start
+	$AudioLoop.play()
+	$Light2D.reload(health)
 	$Light2D.enable()
 	emit_signal("active")
 
 
 func activate():
-	if activated:
+	if health != GlobalVars.Ignis_state.OFF:
+		collision_layer = 1 << 3
 		$AudioLoop.stop()
 		$AudioOff.play()
 		$Light2D.disable()
-		activated = false
+		health = GlobalVars.Ignis_state.OFF
 		emit_signal("not_active")
-	else:
-		if body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
-			$AudioOff.stop()
-			$AudioOn.play()
-			$AudioLoop.play()
-			activated = true
-			$Light2D.enable()
+	elif body_informator != null and body_informator.ignis_status == GlobalVars.Is_ignis.HAS_IGNIS:
+		collision_layer = 1 << 6
+		$AudioOff.stop()
+		$AudioOn.play()
+		$AudioLoop.play()
+		health = body_informator.ignis_health
+		$Light2D.reload(body_informator.ignis_health)
+		$Light2D.enable()
+		if type == "hint":
+			$HintTimer.set_wait_time(hint_delay_time)
+			$HintTimer.start()
+		else:
 			emit_signal("active")
 
 
@@ -75,3 +94,26 @@ func _on_IgnisRegularLevel_body_exited(body):
 		if body.get_informator() == body_informator:
 			body_informator = null
 	pass # Replace with function body.
+
+
+func hit():
+	var need_switch_off = (max(min(health, health - 1), 0) == 0 and health != 0)
+	$Light2D.hit()
+	if health != $Light2D.health and $Light2D.health == GlobalVars.Ignis_state.OFF:
+		activate()
+	health = $Light2D.health
+
+
+func reload(arg):
+	var need_activate = (min(health, arg) == 0 and max(health, arg) != 0)
+	if need_activate:
+		activate()
+	elif health != arg:
+		$Light2D.reload(arg)
+		health = $Light2D.health
+		$AudioOn.play()
+
+
+func _on_HintTimer_timeout():
+	emit_signal("active")
+	$HintTimer.stop()

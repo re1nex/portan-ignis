@@ -15,3 +15,11 @@ enum Is_ignis {
 		HIDE_IGNIS,
 		NO_IGNIS,
 }
+
+enum Ignis_state {
+		OFF,
+		LIFE_1,
+		LIFE_2,
+		LIFE_3,
+		LIFE_MAX,
+}

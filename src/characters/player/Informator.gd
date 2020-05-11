@@ -7,6 +7,7 @@ var has_instruments = []
 var num_of_active_weapon = - 1 # -1 - nothing is active
 var ignis_timer_start
 var health 
+var ignis_health
 
 
 func _ready():
@@ -19,5 +20,6 @@ func _ready():
 	ignis_status = Transfer.cur_ignis_status
 	ignis_timer_start = get_parent().life_time_of_ignis
 	health = Transfer.health
+	ignis_health = Transfer.ignis_health
 	
 	pass

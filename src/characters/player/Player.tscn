@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://resource/sprites/characters/player/player.png" type="Texture" id=1]
 [ext_resource path="res://src/characters/player/Player.gd" type="Script" id=2]
@@ -12,13 +12,18 @@
 [ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell5.wav" type="AudioStream" id=10]
 [ext_resource path="res://resource/sounds/monster/pack/Voice Effects Zombie-Skeleton-Monster Human Male/humanYell3.wav" type="AudioStream" id=11]
 [ext_resource path="res://resource/sounds/player/landing.wav" type="AudioStream" id=12]
-[ext_resource path="res://resource/sounds/player/jump.wav" type="AudioStream" id=13]
+[ext_resource path="res://resource/sounds/player/jump/jump0.wav" type="AudioStream" id=13]
 [ext_resource path="res://resource/sounds/player/stairs.wav" type="AudioStream" id=14]
 [ext_resource path="res://resource/sounds/ignis/IgnisOn.wav" type="AudioStream" id=15]
 [ext_resource path="res://resource/sounds/objects/pickUpSound.wav" type="AudioStream" id=16]
+[ext_resource path="res://resource/sounds/player/jump/jump2.wav" type="AudioStream" id=17]
+[ext_resource path="res://resource/sounds/player/jump/jump1.wav" type="AudioStream" id=18]
+[ext_resource path="res://resource/sounds/player/jump/jump3.wav" type="AudioStream" id=19]
+[ext_resource path="res://resource/sounds/player/jump/jump4.wav" type="AudioStream" id=21]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 14.8201
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( 0, -12 )
+b = Vector2( 0, 12 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -30,62 +35,92 @@ region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 448, 0, 64, 64 )
+region = Rect2( 1344, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 1152, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 64 )
+region = Rect2( 1216, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 64 )
+region = Rect2( 1280, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 448, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 1152, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ) ],
 "loop": false,
 "name": "jump",
 "speed": 15.0
 }, {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "stairsMove",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ) ],
 "loop": true,
 "name": "landing",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ) ],
+"frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 10 ) ],
+"frames": [ SubResource( 14 ) ],
 "loop": true,
 "name": "stay",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 15 ) ],
+"loop": true,
+"name": "stairsStay",
+"speed": 5.0
 } ]
 
-[sub_resource type="ConvexPolygonShape2D" id=12]
-points = PoolVector2Array( -10, 1, 0, -6, 10.1, 1, 10.1, 7, 10.1, 18, 0, 18, -4, 18, -10, 8, -10, 8 )
+[sub_resource type="ConvexPolygonShape2D" id=17]
+points = PoolVector2Array( -10, 1, 0, -6, 10.1, 1, 10.1, 7, 10.1, 18, 0, 18, -10, 18, -10, 8, -10, 8 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 6
@@ -119,72 +154,104 @@ one_shot = true
 [node name="IgnisPosition" type="Position2D" parent="."]
 position = Vector2( 9.67478, -4.19816 )
 
+[node name="IgnisPositionOnStairs" type="Position2D" parent="."]
+position = Vector2( 1.07198, 0.918843 )
+
 [node name="TimerHit" type="Timer" parent="."]
 one_shot = true
 
 [node name="AnimatedSprite1" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 11 )
-animation = "landing"
+frames = SubResource( 16 )
+animation = "stairsMove"
+frame = 2
 playing = true
 
 [node name="CharacterShape" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0418178, -5.98959 )
-shape = SubResource( 12 )
+shape = SubResource( 17 )
 one_way_collision_margin = 0.0
 
 [node name="TimerLanding" type="Timer" parent="."]
 one_shot = true
 
-[node name="AudioIngisLoop" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -7.0
+[node name="Audio" type="Node2D" parent="."]
 
-[node name="AudioIngisOff" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -7.0
+[node name="Jump" type="Node2D" parent="Audio"]
 
-[node name="AudioStep" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-
-[node name="AudioHit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-
-[node name="AudioHit2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-
-[node name="AudioHit3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 11 )
-
-[node name="AudioHit4" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-
-[node name="AudioHit5" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-
-[node name="AudioLanding" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
-volume_db = -13.5
-pitch_scale = 2.0
-
-[node name="AudioJump" type="AudioStreamPlayer" parent="."]
+[node name="AudioJump0" type="AudioStreamPlayer" parent="Audio/Jump"]
 stream = ExtResource( 13 )
 volume_db = -2.0
 
-[node name="AudioStairs" type="AudioStreamPlayer" parent="."]
+[node name="AudioJump1" type="AudioStreamPlayer" parent="Audio/Jump"]
+stream = ExtResource( 18 )
+volume_db = -22.0
+
+[node name="AudioJump2" type="AudioStreamPlayer" parent="Audio/Jump"]
+stream = ExtResource( 17 )
+volume_db = -18.0
+
+[node name="AudioJump3" type="AudioStreamPlayer" parent="Audio/Jump"]
+stream = ExtResource( 19 )
+volume_db = -15.0
+
+[node name="AudioJump4" type="AudioStreamPlayer" parent="Audio/Jump"]
+stream = ExtResource( 21 )
+volume_db = -21.0
+
+[node name="Hit" type="Node2D" parent="Audio"]
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="Audio/Hit"]
+stream = ExtResource( 9 )
+
+[node name="AudioHit2" type="AudioStreamPlayer" parent="Audio/Hit"]
+stream = ExtResource( 7 )
+
+[node name="AudioHit3" type="AudioStreamPlayer" parent="Audio/Hit"]
+stream = ExtResource( 11 )
+
+[node name="AudioHit4" type="AudioStreamPlayer" parent="Audio/Hit"]
+stream = ExtResource( 8 )
+
+[node name="AudioHit5" type="AudioStreamPlayer" parent="Audio/Hit"]
+stream = ExtResource( 10 )
+
+[node name="Move" type="Node2D" parent="Audio"]
+
+[node name="AudioStairs" type="AudioStreamPlayer" parent="Audio/Move"]
 stream = ExtResource( 14 )
 volume_db = -1.0
 pitch_scale = 2.0
 
-[node name="AudioIgnisSwitch" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 16 )
+[node name="AudioStep" type="AudioStreamPlayer" parent="Audio/Move"]
+stream = ExtResource( 5 )
 
-[node name="AudioPickUp" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 16 )
-volume_db = 5.0
+[node name="AudioLanding" type="AudioStreamPlayer" parent="Audio/Move"]
+stream = ExtResource( 12 )
+volume_db = -13.5
+pitch_scale = 2.0
 
-[node name="AudioIgnisOn" type="AudioStreamPlayer" parent="."]
+[node name="Ignis" type="Node2D" parent="Audio"]
+
+[node name="AudioIgnisOn" type="AudioStreamPlayer" parent="Audio/Ignis"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+
+[node name="AudioIgnisSwitch" type="AudioStreamPlayer" parent="Audio/Ignis"]
+stream = ExtResource( 16 )
+
+[node name="AudioIngisOff" type="AudioStreamPlayer" parent="Audio/Ignis"]
+stream = ExtResource( 3 )
+volume_db = -7.0
+
+[node name="AudioIngisLoop" type="AudioStreamPlayer" parent="Audio/Ignis"]
+stream = ExtResource( 4 )
+volume_db = -7.0
+
+[node name="Other" type="Node2D" parent="Audio"]
+
+[node name="AudioPickUp" type="AudioStreamPlayer" parent="Audio/Other"]
+stream = ExtResource( 16 )
+volume_db = 5.0
 [connection signal="area_entered" from="Area" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area" to="." method="_on_Area2D_area_exited"]

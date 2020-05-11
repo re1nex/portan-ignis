@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/level0/Level0.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/ui/winWindow/WinWindow.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/characters/enemy2/Enemy2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/ui/visualHit/Hit.tscn" type="PackedScene" id=10]
 
 [node name="Level0" type="Node2D"]
 script = ExtResource( 2 )
@@ -32,3 +33,7 @@ position = Vector2( 1004.49, 634.459 )
 [node name="Inventory" parent="." instance=ExtResource( 5 )]
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+
+[node name="Hit" parent="." instance=ExtResource( 10 )]
+[connection signal="hint_activate" from="Level0Landscape" to="." method="_on_Level0Landscape_hint_activate"]
+[connection signal="hint_disactivate" from="Level0Landscape" to="." method="_on_Level0Landscape_hint_disactivate"]

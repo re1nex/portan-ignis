@@ -7,6 +7,7 @@ signal health_changed
 signal torch_changed
 signal torch_reloaded
 signal torch_hidden
+signal got_hit
 
 class_name Player
 
@@ -27,7 +28,7 @@ export (float) var scale_x = 1
 export (float) var scale_y = 1
 
 export (float) var recharge_coef = 1.5
-export (float) var life_time_of_ignis = 3
+export (float) var life_time_of_ignis = 1 # for each life of ignis
 export (float) var hit_time = 1
 
 export (float) var dead_zone = 0.2
@@ -53,6 +54,7 @@ var direction = 1 # -1 - left; 1 - right
 var ignis_direction = 1 # -1 - left; 1 - right
 var sprite
 var floor_vel = Vector2()
+var is_on_platform = true
 
 var endLevel=false
 var on_stairs = 0
@@ -85,16 +87,27 @@ func _ready():
 
 func HitPlay(num):
 	if(num == 1):
-		$AudioHit.play()
+		$Audio/Hit/AudioHit.play()
 	elif(num ==2):
-		$AudioHit2.play()
+		$Audio/Hit/AudioHit2.play()
 	elif(num ==3):
-		$AudioHit3.play()
+		$Audio/Hit/AudioHit3.play()
 	elif(num ==4):
-		$AudioHit4.play()
+		$Audio/Hit/AudioHit4.play()
 	elif(num ==5):
-		$AudioHit5.play()
+		$Audio/Hit/AudioHit5.play()
 
+func jump_play(num):
+	if(num == 0):
+		$Audio/Jump/AudioJump0.play()
+	elif(num ==1):
+		$Audio/Jump/AudioJump1.play()
+	elif(num ==2):
+		$Audio/Jump/AudioJump2.play()
+	elif(num ==3):
+		$Audio/Jump/AudioJump3.play()
+	elif(num ==4):
+		$Audio/Jump/AudioJump4.play()
 
 
 
@@ -118,7 +131,7 @@ func _process(delta):
 			on_player_area_node.disactivate()
 			
 	
-	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "activated" in on_player_area_node:
+	if Input.is_action_just_pressed("ui_recharge") and in_node_area and "health" in on_player_area_node:
 		recharge()
 	
 	control_weapons()
@@ -126,7 +139,6 @@ func _process(delta):
 	update_ignis_timer_start(delta)
 	
 	check_rotate_ignis(delta)
-	
 
 func goAway():
 	var i=0
@@ -138,34 +150,42 @@ func _physics_process(delta):
 	### MOVEMENT ###
 	# Apply gravity
 	linear_vel += delta * gravity_vec
+	
 	# Move and slide
 	changeIgnis = false
-	var snap =  Vector2.DOWN * 15 if !jumping else Vector2.ZERO
+	var snap =  Vector2.DOWN * 15 if !jumping and on_stairs == 0 else Vector2.ZERO
 	linear_vel = move_and_slide_with_snap(linear_vel, snap, FLOOR_NORMAL)
+	
+	var obj = null #get_slide_collision(0)
+	if get_slide_count() != 0:
+		obj = get_slide_collision(0)
+		if obj and obj.collider.get_name() == "Platform":
+			is_on_platform = true
+		else:
+			is_on_platform = false
 	# Detect if we are on floor - only works if called *after* move_and_slide
 	var on_floor = is_on_floor()
-	
+	if not is_on_platform:
+		floor_vel = Vector2.ZERO
 	if on_floor:
 		height=0
 	### CONTROL ###
 
 	# Horizontal movement
 	var target_speed = 0
-	if Input.is_action_pressed("ui_left")&&!blockPlayer:
+	if Input.is_action_pressed("ui_left") and not blockPlayer:
 		target_speed -= 1
-		#if(!$AudioStep.playing &&on_floor):$AudioStep.play()
 		if not Input.is_action_pressed("ui_right") and direction == 1:
 			direction = -1
 			sprite.flip_h = true
 			$CharacterShape.scale.x *= -1
 			if $Informator.num_of_active_weapon != -1:
 				update_ignis()
-
+				
 	
-	if Input.is_action_pressed("ui_right")||blockPlayer:
+	if Input.is_action_pressed("ui_right") || blockPlayer:
 		target_speed += 1
-		#if(!$AudioStep.playing&&on_floor):$AudioStep.play()
-		if not Input.is_action_pressed("ui_left") and direction == -1 &&!blockPlayer:
+		if not Input.is_action_pressed("ui_left") and direction == -1 and not blockPlayer:
 			direction = 1
 			sprite.flip_h = false
 			$CharacterShape.scale.x *= -1
@@ -173,78 +193,80 @@ func _physics_process(delta):
 				update_ignis()
 	
 	target_speed *= walk_speed
+	linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
 	
+	# VERTICAL MOVEMENT
 	
-	
-	
-	
-	if on_floor:
-		linear_vel.x = lerp(linear_vel.x, target_speed, inertia)
-		if sprite.animation == "fall":
-			sprite.animation = "landing"
-			$AudioLanding.play()
-			
-			$TimerLanding.set_wait_time(landing_time)
-			$TimerLanding.start()
-		if $TimerLanding.is_stopped():
-			if abs(linear_vel.x) > SMALL_TWITCHING:
-				sprite.animation = "walk"
-			else:
-				sprite.animation = "stay"
-	else:
-		linear_vel.x = target_speed
-		linear_vel.x += floor_vel.x
-		if linear_vel.y < 0:
-			sprite.animation = "jump"
-			pass
-		elif linear_vel.y > 0:
-			sprite.animation = "fall"
-			
-	
-	
-	if sprite.animation == "walk" and (sprite.get_frame() == 0 or sprite.get_frame() == 2) and not $AudioStep.playing:
-		$AudioStep.play()
-	# Jumping
-	#if is_on_ceiling():
-		#linear_vel.y = 0
-		#jumping = false
-
+	# STAIRS
 	if on_stairs > 0:
-		linear_vel.y = 0
-		if Input.is_action_pressed("ui_up"):
-			position.y -= walk_speed * delta
-			sprite.animation = "jump"
-			sprite.set_frame(1)
-			if not $AudioStairs.playing:
-				$AudioStairs.play()
+		var target_speed_y = 0
+		if Input.is_action_pressed("ui_up") and not is_on_ceiling():
+			target_speed_y = - walk_speed
+			
 		elif Input.is_action_pressed("ui_down") and not on_floor:
-			position.y += walk_speed * delta
-			sprite.animation = "fall"
-			if not $AudioStairs.playing:
-				$AudioStairs.play()
+			target_speed_y = walk_speed
+			
+		
+		linear_vel.y = lerp(linear_vel.y, target_speed_y, 1)
+		
+		if abs(linear_vel.y) > 0:
+			sprite.animation = "stairsMove"
+			if not $Audio/Move/AudioStairs.playing:
+				$Audio/Move/AudioStairs.play()
 		else:
-			sprite.animation = "stay"
-			if $AudioStairs.playing:
-				$AudioStairs.stop()
-		
+			sprite.animation = "stairsStay"
+			if $Audio/Move/AudioStairs.playing:
+				$Audio/Move/AudioStairs.stop()
+	
+	# NOT STAIRS
 	else:
-		if $AudioStairs.playing:
-			$AudioStairs.stop()
+		#ON FLOOR
+		if on_floor:
+			#LANDING
+			if sprite.animation == "fall":
+				sprite.animation = "landing"
+				$Audio/Move/AudioLanding.play()
 				
-		if on_floor and Input.is_action_pressed("jump")&&!blockPlayer:
-			floor_vel = get_floor_velocity()
-			linear_vel.y = -jump_speed
-			height -= linear_vel.y * delta
-			jumping = true
-			sprite.animation = "jump"
-			$AudioJump.play()
-		
-		elif jumping==true &&!blockPlayer:
-			if Input.is_action_pressed("jump") and height < jump_height_limit:
+				$TimerLanding.set_wait_time(landing_time)
+				$TimerLanding.start()
+			#WALK AFTER LANDING
+			elif $TimerLanding.is_stopped():
+				if abs(linear_vel.x) > SMALL_TWITCHING:
+					sprite.animation = "walk"
+					if (sprite.get_frame() == 0 or sprite.get_frame() == 2) and not $Audio/Move/AudioStep.playing:
+						$Audio/Move/AudioStep.play()
+				
+				else:
+					sprite.animation = "stay"
+			#JUMP
+			if Input.is_action_pressed("jump") and not blockPlayer:
+				if is_on_platform:
+					floor_vel = get_floor_velocity()
+				else:
+					floor_vel = Vector2.ZERO
 				linear_vel.y = -jump_speed
 				height -= linear_vel.y * delta
-			else:
-				jumping=false
+				jumping = true
+				sprite.animation = "jump"
+				jump_play(randi()%5)
+		
+		#JUMPING
+		else:
+			if jumping==true and not blockPlayer:
+				if Input.is_action_pressed("jump") and height < jump_height_limit:
+					linear_vel.y = -jump_speed
+					height -= linear_vel.y * delta
+				else:
+					jumping=false
+					
+			linear_vel.x += floor_vel.x
+			if linear_vel.y < 0:
+				sprite.animation = "jump"
+				pass
+			elif linear_vel.y > 0:
+				sprite.animation = "fall"
+
+
 
 
 func _on_Area2D_area_entered(area):
@@ -252,10 +274,12 @@ func _on_Area2D_area_entered(area):
 		on_player_area_node = area;
 		in_node_area = true
 	elif area.get_class() == "Stairs":
-		jumping = true
 		if on_stairs == 0:
 			linear_vel.y = 0
 			gravity_vec.y = 0
+			floor_vel = Vector2.ZERO
+			ignis_pos = $IgnisPositionOnStairs.get_position()
+			update_ignis()
 		on_stairs += 1
 	pass # Replace with function body.
 
@@ -268,7 +292,12 @@ func _on_Area2D_area_exited(area):
 	elif area.get_class() == "Stairs":
 		on_stairs -= 1
 		if on_stairs == 0:
+			linear_vel.y = 0
 			gravity_vec.y = GRAVITY
+			if $Audio/Move/AudioStairs.playing:
+				$Audio/Move/AudioStairs.stop()
+			ignis_pos = $IgnisPosition.get_position()
+			update_ignis()
 	pass # Replace with function body.
 
 
@@ -279,19 +308,19 @@ func _on_IgnisRegularOuter_ignis_regular_taken(type):
 	if type == GlobalVars.Ignis_type.REGULAR :
 		$Informator.has_weapons[GlobalVars.Ignis_type.REGULAR] = true
 		turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
-		$AudioIgnisOn.play()
+		$Audio/Ignis/AudioIgnisOn.play()
 		#switch_sprites($iconWithIgnis)
 	
 	if type == GlobalVars.Ignis_type.SECTOR:
 		$Informator.has_weapons[GlobalVars.Ignis_type.SECTOR] = true
 		turn_on_ignis(GlobalVars.Ignis_type.SECTOR)
-		$AudioPickUp.play()
+		$Audio/Other/AudioPickUp.play()
 		#switch_sprites($iconWithIgnis)
 	
 	if type == GlobalVars.Ignis_type.LONG_SECTOR:
 		$Informator.has_weapons[GlobalVars.Ignis_type.LONG_SECTOR] = true
 		turn_on_ignis(GlobalVars.Ignis_type.LONG_SECTOR)
-		$AudioPickUp.play()
+		$Audio/Other/AudioPickUp.play()
 	pass # Replace with function body.
 
 func get_informator():
@@ -353,8 +382,8 @@ func turn_off_ignis():
 	$Informator.ignis_status = GlobalVars.Is_ignis.HIDE_IGNIS
 	#$Informator.num_of_active_weapon = -1
 	if(!changeIgnis):
-		$AudioIngisLoop.stop()
-		$AudioIngisOff.play()
+		$Audio/Ignis/AudioIngisLoop.stop()
+		$Audio/Ignis/AudioIngisOff.play()
 	turn_on_ignis_timer()
 	emit_signal("torch_hidden")
 
@@ -364,9 +393,10 @@ func turn_on_ignis(num):
 	$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
 	$Informator.num_of_active_weapon = num
 	if(!changeIgnis):
-		$AudioIngisOff.stop()
-		$AudioIngisLoop.play()
+		$Audio/Ignis/AudioIngisOff.stop()
+		$Audio/Ignis/AudioIngisLoop.play()
 	update_ignis()
+	weapons[num].reload($Informator.ignis_health)
 	weapons[num].enable()
 	emit_signal("torch_changed")
 
@@ -378,7 +408,13 @@ func turn_off_ignis_time():
 	$TimerIgnis.stop()
 
 func _on_Timer_timeout():
-	$Informator.ignis_status = GlobalVars.Is_ignis.NO_IGNIS
+	if $Informator.ignis_health != GlobalVars.Ignis_state.OFF:
+		$Informator.ignis_health -= 1
+	if $Informator.ignis_health != GlobalVars.Ignis_state.OFF:
+		$TimerIgnis.set_wait_time(life_time_of_ignis)
+		$TimerIgnis.start()
+	else:
+		$Informator.ignis_status = GlobalVars.Is_ignis.NO_IGNIS
 
 
 func fill_weapons():
@@ -389,11 +425,13 @@ func fill_weapons():
 	weapons[GlobalVars.Ignis_type.REGULAR].disable()
 	
 	node = preload("res://src/objects/IgnisSectorInner/IgnisSectorInner.tscn").instance()
+	node.priority = 2
 	weapons[GlobalVars.Ignis_type.SECTOR] = node
 	add_child(weapons[GlobalVars.Ignis_type.SECTOR])
 	weapons[GlobalVars.Ignis_type.SECTOR].disable()
 	
 	node = preload("res://src/objects/IgnisLongSectorInner/IgnisLongSectorInner.tscn").instance()
+	node.priority = 2
 	weapons[GlobalVars.Ignis_type.LONG_SECTOR] = node
 	add_child(weapons[GlobalVars.Ignis_type.LONG_SECTOR])
 	weapons[GlobalVars.Ignis_type.LONG_SECTOR].disable()
@@ -421,16 +459,21 @@ func update_ignis_timer_start(delta):
 
 
 func recharge():
-	if on_player_area_node.activated and $Informator.ignis_status != GlobalVars.Is_ignis.HAS_IGNIS:
+	if $Informator.ignis_health != on_player_area_node.health:
 		if not $TimerIgnis.is_stopped():
 			turn_off_ignis_time()
 		$Informator.ignis_timer_start = life_time_of_ignis
 		$Informator.ignis_status = GlobalVars.Is_ignis.HAS_IGNIS
+		var max_health = max($Informator.ignis_health, on_player_area_node.health)
+		if $Informator.ignis_health != max_health:
+			$Informator.ignis_health = max_health
+			turn_on_ignis($Informator.num_of_active_weapon)
+			$Audio/Ignis/AudioIgnisOn.play()
+		if on_player_area_node.health != max_health:
+			on_player_area_node.reload(max_health)
 		#if $Informator.has_weapons[GlobalVars.Ignis_type.REGULAR]:
 			#turn_on_ignis(GlobalVars.Ignis_type.REGULAR)
 			#switch_sprites($iconWithIgnis)
-		turn_on_ignis($Informator.num_of_active_weapon)
-		$AudioIgnisOn.play()
 		emit_signal("torch_reloaded")
 
 
@@ -464,7 +507,8 @@ func check_rotate_ignis(delta):
 			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
 
 func update_ignis():
-	ignis_pos.x = direction * $IgnisPosition.position.x
+	if ignis_pos.x * direction < 0:
+		ignis_pos.x *= -1
 
 	for i in range(WEAPONS_NUM):
 		weapons[i].set_position(ignis_pos)
@@ -485,11 +529,14 @@ func hit():
 		HitPlay(randi()%5+1)
 		$Informator.health -= 1
 		emit_signal("health_changed")
+		emit_signal("got_hit")
 		if $Informator.health == 0:
 			emit_signal("die")
 			
 		if $Informator.ignis_status==GlobalVars.Is_ignis.HAS_IGNIS:
 			$Informator.ignis_timer_start-= life_time_of_ignis / 4
+			$Informator.ignis_health = max(0, $Informator.ignis_health - 1)
+			weapons[$Informator.num_of_active_weapon].hit()
 			emit_signal("torch_hit")
 		turn_on_hit_timer()
 	pass
@@ -502,13 +549,13 @@ func switch_weapons(type):
 			changeIgnis=true
 			turn_off_ignis()
 		turn_on_ignis(type)
-		$AudioIgnisSwitch.play()
+		$Audio/Ignis/AudioIgnisSwitch.play()
 		emit_signal("torch_changed")
 
 
 func _on_Lever_lever_taken():
 	$Informator.has_instruments[GlobalVars.Instruments_type.LEVER] += 1
-	$AudioPickUp.play()
+	$Audio/Other/AudioPickUp.play()
 	pass # Replace with function body.
 
 func after_die():
@@ -521,11 +568,21 @@ func after_die():
 
 func take_heart():
 	if $Informator.health < MAX_HEALTH:
-		$AudioPickUp.play()
+		$Audio/Other/AudioPickUp.play()
 		$Informator.health += 1
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart
 	return false # heart not taken --> can't free heart
+
+
+func take_fuel():
+	if $Informator.ignis_health < GlobalVars.Ignis_state.LIFE_MAX:
+		$Audio/Other/AudioPickUp.play()
+		$Informator.ignis_health += 1
+		turn_on_ignis($Informator.num_of_active_weapon)
+		emit_signal("torch_reloaded")
+		return true # fuel taken --> can free fuel
+	return false # fuel not taken --> can't free fuel
 
 
 func highway_to_hell(delta):

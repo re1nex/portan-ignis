@@ -7,28 +7,19 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	$Player.prepare_camera($Level3Landscape.posLU, $Level3Landscape.posRD)
+	connect("falls", self, "_on_Player_die")
+	$Player.connect("die", self, "_on_Player_die")
 	
-	$Ignises/IgnisDoor.connect("active", $Level3Landscape/Doors/Door3, "_on_IgnisRegularLevel_active")
-	$Ignises/IgnisDoor.connect("not_active", $Level3Landscape/Doors/Door3, "_on_IgnisRegularLevel_not_active")
-	
-	$Ignises/IgnisDoor2.connect("active", $Level3Landscape/Doors/Door2, "_on_IgnisRegularLevel_active")
-	$Ignises/IgnisDoor2.connect("not_active", $Level3Landscape/Doors/Door2, "_on_IgnisRegularLevel_not_active")
-
-	$Objects/Mechanism.connect("active", $Level3Landscape/Doors/Door4, "_on_Mechanism_active")
-	$Objects/Mechanism.connect("not_active", $Level3Landscape/Doors/Door4, "_on_Mechanism_not_active")
-	
+	$Ignises/IgnisDoor.connect("active", $Level3Landscape/Doors/Door2, "_on_IgnisRegularLevel_active")
+	$Ignises/IgnisDoor.connect("not_active", $Level3Landscape/Doors/Door2, "_on_IgnisRegularLevel_not_active")
+	$Ignises/IgnisDoor.activate_at_start()
 	$Ignises/IgnisActivated.activate_at_start()
-	$Ignises/IgnisActivated2.activate_at_start()
 	
-	$Objects/Lever.connect("lever_taken", $Player, "_on_Lever_lever_taken")
-	
-	$WinWindow/CenterContainer.hide()
 	$HUD/HUD.init_player($Player)
-	$WindowGameOver/CenterContainer.hide()
+	$Hit.init_player($Player)
 	$Inventory.set_player($Player)
 	$Player.new_lvl()
 	MusicController.playMusic(true)
-
 
 
 func _on_Player_die():
@@ -41,16 +32,31 @@ func _on_Player_die():
 	MusicController.playMusic(false)
 
 
+func _on_Death_body_entered(body):
+	if body.has_method("get_informator"):
+		emit_signal("falls")
+	elif body.has_method("check_chase"):
+		$Enemy.queue_free()
+
+
 func _on_Win_body_entered(body):
 	if body.has_method("get_informator"):
 		$PauseMenu.set_process_input(false)
 		$Inventory.set_process_input(false)
+		MusicController.playMusic(false)
 		$WinWindow.show()
 		$Player.goAway()
-		MusicController.playMusic(false)
 		Transfer.copy_chars($Player)
 
 
 func _on_End_body_entered(body):
 	if body.has_method("get_informator"):
 		$Player.endLevel=true
+
+
+func _on_Level2Landscape_hint_activate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_Level2Landscape_hint_disactivate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

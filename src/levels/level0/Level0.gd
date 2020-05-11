@@ -10,6 +10,7 @@ func _ready():
 	$Level0Landscape.connect("level_complete", self, "complete")
 	$WinWindow/CenterContainer.hide()
 	$Menu/HUD.init_player($Player)
+	$Hit.init_player($Player)
 	$Inventory.set_player($Player)
 	$WindowGameOver/CenterContainer.hide()
 	$Player.hit()
@@ -38,3 +39,11 @@ func complete():
 
 func _on_Level0Landscape_player_stop():
 	$Player.endLevel=true
+
+
+func _on_Level0Landscape_hint_disactivate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
+func _on_Level0Landscape_hint_activate():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
