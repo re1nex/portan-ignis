@@ -2,17 +2,17 @@
 
 [ext_resource path="res://resource/ui/windows/background2.png" type="Texture" id=1]
 [ext_resource path="res://src/ui/winWindow/WinWindow.gd" type="Script" id=2]
-[ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://resource/ui/17383.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resource/sounds/clicks/2.wav" type="AudioStream" id=5]
 [ext_resource path="res://resource/sounds/situation/win1.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 100
+size = 80
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 70
+size = 50
 font_data = ExtResource( 3 )
 
 [node name="WinWindow" type="CanvasLayer"]
@@ -20,7 +20,6 @@ pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-visible = false
 light_mask = 2
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -35,16 +34,16 @@ scale = Vector2( 1, 0.8 )
 texture = ExtResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 382.0
-margin_top = 236.0
-margin_right = 897.0
-margin_bottom = 483.0
+margin_left = 401.0
+margin_top = 251.0
+margin_right = 878.0
+margin_bottom = 468.0
 custom_constants/separation = 15
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 light_mask = 2
-margin_right = 515.0
-margin_bottom = 85.0
+margin_right = 477.0
+margin_bottom = 77.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.854902, 0.690196, 0.45098, 1 )
 text = "level complete"
@@ -55,10 +54,10 @@ __meta__ = {
 
 [node name="NextLvl" type="Button" parent="CenterContainer/VBoxContainer"]
 light_mask = 2
-margin_left = 118.0
-margin_top = 100.0
-margin_right = 396.0
-margin_bottom = 166.0
+margin_left = 128.0
+margin_top = 92.0
+margin_right = 348.0
+margin_bottom = 147.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -80,10 +79,10 @@ range_item_cull_mask = 4
 
 [node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
 light_mask = 2
-margin_left = 97.0
-margin_top = 181.0
-margin_right = 417.0
-margin_bottom = 247.0
+margin_left = 98.0
+margin_top = 162.0
+margin_right = 378.0
+margin_bottom = 217.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
