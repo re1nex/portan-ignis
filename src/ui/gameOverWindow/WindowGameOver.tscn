@@ -2,17 +2,17 @@
 
 [ext_resource path="res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resource/ui/windows/background.png" type="Texture" id=2]
-[ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://resource/ui/17383.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.gd" type="Script" id=4]
 [ext_resource path="res://resource/sounds/clicks/2.wav" type="AudioStream" id=5]
 [ext_resource path="res://resource/sounds/situation/gameover1.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 110
+size = 90
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 80
+size = 60
 font_data = ExtResource( 3 )
 
 [node name="WindowGameOver" type="CanvasLayer"]
@@ -38,15 +38,15 @@ scale = Vector2( 1, 0.8 )
 texture = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 457.0
-margin_top = 235.0
-margin_right = 823.0
-margin_bottom = 485.0
+margin_left = 473.0
+margin_top = 248.0
+margin_right = 807.0
+margin_bottom = 471.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 light_mask = 2
-margin_right = 366.0
-margin_bottom = 94.0
+margin_right = 334.0
+margin_bottom = 87.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
@@ -59,10 +59,10 @@ __meta__ = {
 
 [node name="Restart" type="Button" parent="CenterContainer/VBoxContainer"]
 light_mask = 2
-margin_left = 68.0
-margin_top = 98.0
-margin_right = 298.0
-margin_bottom = 172.0
+margin_left = 75.0
+margin_top = 91.0
+margin_right = 259.0
+margin_bottom = 155.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -83,9 +83,9 @@ shadow_item_cull_mask = 4
 
 [node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
 light_mask = 2
-margin_top = 176.0
-margin_right = 366.0
-margin_bottom = 250.0
+margin_top = 159.0
+margin_right = 334.0
+margin_bottom = 223.0
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
