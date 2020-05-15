@@ -18,7 +18,6 @@ const lang_prop = {
 
 var _lang = default_lang
 var current_res_path
-var _storage_paths = []
 var _loaded_resources = {
 	GlobalVars.Storage_string_id.MENU: ConfigFile.new(),
 	GlobalVars.Storage_string_id.HINT: ConfigFile.new(),
@@ -30,14 +29,15 @@ var is_loaded = false
 func get_string(storage_enum, str_id):
 	if not is_loaded: # resource has not been loaded yet
 		set_lang(_lang)
-	var val = _loaded_resources[storage_enum].get_value(str_id, lang_prop[_lang], load_error_string[_lang])
+	return _loaded_resources[storage_enum].get_value(str_id, lang_prop[_lang], load_error_string[_lang])
 
 
 func set_lang(to_lang):
 	_lang = to_lang
 	_load_text()
+	is_loaded = true
 
 
 func _load_text():
 	for cur_prop in GlobalVars.Storage_string_id.values():
-		_loaded_resources[cur_prop].load(_storage_paths[cur_prop])
+		_loaded_resources[cur_prop].load(_file_names[cur_prop])
