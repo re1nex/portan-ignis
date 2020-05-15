@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://resource/ui/menu/backgroundtest3.png" type="Texture" id=2]
@@ -27,6 +27,14 @@ font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 70
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 60
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 60
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -393,21 +401,21 @@ visible = false
 margin_left = 120.0
 margin_top = 80.0
 margin_right = 598.0
-margin_bottom = 644.0
+margin_bottom = 667.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_constants/separation = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
-margin_right = 487.0
-margin_bottom = 505.0
+margin_right = 478.0
+margin_bottom = 483.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_constants/separation = 30
+custom_constants/separation = 15
 
 [node name="Label" type="Label" parent="Settings/VBoxContainer"]
-margin_right = 487.0
-margin_bottom = 77.0
+margin_right = 478.0
+margin_bottom = 68.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 3 )
 text = "fullscreen mode"
@@ -436,13 +444,13 @@ scale = Vector2( 1, 1 )
 
 [node name="LightFsc" parent="Settings/VBoxContainer/Label" instance=ExtResource( 4 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="stretchSettings" type="Label" parent="Settings/VBoxContainer"]
-margin_top = 107.0
-margin_right = 487.0
-margin_bottom = 184.0
+margin_top = 83.0
+margin_right = 478.0
+margin_bottom = 151.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 3 )
 text = "stretching mode"
@@ -472,13 +480,13 @@ scale = Vector2( 1, 1 )
 
 [node name="LightStr" parent="Settings/VBoxContainer/stretchSettings" instance=ExtResource( 4 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="Label2" type="Label" parent="Settings/VBoxContainer"]
-margin_top = 214.0
-margin_right = 366.0
-margin_bottom = 291.0
+margin_top = 166.0
+margin_right = 339.0
+margin_bottom = 234.0
 mouse_filter = 1
 size_flags_horizontal = 0
 custom_fonts/font = SubResource( 3 )
@@ -508,13 +516,13 @@ scale = Vector2( 1, 1 )
 
 [node name="LightMut" parent="Settings/VBoxContainer/Label2" instance=ExtResource( 4 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="VolumeSettings" type="Label" parent="Settings/VBoxContainer"]
-margin_top = 321.0
-margin_right = 487.0
-margin_bottom = 398.0
+margin_top = 249.0
+margin_right = 478.0
+margin_bottom = 317.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 4 )
 text = "general volume"
@@ -532,13 +540,13 @@ __meta__ = {
 
 [node name="LightVol" parent="Settings/VBoxContainer/VolumeSettings" instance=ExtResource( 4 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="MusicSettings" type="Label" parent="Settings/VBoxContainer"]
-margin_top = 428.0
-margin_right = 487.0
-margin_bottom = 505.0
+margin_top = 332.0
+margin_right = 478.0
+margin_bottom = 400.0
 mouse_filter = 1
 custom_fonts/font = SubResource( 4 )
 text = "volume of music"
@@ -556,13 +564,64 @@ __meta__ = {
 
 [node name="LightMusic" parent="Settings/VBoxContainer/MusicSettings" instance=ExtResource( 4 )]
 visible = false
-position = Vector2( -30, 40 )
+position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
+
+[node name="language" type="Label" parent="Settings/VBoxContainer"]
+margin_top = 415.0
+margin_right = 478.0
+margin_bottom = 483.0
+mouse_filter = 1
+custom_fonts/font = SubResource( 4 )
+text = "language"
+
+[node name="LightLanguage" parent="Settings/VBoxContainer/language" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -30, 30 )
+scale = Vector2( 1, 1 )
+
+[node name="CurrentLanguage" type="Button" parent="Settings/VBoxContainer/language"]
+margin_left = 555.0
+margin_right = 955.0
+margin_bottom = 74.0
+focus_mode = 0
+custom_fonts/font = SubResource( 10 )
+enabled_focus_mode = 0
+text = "english"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="currentLangLight" parent="Settings/VBoxContainer/language/CurrentLanguage" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 60, 30 )
+scale = Vector2( 1, 1 )
+
+[node name="AddLanguage" type="Button" parent="Settings/VBoxContainer/language"]
+visible = false
+margin_left = 555.0
+margin_top = 74.0
+margin_right = 955.0
+margin_bottom = 148.0
+focus_mode = 0
+custom_fonts/font = SubResource( 11 )
+enabled_focus_mode = 0
+text = "russian"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="addLangLight2" parent="Settings/VBoxContainer/language/AddLanguage" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 60, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="BackSettings" type="Button" parent="Settings"]
-margin_top = 535.0
-margin_right = 140.0
-margin_bottom = 618.0
+margin_top = 513.0
+margin_right = 153.0
+margin_bottom = 587.0
 focus_mode = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -1085,6 +1144,14 @@ bus = "Music"
 [connection signal="mouse_entered" from="Settings/VBoxContainer/MusicSettings/MusicHSlider" to="." method="_on_MusicHSlider_mouse_entered"]
 [connection signal="mouse_exited" from="Settings/VBoxContainer/MusicSettings/MusicHSlider" to="." method="_on_MusicHSlider_mouse_exited"]
 [connection signal="value_changed" from="Settings/VBoxContainer/MusicSettings/MusicHSlider" to="." method="_on_MusicHSlider_value_changed"]
+[connection signal="mouse_entered" from="Settings/VBoxContainer/language" to="." method="_on_language_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/VBoxContainer/language" to="." method="_on_language_mouse_exited"]
+[connection signal="mouse_entered" from="Settings/VBoxContainer/language/CurrentLanguage" to="." method="_on_CurrentLanguage_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/VBoxContainer/language/CurrentLanguage" to="." method="_on_CurrentLanguage_mouse_exited"]
+[connection signal="pressed" from="Settings/VBoxContainer/language/CurrentLanguage" to="." method="_on_CurrentLanguage_pressed"]
+[connection signal="mouse_entered" from="Settings/VBoxContainer/language/AddLanguage" to="." method="_on_AddLanguage_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/VBoxContainer/language/AddLanguage" to="." method="_on_AddLanguage_mouse_exited"]
+[connection signal="pressed" from="Settings/VBoxContainer/language/AddLanguage" to="." method="_on_AddLanguage_pressed"]
 [connection signal="mouse_entered" from="Settings/BackSettings" to="." method="_on_backSettings_mouse_entered"]
 [connection signal="mouse_exited" from="Settings/BackSettings" to="." method="_on_backSettings_mouse_exited"]
 [connection signal="pressed" from="Settings/BackSettings" to="." method="_on_backSettings_pressed"]
