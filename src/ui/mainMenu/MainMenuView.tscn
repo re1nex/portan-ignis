@@ -29,27 +29,27 @@ font_data = ExtResource( 9 )
 size = 70
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=10]
-size = 60
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=11]
-size = 60
-font_data = ExtResource( 9 )
-
 [sub_resource type="DynamicFont" id=5]
-size = 30
+size = 60
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 50
+size = 60
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 50
+size = 30
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=8]
+size = 50
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 50
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=10]
 size = 50
 font_data = ExtResource( 9 )
 
@@ -585,7 +585,7 @@ margin_left = 555.0
 margin_right = 955.0
 margin_bottom = 74.0
 focus_mode = 0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 0
 text = "english"
 flat = true
@@ -605,7 +605,7 @@ margin_top = 74.0
 margin_right = 955.0
 margin_bottom = 148.0
 focus_mode = 0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 6 )
 enabled_focus_mode = 0
 text = "russian"
 flat = true
@@ -661,7 +661,7 @@ margin_right = 1040.0
 margin_bottom = 447.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 7 )
 custom_constants/line_separation = 5
 text = "Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. 
 The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers 
@@ -747,7 +747,7 @@ columns = 3
 [node name="Label32" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_right = 424.0
 margin_bottom = 123.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "action
 "
 
@@ -755,7 +755,7 @@ text = "action
 margin_left = 524.0
 margin_right = 691.0
 margin_bottom = 123.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "button
 "
 
@@ -763,7 +763,7 @@ text = "button
 margin_left = 791.0
 margin_right = 1068.0
 margin_bottom = 123.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 text = "extra
 "
 
@@ -771,7 +771,7 @@ text = "extra
 margin_top = 127.0
 margin_right = 424.0
 margin_bottom = 187.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "move left"
 
 [node name="Label" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -779,7 +779,7 @@ margin_left = 524.0
 margin_top = 127.0
 margin_right = 691.0
 margin_bottom = 187.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "A"
 
 [node name="Label3" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -787,14 +787,14 @@ margin_left = 791.0
 margin_top = 127.0
 margin_right = 1068.0
 margin_bottom = 187.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 text = "arrow left"
 
 [node name="Label5" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 191.0
 margin_right = 424.0
 margin_bottom = 251.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "move right"
 
 [node name="Label6" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -802,7 +802,7 @@ margin_left = 524.0
 margin_top = 191.0
 margin_right = 691.0
 margin_bottom = 251.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "D"
 
 [node name="Label4" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -810,14 +810,14 @@ margin_left = 791.0
 margin_top = 191.0
 margin_right = 1068.0
 margin_bottom = 251.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 text = "arrow right"
 
 [node name="Label36" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 255.0
 margin_right = 424.0
 margin_bottom = 315.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "climb the stairs"
 
 [node name="Label35" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -825,7 +825,7 @@ margin_left = 524.0
 margin_top = 255.0
 margin_right = 691.0
 margin_bottom = 315.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "W"
 
 [node name="Label34" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -833,14 +833,14 @@ margin_left = 791.0
 margin_top = 255.0
 margin_right = 1068.0
 margin_bottom = 315.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 text = "arrow up"
 
 [node name="Label11" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 319.0
 margin_right = 424.0
 margin_bottom = 379.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "jump"
 
 [node name="Label12" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -848,7 +848,7 @@ margin_left = 524.0
 margin_top = 319.0
 margin_right = 691.0
 margin_bottom = 379.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "space"
 
 [node name="Label10" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -856,13 +856,13 @@ margin_left = 791.0
 margin_top = 319.0
 margin_right = 1068.0
 margin_bottom = 379.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label8" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 383.0
 margin_right = 424.0
 margin_bottom = 443.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "rotate ignis up"
 
 [node name="Label9" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -870,7 +870,7 @@ margin_left = 524.0
 margin_top = 383.0
 margin_right = 691.0
 margin_bottom = 443.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "V"
 
 [node name="Label7" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -878,13 +878,13 @@ margin_left = 791.0
 margin_top = 383.0
 margin_right = 1068.0
 margin_bottom = 443.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label14" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 447.0
 margin_right = 424.0
 margin_bottom = 507.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "rotate ignis down"
 
 [node name="Label15" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -892,7 +892,7 @@ margin_left = 524.0
 margin_top = 447.0
 margin_right = 691.0
 margin_bottom = 507.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "B"
 
 [node name="Label13" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -900,13 +900,13 @@ margin_left = 791.0
 margin_top = 447.0
 margin_right = 1068.0
 margin_bottom = 507.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label17" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 511.0
 margin_right = 424.0
 margin_bottom = 571.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "interaction"
 
 [node name="Label18" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -914,7 +914,7 @@ margin_left = 524.0
 margin_top = 511.0
 margin_right = 691.0
 margin_bottom = 571.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "E"
 
 [node name="Label16" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -922,13 +922,13 @@ margin_left = 791.0
 margin_top = 511.0
 margin_right = 1068.0
 margin_bottom = 571.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label20" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 575.0
 margin_right = 424.0
 margin_bottom = 635.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "recharge"
 
 [node name="Label21" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -936,7 +936,7 @@ margin_left = 524.0
 margin_top = 575.0
 margin_right = 691.0
 margin_bottom = 635.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "R"
 
 [node name="Label19" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -944,13 +944,13 @@ margin_left = 791.0
 margin_top = 575.0
 margin_right = 1068.0
 margin_bottom = 635.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label23" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 639.0
 margin_right = 424.0
 margin_bottom = 699.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "type of ignis"
 
 [node name="Label24" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -958,7 +958,7 @@ margin_left = 524.0
 margin_top = 639.0
 margin_right = 691.0
 margin_bottom = 699.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "1,2"
 
 [node name="Label22" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -966,13 +966,13 @@ margin_left = 791.0
 margin_top = 639.0
 margin_right = 1068.0
 margin_bottom = 699.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label26" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 703.0
 margin_right = 424.0
 margin_bottom = 763.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "hide ignis"
 
 [node name="Label27" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -980,7 +980,7 @@ margin_left = 524.0
 margin_top = 703.0
 margin_right = 691.0
 margin_bottom = 763.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "F"
 
 [node name="Label25" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -988,13 +988,13 @@ margin_left = 791.0
 margin_top = 703.0
 margin_right = 1068.0
 margin_bottom = 763.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label29" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 767.0
 margin_right = 424.0
 margin_bottom = 827.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "scrolling ignis"
 
 [node name="Label30" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -1002,7 +1002,7 @@ margin_left = 524.0
 margin_top = 767.0
 margin_right = 691.0
 margin_bottom = 827.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "wheel"
 
 [node name="Label28" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -1010,13 +1010,13 @@ margin_left = 791.0
 margin_top = 767.0
 margin_right = 1068.0
 margin_bottom = 827.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="Label39" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
 margin_top = 831.0
 margin_right = 424.0
 margin_bottom = 891.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "inventory"
 
 [node name="Label38" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -1024,7 +1024,7 @@ margin_left = 524.0
 margin_top = 831.0
 margin_right = 691.0
 margin_bottom = 891.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "I"
 
 [node name="Label37" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
@@ -1032,7 +1032,7 @@ margin_left = 791.0
 margin_top = 831.0
 margin_right = 1068.0
 margin_bottom = 891.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 
 [node name="BackHelp" type="Button" parent="Help"]
 margin_top = 477.0

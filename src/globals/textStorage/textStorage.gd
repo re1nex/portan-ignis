@@ -26,6 +26,7 @@ var _loaded_resources = {
 
 func _ready():
 	_load_text()
+	_lang=Settings.Language
 	set_lang(_lang)
 
 
@@ -35,6 +36,7 @@ func get_string(storage_enum, str_id):
 
 
 func set_lang(to_lang):
+	Settings.Language = to_lang
 	_lang = to_lang
 
 

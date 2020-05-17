@@ -19,6 +19,7 @@ var langMode= false
 
 var begin=true
 var begin1=true
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	#if(Settings.Sound["Volume"] != null):
@@ -40,7 +41,7 @@ func _ready():
 	$Music2.stop()
 	secondPlay=false
 	$Music.play()
-	testModeOff()
+	#testModeOff()
 	
 func testModeOff():
 	$StartView/VBoxContainer/level0.disabled
@@ -1016,6 +1017,10 @@ func _on_AddLanguage_pressed():
 		checkClick=true
 		_on_CurrentLanguage_mouse_exited()
 		_on_AddLanguage_mouse_exited()
+		if(textStorage._lang==GlobalVars.User_lang.ENGLISH):
+			textStorage.set_lang(GlobalVars.User_lang.RUSSIAN)
+		else:
+			textStorage.set_lang(GlobalVars.User_lang.ENGLISH)
 		langMode=false
 		
 
