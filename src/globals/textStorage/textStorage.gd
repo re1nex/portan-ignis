@@ -22,20 +22,20 @@ var _loaded_resources = {
 	GlobalVars.Storage_string_id.MENU: ConfigFile.new(),
 	GlobalVars.Storage_string_id.HINT: ConfigFile.new(),
 }
-var is_loaded = false
+
+
+func _ready():
+	_load_text()
+	set_lang(_lang)
 
 
 # storage is GlobalVars.Storage_string_id enum
 func get_string(storage_enum, str_id):
-	if not is_loaded: # resource has not been loaded yet
-		set_lang(_lang)
 	return _loaded_resources[storage_enum].get_value(str_id, lang_prop[_lang], load_error_string[_lang])
 
 
 func set_lang(to_lang):
 	_lang = to_lang
-	_load_text()
-	is_loaded = true
 
 
 func _load_text():
