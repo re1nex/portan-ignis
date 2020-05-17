@@ -14,6 +14,10 @@ func _ready():
 	$TextureRect/VBoxContainer/RichTextLabel.text=text
 
 
+func upd_text():
+	$TextureRect/VBoxContainer/RichTextLabel.text=text
+
+
 func _input(event):
 	if(activated):
 		if(event.is_action_pressed("ui_accept")):
