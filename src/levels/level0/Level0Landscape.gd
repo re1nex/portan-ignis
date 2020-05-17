@@ -19,13 +19,11 @@ func _ready():
 	$Ignises/IgnisDoor.connect("active", $Door, "_on_IgnisRegularLevel_active")
 	$Ignises/IgnisDoor.connect("not_active", $Door, "_on_IgnisRegularLevel_not_active")
 	$Ignises/IgnisHint.connect("active", $HintTorch, "activate")
-	_fill_hint1(GlobalVars.User_lang.ENGLISH)
-	#_fill_hint1(GlobalVars.User_lang.RUSSIAN)
+	_fill_hint1()
 	pass
 
 
-func _fill_hint1(lang_enum):
-	textStorage.set_lang(lang_enum)
+func _fill_hint1():
 	$Hint.text = textStorage.get_string(GlobalVars.Storage_string_id.HINT, "Hint1")
 	$Hint.upd_text()
 

@@ -6,6 +6,7 @@ var pos = -1
 var soundLen=0.22
 var ScrollRange=56
 
+var langPos=0
 var checkClick=false
 var soundSet=false
 var musicSet=false
@@ -14,9 +15,11 @@ var testPlay=false
 var secondPlay=false
 var changeMute=false
 var textActivate=false
+var langMode= false
 
 var begin=true
 var begin1=true
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	#if(Settings.Sound["Volume"] != null):
@@ -38,7 +41,11 @@ func _ready():
 	$Music2.stop()
 	secondPlay=false
 	$Music.play()
-	testModeOff()
+	if(Settings.Language==GlobalVars.User_lang.RUSSIAN):
+		var buf = $Settings/VBoxContainer/language/AddLanguage.text
+		$Settings/VBoxContainer/language/AddLanguage.text=$Settings/VBoxContainer/language/CurrentLanguage.text
+		$Settings/VBoxContainer/language/CurrentLanguage.text=buf
+	#testModeOff()
 	
 func testModeOff():
 	$StartView/VBoxContainer/level0.disabled
@@ -66,22 +73,30 @@ func _input(event):
 			textActivate=false
 			keyboard=false
 			pos=-1
+		if(langMode):
+			checkMousePos()
 	if event.is_action_pressed("ui_down"): 
-		if(!textActivate):
-			_closeBeforeChange()
-			pos+=1
-			keyboard=true
-			_ChangePos()
-		else:
+		if(textActivate):
 			scrollDown()
-	if event.is_action_pressed("ui_up"):
-		if(!textActivate):
+		else:
 			_closeBeforeChange()
-			pos-=1
+			if(!langMode):
+				pos+=1
+			else:
+				langPos+=1
 			keyboard=true
 			_ChangePos()
-		else:
+	if event.is_action_pressed("ui_up"):
+		if(textActivate):
 			scrollUp()
+		else:
+			_closeBeforeChange()
+			if(!langMode):
+				pos-=1
+			else:
+				langPos-=1
+			keyboard=true
+			_ChangePos()
 	if(event.is_action_pressed("ui_cancel")):
 		_closeBeforeChange()
 		_backToMain()
@@ -110,10 +125,19 @@ func _input(event):
 			$TestSound2.play()
 	if(event.is_action_pressed("ui_accept")):
 		_pressButt()
-		if(!checkClick&&!textActivate):
+		if(!checkClick&&!textActivate&&!langMode):
 			_closeBeforeChange()
 			pos=-1
 		checkClick=false
+
+
+func checkMousePos():
+	var mousePos = get_viewport().get_mouse_position()
+	var curSize= $Settings/VBoxContainer/language/CurrentLanguage.rect_size
+	var curPos = $Settings/VBoxContainer/language/CurrentLanguage.rect_global_position
+	if(mousePos.x<curPos.x||mousePos.x>curPos.x+curSize.x||mousePos.y<curPos.y||mousePos.y>curPos.y+2*curSize.y):
+		_on_CurrentLanguage_pressed()
+		_on_language_mouse_exited()
 
 func scrollDown():
 	if $About.is_visible_in_tree():
@@ -181,8 +205,18 @@ func _pressButt():
 			_on_level5_pressed()
 		return
 	if($Settings.is_visible_in_tree() && $Settings.is_visible_in_tree()):
-		if(pos>=5 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
+		if(langMode):
+			if(langPos>=1 && $Settings/VBoxContainer/language/AddLanguage/addLangLight2.is_visible_in_tree()):
+				_on_AddLanguage_pressed()
+				return
+			if(langPos==0 && $Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.is_visible_in_tree()):
+				_on_CurrentLanguage_pressed()
+				return
+		if(pos>=6 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
 			_on_backSettings_pressed()
+			return
+		if(pos==5 && $Settings/VBoxContainer/language/LightLanguage.is_visible_in_tree()):
+			_on_CurrentLanguage_pressed()
 			return
 		if(pos==0 && $Settings/VBoxContainer/Label/LightFsc.is_visible_in_tree()):
 			_on_CheckBox_pressed()
@@ -282,8 +316,18 @@ func _closeBeforeChange():
 			return
 		return
 	if($Settings.is_visible_in_tree()):
-		if(pos>=5):
+		if(langMode):
+			if(langPos>=1):
+				_on_AddLanguage_mouse_exited()
+				return
+			if(langPos==0):
+				_on_CurrentLanguage_mouse_exited()
+				return
+		if(pos>=6):
 			_on_backSettings_mouse_exited()
+			return
+		if(pos==5):
+			_on_language_mouse_exited()
 			return
 		if(pos==0):
 			_on_Label_mouse_exited()
@@ -609,7 +653,7 @@ func _on_BackStart_mouse_exited():
 
 
 func _on_backSettings_mouse_entered():
-	pos=5
+	pos=6
 	if(!IgnisPlay):
 		IgnisPlay=true
 		$IgnisSound.play()
@@ -689,8 +733,18 @@ func _ChangePos():
 			_on_level5_mouse_entered()
 		return
 	if($Settings.is_visible_in_tree()):
-		if(pos>=5):
+		if(langMode):
+			if(langPos>=1):
+				_on_AddLanguage_mouse_entered()
+				return
+			if(langPos==0):
+				_on_CurrentLanguage_mouse_entered()
+				return
+		if(pos>=6):
 			_on_backSettings_mouse_entered()
+			return
+		if(pos==5):
+			_on_language_mouse_entered()
 			return
 		if(pos==0):
 			_on_Label_mouse_entered()
@@ -940,3 +994,79 @@ func _on_ScrollContainer_mouse_exited():
 	textActivate=false
 	$Help/VBoxContainer/ScrollHelpLight.hide()
 	$IgnisSound.stop()
+
+
+
+
+func _on_CurrentLanguage_pressed():
+	if(!$Settings/VBoxContainer/language/AddLanguage.is_visible_in_tree()):
+		$Settings/VBoxContainer/language/AddLanguage.show()
+		langMode=true
+		checkClick=true
+		_on_CurrentLanguage_mouse_entered()
+	else:
+		$Settings/VBoxContainer/language/AddLanguage.hide()
+		langMode=false
+		checkClick=true
+		_on_CurrentLanguage_mouse_exited()
+		_on_AddLanguage_mouse_exited()
+		
+
+
+func _on_AddLanguage_pressed():
+	if($Settings/VBoxContainer/language/AddLanguage.is_visible_in_tree()):
+		var text = $Settings/VBoxContainer/language/AddLanguage.text
+		$Settings/VBoxContainer/language/AddLanguage.text = $Settings/VBoxContainer/language/CurrentLanguage.text
+		$Settings/VBoxContainer/language/CurrentLanguage.text=text
+		$Settings/VBoxContainer/language/AddLanguage.hide()
+		checkClick=true
+		_on_CurrentLanguage_mouse_exited()
+		_on_AddLanguage_mouse_exited()
+		if(textStorage._lang==GlobalVars.User_lang.ENGLISH):
+			textStorage.set_lang(GlobalVars.User_lang.RUSSIAN)
+		else:
+			textStorage.set_lang(GlobalVars.User_lang.ENGLISH)
+		langMode=false
+		
+
+
+func _on_CurrentLanguage_mouse_entered():
+	_on_language_mouse_entered()
+	if(langMode):
+		langPos=0
+		$Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.enable()
+		$Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.show()
+
+
+func _on_CurrentLanguage_mouse_exited():
+	if(!checkClick):_on_language_mouse_exited()
+	$Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.hide()
+
+
+func _on_AddLanguage_mouse_entered():
+	if(langMode):
+		langPos=1
+		_on_language_mouse_entered()
+		$Settings/VBoxContainer/language/AddLanguage/addLangLight2.enable()
+		$Settings/VBoxContainer/language/AddLanguage/addLangLight2.show()
+
+
+func _on_AddLanguage_mouse_exited():
+	if(!checkClick):_on_language_mouse_exited()
+	$Settings/VBoxContainer/language/AddLanguage/addLangLight2.hide()
+
+
+func _on_language_mouse_entered():
+	pos=5
+	if(!IgnisPlay):
+		IgnisPlay=true
+		$IgnisSound.play()
+	$Settings/VBoxContainer/language/LightLanguage.enable()
+	$Settings/VBoxContainer/language/LightLanguage.show()
+
+
+func _on_language_mouse_exited():
+	if(!checkIgnisSettings()):
+		$IgnisSound.stop()
+		IgnisPlay=false
+	$Settings/VBoxContainer/language/LightLanguage.hide()
