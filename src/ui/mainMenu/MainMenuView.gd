@@ -41,6 +41,10 @@ func _ready():
 	$Music2.stop()
 	secondPlay=false
 	$Music.play()
+	if(Settings.Language==GlobalVars.User_lang.RUSSIAN):
+		var buf = $Settings/VBoxContainer/language/AddLanguage.text
+		$Settings/VBoxContainer/language/AddLanguage.text=$Settings/VBoxContainer/language/CurrentLanguage.text
+		$Settings/VBoxContainer/language/CurrentLanguage.text=buf
 	#testModeOff()
 	
 func testModeOff():
