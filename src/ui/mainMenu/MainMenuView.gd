@@ -74,7 +74,7 @@ func _input(event):
 			keyboard=false
 			pos=-1
 		if(langMode):
-				checkMousePos()
+			checkMousePos()
 	if event.is_action_pressed("ui_down"): 
 		if(textActivate):
 			scrollDown()
@@ -137,6 +137,7 @@ func checkMousePos():
 	var curPos = $Settings/VBoxContainer/language/CurrentLanguage.rect_global_position
 	if(mousePos.x<curPos.x||mousePos.x>curPos.x+curSize.x||mousePos.y<curPos.y||mousePos.y>curPos.y+2*curSize.y):
 		_on_CurrentLanguage_pressed()
+		_on_language_mouse_exited()
 
 func scrollDown():
 	if $About.is_visible_in_tree():
