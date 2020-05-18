@@ -50,6 +50,7 @@ func _ready():
 	if Settings.Graphics["Fullscreen"]:
 		_full_screen()
 	begin=false
+	update_text()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -434,3 +435,16 @@ func _on_MuteCheckBox_mouse_entered():
 
 func _on_MuteCheckBox_mouse_exited():
 	_on_Mute_mouse_exited()
+
+
+func update_text():
+	var _key = GlobalVars.Storage_string_id.MENU
+	$CenterContainer/Pause/Continue.text = textStorage.get_string(_key, "PauseMenuMainContinue")
+	$CenterContainer/Pause/Restart.text = textStorage.get_string(_key, "PauseMenuMainRestart")
+	$CenterContainer/Pause/Settings.text = textStorage.get_string(_key, "PauseMenuMainSettings")
+	$CenterContainer/Pause/MainMenu.text = textStorage.get_string(_key, "PauseMenuMainExit")
+	
+	$CenterContainer/Settings/backSettings.text = textStorage.get_string(_key, "PauseMenuSettingsBack")
+	$CenterContainer/Settings/Mute.text = textStorage.get_string(_key, "PauseMenuSettingsGlobalMute")
+	$CenterContainer/Settings/Label.text = textStorage.get_string(_key, "PauseMenuSettingsFullscreenMode")
+	$CenterContainer/Settings/Label2.text = textStorage.get_string(_key, "PauseMenuSettingsVolume")
