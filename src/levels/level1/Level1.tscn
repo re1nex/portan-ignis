@@ -51,31 +51,37 @@ position = Vector2( 512, 664 )
 position = Vector2( 592, 616 )
 scale = Vector2( 0.3, 0.3 )
 text = "You have fallen into a hole during a battle in the caves. You have lost all your Ignis weapons. Come close to the torch and press E to take it"
+nickname = "Introduction"
 
 [node name="Hint2" parent="Hints" instance=ExtResource( 10 )]
 position = Vector2( 600, 616 )
 scale = Vector2( 0.3, 0.3 )
 text = "Now you have your first Ignis. Use it to light your path and find a way out of here"
+nickname = "FirstIgnis"
 
 [node name="Hint3" parent="Hints" instance=ExtResource( 10 )]
 position = Vector2( 856, 616 )
 scale = Vector2( 0.25, 0.25 )
 text = "Press E near fireless torch to activate it. Press E near activated torch to put it out"
+nickname = "LevelIgnis"
 
 [node name="Hint4" parent="Hints" instance=ExtResource( 10 )]
 position = Vector2( 1088, 632 )
 scale = Vector2( 0.25, 0.25 )
 text = "Your Ignis has lives, which are presented by yellow scale in the upper part of the screen. Less lives means fainter and weaker your light. You can press R near activated stronger torch to restore your Ignis lives. It also works in reverse. Try to press R near this weak torch"
+nickname = "Recharge"
 
 [node name="Hint5" parent="Hints" instance=ExtResource( 10 )]
 position = Vector2( 784, 512 )
 scale = Vector2( 0.25, 0.25 )
 text = "These torches will give you hints "
+nickname = "Hints"
 
 [node name="Hint6" parent="Hints" instance=ExtResource( 10 )]
 position = Vector2( 1280, 272 )
 scale = Vector2( 0.25, 0.25 )
 text = "There is a door ahead. It is controlled by torch on the pillar. Activate it to open the door, deactivate it to close the door"
+nickname = "Door"
 
 [node name="Timer" type="Timer" parent="Hints"]
 wait_time = 0.3
