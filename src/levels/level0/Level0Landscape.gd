@@ -26,6 +26,8 @@ func _ready():
 func _fill_hint1():
 	$Hint.text = textStorage.get_string(GlobalVars.Storage_string_id.HINT, "Hint1")
 	$Hint.upd_text()
+	$HintTorch.text = textStorage.get_string(GlobalVars.Storage_string_id.HINT, "HintTorch")
+	$HintTorch.upd_text()
 
 
 func _process(delta):
