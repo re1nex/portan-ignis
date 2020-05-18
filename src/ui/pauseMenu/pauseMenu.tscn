@@ -164,10 +164,11 @@ shadow_item_cull_mask = 4
 [node name="Settings" type="VBoxContainer" parent="CenterContainer"]
 visible = false
 light_mask = 2
-margin_left = 471.0
+margin_left = 430.0
 margin_top = 251.0
-margin_right = 808.0
+margin_right = 850.0
 margin_bottom = 468.0
+rect_min_size = Vector2( 420, 217 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_constants/separation = 5
