@@ -663,13 +663,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 7 )
 custom_constants/line_separation = 5
-text = "Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. 
-The main character has an Ignis (light sourse). He must use it for overcome the different obstacles and keep out of dangers 
-hidden in the dark. One of the key mechanics in the game is using the light on the levels to solve some puzzles.
+text = "Portan Ignis is a puzzle-platformer adventure game developed for PC. The game takes place in a completely dark world. The main character has a light source, called Ignis. He must use it to light his way, solve puzzles and scare away monsters, hiding in the dark.
 
-A long time ago The Darkness covered the world. Remainig people live under ground in closed caves, while Portans of Ignis Order travel in dangerous caverns, help people and fight monsters.
-You and your small team of fellow Portans were walking through a tunnel, when you had got into ambush. Presumably, your comrades were defeated, as before the end of the battle you had fallen into a hole and had lost all of your Ignis weapon.
-Regain your sacred weapons, find the way out and save your friends.
+A long time ago The Darkness covered the world. Since that time remainig people have been living underground in barricaded caves. At some point Order of Ignis appeared. Portans of this Order travelled through dangerous caverns, helped people and fought monsters.
+
+Your small team of fellow Portans and you had been walking through a tunnel, when you were ambushed. Presumably, your comrades were defeated, as you had fallen into a hole before the end of the battle and lost all of your weapons.
+Regain your sacred Ignis, find the way out and locate your friends.
 
 Developers:
 Alexander Karasev
@@ -681,8 +680,7 @@ Elisey Vasilevskiy
 Textures and art by:
 Buch: https://opengameart.org/users/buch
 
-github: https://github.com/re1nex/portan-ignis
-"
+github: https://github.com/re1nex/portan-ignis"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1081,6 +1079,7 @@ bus = "Music"
 stream = ExtResource( 8 )
 volume_db = 5.0
 bus = "Music"
+[connection signal="LanguageChanged" from="." to="." method="update_lang"]
 [connection signal="mouse_entered" from="Main/mainView/Start" to="." method="_on_Start_mouse_entered"]
 [connection signal="mouse_exited" from="Main/mainView/Start" to="." method="_on_Start_mouse_exited"]
 [connection signal="pressed" from="Main/mainView/Start" to="." method="_on_Start_pressed"]

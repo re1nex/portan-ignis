@@ -1,5 +1,7 @@
 extends MarginContainer
+
 signal ChangePos
+signal LanguageChanged
 
 var keyboard = false
 var pos = -1
@@ -46,6 +48,11 @@ func _ready():
 		$Settings/VBoxContainer/language/AddLanguage.text=$Settings/VBoxContainer/language/CurrentLanguage.text
 		$Settings/VBoxContainer/language/CurrentLanguage.text=buf
 	#testModeOff()
+	update_lang()
+	
+func update_lang():
+	var _key = GlobalVars.Storage_string_id.MENU
+	$About/RichTextLabel.text = textStorage.get_string(_key, "MainMenuAboutText")
 	
 func testModeOff():
 	$StartView/VBoxContainer/level0.disabled
@@ -1027,7 +1034,7 @@ func _on_AddLanguage_pressed():
 		else:
 			textStorage.set_lang(GlobalVars.User_lang.ENGLISH)
 		langMode=false
-		
+		emit_signal("LanguageChanged")
 
 
 func _on_CurrentLanguage_mouse_entered():
