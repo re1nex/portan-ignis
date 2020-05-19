@@ -17,6 +17,8 @@ func _ready():
 
 	$CenterContainer/VBoxContainer/Restart/ResLight.set_enemy_visible(false)
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.set_enemy_visible(false)
+	
+	update_text()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -111,3 +113,9 @@ func _on_MainMenu_pressed():
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.hide()
 	get_tree().paused=false
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_MAIN_MENU)
+
+func update_text():
+	var _key = GlobalVars.Storage_string_id.MENU
+	$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowGameOverLabel")
+	$CenterContainer/VBoxContainer/Restart.text = textStorage.get_string(_key, "WindowGameOverRestart")
+	$CenterContainer/VBoxContainer/MainMenu.text = textStorage.get_string(_key, "WindowGameOverMainExit")
