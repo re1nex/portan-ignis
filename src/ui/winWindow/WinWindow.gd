@@ -19,7 +19,6 @@ func _ready():
 	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_5):
 		lastlvl=true
 		$CenterContainer/VBoxContainer/NextLvl.hide()
-		$CenterContainer/VBoxContainer/Label.text = "to be continued"
 	
 	update_text()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -139,6 +138,9 @@ func _on_MainMenu_pressed():
 
 func update_text():
 	var _key = GlobalVars.Storage_string_id.MENU
-	$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowWinLabel")
 	$CenterContainer/VBoxContainer/NextLvl.text = textStorage.get_string(_key, "WindowWinNextLvl")
 	$CenterContainer/VBoxContainer/MainMenu.text = textStorage.get_string(_key, "WindowWinMainExit")
+	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_5):
+		$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowWinLabelEnd")
+	else:
+		$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowWinLabel")
