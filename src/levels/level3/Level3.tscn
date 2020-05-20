@@ -97,6 +97,7 @@ position = Vector2( 1088, 112 )
 position = Vector2( 1120, 48 )
 scale = Vector2( 0.25, 0.25 )
 text = "This box will restore one section of your ignis Lives"
+nickname = "Fuel"
 
 [node name="WinWindow" parent="." instance=ExtResource( 8 )]
 
