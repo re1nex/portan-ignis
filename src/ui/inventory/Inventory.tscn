@@ -4,10 +4,10 @@
 [ext_resource path="res://src/ui/inventory/Inventory.gd" type="Script" id=2]
 [ext_resource path="res://resource/sounds/objects/inventory/close.wav" type="AudioStream" id=3]
 [ext_resource path="res://resource/sounds/objects/inventory/open.wav" type="AudioStream" id=4]
-[ext_resource path="res://resource/ui/yazata.TTF" type="DynamicFontData" id=5]
+[ext_resource path="res://resource/ui/17383.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://resource/ui/inventory/background3.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 40
 font_data = ExtResource( 5 )
 
@@ -48,14 +48,14 @@ __meta__ = {
 
 [node name="Weapons" type="VBoxContainer" parent="Control/Types"]
 margin_right = 200.0
-margin_bottom = 310.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 200, 280 )
 
 [node name="WeaponsLabel" type="Label" parent="Control/Types/Weapons"]
 margin_right = 200.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 200, 40 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "weapons"
 align = 1
 valign = 1
@@ -79,14 +79,14 @@ __meta__ = {
 [node name="Instruments" type="VBoxContainer" parent="Control/Types"]
 margin_left = 260.0
 margin_right = 460.0
-margin_bottom = 310.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 200, 280 )
 
 [node name="InstrumentsLabel" type="Label" parent="Control/Types/Instruments"]
 margin_right = 200.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 200, 40 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "instruments"
 align = 1
 valign = 1
