@@ -57,6 +57,11 @@ func update():
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
 		node.set_picture("res://resource/sprites/objects/lever/DungeonCrawl_ProjectUtumnoTileset.png")
 		instriments.add_child(node)
+	
+	for i in range(informator.has_instruments[GlobalVars.Instruments_type.GREANDE]):
+		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
+		node.set_picture("res://resource/sprites/objects/grenade/grenade.png")
+		instriments.add_child(node)
 
 
 func clear():

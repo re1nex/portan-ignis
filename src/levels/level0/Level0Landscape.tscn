@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/levels/level0/Level0Landscape.gd" type="Script" id=1]
 [ext_resource path="res://resource/tileres/platforms.tres" type="TileSet" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://src/objects/lever/Lever.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/objects/IgnisLongSectorOuter/IgnisLongSectorOuter.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/objects/IgnisSectorOuter/IgnisSectorOuter.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/ui/hint/Hint.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 41.4907, 65.2372 )
@@ -231,21 +230,7 @@ position = Vector2( 1297.88, 447.049 )
 
 [node name="Door2" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1503.98, 336.057 )
-
-[node name="Hint" parent="." instance=ExtResource( 17 )]
-position = Vector2( 623.246, 628.563 )
-scale = Vector2( 0.2, 0.2 )
-text = "Hello "
-
-[node name="HintTorch" parent="." instance=ExtResource( 17 )]
-position = Vector2( 984.485, 286.653 )
-scale = Vector2( 0.3, 0.3 )
-text = "This is a hint activated by torch. Press Enter to close it"
 [connection signal="body_entered" from="LevelEnd" to="." method="_on_LevelEnd_body_entered"]
 [connection signal="body_entered" from="LevelEndStop" to="." method="_on_LevelEndStop_body_entered"]
 [connection signal="active" from="Mechanism" to="Door2" method="_on_Mechanism_active"]
 [connection signal="not_active" from="Mechanism" to="Door2" method="_on_Mechanism_not_active"]
-[connection signal="activate" from="Hint" to="." method="_on_Hint_activate"]
-[connection signal="disactivate" from="Hint" to="." method="_on_Hint_disactivate"]
-[connection signal="activate" from="HintTorch" to="." method="_on_Hint_activate"]
-[connection signal="disactivate" from="HintTorch" to="." method="_on_Hint_disactivate"]
