@@ -133,11 +133,13 @@ position = Vector2( 984, 800 )
 position = Vector2( 144, 976 )
 scale = Vector2( 0.25, 0.25 )
 text = "Be careful, the enemy set an ambush for you. Press F to deactivate your Ignis and run to the end of the room. Press F again before your Ignis lives run out to activate it. If Ignis lives are over, try to restore fire near activated torch by pressing R"
+nickname = "Enemy2"
 
 [node name="Hint2" parent="Hints" instance=ExtResource( 17 )]
 position = Vector2( 1672, 472 )
 scale = Vector2( 0.25, 0.25 )
-text = "You have gathered box with magnifier. Use it to see farther, then your regular Ignis can light up. Rotate Light Sector by pressing V and B. Press 1 and 2 to switch Ignis modes"
+text = "You have gathered box with magnifier. Use it to see farther, than your regular Ignis can light up. Rotate Light Sector by pressing V and B. Press 1 and 2 to switch Ignis modes"
+nickname = "Lens"
 
 [node name="PauseMenu" parent="." instance=ExtResource( 10 )]
 

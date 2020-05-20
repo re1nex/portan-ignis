@@ -502,9 +502,9 @@ func check_rotate_ignis(delta):
 						weapons[$Informator.num_of_active_weapon].rotate_ignis(angle_delta)
 
 		if Input.is_action_pressed("ui_rotate_down"):
-			weapons[$Informator.num_of_active_weapon].rotate_ignis(PI / 2 * delta)
+			weapons[$Informator.num_of_active_weapon].rotate_ignis(PI * delta)
 		if Input.is_action_pressed("ui_rotate_up"):
-			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI / 2 * delta)
+			weapons[$Informator.num_of_active_weapon].rotate_ignis(- PI * delta)
 
 func update_ignis():
 	if ignis_pos.x * direction < 0:

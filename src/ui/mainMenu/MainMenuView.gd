@@ -52,7 +52,15 @@ func _ready():
 	
 func update_lang():
 	var _key = GlobalVars.Storage_string_id.MENU
+	
+	$Main/mainView/Help.text = textStorage.get_string(_key, "MainMenuMainHelp")
+	$Main/mainView/About.text = textStorage.get_string(_key, "MainMenuMainAbout")
+	$Main/mainView/Exit.text = textStorage.get_string(_key, "MainMenuMainExit")
+	
 	$About/RichTextLabel.text = textStorage.get_string(_key, "MainMenuAboutText")
+	$About/BackAbout.text = textStorage.get_string(_key, "MainMenuAboutBackAbout")
+	
+	_update_lang_help()
 	
 func testModeOff():
 	$StartView/VBoxContainer/level0.disabled
@@ -1077,3 +1085,30 @@ func _on_language_mouse_exited():
 		$IgnisSound.stop()
 		IgnisPlay=false
 	$Settings/VBoxContainer/language/LightLanguage.hide()
+
+func _update_lang_help():
+	var _key = GlobalVars.Storage_string_id.MENU
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Action.text = textStorage.get_string(_key, "MainMenuHelpAction")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Button.text = textStorage.get_string(_key, "MainMenuHelpButton")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Extra.text = textStorage.get_string(_key, "MainMenuHelpExtra")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/MoveLeft.text = textStorage.get_string(_key, "MainMenuHelpMoveLeft")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/ArrowLeft.text = textStorage.get_string(_key, "MainMenuHelpArrowLeft")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/MoveRight.text = textStorage.get_string(_key, "MainMenuHelpMoveRight")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/ArrowRight.text = textStorage.get_string(_key, "MainMenuHelpArrowRight")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Climb.text = textStorage.get_string(_key, "MainMenuHelpClimb")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/ArrowUp.text = textStorage.get_string(_key, "MainMenuHelpArrowUp")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Down.text = textStorage.get_string(_key, "MainMenuHelpDown")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/ArrowDown.text = textStorage.get_string(_key, "MainMenuHelpArrowDown")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Jump.text = textStorage.get_string(_key, "MainMenuHelpJump")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Space.text = textStorage.get_string(_key, "MainMenuHelpSpace")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/RotateUp.text = textStorage.get_string(_key, "MainMenuHelpRotateUp")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/RotateDown.text = textStorage.get_string(_key, "MainMenuHelpRotateDown")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Interaction.text = textStorage.get_string(_key, "MainMenuHelpInteraction")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Recharge.text = textStorage.get_string(_key, "MainMenuHelpRecharge")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/TypeIgnis.text = textStorage.get_string(_key, "MainMenuHelpTypeIgnis")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/HideIgnis.text = textStorage.get_string(_key, "MainMenuHelpHideIgnis")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/ScrollIgnis.text = textStorage.get_string(_key, "MainMenuHelpScrollIgnis")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Wheel.text = textStorage.get_string(_key, "MainMenuHelpWheel")
+	$Help/VBoxContainer/ScrollContainer/GridContainer/Inventory.text = textStorage.get_string(_key, "MainMenuHelpInventory")
+	
+	$Help/BackHelp.text = textStorage.get_string(_key, "MainMenuHelpBackHelp")

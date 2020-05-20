@@ -718,8 +718,8 @@ size_flags_vertical = 3
 custom_constants/separation = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Help"]
-margin_right = 1080.0
-margin_bottom = 447.0
+margin_right = 1040.0
+margin_bottom = 456.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -729,312 +729,335 @@ position = Vector2( -30, 30 )
 scale = Vector2( 1, 1 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Help/VBoxContainer"]
-margin_right = 1080.0
-margin_bottom = 447.0
+margin_right = 975.0
+margin_bottom = 456.0
 size_flags_horizontal = 2
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="Help/VBoxContainer/ScrollContainer"]
-margin_right = 949.0
-margin_bottom = 737.0
+margin_right = 963.0
+margin_bottom = 790.0
 size_flags_horizontal = 4
 custom_constants/hseparation = 100
 columns = 3
 
-[node name="Label32" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_right = 424.0
-margin_bottom = 123.0
+[node name="Action" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_right = 368.0
+margin_bottom = 101.0
 custom_fonts/font = SubResource( 8 )
 text = "action
 "
 
-[node name="Label33" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_right = 691.0
-margin_bottom = 123.0
+[node name="Button" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_right = 609.0
+margin_bottom = 101.0
 custom_fonts/font = SubResource( 9 )
 text = "button
 "
 
-[node name="Label31" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_right = 1068.0
-margin_bottom = 123.0
+[node name="Extra" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 709.0
+margin_right = 963.0
+margin_bottom = 101.0
 custom_fonts/font = SubResource( 10 )
 text = "extra
 "
 
-[node name="Label2" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 127.0
-margin_right = 424.0
-margin_bottom = 187.0
+[node name="MoveLeft" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 105.0
+margin_right = 368.0
+margin_bottom = 154.0
 custom_fonts/font = SubResource( 8 )
 text = "move left"
 
-[node name="Label" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 127.0
-margin_right = 691.0
-margin_bottom = 187.0
+[node name="A" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 105.0
+margin_right = 609.0
+margin_bottom = 154.0
 custom_fonts/font = SubResource( 9 )
 text = "A"
 
-[node name="Label3" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 127.0
-margin_right = 1068.0
-margin_bottom = 187.0
+[node name="ArrowLeft" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 709.0
+margin_top = 105.0
+margin_right = 963.0
+margin_bottom = 154.0
 custom_fonts/font = SubResource( 10 )
 text = "arrow left"
 
-[node name="Label5" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 191.0
-margin_right = 424.0
-margin_bottom = 251.0
+[node name="MoveRight" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 158.0
+margin_right = 368.0
+margin_bottom = 207.0
 custom_fonts/font = SubResource( 8 )
 text = "move right"
 
-[node name="Label6" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 191.0
-margin_right = 691.0
-margin_bottom = 251.0
+[node name="D" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 158.0
+margin_right = 609.0
+margin_bottom = 207.0
 custom_fonts/font = SubResource( 9 )
 text = "D"
 
-[node name="Label4" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 191.0
-margin_right = 1068.0
-margin_bottom = 251.0
+[node name="ArrowRight" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 709.0
+margin_top = 158.0
+margin_right = 963.0
+margin_bottom = 207.0
 custom_fonts/font = SubResource( 10 )
 text = "arrow right"
 
-[node name="Label36" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 255.0
-margin_right = 424.0
-margin_bottom = 315.0
+[node name="Climb" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 211.0
+margin_right = 368.0
+margin_bottom = 260.0
 custom_fonts/font = SubResource( 8 )
 text = "climb the stairs"
 
-[node name="Label35" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 255.0
-margin_right = 691.0
-margin_bottom = 315.0
+[node name="W" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 211.0
+margin_right = 609.0
+margin_bottom = 260.0
 custom_fonts/font = SubResource( 9 )
 text = "W"
 
-[node name="Label34" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 255.0
-margin_right = 1068.0
-margin_bottom = 315.0
+[node name="ArrowUp" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 709.0
+margin_top = 211.0
+margin_right = 963.0
+margin_bottom = 260.0
 custom_fonts/font = SubResource( 10 )
 text = "arrow up"
 
-[node name="Label11" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 319.0
-margin_right = 424.0
-margin_bottom = 379.0
+[node name="Down" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 264.0
+margin_right = 368.0
+margin_bottom = 313.0
+custom_fonts/font = SubResource( 8 )
+text = "down the stairs"
+
+[node name="S" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 264.0
+margin_right = 609.0
+margin_bottom = 313.0
+custom_fonts/font = SubResource( 9 )
+text = "S"
+
+[node name="ArrowDown" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 709.0
+margin_top = 264.0
+margin_right = 963.0
+margin_bottom = 313.0
+custom_fonts/font = SubResource( 10 )
+text = "arrow down"
+
+[node name="Jump" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 317.0
+margin_right = 368.0
+margin_bottom = 366.0
 custom_fonts/font = SubResource( 8 )
 text = "jump"
 
-[node name="Label12" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 319.0
-margin_right = 691.0
-margin_bottom = 379.0
+[node name="Space" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 317.0
+margin_right = 609.0
+margin_bottom = 366.0
 custom_fonts/font = SubResource( 9 )
 text = "space"
 
 [node name="Label10" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 319.0
-margin_right = 1068.0
-margin_bottom = 379.0
+margin_left = 709.0
+margin_top = 317.0
+margin_right = 963.0
+margin_bottom = 366.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label8" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 383.0
-margin_right = 424.0
-margin_bottom = 443.0
+[node name="RotateUp" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 370.0
+margin_right = 368.0
+margin_bottom = 419.0
 custom_fonts/font = SubResource( 8 )
 text = "rotate ignis up"
 
-[node name="Label9" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 383.0
-margin_right = 691.0
-margin_bottom = 443.0
+[node name="V" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 370.0
+margin_right = 609.0
+margin_bottom = 419.0
 custom_fonts/font = SubResource( 9 )
 text = "V"
 
 [node name="Label7" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 383.0
-margin_right = 1068.0
-margin_bottom = 443.0
+margin_left = 709.0
+margin_top = 370.0
+margin_right = 963.0
+margin_bottom = 419.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label14" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 447.0
-margin_right = 424.0
-margin_bottom = 507.0
+[node name="RotateDown" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 423.0
+margin_right = 368.0
+margin_bottom = 472.0
 custom_fonts/font = SubResource( 8 )
 text = "rotate ignis down"
 
-[node name="Label15" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 447.0
-margin_right = 691.0
-margin_bottom = 507.0
+[node name="B" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 423.0
+margin_right = 609.0
+margin_bottom = 472.0
 custom_fonts/font = SubResource( 9 )
 text = "B"
 
 [node name="Label13" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 447.0
-margin_right = 1068.0
-margin_bottom = 507.0
+margin_left = 709.0
+margin_top = 423.0
+margin_right = 963.0
+margin_bottom = 472.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label17" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 511.0
-margin_right = 424.0
-margin_bottom = 571.0
+[node name="Interaction" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 476.0
+margin_right = 368.0
+margin_bottom = 525.0
 custom_fonts/font = SubResource( 8 )
 text = "interaction"
 
-[node name="Label18" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 511.0
-margin_right = 691.0
-margin_bottom = 571.0
+[node name="E" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 476.0
+margin_right = 609.0
+margin_bottom = 525.0
 custom_fonts/font = SubResource( 9 )
 text = "E"
 
 [node name="Label16" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 511.0
-margin_right = 1068.0
-margin_bottom = 571.0
+margin_left = 709.0
+margin_top = 476.0
+margin_right = 963.0
+margin_bottom = 525.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label20" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 575.0
-margin_right = 424.0
-margin_bottom = 635.0
+[node name="Recharge" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 529.0
+margin_right = 368.0
+margin_bottom = 578.0
 custom_fonts/font = SubResource( 8 )
 text = "recharge"
 
-[node name="Label21" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 575.0
-margin_right = 691.0
-margin_bottom = 635.0
+[node name="R" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 529.0
+margin_right = 609.0
+margin_bottom = 578.0
 custom_fonts/font = SubResource( 9 )
 text = "R"
 
 [node name="Label19" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 575.0
-margin_right = 1068.0
-margin_bottom = 635.0
+margin_left = 709.0
+margin_top = 529.0
+margin_right = 963.0
+margin_bottom = 578.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label23" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 639.0
-margin_right = 424.0
-margin_bottom = 699.0
+[node name="TypeIgnis" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 582.0
+margin_right = 368.0
+margin_bottom = 631.0
 custom_fonts/font = SubResource( 8 )
 text = "type of ignis"
 
-[node name="Label24" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 639.0
-margin_right = 691.0
-margin_bottom = 699.0
+[node name="OneTwo" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 582.0
+margin_right = 609.0
+margin_bottom = 631.0
 custom_fonts/font = SubResource( 9 )
 text = "1,2"
 
 [node name="Label22" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 639.0
-margin_right = 1068.0
-margin_bottom = 699.0
+margin_left = 709.0
+margin_top = 582.0
+margin_right = 963.0
+margin_bottom = 631.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label26" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 703.0
-margin_right = 424.0
-margin_bottom = 763.0
+[node name="HideIgnis" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 635.0
+margin_right = 368.0
+margin_bottom = 684.0
 custom_fonts/font = SubResource( 8 )
 text = "hide ignis"
 
-[node name="Label27" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 703.0
-margin_right = 691.0
-margin_bottom = 763.0
+[node name="F" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 635.0
+margin_right = 609.0
+margin_bottom = 684.0
 custom_fonts/font = SubResource( 9 )
 text = "F"
 
 [node name="Label25" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 703.0
-margin_right = 1068.0
-margin_bottom = 763.0
+margin_left = 709.0
+margin_top = 635.0
+margin_right = 963.0
+margin_bottom = 684.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label29" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 767.0
-margin_right = 424.0
-margin_bottom = 827.0
+[node name="ScrollIgnis" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 688.0
+margin_right = 368.0
+margin_bottom = 737.0
 custom_fonts/font = SubResource( 8 )
 text = "scrolling ignis"
 
-[node name="Label30" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 767.0
-margin_right = 691.0
-margin_bottom = 827.0
+[node name="Wheel" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 688.0
+margin_right = 609.0
+margin_bottom = 737.0
 custom_fonts/font = SubResource( 9 )
 text = "wheel"
 
 [node name="Label28" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 767.0
-margin_right = 1068.0
-margin_bottom = 827.0
+margin_left = 709.0
+margin_top = 688.0
+margin_right = 963.0
+margin_bottom = 737.0
 custom_fonts/font = SubResource( 10 )
 
-[node name="Label39" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_top = 831.0
-margin_right = 424.0
-margin_bottom = 891.0
+[node name="Inventory" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_top = 741.0
+margin_right = 368.0
+margin_bottom = 790.0
 custom_fonts/font = SubResource( 8 )
 text = "inventory"
 
-[node name="Label38" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 524.0
-margin_top = 831.0
-margin_right = 691.0
-margin_bottom = 891.0
+[node name="I" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
+margin_left = 468.0
+margin_top = 741.0
+margin_right = 609.0
+margin_bottom = 790.0
 custom_fonts/font = SubResource( 9 )
 text = "I"
 
 [node name="Label37" type="Label" parent="Help/VBoxContainer/ScrollContainer/GridContainer"]
-margin_left = 791.0
-margin_top = 831.0
-margin_right = 1068.0
-margin_bottom = 891.0
+margin_left = 709.0
+margin_top = 741.0
+margin_right = 963.0
+margin_bottom = 790.0
 custom_fonts/font = SubResource( 10 )
 
 [node name="BackHelp" type="Button" parent="Help"]
-margin_top = 477.0
-margin_right = 140.0
+margin_top = 486.0
+margin_right = 153.0
 margin_bottom = 560.0
 focus_mode = 0
 size_flags_horizontal = 0
