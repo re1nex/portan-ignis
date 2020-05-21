@@ -60,7 +60,7 @@ func _ready():
 	true_energy = energyMax
 	switchingOff = false
 	last_health = health
-	finish_disabling()
+	#finish_disabling()
 	set_process(false)
 	set_visibility_flags(true)
 	pass # Replace with function body

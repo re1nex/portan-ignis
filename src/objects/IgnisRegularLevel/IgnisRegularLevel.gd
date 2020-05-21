@@ -42,6 +42,7 @@ func _ready():
 	else:
 		health = GlobalVars.Ignis_state.OFF
 		collision_layer = 1 << 3
+		$Light2D.finish_disabling()
 		$Light2D.disable()
 		emit_signal("not_active")
 	pass # Replace with function body.

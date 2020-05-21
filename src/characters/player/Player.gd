@@ -420,6 +420,7 @@ func _on_Timer_timeout():
 func fill_weapons():
 	var node = preload("res://src/objects/IgnisRegularInner/IgnisRegularInner.tscn").instance()
 	node.priority = 2
+	node.finish_disabling()
 	weapons[GlobalVars.Ignis_type.REGULAR] = node
 	add_child(weapons[GlobalVars.Ignis_type.REGULAR])
 	weapons[GlobalVars.Ignis_type.REGULAR].disable()
