@@ -1,0 +1,136 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/objects/IgnisRegularLevel/IgnisRegularLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/levels/level6/Level6Landscape.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/characters/enemy2/Enemy2.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/objects/mechanism/Mechanism.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/objects/fuel/fuel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/objects/heart/Heart.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/ui/gameOverWindow/WindowGameOver.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/ui/inventory/Inventory.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/ui/winWindow/WinWindow.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/ui/HUD/HUD.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/ui/visualHit/Hit.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/ui/pauseMenu/pauseMenu.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/levels/level6/Level6.gd" type="Script" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 64 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 104 )
+
+[node name="Level6" type="Node2D"]
+script = ExtResource( 14 )
+
+[node name="Level6Landscape" parent="." instance=ExtResource( 3 )]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 192, 692 )
+
+[node name="Ignises" type="Node2D" parent="."]
+
+[node name="IgnisRegularLevel" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( -144, 696 )
+type = "column"
+health_at_start = 4
+
+[node name="IgnisDoor1" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 664, 208 )
+type = "column"
+
+[node name="IgnisRegularLevel4" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 928, 448 )
+type = "hint"
+
+[node name="IgnisRegularLevel5" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 1192, 416 )
+health_at_start = 1
+
+[node name="IgnisRegularLevel6" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 1592, 416 )
+health_at_start = 1
+
+[node name="IgnisRegularLevel9" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 1904, 416 )
+health_at_start = 1
+
+[node name="IgnisDoor2" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 2208, 224 )
+type = "column"
+
+[node name="IgnisRegularLevel7" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 1072, 704 )
+type = "simple"
+health_at_start = 3
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1232, 208 )
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1547, 176 )
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 2000, 176 )
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1392, 864 )
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1680, 864 )
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Mechanism" parent="Objects" instance=ExtResource( 5 )]
+position = Vector2( -200, 692 )
+
+[node name="Heart" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 640, 288 )
+
+[node name="Heart2" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 1168, 976 )
+
+[node name="Heart3" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 2264, 208 )
+
+[node name="Fuel" parent="Objects" instance=ExtResource( 6 )]
+position = Vector2( 600, 288 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 13 )]
+
+[node name="WinWindow" parent="." instance=ExtResource( 10 )]
+
+[node name="WindowGameOver" parent="." instance=ExtResource( 8 )]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HUD" instance=ExtResource( 11 )]
+margin_bottom = 106.0
+
+[node name="Inventory" parent="." instance=ExtResource( 9 )]
+
+[node name="Hit" parent="." instance=ExtResource( 12 )]
+
+[node name="Win" type="Area2D" parent="."]
+position = Vector2( 2688, -112 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Win"]
+shape = SubResource( 1 )
+
+[node name="End" type="Area2D" parent="."]
+position = Vector2( 3096, -96 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
+shape = SubResource( 2 )
+[connection signal="die" from="Player" to="." method="_on_Player_die"]
+[connection signal="body_entered" from="Win" to="." method="_on_Win_body_entered"]
+[connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]

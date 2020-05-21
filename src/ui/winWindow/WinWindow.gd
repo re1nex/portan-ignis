@@ -16,7 +16,7 @@ func _ready():
 	$CenterContainer/VBoxContainer/NextLvl/ResLight.set_enemy_visible(false)
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.set_enemy_visible(false)
 	$CenterContainer.hide()
-	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_5):
+	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_6):
 		lastlvl=true
 		$CenterContainer/VBoxContainer/NextLvl.hide()
 	
