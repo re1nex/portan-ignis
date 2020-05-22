@@ -121,7 +121,7 @@ func finish_disabling():
 		$Area2D/CollisionShape2D.disabled = true
 	$Flame.emitting = false
 	$Smoke.emitting = false
-	enabled = false
+	#enabled = false
 	energy = 0
 	last_health = health
 	health = GlobalVars.Ignis_state.OFF

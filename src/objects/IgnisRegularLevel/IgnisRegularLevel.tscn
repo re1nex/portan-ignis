@@ -11,7 +11,7 @@
 [ext_resource path="res://resource/sprites/ignis/ignis_regular_level/hintTorch.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18, 24 )
+extents = Vector2( 18, 14.0038 )
 
 [node name="IgnisRegularLevel" type="Area2D"]
 light_mask = 3
@@ -43,7 +43,7 @@ texture = ExtResource( 9 )
 offset = Vector2( 0, -18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -30 )
 shape = SubResource( 1 )
 
 [node name="Light2D" parent="." instance=ExtResource( 3 )]
