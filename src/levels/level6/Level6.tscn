@@ -27,7 +27,7 @@ script = ExtResource( 14 )
 [node name="Level6Landscape" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 192, 692 )
+position = Vector2( 320, 692 )
 
 [node name="Ignises" type="Node2D" parent="."]
 
@@ -45,16 +45,20 @@ position = Vector2( 928, 448 )
 type = "hint"
 
 [node name="IgnisRegularLevel5" parent="Ignises" instance=ExtResource( 1 )]
-position = Vector2( 1192, 416 )
-health_at_start = 1
+position = Vector2( 1216, 432 )
+health_at_start = 3
 
 [node name="IgnisRegularLevel6" parent="Ignises" instance=ExtResource( 1 )]
-position = Vector2( 1592, 416 )
-health_at_start = 1
+position = Vector2( 1528, 432 )
+health_at_start = 3
 
 [node name="IgnisRegularLevel9" parent="Ignises" instance=ExtResource( 1 )]
-position = Vector2( 1904, 416 )
-health_at_start = 1
+position = Vector2( 1904, 432 )
+health_at_start = 3
+
+[node name="IgnisRegularLevel10" parent="Ignises" instance=ExtResource( 1 )]
+position = Vector2( 2184, 480 )
+health_at_start = 4
 
 [node name="IgnisDoor2" parent="Ignises" instance=ExtResource( 1 )]
 position = Vector2( 2208, 224 )
@@ -68,13 +72,13 @@ health_at_start = 3
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 1232, 208 )
+position = Vector2( 1048, 192 )
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 1547, 176 )
+position = Vector2( 1520, 208 )
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 2000, 176 )
+position = Vector2( 2024, 176 )
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 1392, 864 )
