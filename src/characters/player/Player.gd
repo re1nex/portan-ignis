@@ -149,11 +149,14 @@ func _physics_process(delta):
 		return
 	### MOVEMENT ###
 	
-	if Input.is_action_pressed("ui_throw_grenade") and $Informator.has_instruments[GlobalVars.Instruments_type.GREANDE] > 0:
-		var g = grenade.instance()
-		g.apply_impulse(Vector2(0, -2), Vector2.UP.rotated(PI/4 * direction) * 300)
-		g.position = position + ignis_pos
-		get_parent().add_child(g)
+	if Input.is_action_just_released("ui_throw_grenade") and $Informator.has_instruments[GlobalVars.Instruments_type.GREANDE] > 0:
+		var gren = grenade.instance()
+		get_parent().add_child(gren)
+		var g = gren.get_node("GrenadeBody")
+		g.apply_central_impulse(Vector2.UP.rotated(PI/4 * direction) * 300)
+		g.apply_torque_impulse(12)
+		gren.global_position = position + ignis_pos
+		
 		$Informator.has_instruments[GlobalVars.Instruments_type.GREANDE] -= 1
 	
 	# Apply gravity
