@@ -9,6 +9,6 @@ func _ready():
 	posRD = $PositionRD.position
 	posLU = $PositionLU.position
 	
-	$CanvasModulate.visible = false
+	$CanvasModulate.visible = true
 	
 	pass

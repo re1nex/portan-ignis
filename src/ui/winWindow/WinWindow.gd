@@ -140,7 +140,7 @@ func update_text():
 	var _key = GlobalVars.Storage_string_id.MENU
 	$CenterContainer/VBoxContainer/NextLvl.text = textStorage.get_string(_key, "WindowWinNextLvl")
 	$CenterContainer/VBoxContainer/MainMenu.text = textStorage.get_string(_key, "WindowWinMainExit")
-	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_5):
+	if(lastlvl == true):
 		$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowWinLabelEnd")
 	else:
 		$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowWinLabel")
