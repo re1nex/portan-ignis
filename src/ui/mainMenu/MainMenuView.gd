@@ -44,18 +44,38 @@ func _ready():
 	secondPlay=false
 	$Music.play()
 	if(Settings.Language==GlobalVars.User_lang.RUSSIAN):
-		var buf = $Settings/VBoxContainer/language/AddLanguage.text
-		$Settings/VBoxContainer/language/AddLanguage.text=$Settings/VBoxContainer/language/CurrentLanguage.text
-		$Settings/VBoxContainer/language/CurrentLanguage.text=buf
+		var buf = $Settings/VBoxContainer/Language/AddLanguage.text
+		$Settings/VBoxContainer/Language/AddLanguage.text=$Settings/VBoxContainer/Language/CurrentLanguage.text
+		$Settings/VBoxContainer/Language/CurrentLanguage.text=buf
 	testModeOff()
 	update_lang()
 	
 func update_lang():
 	var _key = GlobalVars.Storage_string_id.MENU
-	
+	$Main/mainView/Start.text = textStorage.get_string(_key, "MainMenuMainStart")
+	$Main/mainView/Settings.text = textStorage.get_string(_key, "MainMenuMainSettings")
 	$Main/mainView/Help.text = textStorage.get_string(_key, "MainMenuMainHelp")
 	$Main/mainView/About.text = textStorage.get_string(_key, "MainMenuMainAbout")
 	$Main/mainView/Exit.text = textStorage.get_string(_key, "MainMenuMainExit")
+	
+	$StartView/VBoxContainer/level0.text = textStorage.get_string(_key, "MainMenuStartLevel0")
+	$StartView/VBoxContainer/level1.text = textStorage.get_string(_key, "MainMenuStartLevel1")
+	$StartView/VBoxContainer/level2.text = textStorage.get_string(_key, "MainMenuStartLevel2")
+	$StartView/VBoxContainer/level3.text = textStorage.get_string(_key, "MainMenuStartLevel3")
+	$StartView/VBoxContainer/level4.text = textStorage.get_string(_key, "MainMenuStartLevel4")
+	$StartView/VBoxContainer/level5.text = textStorage.get_string(_key, "MainMenuStartLevel5")
+	$StartView/VBoxContainer/level6.text = textStorage.get_string(_key, "MainMenuStartLevel6")
+	$StartView/BackStart.text = textStorage.get_string(_key, "MainMenuStartBack")
+
+	$Settings/VBoxContainer/Label.text = textStorage.get_string(_key, "MainMenuSettingsLabel")
+	$Settings/VBoxContainer/stretchSettings.text = textStorage.get_string(_key, "MainMenuSettingsStretchSettings")
+	$Settings/VBoxContainer/Label2.text = textStorage.get_string(_key, "MainMenuSettingsLabel2")
+	$Settings/VBoxContainer/VolumeSettings.text = textStorage.get_string(_key, "MainMenuSettingsVolumeSettings")
+	$Settings/VBoxContainer/MusicSettings.text = textStorage.get_string(_key, "MainMenuSettingsMusicSettings")
+	$Settings/VBoxContainer/Language.text = textStorage.get_string(_key, "MainMenuSettingsLanguage")
+	$Settings/VBoxContainer/Language/CurrentLanguage.text = textStorage.get_string(_key, "MainMenuSettingsCurrentLanguage")
+	$Settings/VBoxContainer/Language/AddLanguage.text = textStorage.get_string(_key, "MainMenuSettingsAddLanguage")
+	$Settings/BackSettings.text = textStorage.get_string(_key, "MainMenuSettingsBack")
 	
 	$About/RichTextLabel.text = textStorage.get_string(_key, "MainMenuAboutText")
 	$About/BackAbout.text = textStorage.get_string(_key, "MainMenuAboutBackAbout")
@@ -148,8 +168,8 @@ func _input(event):
 
 func checkMousePos():
 	var mousePos = get_viewport().get_mouse_position()
-	var curSize= $Settings/VBoxContainer/language/CurrentLanguage.rect_size
-	var curPos = $Settings/VBoxContainer/language/CurrentLanguage.rect_global_position
+	var curSize= $Settings/VBoxContainer/Language/CurrentLanguage.rect_size
+	var curPos = $Settings/VBoxContainer/Language/CurrentLanguage.rect_global_position
 	if(mousePos.x<curPos.x||mousePos.x>curPos.x+curSize.x||mousePos.y<curPos.y||mousePos.y>curPos.y+2*curSize.y):
 		_on_CurrentLanguage_pressed()
 		_on_language_mouse_exited()
@@ -223,16 +243,16 @@ func _pressButt():
 		return
 	if($Settings.is_visible_in_tree() && $Settings.is_visible_in_tree()):
 		if(langMode):
-			if(langPos>=1 && $Settings/VBoxContainer/language/AddLanguage/addLangLight2.is_visible_in_tree()):
+			if(langPos>=1 && $Settings/VBoxContainer/Language/AddLanguage/addLangLight2.is_visible_in_tree()):
 				_on_AddLanguage_pressed()
 				return
-			if(langPos==0 && $Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.is_visible_in_tree()):
+			if(langPos==0 && $Settings/VBoxContainer/Language/CurrentLanguage/currentLangLight.is_visible_in_tree()):
 				_on_CurrentLanguage_pressed()
 				return
 		if(pos>=6 && $Settings/BackSettings/LightBackStg.is_visible_in_tree()):
 			_on_backSettings_pressed()
 			return
-		if(pos==5 && $Settings/VBoxContainer/language/LightLanguage.is_visible_in_tree()):
+		if(pos==5 && $Settings/VBoxContainer/Language/LightLanguage.is_visible_in_tree()):
 			_on_CurrentLanguage_pressed()
 			return
 		if(pos==0 && $Settings/VBoxContainer/Label/LightFsc.is_visible_in_tree()):
@@ -1041,13 +1061,13 @@ func _on_ScrollContainer_mouse_exited():
 
 
 func _on_CurrentLanguage_pressed():
-	if(!$Settings/VBoxContainer/language/AddLanguage.is_visible_in_tree()):
-		$Settings/VBoxContainer/language/AddLanguage.show()
+	if(!$Settings/VBoxContainer/Language/AddLanguage.is_visible_in_tree()):
+		$Settings/VBoxContainer/Language/AddLanguage.show()
 		langMode=true
 		checkClick=true
 		_on_CurrentLanguage_mouse_entered()
 	else:
-		$Settings/VBoxContainer/language/AddLanguage.hide()
+		$Settings/VBoxContainer/Language/AddLanguage.hide()
 		langMode=false
 		checkClick=true
 		_on_CurrentLanguage_mouse_exited()
@@ -1056,11 +1076,11 @@ func _on_CurrentLanguage_pressed():
 
 
 func _on_AddLanguage_pressed():
-	if($Settings/VBoxContainer/language/AddLanguage.is_visible_in_tree()):
-		var text = $Settings/VBoxContainer/language/AddLanguage.text
-		$Settings/VBoxContainer/language/AddLanguage.text = $Settings/VBoxContainer/language/CurrentLanguage.text
-		$Settings/VBoxContainer/language/CurrentLanguage.text=text
-		$Settings/VBoxContainer/language/AddLanguage.hide()
+	if($Settings/VBoxContainer/Language/AddLanguage.is_visible_in_tree()):
+		var text = $Settings/VBoxContainer/Language/AddLanguage.text
+		$Settings/VBoxContainer/Language/AddLanguage.text = $Settings/VBoxContainer/Language/CurrentLanguage.text
+		$Settings/VBoxContainer/Language/CurrentLanguage.text=text
+		$Settings/VBoxContainer/Language/AddLanguage.hide()
 		checkClick=true
 		_on_CurrentLanguage_mouse_exited()
 		_on_AddLanguage_mouse_exited()
@@ -1076,26 +1096,26 @@ func _on_CurrentLanguage_mouse_entered():
 	_on_language_mouse_entered()
 	if(langMode):
 		langPos=0
-		$Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.enable()
-		$Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.show()
+		$Settings/VBoxContainer/Language/CurrentLanguage/currentLangLight.enable()
+		$Settings/VBoxContainer/Language/CurrentLanguage/currentLangLight.show()
 
 
 func _on_CurrentLanguage_mouse_exited():
 	if(!checkClick):_on_language_mouse_exited()
-	$Settings/VBoxContainer/language/CurrentLanguage/currentLangLight.hide()
+	$Settings/VBoxContainer/Language/CurrentLanguage/currentLangLight.hide()
 
 
 func _on_AddLanguage_mouse_entered():
 	if(langMode):
 		langPos=1
 		_on_language_mouse_entered()
-		$Settings/VBoxContainer/language/AddLanguage/addLangLight2.enable()
-		$Settings/VBoxContainer/language/AddLanguage/addLangLight2.show()
+		$Settings/VBoxContainer/Language/AddLanguage/addLangLight2.enable()
+		$Settings/VBoxContainer/Language/AddLanguage/addLangLight2.show()
 
 
 func _on_AddLanguage_mouse_exited():
 	if(!checkClick):_on_language_mouse_exited()
-	$Settings/VBoxContainer/language/AddLanguage/addLangLight2.hide()
+	$Settings/VBoxContainer/Language/AddLanguage/addLangLight2.hide()
 
 
 func _on_language_mouse_entered():
@@ -1103,15 +1123,15 @@ func _on_language_mouse_entered():
 	if(!IgnisPlay):
 		IgnisPlay=true
 		$IgnisSound.play()
-	$Settings/VBoxContainer/language/LightLanguage.enable()
-	$Settings/VBoxContainer/language/LightLanguage.show()
+	$Settings/VBoxContainer/Language/LightLanguage.enable()
+	$Settings/VBoxContainer/Language/LightLanguage.show()
 
 
 func _on_language_mouse_exited():
 	if(!checkIgnisSettings()):
 		$IgnisSound.stop()
 		IgnisPlay=false
-	$Settings/VBoxContainer/language/LightLanguage.hide()
+	$Settings/VBoxContainer/Language/LightLanguage.hide()
 
 func _update_lang_help():
 	var _key = GlobalVars.Storage_string_id.MENU
