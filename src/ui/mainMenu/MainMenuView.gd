@@ -47,7 +47,7 @@ func _ready():
 		var buf = $Settings/VBoxContainer/language/AddLanguage.text
 		$Settings/VBoxContainer/language/AddLanguage.text=$Settings/VBoxContainer/language/CurrentLanguage.text
 		$Settings/VBoxContainer/language/CurrentLanguage.text=buf
-	#testModeOff()
+	testModeOff()
 	update_lang()
 	
 func update_lang():
@@ -205,19 +205,21 @@ func _pressButt():
 		if(pos==6 && $StartView/BackStart/LightBackStart.is_visible_in_tree()):
 			_on_BackStart_pressed()
 			return
-		if(pos==0 && $StartView/VBoxContainer/level0/LightLevel0.is_visible_in_tree()):
-			_on_level0_pressed()
-			return
-		if(pos==1 && $StartView/VBoxContainer/level1/LightLevel1.is_visible_in_tree()):
+		#if(pos==0 && $StartView/VBoxContainer/level0/LightLevel0.is_visible_in_tree()):
+		#	_on_level0_pressed()
+		#	return
+		if(pos==0 && $StartView/VBoxContainer/level1/LightLevel1.is_visible_in_tree()):
 			_on_level1_pressed()
-		if(pos==2 && $StartView/VBoxContainer/level2/LightLevel2.is_visible_in_tree()):
+		if(pos==1 && $StartView/VBoxContainer/level2/LightLevel2.is_visible_in_tree()):
 			_on_level2_pressed()
-		if(pos==3 && $StartView/VBoxContainer/level3/LightLevel3.is_visible_in_tree()):
+		if(pos==2 && $StartView/VBoxContainer/level3/LightLevel3.is_visible_in_tree()):
 			_on_level3_pressed()
-		if(pos==4 && $StartView/VBoxContainer/level4/LightLevel4.is_visible_in_tree()):
+		if(pos==3 && $StartView/VBoxContainer/level4/LightLevel4.is_visible_in_tree()):
 			_on_level4_pressed()
-		if(pos==5 && $StartView/VBoxContainer/level5/LightLevel5.is_visible_in_tree()):
+		if(pos==4 && $StartView/VBoxContainer/level5/LightLevel5.is_visible_in_tree()):
 			_on_level5_pressed()
+		if(pos==5 && $StartView/VBoxContainer/level6/LightLevel6.is_visible_in_tree()):
+			_on_level6_pressed()
 		return
 	if($Settings.is_visible_in_tree() && $Settings.is_visible_in_tree()):
 		if(langMode):
@@ -312,22 +314,25 @@ func _closeBeforeChange():
 		if(pos==6):
 			_on_BackStart_mouse_exited()
 			return
+		#if(pos==0):
+		#	_on_level0_mouse_exited()
+		#	return
 		if(pos==0):
-			_on_level0_mouse_exited()
-			return
-		if(pos==1):
 			_on_level1_mouse_exited()
-		if(pos==2):
+		if(pos==1):
 			_on_level2_mouse_exited()
 			return
-		if(pos==3):
+		if(pos==2):
 			_on_level3_mouse_exited()
 			return
-		if(pos==4):
+		if(pos==3):
 			_on_level4_mouse_exited()
 			return
-		if(pos==5):
+		if(pos==4):
 			_on_level5_mouse_exited()
+			return
+		if(pos==5):
+			_on_level6_mouse_exited()
 			return
 		return
 	if($Settings.is_visible_in_tree()):
@@ -512,6 +517,13 @@ func _on_level5_pressed():
 	$Music.stop()
 	$ClickSound.play()
 	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_5)
+	
+func _on_level6_pressed():
+	pos=0
+	$Music2.stop()
+	$Music.stop()
+	$ClickSound.play()
+	SceneSwitcher.goto_scene(SceneSwitcher.Scenes.SCENE_STAGE_6)
 
 
 func _on_Start_mouse_exited():
@@ -580,7 +592,7 @@ func _on_level0_mouse_exited():
 
 
 func _on_level1_mouse_entered():
-	pos=1
+	pos=0
 	$IgnisSound.play()
 	IgnisPlay=true
 	$StartView/VBoxContainer/level1/LightLevel1.show()
@@ -593,7 +605,7 @@ func _on_level1_mouse_exited():
 	$StartView/VBoxContainer/level1/LightLevel1.hide()
 
 func _on_level2_mouse_entered():
-	pos=2
+	pos=1
 	$IgnisSound.play()
 	IgnisPlay=true
 	$StartView/VBoxContainer/level2/LightLevel2.show()
@@ -606,7 +618,7 @@ func _on_level2_mouse_exited():
 	$StartView/VBoxContainer/level2/LightLevel2.hide()
 
 func _on_level3_mouse_entered():
-	pos=3
+	pos=2
 	$IgnisSound.play()
 	IgnisPlay=true
 	$StartView/VBoxContainer/level3/LightLevel3.show()
@@ -619,7 +631,7 @@ func _on_level3_mouse_exited():
 	$StartView/VBoxContainer/level3/LightLevel3.hide()
 	
 func _on_level4_mouse_entered():
-	pos=4
+	pos=3
 	$IgnisSound.play()
 	IgnisPlay=true
 	$StartView/VBoxContainer/level4/LightLevel4.show()
@@ -632,7 +644,7 @@ func _on_level4_mouse_exited():
 	$StartView/VBoxContainer/level4/LightLevel4.hide()
 	
 func _on_level5_mouse_entered():
-	pos=5
+	pos=4
 	$IgnisSound.play()
 	IgnisPlay=true
 	$StartView/VBoxContainer/level5/LightLevel5.show()
@@ -643,6 +655,19 @@ func _on_level5_mouse_exited():
 	$IgnisSound.stop()
 	IgnisPlay=false
 	$StartView/VBoxContainer/level5/LightLevel5.hide()
+	
+func _on_level6_mouse_entered():
+	pos=5
+	$IgnisSound.play()
+	IgnisPlay=true
+	$StartView/VBoxContainer/level6/LightLevel6.show()
+	$StartView/VBoxContainer/level6/LightLevel6.enable()
+
+
+func _on_level6_mouse_exited():
+	$IgnisSound.stop()
+	IgnisPlay=false
+	$StartView/VBoxContainer/level6/LightLevel6.hide()
 
 func _on_BackStart_pressed():
 	pos=0
@@ -733,19 +758,21 @@ func _ChangePos():
 		if(pos>=6):
 			_on_BackStart_mouse_entered()
 			return
+		#if(pos==0):
+		#	_on_level0_mouse_entered()
+		#	return
 		if(pos==0):
-			_on_level0_mouse_entered()
-			return
-		if(pos==1):
 			_on_level1_mouse_entered()
-		if(pos==2):
+		if(pos==1):
 			_on_level2_mouse_entered()
-		if(pos==3):
+		if(pos==2):
 			_on_level3_mouse_entered()
-		if(pos==4):
+		if(pos==3):
 			_on_level4_mouse_entered()
-		if(pos==5):
+		if(pos==4):
 			_on_level5_mouse_entered()
+		if(pos==5):
+			_on_level6_mouse_entered()
 		return
 	if($Settings.is_visible_in_tree()):
 		if(langMode):

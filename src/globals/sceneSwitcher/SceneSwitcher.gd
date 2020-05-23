@@ -7,6 +7,7 @@ enum Scenes{
 	SCENE_STAGE_3,
 	SCENE_STAGE_4,
 	SCENE_STAGE_5,
+	SCENE_STAGE_6,
 	SCENE_MAIN_MENU,
 	SCENE_RESTART,
 	SCENE_NEXT_SCENE
@@ -52,6 +53,10 @@ func _deferred_goto_scene(scene):
 		new_scene = ResourceLoader.load("res://src/levels/level5/Level5.tscn")
 		if Transfer.levels_passed == 0:
 			Transfer.set_default_level5_chars()
+	elif scene == Scenes.SCENE_STAGE_6:
+		new_scene = ResourceLoader.load("res://src/levels/level6/Level6.tscn")
+		if Transfer.levels_passed == 0:
+			Transfer.set_default_level6_chars()
 	elif scene == Scenes.SCENE_MAIN_MENU:
 		new_scene = ResourceLoader.load("res://src/ui/mainMenu/MainMenuView.tscn")
 		Transfer.set_default_chars()

@@ -16,7 +16,7 @@ func _ready():
 	$CenterContainer/VBoxContainer/NextLvl/ResLight.set_enemy_visible(false)
 	$CenterContainer/VBoxContainer/MainMenu/MenuLight.set_enemy_visible(false)
 	$CenterContainer.hide()
-	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_5):
+	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_6):
 		lastlvl=true
 		$CenterContainer/VBoxContainer/NextLvl.hide()
 	
@@ -140,7 +140,7 @@ func update_text():
 	var _key = GlobalVars.Storage_string_id.MENU
 	$CenterContainer/VBoxContainer/NextLvl.text = textStorage.get_string(_key, "WindowWinNextLvl")
 	$CenterContainer/VBoxContainer/MainMenu.text = textStorage.get_string(_key, "WindowWinMainExit")
-	if(SceneSwitcher.cur_scene==SceneSwitcher.Scenes.SCENE_STAGE_5):
+	if(lastlvl == true):
 		$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowWinLabelEnd")
 	else:
 		$CenterContainer/VBoxContainer/Label.text = textStorage.get_string(_key, "WindowWinLabel")
