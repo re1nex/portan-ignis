@@ -11,7 +11,7 @@ func start(pos, dir):
 func _physics_process(delta):
 	position += velocity * delta
 	velocity += gravity * gravity_vec * delta
-	rotation = velocity.angle()   
+	rotation = velocity.angle()
 
 func _on_Arrow_body_entered(body):
 	if body.has_method('hit'):
