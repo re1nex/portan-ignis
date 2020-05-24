@@ -18,13 +18,12 @@ func _ready():
 	
 	$Ignises/IgnisDoor.connect("active", $Door, "_on_IgnisRegularLevel_active")
 	$Ignises/IgnisDoor.connect("not_active", $Door, "_on_IgnisRegularLevel_not_active")
-	$Ignises/IgnisHint.connect("active", $HintTorch, "activate")
+	#$Ignises/IgnisHint.connect("active", $HintTorch, "activate")
 	pass
-
 
 func _process(delta):
 	if(begin):
-		$Hint.activate()
+		#$Hint.activate()
 		begin=false
 
 func _on_LevelEnd_body_entered(body):
