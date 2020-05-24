@@ -12,10 +12,10 @@ signal got_hit
 class_name Player
 
 
-
+export (PackedScene) var grenade
 const SMALL_TWITCHING = 5
 const WEAPONS_NUM = 3
-const INSTRUMENTS_NUM = 1
+const INSTRUMENTS_NUM = 2
 const MAX_HEALTH = 5
 const GRAVITY = 550
 const FLOOR_NORMAL = Vector2(0, -1)
@@ -148,6 +148,17 @@ func _physics_process(delta):
 	if(endLevel):
 		return
 	### MOVEMENT ###
+	
+	if Input.is_action_just_released("ui_throw_grenade") and $Informator.has_instruments[GlobalVars.Instruments_type.GREANDE] > 0:
+		var gren = grenade.instance()
+		get_parent().add_child(gren)
+		var g = gren.get_node("GrenadeBody")
+		g.apply_central_impulse(Vector2.UP.rotated(PI/4 * direction) * 300)
+		g.apply_torque_impulse(12)
+		gren.global_position = position + ignis_pos
+		
+		$Informator.has_instruments[GlobalVars.Instruments_type.GREANDE] -= 1
+	
 	# Apply gravity
 	linear_vel += delta * gravity_vec
 	
@@ -573,6 +584,12 @@ func take_heart():
 		emit_signal("health_changed")
 		return true # heart taken --> can free heart
 	return false # heart not taken --> can't free heart
+
+
+func take_grenade():
+	$Informator.has_instruments[GlobalVars.Instruments_type.GREANDE] += 1
+	$Audio/Other/AudioPickUp.play()
+	return true # always can take for now
 
 
 func take_fuel():

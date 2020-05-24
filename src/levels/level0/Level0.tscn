@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/level0/Level0.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://src/ui/winWindow/WinWindow.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/characters/enemy2/Enemy2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/ui/visualHit/Hit.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/objects/Grenade/Grenade.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/objects/grenadeLevel/grenadeLevel.tscn" type="PackedScene" id=12]
 
 [node name="Level0" type="Node2D"]
 script = ExtResource( 2 )
@@ -20,7 +22,13 @@ script = ExtResource( 2 )
 position = Vector2( 536, 704 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 1004.49, 634.459 )
+position = Vector2( 344.387, 518.36 )
+
+[node name="Grenade" parent="." instance=ExtResource( 11 )]
+position = Vector2( 574.523, 611.674 )
+
+[node name="grenadeLevel" parent="." instance=ExtResource( 12 )]
+position = Vector2( 652.142, 713.84 )
 
 [node name="Menu" type="CanvasLayer" parent="."]
 

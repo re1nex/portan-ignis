@@ -8,6 +8,7 @@ enum Ignis_type {
 
 enum Instruments_type {
 		LEVER,
+		GREANDE
 }
 
 enum Is_ignis {

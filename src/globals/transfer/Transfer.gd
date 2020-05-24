@@ -8,7 +8,7 @@ var weapons = []
 var instruments = []
 var ignis_health
 const WEAPONS_NUM = 3#load("res://src/characters/player/Player.gd").WEAPONS_NUM
-const INSTRUMENTS_NUM = 1
+const INSTRUMENTS_NUM = 2
 
 var levels_passed
 

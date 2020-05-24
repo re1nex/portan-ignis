@@ -47,6 +47,7 @@ func shoot(where):
 	var a_pos = position + $ArrowPos.position
 	dir = where - a_pos
 	var b = arrow.instance()
+	b.position += $ArrowPos.position
 	var v = b.speed
 	var g = b.gravity
 	var k = (sqrt(pow(v,4) + 2 * dir.y * g * v * v - pow(dir.x, 2) * g * g) - v * v) / (dir.x * g)
