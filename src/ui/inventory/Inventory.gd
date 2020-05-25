@@ -14,6 +14,14 @@ onready var instriments = get_node("Control/Types/Instruments/InstrumentsGrid")
 #	$Control.hide()
 #	pass # Replace with function body.
 
+func _ready():
+	update_text()
+
+func update_text():
+	var _key = GlobalVars.Storage_string_id.MENU
+	$Control/Types/Instruments/InstrumentsLabel.text = textStorage.get_string(_key, "InventoryInstruments")
+	$Control/Types/Weapons/WeaponsLabel.text = textStorage.get_string(_key, "InventoryWeapons")
+
 
 func _input(event):
 	if event.is_action_pressed("ui_inventory"):
@@ -24,7 +32,6 @@ func _input(event):
 			$Control.show()
 			get_tree().paused = true
 			pause_mode = PAUSE_MODE_PROCESS
-			
 			update()
 		else:
 			$AudioClose.play()
@@ -56,6 +63,11 @@ func update():
 	for i in range(informator.has_instruments[GlobalVars.Instruments_type.LEVER]):
 		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
 		node.set_picture("res://resource/sprites/objects/lever/DungeonCrawl_ProjectUtumnoTileset.png")
+		instriments.add_child(node)
+	
+	for i in range(informator.has_instruments[GlobalVars.Instruments_type.GREANDE]):
+		var node = preload("res://src/ui/inventory/TextureRect.tscn").instance()
+		node.set_picture("res://resource/sprites/objects/grenade/grenade_inv.png")
 		instriments.add_child(node)
 
 

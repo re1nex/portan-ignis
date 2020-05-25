@@ -1,5 +1,6 @@
 extends Node2D
 export (String) var text
+export (String) var nickname
 signal activate
 signal disactivate
 var activated=false
@@ -11,6 +12,14 @@ var activated=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$TextureRect.visible=false
+	$TextureRect/VBoxContainer/RichTextLabel.text=text
+	fill_hint()
+
+func fill_hint():
+	text = textStorage.get_string(GlobalVars.Storage_string_id.HINT, nickname)
+	upd_text()
+	
+func upd_text():
 	$TextureRect/VBoxContainer/RichTextLabel.text=text
 
 

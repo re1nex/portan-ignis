@@ -98,16 +98,19 @@ position = Vector2( 1560, 564 )
 position = Vector2( 240, 232 )
 scale = Vector2( 0.25, 0.25 )
 text = "There is a lever on the platform. Pick it up by pressing E near it. Then you can see it in your inventory by pressing I"
+nickname = "Lever"
 
 [node name="Hint2" parent="Hints" instance=ExtResource( 14 )]
 position = Vector2( 1528, 448 )
 scale = Vector2( 0.25, 0.25 )
 text = "This door can be opened by Mechanism. Find Lever, press E near Mechanism to insert Lever, than hold E to open the door"
+nickname = "Mechanism"
 
 [node name="Hint3" parent="Hints" instance=ExtResource( 14 )]
 position = Vector2( 192, 608 )
 scale = Vector2( 0.25, 0.25 )
 text = "Be careful. There is an Enemy ahead. He runs towards visible Ignis and destroys it. Try to follow him, while keeping the distance"
+nickname = "EnemyFirst"
 
 [node name="Timer" type="Timer" parent="Hints"]
 one_shot = true

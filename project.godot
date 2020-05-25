@@ -55,14 +55,15 @@ default_bus_layout="res://resource/sounds/bus/music_bus.tres"
 
 [autoload]
 
+GlobalVars="*res://src/globals/global_vars/GlobalVars.gd"
 Settings="*res://src/globals/settings/Settings.gd"
 AudioController="*res://src/globals/settings/AudioController.gd"
 GraphicsController="*res://src/globals/settings/GraphicsController.gd"
 ConfigSave="*res://src/globals/config_save/ConfigSave.gd"
-GlobalVars="*res://src/globals/global_vars/GlobalVars.gd"
 SceneSwitcher="*res://src/globals/sceneSwitcher/SceneSwitcher.gd"
 Transfer="*res://src/globals/transfer/Transfer.gd"
 MusicController="*res://src/globals/musicController/MusicController.tscn"
+textStorage="*res://src/globals/textStorage/textStorage.gd"
 
 [display]
 
@@ -215,6 +216,11 @@ ui_inventory={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_throw_grenade={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":71,"unicode":0,"echo":false,"script":null)
  ]
 }
 

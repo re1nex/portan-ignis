@@ -10,3 +10,5 @@ var Graphics = {
 	"Fullscreen" : false,
 	"Stretching" : false
 }
+
+var Language = GlobalVars.User_lang.ENGLISH

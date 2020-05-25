@@ -23,6 +23,7 @@ func save_to():
 	conf.set_value("Graphics", "Fullscreen", Settings.Graphics["Fullscreen"])
 	conf.set_value("Graphics", "Stretching", Settings.Graphics["Stretching"])
 	
+	conf.set_value("Settings","Language",Settings.Language)
 	conf.save(CONFIG_PATH)
 	# Шифровальная машина не работает
 	#conf.save_encrypted(CONFIG_PATH, KEY.to_ascii())
@@ -30,6 +31,7 @@ func save_to():
 
 
 func read_from():
+	textStorage.set_lang(conf.get_value("Settings","Language",Settings.Language))
 	AudioController.changeMusicVol(conf.get_value("Sound", "MusicVol", Settings.Sound["MusicVol"]))
 	AudioController.changeVol(conf.get_value("Sound", "Volume", Settings.Sound["Volume"]))
 	AudioController.turnVol(!conf.get_value("Sound", "Mute", Settings.Sound["Mute"]))
